@@ -1,0 +1,254 @@
+{% style %}
+
+
+#shopify-section-{{ section.id }} textarea {
+  width: 100%;
+  padding: 1.85rem 16px;
+  border: 2px solid #d9d9d9;
+  border-radius: 32px;
+  font-size: clamp(10px, 0.84vw, 16px);
+  min-height: 140px;
+  resize: vertical;
+  outline: none;
+}
+
+#shopify-section-{{ section.id }} textarea:focus {
+  border-color: #be935f;
+}
+
+#shopify-section-{{ section.id }} .message.success {
+  background: #4caf50;
+  color: white;
+  padding: 20px;
+  border-radius: 12px;
+  text-align: center;
+  display: block;
+}
+
+    #shopify-section-{{ section.id }} .form-distributors.form-container {
+    background: #ffffff;
+    padding: 32px 16px;
+    border-radius: 16px;
+    max-width: calc(100% - 32px);
+    width: 780px;
+  }
+
+  #shopify-section-{{ section.id }} h3 {
+    font-weight: 700;
+    line-height: 1.2 !important;
+    text-align: center;
+  }
+
+  #shopify-section-{{ section.id }} form {
+    display: flex;
+    flex-direction: column;
+    gap: 16px;
+  }
+
+  #shopify-section-{{ section.id }} .input-group {
+    position: relative;
+  }
+
+  #shopify-section-{{ section.id }} input {
+    width: 100%;
+    font-weight: 500;
+    padding: 1.85rem 16px;
+    color: #000;
+    opacity: 0.8;
+    border: 2px solid #d9d9d9;
+    min-height: 1.2rem;
+    border-radius: 32px;
+    font-size: clamp(10px, 0.84vw, 16px);
+    outline: none;
+    line-height: 1.22 !important;
+  }
+
+  #shopify-section-{{ section.id }} input::placeholder {
+    color: #d9d9d9;
+  }
+
+  #shopify-section-{{ section.id }} input:focus {
+    border-color: #be935f;
+    box-shadow: none;
+  }
+
+  #shopify-section-{{ section.id }} .error-message {
+    color: #ef4444;
+    font-size: clamp(5px, 0.52vw, 10px);
+    margin-top: -2px;
+    display: none;
+  }
+
+  #shopify-section-{{ section.id }} .grid {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 16px;
+    margin: 0 !important;
+  }
+
+  #shopify-section-{{ section.id }} button {
+    margin-top: 0.8rem;
+    position: relative;
+    padding: 1rem 2rem;
+    font-size: clamp(10px, 0.84vw, 16px);
+    font-weight: 600;
+    background-color: #be935f;
+    color: white;
+    border: none;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+  }
+
+  #shopify-section-{{ section.id }} button:disabled {
+    background-color: #ddd;
+    cursor: not-allowed;
+  }
+
+  #shopify-section-{{ section.id }} .message {
+    padding: 12px 20px;
+    margin-top: 16px;
+    font-size: clamp(10px, 0.84vw, 16px);
+    font-weight: 600;
+    text-align: center;
+    display: none;
+  }
+
+  #shopify-section-{{ section.id }} .message.success {
+    background-color: #4caf50;
+    color: white;
+  }
+
+  #shopify-section-{{ section.id }} .message.error {
+    background-color: #f44336;
+    color: white;
+  }
+
+  #shopify-section-{{ section.id }} .loading-spinner {
+    border: 4px solid #f3f3f3;
+    border-top: 4px solid #be935f;
+    border-radius: 50%;
+    width: 20px;
+    height: 20px;
+    animation: spin 2s linear infinite;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    display: none;
+  }
+
+  @keyframes spin {
+    0% {
+      transform: rotate(0deg);
+    }
+    100% {
+      transform: rotate(360deg);
+    }
+  }
+{% endstyle %}
+
+
+
+<div class="form-distributors form-container font-sans">
+
+{% form 'contact' %}
+
+{% if form.posted_successfully? %}
+
+<div class="message success form-success" style="display:none;">
+  Thank you! Your application has been submitted successfully.
+</div>
+
+{% endif %}
+
+  <input
+  type="hidden"
+  name="contact[subject]"
+  value="DISTRIBUTOR_FORM"
+>
+
+    <div class="input-group product-option">
+      <input
+        type="text"
+        name="contact[Company Name]"
+        placeholder="Company Name"
+        required
+      >
+    </div>
+
+    <div class="input-group">
+      <input
+        type="text"
+        name="contact[Business Address]"
+        placeholder="Business Address"
+        required
+      >
+    </div>
+
+    <div class="input-group">
+      <input
+        type="text"
+        name="contact[Country]"
+        placeholder="Country"
+        required
+      >
+    </div>
+
+    <div class="grid">
+
+      <div class="input-group">
+        <input
+          type="text"
+          name="contact[State]"
+          placeholder="State"
+          required
+        >
+      </div>
+
+      <div class="input-group">
+        <input
+          type="text"
+          name="contact[Zip Code]"
+          placeholder="Zip Code"
+          required
+        >
+      </div>
+
+    </div>
+
+    <div class="input-group">
+      <input
+        type="url"
+        name="contact[Website URL]"
+        placeholder="Website URL (Optional)"
+      >
+    </div>
+
+    <div class="input-group">
+      <input
+        type="email"
+        name="contact[email]"
+        placeholder="Email Address"
+        required
+      >
+    </div>
+
+    <div class="input-group">
+      <textarea
+        name="contact[body]"
+        rows="6"
+        placeholder="Tell us about your business, products you distribute, expected order volume, and any additional information."
+      ></textarea>
+    </div>
+
+    <button
+  type="submit"
+  onclick="sessionStorage.setItem('submittedForm','distributor')"
+>
+  Submit Distributor Application
+</button>
+
+
+{% endform %}
+
+</div>

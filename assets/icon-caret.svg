@@ -1,0 +1,6 @@
+<!-- <svg class="icon icon-caret"  viewBox="0 0 13 8"><path fill="none" d="M12.3516 0.353516L6.35156 6.35352L0.351562 0.353517" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/></svg> -->
+
+<!-- <svg width="13" height="8" viewBox="0 0 13 8" fill="none" xmlns="http://www.w3.org/2000/svg">
+<path d="M12.3516 0.353516L6.35156 6.35352L0.351562 0.353517" stroke="white"/>
+</svg> -->
+<svg class="icon icon-caret" viewBox="0 0 10 6"><path fill="currentColor" fill-rule="evenodd" d="M9.354.646a.5.5 0 0 0-.708 0L5 4.293 1.354.646a.5.5 0 0 0-.708.708l4 4a.5.5 0 0 0 .708 0l4-4a.5.5 0 0 0 0-.708" clip-rule="evenodd"/></svg>

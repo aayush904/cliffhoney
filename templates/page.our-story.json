@@ -1,0 +1,658 @@
+/*
+ * ------------------------------------------------------------
+ * IMPORTANT: The contents of this file are auto-generated.
+ *
+ * This file may be updated by the Shopify admin theme editor
+ * or related systems. Please exercise caution as any changes
+ * made to this file may be overwritten.
+ * ------------------------------------------------------------
+ */
+{
+  "sections": {
+    "main": {
+      "type": "main-page",
+      "disabled": true,
+      "custom_css": [],
+      "settings": {
+        "padding_top": 100,
+        "padding_bottom": 35
+      }
+    },
+    "image_banner_Vjt9ci": {
+      "type": "image-banner",
+      "blocks": {
+        "heading_cL9R7E": {
+          "type": "heading",
+          "disabled": true,
+          "settings": {
+            "heading": "From Places on Earth Where Nature Still Decides The Rules",
+            "heading_size": "h1"
+          }
+        },
+        "text_cmyhVR": {
+          "type": "text",
+          "disabled": true,
+          "settings": {
+            "text": "Himalayan cliff honey is a rare and exquisite wild honey variety collected from huge hives of Apis laboriosa, found only in Himalayan forests. It’s loaded with vitamins, minerals, antioxidants, and most importantly, a rare compound called grayanotoxin. A spoonful of it and you will feel energetic and relaxed, each drop connects you with the power of the wild Himalayas.",
+            "text_style": "body"
+          }
+        },
+        "buttons_6YNEkA": {
+          "type": "buttons",
+          "disabled": true,
+          "settings": {
+            "button_label_1": "Try Himalayan Cliff Honey",
+            "button_link_1": "#",
+            "button_style_secondary_1": false,
+            "button_label_2": "",
+            "button_link_2": "",
+            "button_style_secondary_2": false
+          }
+        }
+      },
+      "block_order": [
+        "heading_cL9R7E",
+        "text_cmyhVR",
+        "buttons_6YNEkA"
+      ],
+      "custom_css": [
+        ".banner {max-width: var(--max-width); margin: 12rem auto 0 auto; overflow: hidden;}",
+        ".banner__media {background: transparent !important;}",
+        "h1,.banner__box {max-width: 622px; letter-spacing: 0; padding-top: 2.4rem; padding-bottom: 0rem;}",
+        "@media (max-width: 1600px) {.banner {max-width: calc((var(--page-width) + 100vw) / 1.93238); }}",
+        "@media (min-width: 768px) {.banner__box * {color: #fff; letter-spacing: 0; } .banner__box {padding: 0; } .banner__content {padding: clamp(4rem, 4.91vw, 9.4rem) 6.8%; }}"
+      ],
+      "name": "t:sections.image-banner.presets.name",
+      "settings": {
+        "image": "shopify://shop_images/hunter_bamboo_ladder.webp",
+        "image_overlay_opacity": 0,
+        "image_height": "small",
+        "image_behavior": "none",
+        "desktop_content_position": "middle-center",
+        "desktop_content_alignment": "center",
+        "show_text_box": false,
+        "color_scheme": "scheme-4",
+        "stack_images_on_mobile": true,
+        "mobile_content_alignment": "center",
+        "show_text_below": true,
+        "section_class": "header-dark",
+        "section_id": "",
+        "custom_liquid_html": "{% assign imgbanid = \"#shopify-section-\" | append: section.id %}\n{% style %}\n{{ imgbanid }} .media > img {\n  object-fit: cover;\n  border-radius: 32px;\n}\n{{ imgbanid }} .button:after{\nbox-shadow:none;\n}\n{% endstyle %}"
+      }
+    },
+    "rich_text_UyjmX4": {
+      "type": "rich-text",
+      "blocks": {
+        "text_PPWfmJ": {
+          "type": "text",
+          "settings": {
+            "text": "<p>Where roads end. Where silence is heavy. Where survival depends on respect -  for land, for bees, and for each other.</p><p>Himalayan Cliff Honey begins in one of those places.</p>"
+          }
+        }
+      },
+      "block_order": [
+        "text_PPWfmJ"
+      ],
+      "name": "t:sections.rich-text.presets.name",
+      "settings": {
+        "desktop_content_position": "center",
+        "content_alignment": "center",
+        "color_scheme": "scheme-4",
+        "full_width": true,
+        "padding_top": 110,
+        "padding_bottom": 110
+      }
+    },
+    "multirow_waDjYh": {
+      "type": "multirow",
+      "blocks": {
+        "row_dpJcRU": {
+          "type": "row",
+          "settings": {
+            "image": "shopify://shop_images/DSC08258_1_4c67b85e-f97c-4528-817b-8c54a2c58eae.webp",
+            "custom_liquid": "",
+            "caption": "",
+            "heading": "Where It<strong> All Began</strong>",
+            "text": "<p>Our story began in the hills and forests of Nepal.</p><p>We come from the second generation of a family of beekeepers and we grew up hearing extraordinary stories of traditional honey hunters who climbed steep cliffs to harvest wild honey from giant Himalayan bees. This stayed as a quiet curiosity for a long and without waiting for too long, we decided to turn it into a lifelong commitment. In our journey dedicated to working closely with both local beekeepers and honey-hunting communities, we returned to the roots, traveling deep into the mountains just to find local traditions and way of life.</p><p>We started our journey with a clear motive: respect the bees, protect nature, and support the people who have practiced this craft for generations. As we know from depth what matters- we honor heritage, livelihood, and responsibility.</p>",
+            "button_label": "",
+            "button_link": "",
+            "block_class": ""
+          }
+        },
+        "row_WG94xp": {
+          "type": "row",
+          "settings": {
+            "image": "shopify://shop_images/hunter_hanging_for_honey.webp",
+            "custom_liquid": "",
+            "caption": "",
+            "heading": "<strong>Born of Nature: </strong>Harvested with Courage",
+            "text": "<p>Dwellers of the Himalayas, the Himalayan giant honeybees (Apis laboriosa) forage on the alpine and subalpine flowers. Also known as the largest honeybee species, they build their nests on high cliffs thousands of feet above ground, producing a honey unlike anything found elsewhere.</p><p>The Gurung and Magar communities, the mountain natives are the original honey hunters with the tradition passed down from the generations. Each season as the harvesting day arrives, the community sets out for the forests taking along self-made hand-woven rope ladders, ancient wooden tools, and hearts steady enough to face the giants.</p><p>We work directly with these local honey-hunting communities with a commitment to fair trade practices. Deeply studied, their practices favor sustainability, and by collaborating with them, we ensure a system that is aligned with modern standards of safety, traceability, and sustainability.</p>",
+            "button_label": "",
+            "button_link": "",
+            "block_class": ""
+          }
+        },
+        "row_hpHUHf": {
+          "type": "row",
+          "settings": {
+            "image": "shopify://shop_images/hunters_village.webp",
+            "custom_liquid": "",
+            "caption": "",
+            "heading": "<strong>Rooted in Respect</strong> - For People & Planet",
+            "text": "<p>We are more than a honey brand - we are a community-oriented business. </p><p>Sustainability first - Our honey is harvested in traditional ways that in the best ways possible protect bee colonies and the alpine environment.</p><p>Community empowerment - We collaborate with honey-hunters and beekeepers across Nepal.</p><p>Fair and transparent partnerships - Local hunters and beekeepers who work with us receive fair compensation- no profit cut by middlemen, all the safety support they require, and related training.</p><p>Global connection, local impact - While our honey reaches homes around the world, its benefits flow back to the Himalayan families who make it possible.</p>",
+            "button_label": "",
+            "button_link": "",
+            "block_class": ""
+          }
+        },
+        "row_4yA4ej": {
+          "type": "row",
+          "settings": {
+            "image": "shopify://shop_images/Traceable_source_Finalwebp.webp",
+            "custom_liquid": "",
+            "caption": "",
+            "heading": "<strong>Traceable </strong>to the Source",
+            "text": "<p>We know where our honey comes from because we are there.</p><p>Each harvest is linked to:</p><ul><li>A specific Himalayan region</li><li>A known honey-hunting community and beekeeper</li><li>A seasonal flowering cycle</li></ul>",
+            "button_label": "",
+            "button_link": "",
+            "block_class": ""
+          }
+        },
+        "row_TUAdec": {
+          "type": "row",
+          "disabled": true,
+          "settings": {
+            "image": "shopify://shop_images/rangkemi.webp",
+            "custom_liquid": "",
+            "caption": "",
+            "heading": "Preserving <strong>The Tradition</strong>",
+            "text": "<p>The changing environmental conditions, development projects affecting the habitat site, and the slow disappearance of water resources are a threat to the long-term existence of this practice. These problems need urgent attention, and additionally, supporting the native harvesters, Gurungs and Magars, can also effectively help in the preservation.</p>",
+            "button_label": "",
+            "button_link": "",
+            "block_class": ""
+          }
+        }
+      },
+      "block_order": [
+        "row_dpJcRU",
+        "row_WG94xp",
+        "row_hpHUHf",
+        "row_4yA4ej",
+        "row_TUAdec"
+      ],
+      "custom_css": [
+        ".multirow__inner {--grid-desktop-vertical-spacing: clamp(24px, 2.61vw, 5rem); gap: 0; padding: 0;}",
+        ".global-media-settings {background: transparent;}",
+        ".image-with-text__grid {padding: clamp(24px, 2.61vw, 5rem) 16px; margin: 0 auto; --grid-desktop-horizontal-spacing: 5rem; gap: clamp(24px, 2.61vw, 5rem);}",
+        ".image-with-text:nth-child(odd) {background: #b5731f0d;}",
+        ".image-with-text:nth-child(even) {background: #fbf8f4;}",
+        ".image-with-text__content {padding: 0;}"
+      ],
+      "name": "t:sections.multirow.presets.name",
+      "settings": {
+        "image_height": "adapt",
+        "desktop_image_width": "medium",
+        "image_layout": "alternate-left",
+        "heading_size": "h2",
+        "text_style": "body",
+        "button_style": "primary",
+        "desktop_content_position": "middle",
+        "desktop_content_alignment": "left",
+        "mobile_content_alignment": "center",
+        "section_color_scheme": "scheme-115c0f00-6e48-4035-b511-680a9158c036",
+        "row_color_scheme": "scheme-115c0f00-6e48-4035-b511-680a9158c036",
+        "padding_top": 0,
+        "padding_bottom": 0,
+        "section_id": "",
+        "section_class": ""
+      }
+    },
+    "multicolumn_iTiXbD": {
+      "type": "multicolumn",
+      "blocks": {
+        "column_8nr8R8": {
+          "type": "column",
+          "settings": {
+            "image": "shopify://shop_images/image106.webp",
+            "title": "Jajarkot",
+            "text": "",
+            "link_label": "",
+            "link": "",
+            "custom_liquid": "<ul>\n<li>\n<svg width=\"48\" height=\"48\">\n  <use href=\"{{'honey-icons.svg'| asset_url}}#icon-altitude\"></use>\n</svg>\n<p><b>Altitude:</b> 2400-3500m</p>\n</li>\n\n<li>\n<svg width=\"48\" height=\"48\">\n  <use href=\"{{'honey-icons.svg'| asset_url}}#icon-honey-drop\"></use></svg>\n<p><b>Color:</b> Golden Amber\n</p></li>\n\n<li>\n<svg width=\"48\" height=\"48\">\n  <use href=\"{{'honey-icons.svg'| asset_url}}#icon-honey-dipper\"></use></svg>\n<p><b>Taste:</b> Mellow & Floral</p>\n</li>\n\n<li>\n<svg width=\"48\" height=\"48\">\n  <use href=\"{{'honey-icons.svg'| asset_url}}#icon-star\"></use></svg>\n<b>Potency:</b>\n<svg class=\"stars\" viewBox=\"0 0 128 24\" fill=\"none\" xmlns=\"http://www.w3.org/2000/svg\">\n<path d=\"M12 0L14.6942 8.2918H23.4127L16.3593 13.4164L19.0534 21.7082L12 16.5836L4.94658 21.7082L7.64074 13.4164L0.587322 8.2918H9.30583L12 0Z\" fill=\"#B5742A\"/>\n<path d=\"M38 0L40.6942 8.2918H49.4127L42.3593 13.4164L45.0534 21.7082L38 16.5836L30.9466 21.7082L33.6407 13.4164L26.5873 8.2918H35.3058L38 0Z\" fill=\"#B5742A\"/>\n<path d=\"M64 0L66.6942 8.2918H75.4127L68.3593 13.4164L71.0534 21.7082L64 16.5836L56.9466 21.7082L59.6407 13.4164L52.5873 8.2918H61.3058L64 0Z\" fill=\"#B5742A\"/>\n<path d=\"M90 0L92.6942 8.2918H101.413L94.3593 13.4164L97.0534 21.7082L90 16.5836L82.9466 21.7082L85.6407 13.4164L78.5873 8.2918H87.3058L90 0Z\" fill=\"#B5742A\"/>\n<path d=\"M116 0L118.694 8.2918H127.413L120.359 13.4164L123.053 21.7082L116 16.5836L108.947 21.7082L111.641 13.4164L104.587 8.2918H113.306L116 0Z\" fill=\"#B5742A\"/>\n</svg>\n</li>\n</ul>\n<p>Gentle efforts-ideal for first-time users.</p>"
+          }
+        },
+        "column_d9tQX3": {
+          "type": "column",
+          "settings": {
+            "image": "shopify://shop_images/image106.webp",
+            "title": "Rukum",
+            "text": "",
+            "link_label": "",
+            "link": "",
+            "custom_liquid": "<ul>\n<li>\n<svg width=\"48\" height=\"48\">\n  <use href=\"{{'honey-icons.svg'| asset_url}}#icon-altitude\"></use>\n</svg>\n<p><b>Altitude:</b> 2600-3800m</p>\n</li>\n\n<li>\n<svg width=\"48\" height=\"48\">\n  <use href=\"{{'honey-icons.svg'| asset_url}}#icon-honey-drop\"></use></svg>\n<p><b>Color:</b> Reddish Gold\n</p></li>\n\n<li>\n<svg width=\"48\" height=\"48\">\n  <use href=\"{{'honey-icons.svg'| asset_url}}#icon-honey-dipper\"></use></svg>\n<p><b>Taste:</b> Sweet & Herbal</p>\n</li>\n\n<li>\n<svg width=\"48\" height=\"48\">\n  <use href=\"{{'honey-icons.svg'| asset_url}}#icon-star\"></use></svg>\n<b>Potency:</b>\n<svg class=\"stars\" viewBox=\"0 0 128 24\" fill=\"none\" xmlns=\"http://www.w3.org/2000/svg\">\n<path d=\"M12 0L14.6942 8.2918H23.4127L16.3593 13.4164L19.0534 21.7082L12 16.5836L4.94658 21.7082L7.64074 13.4164L0.587322 8.2918H9.30583L12 0Z\" fill=\"#B5742A\"/>\n<path d=\"M38 0L40.6942 8.2918H49.4127L42.3593 13.4164L45.0534 21.7082L38 16.5836L30.9466 21.7082L33.6407 13.4164L26.5873 8.2918H35.3058L38 0Z\" fill=\"#B5742A\"/>\n<path d=\"M64 0L66.6942 8.2918H75.4127L68.3593 13.4164L71.0534 21.7082L64 16.5836L56.9466 21.7082L59.6407 13.4164L52.5873 8.2918H61.3058L64 0Z\" fill=\"#B5742A\"/>\n<path d=\"M90 0L92.6942 8.2918H101.413L94.3593 13.4164L97.0534 21.7082L90 16.5836L82.9466 21.7082L85.6407 13.4164L78.5873 8.2918H87.3058L90 0Z\" fill=\"#B5742A\"/>\n<path d=\"M116 0L118.694 8.2918H127.413L120.359 13.4164L123.053 21.7082L116 16.5836L108.947 21.7082L111.641 13.4164L104.587 8.2918H113.306L116 0Z\" fill=\"#B5742A\"/>\n</svg>\n</li>\n</ul>\n<p>Balanced & smooth-a favorite for wellness blends.</p>"
+          }
+        },
+        "column_r8PkTx": {
+          "type": "column",
+          "settings": {
+            "image": "shopify://shop_images/image106.webp",
+            "title": "Lamjung",
+            "text": "",
+            "link_label": "",
+            "link": "",
+            "custom_liquid": "<ul>\n<li>\n<svg width=\"48\" height=\"48\">\n  <use href=\"{{'honey-icons.svg'| asset_url}}#icon-altitude\"></use>\n</svg>\n<p><b>Altitude:</b> 2800-4000m</p>\n</li>\n\n<li>\n<svg width=\"48\" height=\"48\">\n  <use href=\"{{'honey-icons.svg'| asset_url}}#icon-honey-drop\"></use></svg>\n<p><b>Color:</b> Deep Amber Red\n</p></li>\n\n<li>\n<svg width=\"48\" height=\"48\">\n  <use href=\"{{'honey-icons.svg'| asset_url}}#icon-honey-dipper\"></use></svg>\n<p><b>Taste:</b> Earthy & Bold</p>\n</li>\n\n<li>\n<svg width=\"48\" height=\"48\">\n  <use href=\"{{'honey-icons.svg'| asset_url}}#icon-star\"></use></svg>\n<b>Potency:</b>\n<svg class=\"stars\" viewBox=\"0 0 128 24\" fill=\"none\" xmlns=\"http://www.w3.org/2000/svg\">\n<path d=\"M12 0L14.6942 8.2918H23.4127L16.3593 13.4164L19.0534 21.7082L12 16.5836L4.94658 21.7082L7.64074 13.4164L0.587322 8.2918H9.30583L12 0Z\" fill=\"#B5742A\"/>\n<path d=\"M38 0L40.6942 8.2918H49.4127L42.3593 13.4164L45.0534 21.7082L38 16.5836L30.9466 21.7082L33.6407 13.4164L26.5873 8.2918H35.3058L38 0Z\" fill=\"#B5742A\"/>\n<path d=\"M64 0L66.6942 8.2918H75.4127L68.3593 13.4164L71.0534 21.7082L64 16.5836L56.9466 21.7082L59.6407 13.4164L52.5873 8.2918H61.3058L64 0Z\" fill=\"#B5742A\"/>\n<path d=\"M90 0L92.6942 8.2918H101.413L94.3593 13.4164L97.0534 21.7082L90 16.5836L82.9466 21.7082L85.6407 13.4164L78.5873 8.2918H87.3058L90 0Z\" fill=\"#B5742A\"/>\n<path d=\"M116 0L118.694 8.2918H127.413L120.359 13.4164L123.053 21.7082L116 16.5836L108.947 21.7082L111.641 13.4164L104.587 8.2918H113.306L116 0Z\" fill=\"#B5742A\"/>\n</svg>\n</li>\n</ul>\n<p>Most potent & aromatic-prized for its intensity.</p>"
+          }
+        }
+      },
+      "block_order": [
+        "column_8nr8R8",
+        "column_d9tQX3",
+        "column_r8PkTx"
+      ],
+      "disabled": true,
+      "custom_css": [
+        ".gradient {overflow: hidden; background: #fff;}",
+        ".grid__item {width: auto;}",
+        ".multicolumn-card__info {padding: clamp(8px, 1.67vw, 32px);}",
+        "h3 {font-family: var(--font-heading-family); line-height: 1.1; font-size: clamp(24px, 2.51vw, 48px); font-weight: 700; color: var(--color-extra);}",
+        "@media (min-width: 769px) {.grid__item {margin-right: clamp(16px, 1.25vw, 24px); max-width: 33%; } .grid__item:last-child {margin-right: 0 !important; }}"
+      ],
+      "name": "t:sections.multicolumn.presets.name",
+      "settings": {
+        "title": "Types of<strong> Himalayan cliff honey</strong>",
+        "description": "Cliff honey varies by region - shaped by altitude, flora, and harvest season.",
+        "heading_size": "h2",
+        "image_width": "full",
+        "image_ratio": "adapt",
+        "button_label": "",
+        "button_link": "",
+        "columns_desktop": 3,
+        "column_alignment": "center",
+        "background_style": "primary",
+        "color_scheme": "scheme-115c0f00-6e48-4035-b511-680a9158c036",
+        "swipe_on_desktop": false,
+        "columns_mobile": "1",
+        "swipe_on_mobile": false,
+        "padding_top": 110,
+        "padding_bottom": 110,
+        "section_id": "",
+        "section_class": "hover-active",
+        "custom_code": "{% assign secid= '#shopify-section-' | append: section.id %}\n\n<style>\n{{ secid }} .content-container:after {\n  content:none;\n}\n{{ secid }} h2{\nmargin-bottom: clamp(16px, 1.67vw, 32px);\n}\n{{ secid }} ul .multicolumn-card .custom-code > p{\nmax-width:90%;\nmargin:6px auto auto;\n    font-size: clamp(1rem, 0.94vw, 1.8rem);\npadding-top:clamp(2px,0.21vw,4px);\n}\n\n{{ secid }} img{\nmix-blend-mode:multiply;\n}\n\n{{ secid }} .multicolumn__title{\njustify-content:center;\nmargin-bottom: clamp(24px,4.18vw,80px);\ntext-align:center;\n}\n\n{{ secid }} .multicolumn__title p{\nmargin:0;\n}\n\n{{secid}} ul ul{\npadding:0;\n max-width: max-content;\n margin:0 auto;\n}\n\n{{secid}} .multicolumn-card-spacing{\nmargin:0;\npadding: clamp(16px, 1.67vw, 32px) clamp(8px, 1.25vw, 24px);\npadding-top:0;\n;\n}\n{{secid}} ul ul li {\n    text-align: left;\n    max-width:max-content;\n    list-style: none;\n    display: flex;\n    margin: 0;\n    margin-bottom: clamp(8px,0.63vw,12px);\n    gap: 12px;\n    align-items: center;\n    font-size: clamp(1rem, 1.05vw, 2rem);\n}\n\n{{secid}} ul ul li svg {\nwidth:clamp(18px,2.51vw,48px);\nheight:clamp(18px,2.51vw,48px);\nfill:transparent;\n}\n\n{{secid}} li .stars{\nwidth:auto;\naspect-ratio:128/24;\nheight: clamp(16px,1.25vw,24px);\n}\n\n{{ secid }} .multicolumn-card {\n  border-radius: 16px;\n  outline: 2px solid transparent;\n    outline-offset: -2px;\n  background: #ffecc3;\n  transition: all 0.5s ease;\n  opacity: 0.6 !important;\n}\n\n{{ secid }} li.is-active .multicolumn-card{\n  opacity: 1!important;\n  outline: 2px solid #B5731F99;\n\n}\n\n{{ secid }} .grid {\n  flex-wrap: nowrap;\n  gap: 0;\n  justify-content: space-between;\n}\n{{secid}} .splide__slide {\nmargin-right:clamp(16px,1.25vw,24px);}\n.multicolumn-card__info > :nth-child(2){\nmargin-top:clamp(10px,0.84vw,16px);\n}\n@media(max-width:768px){\n{{ secid }} .multicolumn-card {\nmin-width:58.75dvw;\n\n}}\n</style>\n\n{{ 'splide.min.css' | asset_url | stylesheet_tag }}\n<script src=\"{{ 'splide.min.js' | asset_url }}\" defer></script>\n\n<script>\ndocument.addEventListener('DOMContentLoaded', function () {\n  if (typeof Splide === 'undefined') return;\n\n  var sectionRoot = document.getElementById('shopify-section-{{ section.id }}');\n  if (!sectionRoot) return;\n  var list = sectionRoot.querySelector('ul[id^=\"Slider-\"]');\n  if (!list || list.closest('.splide')) return;\n\n  // Add splide classes + our own stable index\n  var items = Array.prototype.slice.call(list.children);\n  list.classList.add('splide__list');\n  items.forEach(function (li, i) {\n    li.classList.add('splide__slide');\n    li.setAttribute('data-nav-index', String(i));\n    li.style.cursor = 'pointer';\n  });\n\n  // Wrap with splide structure\n  var track = document.createElement('div');\n  track.className = 'splide__track';\n\n  var root = document.createElement('div');\n  root.className = 'splide';\n\n  list.parentNode.insertBefore(root, list);\n  root.appendChild(track);\n  track.appendChild(list);\n\n  var splide = new Splide(root, {\n    perPage: 3,\n    focus: 'center',\npadding: { left: '16px', right: '16px' },\n    pagination: false,\n    arrows: false,\n    breakpoints: {\n      990: {\n        perPage: 3,\n        type: 'loop',\n      },\n      768: {\n        perPage: 1,\n        type: 'loop',\n        focus: 'center',\npadding: { left: '18.5vw', right: '18.5vw' },\n        gap:'16px',\n      }\n    }\n  });\n\n  function getTargetIndex(slideEl) {\n    // Prefer our stable index (original slides)\n    var v = slideEl.getAttribute('data-nav-index');\n    if (v != null) return parseInt(v, 10);\n\n    // Fallback (for clones if Splide adds them)\n    v = slideEl.getAttribute('data-splide-index');\n    if (v != null) return parseInt(v, 10);\n\n    return null;\n  }\n\n  function goToSlideFromEvent(e) {\n    var slide = e.target.closest('.splide__slide');\n    if (!slide || !root.contains(slide)) return;\n\n    var idx = getTargetIndex(slide);\n    if (idx == null || Number.isNaN(idx)) return;\n\n    splide.go(idx);\n  }\n\n  splide.on('mounted', function () {\n    // CLICK -> activate slide\n    root.addEventListener('click', function (e) {\n      // If your slide contains <a> and you still want navigation, remove next 3 lines.\n      var link = e.target.closest('a');\n      if (link && !(e.metaKey || e.ctrlKey || e.shiftKey || e.altKey)) e.preventDefault();\n\n      goToSlideFromEvent(e);\n    }, true);\n\n    // HOVER -> activate slide (desktop only)\nif (window.matchMedia('(hover: hover) and (pointer: fine)').matches) {\n  root.addEventListener('pointerenter', function (e) {\n    var slide = e.target.closest('.splide__slide');\n    if (!slide || !root.contains(slide)) return;\n\n    // Prefer Splide's index (works on clones)\n    var idx = slide.getAttribute('data-splide-index');\n    if (idx == null) idx = slide.getAttribute('data-nav-index');\n    if (idx == null) return;\n\n    splide.go(parseInt(idx, 10));\n  }, true);\n}\n\n  });\n  splide.mount();\n});\n</script>"
+      }
+    },
+    "products_category_tab_AmCHkR": {
+      "type": "products-category-tab",
+      "disabled": true,
+      "custom_css": [
+        ".h3 {line-height: 1.2;}",
+        "h3:not(.banner_heading) {word-break: break-all; display: -webkit-box; -webkit-box-orient: vertical; -webkit-line-clamp: 1; overflow: hidden; text-overflow: ellipsis;}",
+        ".grid {--grid-desktop-horizontal-spacing: clamp(12px, 2.61vw, 5rem); --grid-desktop-vertical-spacing: 12px;}",
+        ".collection__title,h2 {/* margin-bottom: clamp(16px, 1.3vw, 24px); */ margin: 0;}",
+        "h2,.body p {text-align: center; width: 100%;}",
+        ".body p {font-size: clamp(12px, 0.94vw, 18px);}",
+        ".body strong {color: var(--color-extra); font-weight: inherit;}"
+      ],
+      "name": "Products Collection Tabs",
+      "settings": {
+        "collection": [
+          "all"
+        ],
+        "products_to_show": 3,
+        "title": "",
+        "heading_size": "h2",
+        "description": "",
+        "show_description": false,
+        "description_style": "body",
+        "columns_desktop": 3,
+        "enable_desktop_slider": false,
+        "full_width": false,
+        "show_view_all": false,
+        "view_all_style": "solid",
+        "color_scheme": "scheme-4",
+        "image_ratio": "square",
+        "image_shape": "default",
+        "show_secondary_image": false,
+        "show_vendor": false,
+        "show_rating": false,
+        "quick_add": "standard",
+        "columns_mobile": "2",
+        "swipe_on_mobile": false,
+        "padding_top": 110,
+        "padding_bottom": 110
+      }
+    },
+    "collapsible_content_JK8Kew": {
+      "type": "collapsible-content",
+      "blocks": {
+        "collapsible_row_ynNdtM": {
+          "type": "collapsible_row",
+          "settings": {
+            "heading": "What is Himalayan cliff honey?",
+            "icon": "none",
+            "row_content": "<p>Our team of Ayurvedic experts and nutritionists are here to help you get the most from your Cliff Honey journey. Our </p>",
+            "page": ""
+          }
+        },
+        "collapsible_row_JnmjTG": {
+          "type": "collapsible_row",
+          "settings": {
+            "heading": "What is Himalayan cliff honey?",
+            "icon": "none",
+            "row_content": "<p>Our team of Ayurvedic experts and nutritionists are here to help you get the most from your Cliff Honey journey. Our </p>",
+            "page": ""
+          }
+        },
+        "collapsible_row_yYKUJK": {
+          "type": "collapsible_row",
+          "settings": {
+            "heading": "What is Himalayan cliff honey?",
+            "icon": "none",
+            "row_content": "<p>Our team of Ayurvedic experts and nutritionists are here to help you get the most from your Cliff Honey journey. Our </p>",
+            "page": ""
+          }
+        },
+        "collapsible_row_Hbi9XR": {
+          "type": "collapsible_row",
+          "settings": {
+            "heading": "What is Himalayan cliff honey?",
+            "icon": "none",
+            "row_content": "<p>Our team of Ayurvedic experts and nutritionists are here to help you get the most from your Cliff Honey journey. Our </p>",
+            "page": ""
+          }
+        },
+        "collapsible_row_7m3GnM": {
+          "type": "collapsible_row",
+          "settings": {
+            "heading": "What is Himalayan cliff honey?",
+            "icon": "none",
+            "row_content": "<p>Our team of Ayurvedic experts and nutritionists are here to help you get the most from your Cliff Honey journey. Our </p>",
+            "page": ""
+          }
+        },
+        "collapsible_row_NPrhRV": {
+          "type": "collapsible_row",
+          "settings": {
+            "heading": "What is Himalayan cliff honey?",
+            "icon": "none",
+            "row_content": "<p>Our team of Ayurvedic experts and nutritionists are here to help you get the most from your Cliff Honey journey. Our </p>",
+            "page": ""
+          }
+        }
+      },
+      "block_order": [
+        "collapsible_row_ynNdtM",
+        "collapsible_row_JnmjTG",
+        "collapsible_row_yYKUJK",
+        "collapsible_row_Hbi9XR",
+        "collapsible_row_7m3GnM",
+        "collapsible_row_NPrhRV"
+      ],
+      "disabled": true,
+      "custom_css": [
+        ".grid__item {display: grid; gap: clamp(2px, 1.05vw, 20px) 5%; grid-template-columns: 1fr 1fr;}",
+        ".caption-with-letter-spacing {background: var(--color-extra); width: max-content; margin: 0; padding: clamp(6px, 0.63vw, 12px) clamp(8px, 0.63vw, 12px); color: #fff; letter-spacing: 0; line-height: 1.1; border-radius: 24px; text-transform: capitalize; font-size: clamp(10px, 0.84vw, 16px) !important;}",
+        "@media (max-width: 990px) {.grid__item {display: block; } .collapsible-content__header {flex-direction: column; }}"
+      ],
+      "name": "t:sections.collapsible_content.presets.name",
+      "settings": {
+        "caption": "You're not Alone",
+        "heading": "Questions <strong>Asked By You</strong>",
+        "heading_size": "h2",
+        "heading_alignment": "center",
+        "button_label": "",
+        "button_link": "",
+        "layout": "none",
+        "container_color_scheme": "scheme-115c0f00-6e48-4035-b511-680a9158c036",
+        "color_scheme": "scheme-115c0f00-6e48-4035-b511-680a9158c036",
+        "open_first_collapsible_row": true,
+        "image_ratio": "adapt",
+        "desktop_layout": "image_second",
+        "padding_top": 110,
+        "padding_bottom": 110
+      }
+    },
+    "image_with_text_RQYqqE": {
+      "type": "image-with-text",
+      "blocks": {
+        "caption_GjtGQi": {
+          "type": "caption",
+          "settings": {
+            "caption": "Starter Pack",
+            "text_style": "subtitle",
+            "text_size": "large"
+          }
+        },
+        "heading_AX7JL6": {
+          "type": "heading",
+          "settings": {
+            "heading": "<strong>Save $40</strong> on our Cliff Honey Starter Kit",
+            "heading_size": "h2"
+          }
+        },
+        "text_HhrEWc": {
+          "type": "text",
+          "settings": {
+            "text": "<p>Praesent Praesent ex Nunc placerat non vitae ullamcorper facilisis luctus consectetur amet, Ut sit nec ipsum urna nec lacus, consectetur elit lacus, dignissim, hendrerit Cras placerat volutpat amet, Lorem dui tincidunt laoreet faucibus at </p>",
+            "text_style": "body"
+          }
+        },
+        "button_XcLwQ3": {
+          "type": "button",
+          "settings": {
+            "button_label": "Shop The Bundle",
+            "button_link": "#",
+            "button_style_secondary": false,
+            "attributes": ""
+          }
+        },
+        "linebreak_kkHAip": {
+          "type": "linebreak",
+          "settings": {
+            "horizontal_line_color": "#d6d6d6",
+            "horizontal_line_width": 1,
+            "horizontal_line_margin": 32,
+            "horizontal_line_margin_2": 24
+          }
+        },
+        "iconboxes_rQfd3V": {
+          "type": "iconboxes",
+          "settings": {
+            "iconboxes_text_alignment": "center",
+            "iconboxes_image_1": "shopify://shop_images/No_Fillers.svg",
+            "iconboxes_title_1": "",
+            "iconboxes_description_1": "",
+            "iconboxes_image_2": "shopify://shop_images/No_Fillers.svg",
+            "iconboxes_title_2": "",
+            "iconboxes_description_2": "",
+            "iconboxes_image_3": "shopify://shop_images/No_Fillers.svg",
+            "iconboxes_title_3": "",
+            "iconboxes_description_3": "",
+            "iconboxes_image_4": "shopify://shop_images/No_Fillers.svg",
+            "iconboxes_title_4": "",
+            "iconboxes_description_4": "",
+            "iconboxes_image_5": "shopify://shop_images/No_Fillers.svg",
+            "iconboxes_title_5": "",
+            "iconboxes_description_5": ""
+          }
+        }
+      },
+      "block_order": [
+        "caption_GjtGQi",
+        "heading_AX7JL6",
+        "text_HhrEWc",
+        "button_XcLwQ3",
+        "linebreak_kkHAip",
+        "iconboxes_rQfd3V"
+      ],
+      "disabled": true,
+      "custom_css": [
+        ".subtitle {margin-bottom: clamp(16px, 2.61vw, 5rem);}",
+        ".wrapper-padding {max-width: 100%; padding: 0;}",
+        ".image-with-text__iconbox img {width: 100%; height: auto;}",
+        ".image-with-text__content {padding: clamp(24px, 5.75vw, 110px) 16px !important;}",
+        "@media screen and (min-width: 768px) {.image-with-text__media-item {max-height: 860px; } .image-with-text__content {max-width: 100%; } .image-with-text__iconboxes {gap: 12px; flex-wrap: nowrap !important; }}"
+      ],
+      "name": "t:sections.image-with-text.presets.name",
+      "settings": {
+        "image": "shopify://shop_images/sample_bottle.webp",
+        "height": "large",
+        "desktop_image_width": "medium",
+        "layout": "image_first",
+        "image_behavior": "none",
+        "content_layout": "no-overlap",
+        "desktop_content_position": "middle",
+        "desktop_content_alignment": "left",
+        "mobile_content_alignment": "center",
+        "section_color_scheme": "scheme-e0418eeb-85e5-4e72-8731-e95db24077ad",
+        "color_scheme": "scheme-e0418eeb-85e5-4e72-8731-e95db24077ad",
+        "id": "starter_kit_section",
+        "class": "",
+        "padding_top": 0,
+        "padding_bottom": 0,
+        "custom_liquid": ""
+      }
+    },
+    "rich_text_T8VcFt": {
+      "type": "rich-text",
+      "blocks": {
+        "heading_gkzwwt": {
+          "type": "heading",
+          "settings": {
+            "heading": "The Regional <strong>Reserve Collection.</strong>",
+            "heading_size": "h2"
+          }
+        }
+      },
+      "block_order": [
+        "heading_gkzwwt"
+      ],
+      "custom_css": [
+        ".gradient {background: #fff; padding-top: 48px; padding-bottom: 0;}",
+        "h2 {display: none;}",
+        ".page-width {max-width: 1095px;}",
+        "@media (min-width: 768px) {.gradient {padding-top: clamp(47px, 5.75vw, 110px); padding-bottom: clamp(16px, 2.61vw, 50px); } h2 {display: block; max-width: 512px; }}"
+      ],
+      "name": "t:sections.rich-text.presets.name",
+      "settings": {
+        "desktop_content_position": "left",
+        "content_alignment": "left",
+        "color_scheme": "scheme-4",
+        "full_width": true,
+        "padding_top": 110,
+        "padding_bottom": 50
+      }
+    },
+    "image_with_text_JDUYkM": {
+      "type": "image-with-text",
+      "blocks": {
+        "heading_wzLqPM": {
+          "type": "heading",
+          "settings": {
+            "heading": "The Regional <strong>Reserve Collection.</strong>",
+            "heading_size": "h2"
+          }
+        },
+        "text_Wxz6Ty": {
+          "type": "text",
+          "disabled": true,
+          "settings": {
+            "text": "<p>This selected bundle is designed for those who want to experience the true diversity of Nepali honey. From the wild himalayan Apis laboriosa colonies in <em>Lamjung</em>, <em>Jajarkot</em>, and <em>Rukum</em>, each jar offers a rare taste, texture, where altitude, wild flora, and season shape the honey’s character.</p>",
+            "text_style": "body"
+          }
+        },
+        "liquid_G7V689": {
+          "type": "Liquid",
+          "settings": {
+            "custom_liquid": "<div class=\"custom\"><h4>Includes:</h4>\n<hr/>\n\n<p><strong>Lamjung Cliff Honey <svg width=\"29\" height=\"14\" viewBox=\"0 0 29 14\" fill=\"none\" xmlns=\"http://www.w3.org/2000/svg\">\n<g clip-path=\"url(#clip0_5529_17217)\">\n<path d=\"M3.1295 14L7.51079 9.14851L10.7562 12.7987L15.7634 4.38944L17.4788 7.0462L19.3333 4.9901L26.1023 14H29L19.5188 1.36304L17.8034 3.25743L15.6938 0L10.3853 8.89439L7.51079 5.66007L0 14H3.1295Z\" fill=\"#B5731F\"/>\n</g>\n<defs>\n<clipPath id=\"clip0_5529_17217\">\n<rect width=\"29\" height=\"14\" fill=\"white\"/>\n</clipPath>\n</defs>\n</svg>\n<highlight>Alt. 4000m</highlight>\n</strong>\nBright, aromatic, and balanced</p>\n\n<p><strong>Rukum Cliff Honey <svg width=\"29\" height=\"14\" viewBox=\"0 0 29 14\" fill=\"none\" xmlns=\"http://www.w3.org/2000/svg\">\n<g clip-path=\"url(#clip0_5529_17217)\">\n<path d=\"M3.1295 14L7.51079 9.14851L10.7562 12.7987L15.7634 4.38944L17.4788 7.0462L19.3333 4.9901L26.1023 14H29L19.5188 1.36304L17.8034 3.25743L15.6938 0L10.3853 8.89439L7.51079 5.66007L0 14H3.1295Z\" fill=\"#B5731F\"/>\n</g>\n<defs>\n<clipPath id=\"clip0_5529_17217\">\n<rect width=\"29\" height=\"14\" fill=\"white\"/>\n</clipPath>\n</defs>\n</svg>\n<highlight>Alt. 3800m</highlight>\n</strong>\nEarthy & layered, from high-altitude forests</p>\n\n<p><strong>Jajarkot Cliff Honey <svg width=\"29\" height=\"14\" viewBox=\"0 0 29 14\" fill=\"none\" xmlns=\"http://www.w3.org/2000/svg\">\n<g clip-path=\"url(#clip0_5529_17217)\">\n<path d=\"M3.1295 14L7.51079 9.14851L10.7562 12.7987L15.7634 4.38944L17.4788 7.0462L19.3333 4.9901L26.1023 14H29L19.5188 1.36304L17.8034 3.25743L15.6938 0L10.3853 8.89439L7.51079 5.66007L0 14H3.1295Z\" fill=\"#B5731F\"/>\n</g>\n<defs>\n<clipPath id=\"clip0_5529_17217\">\n<rect width=\"29\" height=\"14\" fill=\"white\"/>\n</clipPath>\n</defs>\n</svg>\n<highlight>Alt. 3500m</highlight>\n</strong>\nDeep, bold, and intense, collected from remote western Himalayan cliffs.</p>\n<hr/>\n<p><strong>Luxury Gift Box Set</strong>\nDesigned for protection, presentation, and gifting.\n</p>\n<hr/>\n<p><strong>Hand-crafted Wooden Spoon</strong>\nFor a gentle, precise daily serving.</p>\n<hr/>\n</div>"
+          }
+        },
+        "button_i8pNKa": {
+          "type": "button",
+          "settings": {
+            "button_label": "Shop The Bundle",
+            "button_link": "shopify://products/cliff-honey-variety",
+            "button_style_secondary": false,
+            "attributes": ""
+          }
+        },
+        "iconboxes_DBdqfK": {
+          "type": "iconboxes",
+          "disabled": true,
+          "settings": {
+            "iconboxes_text_alignment": "center",
+            "iconboxes_image_1": "shopify://shop_images/No_Fillers.svg",
+            "iconboxes_title_1": "",
+            "iconboxes_description_1": "",
+            "iconboxes_image_2": "shopify://shop_images/No_Fillers.svg",
+            "iconboxes_title_2": "",
+            "iconboxes_description_2": "",
+            "iconboxes_image_3": "shopify://shop_images/No_Fillers.svg",
+            "iconboxes_title_3": "",
+            "iconboxes_description_3": "",
+            "iconboxes_image_4": "shopify://shop_images/No_Fillers.svg",
+            "iconboxes_title_4": "",
+            "iconboxes_description_4": "",
+            "iconboxes_image_5": "shopify://shop_images/No_Fillers.svg",
+            "iconboxes_title_5": "",
+            "iconboxes_description_5": ""
+          }
+        }
+      },
+      "block_order": [
+        "heading_wzLqPM",
+        "text_Wxz6Ty",
+        "liquid_G7V689",
+        "button_i8pNKa",
+        "iconboxes_DBdqfK"
+      ],
+      "custom_css": [
+        ".gradient {background: #fff;}",
+        "h4 {margin: 0;}",
+        ".grid {--grid-desktop-horizontal-spacing: clamp(24px, 2.61vw, 50px); --grid-desktop-vertical-spacing: clamp(24px, 2.61vw, 50px);}",
+        ".button {min-height: auto; padding: clamp(12px, 0.73vw, 14px) 52px; margin-top: 8px; letter-spacing: 0; margin-left: 1px;}"
+      ],
+      "name": "t:sections.image-with-text.presets.name",
+      "settings": {
+        "image": "shopify://shop_images/The_Regional_Reserve_Collection.webp",
+        "height": "adapt",
+        "desktop_image_width": "medium",
+        "layout": "image_first",
+        "image_behavior": "none",
+        "content_layout": "no-overlap",
+        "desktop_content_position": "middle",
+        "desktop_content_alignment": "left",
+        "mobile_content_alignment": "left",
+        "section_color_scheme": "scheme-e0418eeb-85e5-4e72-8731-e95db24077ad",
+        "color_scheme": "scheme-e0418eeb-85e5-4e72-8731-e95db24077ad",
+        "id": "starter_kit_section",
+        "class": "",
+        "padding_top": 0,
+        "padding_bottom": 110,
+        "custom_liquid": "{% assign sec_id = \"#shopify-section-\" | append: section.id %}\n{% style %}\n{{ sec_id }} .page-width{\nmax-width:1127px;\n}\n\n{{ sec_id }} hr {\n  display: block;\n  margin: clamp(8px,0.836vw,16px) 0!important;\n  background: gray;\n  height: 1px;\n  width: 30%;\n}\n{{ sec_id }} .custom p{\ncolor:rgba(var(--color-foreground),0.75)\n}\n{{ sec_id }} .custom p strong{\ndisplay:flex;\ngap:8px;\nalign-items:center;\nfont-weight:500;\nmargin-bottom:6px;\nline-height:1;\ncolor:rgba(var(--color-foreground),1)\n}\n\n@media(min-width:768px){\n{{ sec_id }} .image-with-text__media-item{\n max-width:55%;\n}\n{{ sec_id }} .grid{\ngap:clamp(24px, 2.61vw, 50px) 1%;\njustify-content:space-between;\n}\n{{ sec_id }} .image-with-text__text-item{\nmax-width:39.6%;\n}\n{{sec_id}} h2{\ndisplay:none!important;\n}\n}\n{% endstyle %}"
+      }
+    },
+    "custom_liquid_gr4kG4": {
+      "type": "custom-liquid",
+      "name": "t:sections.custom-liquid.presets.name",
+      "settings": {
+        "custom_liquid": "<style>\n#shopify-section-{{ section.id }} {\n  display: none;\n}\n\n@media (max-width: 980px) {\n  #shopify-section-{{ section.id }} {\n    display: block;\n  }\n}\n\n</style>",
+        "color_scheme": "",
+        "padding_top": 0,
+        "padding_bottom": 0
+      }
+    }
+  },
+  "order": [
+    "main",
+    "image_banner_Vjt9ci",
+    "rich_text_UyjmX4",
+    "multirow_waDjYh",
+    "multicolumn_iTiXbD",
+    "products_category_tab_AmCHkR",
+    "collapsible_content_JK8Kew",
+    "image_with_text_RQYqqE",
+    "rich_text_T8VcFt",
+    "image_with_text_JDUYkM",
+    "custom_liquid_gr4kG4"
+  ]
+}

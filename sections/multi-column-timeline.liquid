@@ -1,0 +1,382 @@
+{%- style -%}
+  #shopify-section-{{ section.id }}{
+      overflow: hidden;
+  }
+
+  .section-{{ section.id }}-padding {
+    padding-top: clamp({{ section.settings.padding_top | times: 0.43 | round: 0 }}px,{{ section.settings.padding_top | divided_by: 19.13 | round: 0 }}vw, {{ section.settings.padding_top }}px);
+  }
+
+  .section-{{ section.id }}-padding .honey-timeline{
+    position: relative;
+  }
+
+  .section-{{ section.id }}-padding .honey-timeline .gradient{
+    padding-bottom: clamp({{ section.settings.padding_bottom | times: 0.43 | round: 0 }}px,{{ section.settings.padding_bottom | divided_by: 19.13 | round: 0 }}vw, {{ section.settings.padding_bottom }}px);
+    background-attachment: unset;
+  }
+
+  /* @media screen and (min-width: 768px) { .section-{{ section.id }}-padding  { padding-top: {{ section.settings.padding_top }}px; } .section-{{ section.id }}-padding .honey-timeline .gradient{ padding-bottom: {{ section.settings.padding_bottom }}px; }} */
+{%- endstyle -%}
+
+{% style %}
+  #shopify-section-{{ section.id }}  #timeline-{{ section.id }} {
+    /* Uses theme color-scheme tokens when available */
+    --tl-text: rgb(var(--color-foreground, 30, 30, 30));
+    --tl-background: rgb(var(--color-background));
+    --tl-accent: rgb(var(--color-accent, 208, 139, 46));
+    --tl-extra: var(--color-extra);
+    --tl-blob: rgb(var(--color-button, 208, 139, 46));
+    --tl-connector: rgb(var(--color-foreground, 59, 23, 0));
+    --tl-placeholder-bg: rgb(var(--color-background, 226, 226, 226));
+  }
+
+  #shopify-section-{{ section.id }} .timeline {
+    position: relative;
+    overflow: hidden;
+  }
+
+  #shopify-section-{{ section.id }} .timeline-inner {
+    position: relative;
+  }
+
+  #shopify-section-{{ section.id }} .placeholder { display:block; position: absolute;  width: 16.6%; height: auto; aspect-ratio:1/1; border-radius: 50%; background-color: var(--tl-placeholder-bg); background-size: cover; background-position: center; opacity: 1;}
+  #shopify-section-{{ section.id }} .placeholder.left { left: -2%; top: 10%; }
+  #shopify-section-{{ section.id }} .placeholder.right { top: 0; right: -1%; }
+  #shopify-section-{{ section.id }} .timeline-header { position: relative; z-index: 2; text-align: center; margin-bottom: clamp(40px, 4vw, 70px); color: var(--tl-text);}
+
+  #shopify-section-{{ section.id }} .timeline-header h2 { margin: 0; }
+
+  #shopify-section-{{ section.id }} .timeline-header h2 span { color: var(--tl-accent);}
+
+  #shopify-section-{{ section.id }} .timeline-container { position: relative; z-index: 2; display: grid; grid-template-columns: repeat(3, minmax(30%, 1fr)); grid-column-gap: 4.8%; grid-row-gap: 30px; margin-top: clamp(24px,4.2vw,80px); }
+
+  #shopify-section-{{ section.id }} .timeline-item { position: relative; display: flex; flex-direction: column; gap: clamp(12px,1.4vw,24px); color: var(--tl-text); align-items: center; }
+
+  #shopify-section-{{ section.id }} .timeline-item-header { width:100%; display: flex; gap: clamp(12px, 1.4vw, 32px); justify-content: center; align-items: center; flex-direction: column; }
+
+  #shopify-section-{{ section.id }} .timeline-item:nth-child(odd) { margin-top: 38px; }
+
+  #shopify-section-{{ section.id }} .timeline-item h3 { color: var(--tl-text); margin: 0; letter-spacing: 0; font-size: clamp(24px, 2.2vw, 36px); text-align: center; }
+
+  #shopify-section-{{ section.id }} .timeline-item ul { padding-left: 20px; margin: 0; max-width: max-content; }
+
+  #shopify-section-{{ section.id }} .timeline-item li { max-width: max-content; line-height: 1.6; margin: 0 0 10px; }
+
+  #shopify-section-{{ section.id }} .timeline-item li,#shopify-section-{{ section.id }} .timeline-item p { font-size: clamp(12px, 1.2vw, 16px); opacity: 0.7; }
+
+  #shopify-section-{{ section.id }} .timeline-item li:last-child { margin-bottom:0; }
+
+  #shopify-section-{{ section.id }} .blob { position:relative; width: 43%; height: auto; background: transparent; display: block;}
+
+  #shopify-section-{{ section.id }} .blob svg { width: 100%; height: 100%; display: block; }
+
+  #shopify-section-{{ section.id }} .connector { position: absolute; top: 10%; left: 48%; transform: translateX(-50%); width: 69%; /* max-height: 110px; */ height: auto; aspect-ratio: 1004 / 111; pointer-events: none; z-index: 0; }
+
+  #shopify-section-{{ section.id }} .connector svg { width: 100%; height: 100%; max-height: 85px;}
+
+
+  #shopify-section-{{ section.id }} text { letter-spacing:0; font-family: var(--font-heading-family); font-size: calc(var(--font-heading-scale) * clamp(24px, 1.3vw, 25px)); }
+
+  @media (max-width: 768px) {
+    #shopify-section-{{ section.id }} .placeholder  {
+      display: none!important;
+    }
+
+    #shopify-section-{{ section.id }} .timeline-container {
+      display: block;
+      margin-top: 24px;
+      max-height:60vh;
+      overflow-y:auto;
+    }
+
+    #shopify-section-{{ section.id }} .timeline-item {
+      padding-top: 0;
+      margin-bottom: 18px;
+      align-items: flex-start;
+      justify-content: flex-start;
+    }
+
+    #shopify-section-{{ section.id }} .connector { display: none; }
+
+
+    #shopify-section-{{ section.id }} .timeline-item-header {
+      justify-content: flex-start;
+      align-items: flex-start;
+      width: 100%;
+    }
+
+    #shopify-section-{{ section.id }} .timeline-item h3.h3 {
+      letter-spacing: 0;
+      text-align: left;
+      color: var(--tl-text)!important;
+      font-size: clamp(24px, 2.6vw, 36px);
+    }
+
+    #shopify-section-{{ section.id }} .blob {
+      max-width: 40%;
+    }
+  }
+
+  .wave{
+    fill:rgb(var(--color-background));
+    margin-bottom:-10px
+  }
+
+  .main-tl-section{
+    background: transparent;
+  }
+{% endstyle %}
+
+<div class="color-{{ section.settings.color_scheme }} main-tl-section section-{{ section.id }}-padding isolate">
+  <div
+    {% if section.settings.section_id != blank %}
+      id="{{ section.settings.section_id }}"
+    {% endif %}
+    class="honey-timeline {% unless section.settings.background_style == 'none' and settings.text_boxes_border_thickness > 0 or settings.text_boxes_shadow_opacity > 0 %} background-{{ section.settings.background_style }}{% endunless %} {{ section.settings.section_class }}"
+  >
+    <svg class="wave" viewBox="0 0 1920 116" fill="none" xmlns="http://www.w3.org/2000/svg">
+      <path d="M938.367 48.5472C365.367 21.127 117.777 91.6685 0 115.524H1920V0C1792.64 56.3655 1246.32 63.284 938.367 48.5472Z" fill="var(--color-background)"/>
+    </svg>
+
+    {% if section.settings.show_placeholders %}
+      <div
+        class="placeholder left scroll-trigger animate--slide-in"
+        {% if section.settings.placeholder_img_left != blank %}
+          style=" background-image:url('{{ section.settings.placeholder_img_left | image_url: width: 800 }}');"
+        {% endif %}
+      ></div>
+
+      <div
+        class="placeholder right scroll-trigger animate--slide-in"
+        {% if section.settings.placeholder_img_right != blank %}
+          style=" background-image:url('{{ section.settings.placeholder_img_right | image_url: width: 800 }}');"
+        {% endif %}
+      ></div>
+    {% endif %}
+
+    <div class="gradient">
+      <div class="page-width ">
+        <div id="timeline-{{ section.id }}" class="timeline">
+          <div class="timeline-inner">
+            <div class="timeline-header">
+              <h2 class="h2 scroll-trigger animate--slide-in">
+                {{ section.settings.heading }}
+                <span>{{ section.settings.heading_accent }}</span>
+              </h2>
+            </div>
+
+            <div class="timeline-container">
+              {% if section.settings.show_connector %}
+                <div class="connector " aria-hidden="true">
+                  <svg class="scroll-trigger animate--slide-in" viewBox="0 0 1008 114" preserveAspectRatio="none">
+                    <path d="M1 37.5004C35.8333 7.83373 137.1 -30.5996 263.5 53.0004C389.9 136.6 536.167 114.167 593.5 92.5002C622.5 107.5 694.717 117.161 785 92.5002C893 63.0002 969.833 18.3336 1007 1.00024"
+                      stroke="var(--tl-connector)"
+                      stroke-width="{{ section.settings.connector_width }}"
+                      stroke-linecap="round"
+                      stroke-linejoin="round"
+                      stroke-dasharray="10 10"
+                      fill="none" />
+                  </svg>
+                </div>
+              {% endif %}
+
+              {% for block in section.blocks %}
+                <div
+                  class="timeline-item scroll-trigger animate--slide-in"
+                  style="--animation-order: {{ forloop.index }};"
+                  {{ block.shopify_attributes }}
+                >
+                  <div class="timeline-item-header">
+                    <div class="blob">
+                      <svg
+                        viewBox="0 0 208 159"
+                        xmlns="http://www.w3.org/2000/svg"
+                        role="img"
+                        aria-label="{{ block.settings.period | escape }}"
+                      >
+                        <path d="M9.45135 93.5149C-13.6005 54.9721 9.87115 33.5 33.366 25.7959C129.025 -2.88506 184.825 -4.57696 198.775 5.87856C210.732 14.8415 211.374 23.5652 198.775 83.5562C185.871 145 133.871 160 105.11 158.246C77.8711 156.585 33.3659 133.5 9.45135 93.5149Z"
+                          fill="var(--tl-blob)"></path>
+                        <text  x="110" y="80" text-anchor="middle" dominant-baseline="middle" font-size="30" font-weight="700" fill="var(--tl-text)" style="transform: translateX(-3%);">
+                          {{ block.settings.period }}
+                        </text>
+                      </svg>
+                    </div>
+
+                    <h3 class="h3">{{ block.settings.title }}</h3>
+                  </div>
+
+                  {% if block.settings.bullets != blank %}
+                    <ul>
+                      {% assign lines = block.settings.bullets | newline_to_br | split: '<br />' %}
+                      {% for line in lines %}
+                        {% assign trimmed = line | strip %}
+                        {% if trimmed != blank %}
+                          <li>{{ trimmed }}</li>
+                        {% endif %}
+                      {% endfor %}
+                    </ul>
+                  {% endif %}
+                </div>
+              {% endfor %}
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+{% schema %}
+{
+  "name": "Honey Legacy Timeline",
+  "class": "section",
+  "tag": "section",
+  "disabled_on": {
+    "groups": ["header", "footer"]
+  },
+  "settings": [
+    {
+      "type": "text",
+      "id": "heading",
+      "label": "Heading",
+      "default": "Honey Legacy"
+    },
+    {
+      "type": "text",
+      "id": "heading_accent",
+      "label": "Heading accent",
+      "default": "Almost A Decade!"
+    },
+
+    {
+      "type": "header",
+      "content": "Layout"
+    },
+    {
+      "type": "select",
+      "id": "background_style",
+      "options": [
+        { "value": "none", "label": "None" },
+        { "value": "primary", "label": "Primary" }
+      ],
+      "default": "none",
+      "label": "Background style"
+    },
+    {
+      "type": "color_scheme",
+      "id": "color_scheme",
+      "label": "t:sections.all.colors.label",
+      "default": "scheme-1"
+    },
+
+    {
+      "type": "checkbox",
+      "id": "show_placeholders",
+      "label": "Show side image placeholders",
+      "default": true
+    },
+    {
+      "type": "image_picker",
+      "id": "placeholder_img_left",
+      "label": "Left placeholder image"
+    },
+    {
+      "type": "image_picker",
+      "id": "placeholder_img_right",
+      "label": "Right placeholder image"
+    },
+
+    {
+      "type": "checkbox",
+      "id": "show_connector",
+      "label": "Show dashed connector (desktop only)",
+      "default": true
+    },
+    {
+      "type": "range",
+      "id": "connector_width",
+      "label": "Connector stroke width",
+      "min": 1,
+      "max": 8,
+      "step": 1,
+      "default": 4
+    },
+
+    {
+      "type": "header",
+      "content": "t:sections.all.padding.section_padding_heading"
+    },
+    {
+      "type": "range",
+      "id": "padding_top",
+      "min": 0,
+      "max": 150,
+      "step": 5,
+      "unit": "px",
+      "label": "t:sections.all.padding.padding_top",
+      "default": 50
+    },
+    {
+      "type": "range",
+      "id": "padding_bottom",
+      "min": 0,
+      "max": 150,
+      "step": 5,
+      "unit": "px",
+      "label": "t:sections.all.padding.padding_bottom",
+      "default": 50
+    },
+
+    {
+      "type": "header",
+      "content": "Class/ID Attributes"
+    },
+    {
+      "type": "text",
+      "id": "section_id",
+      "label": "Section ID",
+      "info": "Add a custom ID to this section for CSS or JavaScript targeting. Must be unique and contain no spaces."
+    },
+    {
+      "type": "text",
+      "id": "section_class",
+      "label": "Section Class",
+      "info": "Add custom classes to this section for CSS or JavaScript targeting. Separate multiple classes with spaces."
+    }
+  ],
+  "blocks": [
+    {
+      "type": "timeline_item",
+      "name": "Timeline item",
+      "settings": [
+        {
+          "type": "text",
+          "id": "period",
+          "label": "Period text (inside blob)",
+          "default": "2018-2021"
+        },
+        {
+          "type": "inline_richtext",
+          "id": "title",
+          "label": "Title",
+          "default": "Madoh! <strong>Honey Guys</strong>"
+        },
+        {
+          "type": "textarea",
+          "id": "bullets",
+          "label": "Bullet points (one per line)",
+          "default": "First highlight\nSecond highlight\nThird highlight\nFourth highlight"
+        }
+      ]
+    }
+  ],
+  "max_blocks": 6,
+  "presets": [
+    {
+      "name": "Honey Legacy Timeline",
+      "blocks": [{ "type": "timeline_item" }, { "type": "timeline_item" }, { "type": "timeline_item" }]
+    }
+  ]
+}
+{% endschema %}

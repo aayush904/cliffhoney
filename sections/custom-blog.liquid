@@ -1,0 +1,423 @@
+{{ 'component-article-card.css' | asset_url | stylesheet_tag }}
+{{ 'component-card.css' | asset_url | stylesheet_tag }}
+{{ 'section-main-blog.css' | asset_url | stylesheet_tag }}
+
+{%- liquid
+  assign per_page = section.settings.per_page | default: 6
+  if per_page < 1
+    assign per_page = 6
+  endif
+-%}
+
+{%- style -%}
+  #shopify-section-{{ section.id }} {
+    /* {% render 'style-article' %} */
+  }
+
+  .section-{{ section.id }}-padding {
+    padding-top: clamp({{ section.settings.padding_top | times: 0.43 | round: 0 }}px, {{ section.settings.padding_top | divided_by: 19.13 }}vw, {{ section.settings.padding_top }}px);
+    padding-bottom: clamp({{ section.settings.padding_bottom | times: 0.43 | round: 0 }}px, {{ section.settings.padding_bottom | divided_by: 19.13 }}vw, {{ section.settings.padding_bottom }}px);
+  }
+
+  #shopify-section-{{ section.id }} .main-blog{
+    row-gap: clamp({{ section.settings.padding_top | times: 0.43 | round: 0 }}px, {{ section.settings.padding_top | divided_by: 19.13 }}vw, {{ section.settings.padding_top }}px);
+  }
+
+  #shopify-section-{{ section.id }} .main-blog__topbar {
+    display: flex;
+    align-items: stretch;
+    justify-content: space-between;
+    gap: 1.5rem;
+    flex-wrap: nowrap;
+  }
+
+  #shopify-section-{{ section.id }} .main-blog__tags {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.75rem;
+    align-items: center;
+  }
+
+  #shopify-section-{{ section.id }} .main-blog__tag {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.5rem;
+    padding: 0.75rem 1rem;
+    border-radius: 9px;
+    text-decoration: none;
+    line-height: 1;
+    border: 1px solid rgba(var(--color-foreground), 0.2);
+    color: rgb(var(--color-foreground));
+    background: rgb(var(--color-background));
+  }
+
+  #shopify-section-{{ section.id }} .main-blog__tag.is-active {
+    border-color: rgba(var(--color-foreground), 0.5);
+  }
+
+  #shopify-section-{{ section.id }} .main-blog__search {
+    margin-left: auto;
+    flex: 1 1 30%;
+    display: flex;
+    justify-content: flex-end;
+  }
+
+  #shopify-section-{{ section.id }} .main-blog__search-field {
+    width: min(500px, 100%);
+    position: relative;
+    --inputs-radius: 8px;
+  }
+
+  #shopify-section-{{ section.id }} .main-blog__search-field .field__input {
+    padding: 0.625rem 1rem;
+    padding-right: 2.75rem !important;
+  }
+
+  #shopify-section-{{ section.id }} .main-blog__search-field .field__input::placeholder {
+    color: rgb(var(--color-foreground));
+    opacity: 0.5;
+  }
+
+  #shopify-section-{{ section.id }} .main-blog__search-btn {
+    position: absolute;
+    right: 0.25rem;
+    top: 50%;
+    transform: translateY(-50%);
+    width: 32px;
+    height: 32px;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    border: 0;
+    background: transparent;
+    cursor: pointer;
+  }
+
+  #shopify-section-{{ section.id }} .main-blog__search-btn svg {
+    width: 18px;
+    height: 18px;
+  }
+
+  #shopify-section-{{ section.id }} .main-blog__more-wrap {
+    margin-top: 2.5rem;
+    display: flex;
+    justify-content: center;
+  }
+
+  @media screen and (max-width: 749px) {
+    #shopify-section-{{ section.id }} .main-blog__topbar {
+      margin-top: 1rem;
+      margin-bottom: 1.5rem;
+      flex-wrap:wrap;
+    }
+
+    #shopify-section-{{ section.id }} .main-blog__search {
+      width: 100%;
+      justify-content: stretch;
+    }
+
+    #shopify-section-{{ section.id }} .main-blog__search-field {
+      width: 100%;
+    }
+  }
+{%- endstyle -%}
+
+{{ section.settings.custom_code }}
+
+{%- paginate blog.articles by per_page -%}
+  <div
+    class="main-blog color-{{ section.settings.color_scheme }} page-width section-{{ section.id }}-padding"
+    data-main-blog
+    data-next-url="{% if paginate.next %}{{ paginate.next.url }}{% endif %}"
+  >
+    <h1 class="visually-hidden title--primary{% if settings.animations_reveal_on_scroll %} scroll-trigger animate--fade-in{% endif %}">
+      {{ blog.title | escape }}
+    </h1>
+
+    <div class="main-blog__topbar">
+      {%- if section.settings.show_tags -%}
+        {%- assign current_tag = current_tags | first -%}
+
+        {% comment %}
+          <nav class="main-blog__tags" aria-label="{{ 'blogs.article.tags' | t | default: 'Tags' }}">
+            <a class="main-blog__tag{% if current_tags == blank %} is-active{% endif %}" href="{{ blog.url }}">
+              {{ section.settings.all_label | escape }}
+            </a>
+
+            {%- for t in blog.all_tags -%}
+              <a
+                class="main-blog__tag{% if current_tag == t %} is-active{% endif %}"
+                href="{{ blog.url }}/tagged/{{ t | handleize }}"
+              >
+                {{ t }}
+              </a>
+            {%- endfor -%}
+          </nav>
+        {% endcomment %}
+        {% render 'blog-tagged' %}
+      {%- endif -%}
+
+      {%- if section.settings.show_search -%}
+        <form class="main-blog__search" action="{{ routes.search_url }}" method="get" role="search">
+          <input type="hidden" name="type" value="article">
+          <input type="hidden" name="options[prefix]" value="last">
+
+          <div class="field main-blog__search-field">
+            <label class="visually-hidden" for="MainBlogSearch-{{ section.id }}">
+              {{ 'general.search.search' | t | default: 'Search' }}
+            </label>
+
+            <input
+              id="MainBlogSearch-{{ section.id }}"
+              class="field__input"
+              type="search"
+              name="q"
+              placeholder="{{ section.settings.search_placeholder | escape }}"
+              autocomplete="off"
+            >
+
+            <button
+              class="field__button main-blog__search-btn"
+              type="submit"
+              aria-label="{{ 'general.search.search' | t | default: 'Search' }}"
+            >
+              {{- 'icon-search.svg' | inline_asset_content -}}
+            </button>
+          </div>
+        </form>
+      {%- endif -%}
+    </div>
+
+    <div
+      class="blog-articles {% if section.settings.layout == 'collage' %}blog-articles--collage{% endif %}"
+      data-article-grid
+    >
+      {%- for article in blog.articles -%}
+        <div
+          class="blog-articles__article article{% if settings.animations_reveal_on_scroll %} scroll-trigger animate--slide-in{% endif %}"
+          {% if settings.animations_reveal_on_scroll %}
+            data-cascade
+            style="--animation-order: {{ forloop.index }};"
+          {% endif %}
+        >
+          {%- render 'article-card',
+            article: article,
+            media_height: section.settings.image_height,
+            media_aspect_ratio: article.image.aspect_ratio,
+            show_image: section.settings.show_image,
+            show_date: section.settings.show_date,
+            show_author: section.settings.show_author,
+            show_excerpt: true
+          -%}
+        </div>
+      {%- endfor -%}
+    </div>
+
+    {%- if paginate.next -%}
+      <div class="main-blog__more-wrap">
+        <button class="button" type="button" data-load-more>
+          {{ section.settings.load_more_label | escape }}
+        </button>
+      </div>
+    {%- endif -%}
+  </div>
+{%- endpaginate -%}
+
+<script>
+  (() => {
+    const root = document.querySelector('#shopify-section-{{ section.id }} [data-main-blog]');
+    if (!root) return;
+
+    const grid = root.querySelector('[data-article-grid]');
+    const btn = root.querySelector('[data-load-more]');
+    if (!grid || !btn) return;
+
+    const setNextUrl = (url) => {
+      root.setAttribute('data-next-url', url || '');
+      if (!url) btn.remove();
+    };
+
+    const getNextUrl = () => root.getAttribute('data-next-url') || '';
+
+    btn.addEventListener(
+      'click',
+      async () => {
+        const nextUrl = getNextUrl();
+        if (!nextUrl) return;
+
+        btn.disabled = true;
+
+        try {
+          const res = await fetch(nextUrl, { headers: { 'X-Requested-With': 'XMLHttpRequest' } });
+          if (!res.ok) throw new Error('fetch_failed');
+
+          const html = await res.text();
+          const doc = new DOMParser().parseFromString(html, 'text/html');
+
+          const nextSection = doc.querySelector('#shopify-section-{{ section.id }} [data-main-blog]');
+          const nextGrid = nextSection && nextSection.querySelector('[data-article-grid]');
+          if (!nextSection || !nextGrid) {
+            setNextUrl('');
+            return;
+          }
+
+          const newItems = Array.from(nextGrid.children);
+          newItems.forEach((node) => grid.appendChild(node));
+
+          setNextUrl(nextSection.getAttribute('data-next-url') || '');
+        } catch (e) {
+          btn.disabled = false;
+          return;
+        }
+
+        btn.disabled = false;
+      },
+      { passive: true }
+    );
+  })();
+</script>
+
+{% schema %}
+{
+  "name": "Custom Blog Posts",
+  "tag": "section",
+  "class": "section color-scheme",
+  "settings": [
+    {
+      "type": "select",
+      "id": "layout",
+      "options": [
+        { "value": "grid", "label": "t:sections.main-blog.settings.layout.options__1.label" },
+        { "value": "collage", "label": "t:sections.main-blog.settings.layout.options__2.label" }
+      ],
+      "default": "collage",
+      "label": "t:sections.main-blog.settings.layout.label"
+    },
+    {
+      "type": "range",
+      "id": "per_page",
+      "min": 1,
+      "max": 24,
+      "step": 1,
+      "unit": "per",
+      "label": "Posts per view",
+      "default": 6
+    },
+    {
+      "type": "checkbox",
+      "id": "show_image",
+      "default": true,
+      "label": "t:sections.main-blog.settings.show_image.label"
+    },
+    {
+      "type": "select",
+      "id": "image_height",
+      "options": [
+        { "value": "adapt", "label": "t:sections.main-blog.settings.image_height.options__1.label" },
+        { "value": "small", "label": "t:sections.main-blog.settings.image_height.options__2.label" },
+        { "value": "medium", "label": "t:sections.main-blog.settings.image_height.options__3.label" },
+        { "value": "large", "label": "t:sections.main-blog.settings.image_height.options__4.label" }
+      ],
+      "default": "medium",
+      "label": "t:sections.main-blog.settings.image_height.label"
+    },
+    {
+      "type": "checkbox",
+      "id": "show_date",
+      "default": true,
+      "label": "t:sections.main-blog.settings.show_date.label"
+    },
+    {
+      "type": "checkbox",
+      "id": "show_author",
+      "default": false,
+      "label": "t:sections.main-blog.settings.show_author.label"
+    },
+    {
+      "type": "color_scheme",
+      "id": "color_scheme",
+      "label": "t:sections.all.colors.label",
+      "default": "background-1"
+    },
+    {
+      "type": "header",
+      "content": "Filters"
+    },
+    {
+      "type": "checkbox",
+      "id": "show_tags",
+      "default": true,
+      "label": "Show tags list"
+    },
+    {
+      "type": "textarea",
+      "id": "parent_tag",
+      "label": "Enter parent tags with '|' as a seperator. eg: first | second"
+    },
+    {
+      "type": "text",
+      "id": "all_label",
+      "default": "All",
+      "label": "All label"
+    },
+    {
+      "type": "checkbox",
+      "id": "show_search",
+      "default": true,
+      "label": "Show search"
+    },
+    {
+      "type": "text",
+      "id": "search_placeholder",
+      "default": "Search Blog",
+      "label": "Search placeholder"
+    },
+    {
+      "type": "text",
+      "id": "load_more_label",
+      "default": "See More",
+      "label": "Load more button label"
+    },
+    {
+      "type": "header",
+      "content": "t:sections.all.padding.section_padding_heading"
+    },
+    {
+      "type": "range",
+      "id": "padding_top",
+      "min": 0,
+      "max": 200,
+      "step": 5,
+      "unit": "px",
+      "label": "t:sections.all.padding.padding_top",
+      "default": 50
+    },
+    {
+      "type": "range",
+      "id": "padding_bottom",
+      "min": 0,
+      "max": 200,
+      "step": 5,
+      "unit": "px",
+      "label": "t:sections.all.padding.padding_bottom",
+      "default": 50
+    },
+    {
+      "type": "header",
+      "content": "Custom Liquid/Html",
+      "info": "Add custom Liquid or HTML code to this section."
+    },
+    {
+      "type": "liquid",
+      "id": "custom_code",
+      "label": "Custom code"
+    }
+  ],
+  "presets": [
+    {
+      "name": "Custom Blog Posts",
+      "category": "Blog"
+    }
+  ]
+}
+{% endschema %}

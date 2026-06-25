@@ -1,0 +1,423 @@
+/*
+ * ------------------------------------------------------------
+ * IMPORTANT: The contents of this file are auto-generated.
+ *
+ * This file may be updated by the Shopify admin theme editor
+ * or related systems. Please exercise caution as any changes
+ * made to this file may be overwritten.
+ * ------------------------------------------------------------
+ */
+{
+  "sections": {
+    "banner": {
+      "type": "main-collection-banner",
+      "disabled": true,
+      "custom_css": [
+        ".collection-hero.collection-hero--with-image {margin-top: clamp(130px, 9.83vw, 188px); padding: 0 16px;}",
+        ".collection-hero__inner {margin: 0 auto; flex-direction: column; position: relative; border-radius: 64px; overflow: hidden;}",
+        ".collection-hero__text-wrapper {z-index: 1; max-width: 965px; padding: clamp(48px, 8.15vw, 15.6rem) 16px;}",
+        "h1,p {text-align: center; color: #fff;}",
+        ".collection-hero__image-container,img {position: absolute; top: 0; bottom: 0; left: 0; right: 0; z-index: 0; width: 100%; object-fit: cover; margin: 0; height: 100% !important;}"
+      ],
+      "settings": {
+        "show_collection_description": true,
+        "show_collection_image": true,
+        "color_scheme": "scheme-1"
+      }
+    },
+    "image_banner_9F4wgq": {
+      "type": "image-banner",
+      "blocks": {
+        "heading_7kLdp7": {
+          "type": "heading",
+          "settings": {
+            "heading": "Shop Required Product",
+            "heading_size": "h1"
+          }
+        },
+        "text_qn6yV6": {
+          "type": "text",
+          "settings": {
+            "text": "Find your preferred product from the Himalayas of Nepal- Cliff honey, Superfood honey, and Himalayan honey are the options we have come up with. Select what best fits your needs!",
+            "text_style": "body"
+          }
+        }
+      },
+      "block_order": [
+        "heading_7kLdp7",
+        "text_qn6yV6"
+      ],
+      "custom_css": [
+        ".banner {margin: 0 auto; margin-top: clamp(130px, 9.83vw, 188px); padding: 0 16px; position: relative; border-radius: clamp(12px, 3.35vw, 64px); overflow: hidden;}",
+        ".banner__box {max-width: 75%;}",
+        "h1 {line-height: 1.2; margin-bottom: 8px;}",
+        "img {object-fit: cover;}"
+      ],
+      "name": "t:sections.image-banner.presets.name",
+      "settings": {
+        "image": "shopify://shop_images/Product_category_Banner_Image.webp",
+        "image_overlay_opacity": 0,
+        "image_height": "adapt",
+        "image_behavior": "none",
+        "desktop_content_position": "middle-center",
+        "desktop_content_alignment": "center",
+        "show_text_box": false,
+        "color_scheme": "scheme-92d10699-e28c-4d95-88ce-bf9cab415f48",
+        "stack_images_on_mobile": false,
+        "mobile_content_alignment": "center",
+        "show_text_below": false,
+        "section_class": "page-width",
+        "section_id": "",
+        "custom_liquid_html": ""
+      }
+    },
+    "custom_liquid_drjkkG": {
+      "type": "custom-liquid",
+      "disabled": true,
+      "name": "t:sections.custom-liquid.presets.name",
+      "settings": {
+        "custom_liquid": "",
+        "color_scheme": "",
+        "padding_top": 40,
+        "padding_bottom": 50
+      }
+    },
+    "product-grid": {
+      "type": "main-collection-product-grid",
+      "disabled": true,
+      "settings": {
+        "products_per_page": 16,
+        "columns_desktop": 3,
+        "columns_mobile": "2",
+        "color_scheme": "scheme-4",
+        "image_ratio": "adapt",
+        "image_shape": "default",
+        "show_secondary_image": true,
+        "show_vendor": false,
+        "show_rating": true,
+        "quick_add": "standard",
+        "enable_filtering": false,
+        "filter_type": "horizontal",
+        "enable_sorting": false,
+        "padding_top": 100,
+        "padding_bottom": 35
+      }
+    },
+    "products_category_tab_Ywmphy": {
+      "type": "products-category-tab",
+      "custom_css": [
+        ".slider-buttons {display: none;}",
+        "h2 {margin: 0px; letter-spacing: 0 !important;}",
+        ".product-grid {--gap: clamp(12px, 3.76vw, 72px); --grid-desktop-horizontal-spacing: var(--gap); --grid-desktop-vertical-spacing: var(--gap);}",
+        ".slider-component {margin-bottom: 0;}",
+        ".title-wrapper {position: sticky; top: var(--header-height); background: rgb(var(--color-background)); z-index: 2;}",
+        "@media (min-width: 768px) {.slider-dots {display: none; }}",
+        "@media (max-width: 768px) {.collection {padding-bottom: 0; }}"
+      ],
+      "name": "Products Collection Tabs",
+      "settings": {
+        "collection": [
+          "all",
+          "cliff-honey",
+          "superfood",
+          "himalayan-cliff-honey"
+        ],
+        "products_to_show": 25,
+        "title": "",
+        "heading_size": "h2",
+        "description": "",
+        "show_description": false,
+        "description_style": "body",
+        "columns_desktop": 3,
+        "enable_desktop_slider": false,
+        "full_width": false,
+        "show_view_all": false,
+        "view_all_style": "solid",
+        "color_scheme": "scheme-4",
+        "image_ratio": "adapt",
+        "image_shape": "default",
+        "show_secondary_image": true,
+        "show_vendor": false,
+        "show_rating": false,
+        "quick_add": "standard",
+        "columns_mobile": "2",
+        "swipe_on_mobile": false,
+        "padding_top": 55,
+        "padding_bottom": 0
+      }
+    },
+    "multi_column_timeline_RRj4Vj": {
+      "type": "multi-column-timeline",
+      "blocks": {
+        "timeline_item_QjRTPC": {
+          "type": "timeline_item",
+          "settings": {
+            "period": "2017–2020",
+            "title": "The <strong>first </strong>Leap",
+            "bullets": "Founded in Nepal by 2nd gen Nepali beekeepers family\nYears with the honey hunting community created Himalayan Cliff Honey.\nFrom Nepali flowers, fauna, seasons, and regions to US, we started our journey  \nTogether with one goal : building a luxury honey brand from Nepal"
+          }
+        },
+        "timeline_item_JYr7mC": {
+          "type": "timeline_item",
+          "settings": {
+            "period": "2021–2025",
+            "title": "The <strong>buzz </strong>starts",
+            "bullets": "Started a fully automated, HACCP- and GMP-certified honey processing facility\nAdded multiple Himalayan honey types and bee products\nBegan structured collaborations with honey stores and skincare brands\nWorking with 300+ honey hunters and 200+ beekeepers across Nepal"
+          }
+        },
+        "timeline_item_8qhGzX": {
+          "type": "timeline_item",
+          "settings": {
+            "period": "2026-Beyond",
+            "title": "<strong>12k+</strong> Honey Jars Sold",
+            "bullets": "Find Nepal Honey at U.S. marketplace like amazon, etsy and walmart \nA #1 bestseller on Rare Honey, giving the best honey brands in the world \nIt’s official! We’ve served over +12,000 jars of honey \nFrom Nepal to the world And more to come…"
+          }
+        }
+      },
+      "block_order": [
+        "timeline_item_QjRTPC",
+        "timeline_item_JYr7mC",
+        "timeline_item_8qhGzX"
+      ],
+      "custom_css": [
+        "h2 {padding-top: clamp(2rem, 2.09vw, 4rem);}"
+      ],
+      "name": "Honey Legacy Timeline",
+      "settings": {
+        "heading": "Honey Legacy",
+        "heading_accent": "Almost A Decade!",
+        "background_style": "none",
+        "color_scheme": "scheme-9d2c0c65-03cd-4aee-be49-5b37cc6b1f9f",
+        "show_placeholders": false,
+        "placeholder_img_left": "shopify://shop_images/Mask_group_b768beaf-3d53-443d-a092-59c198343bbc.webp",
+        "placeholder_img_right": "shopify://shop_images/Mask_group_ba4fa17e-2850-498d-a409-d80c60eaab91.webp",
+        "show_connector": true,
+        "connector_width": 2,
+        "padding_top": 110,
+        "padding_bottom": 110,
+        "section_id": "",
+        "section_class": ""
+      }
+    },
+    "marquee_hm7b7m": {
+      "type": "marquee",
+      "blocks": {
+        "marquee_block_hGEXxG": {
+          "type": "marquee_block",
+          "settings": {
+            "marquee_text": "Free Shipping",
+            "marquee_image": "shopify://shop_images/Vector.svg"
+          }
+        },
+        "marquee_block_tBpCDx": {
+          "type": "marquee_block",
+          "settings": {
+            "marquee_text": "Subscribe & Save 20%",
+            "marquee_image": "shopify://shop_images/Group_ecf4023d-0d5a-4b2e-8817-6ae3b71161fe.svg"
+          }
+        },
+        "marquee_block_F8YkYm": {
+          "type": "marquee_block",
+          "settings": {
+            "marquee_text": "Backed by Certification",
+            "marquee_image": "shopify://shop_images/Layer_1_80cf97e6-2416-42c0-9203-d91b70b6d2b8.svg"
+          }
+        },
+        "marquee_block_phpt9w": {
+          "type": "marquee_block",
+          "settings": {
+            "marquee_text": "Lab Verified & Tested",
+            "marquee_image": "shopify://shop_images/Layer_1-1_65747c06-e18c-4af7-b8dd-e0c02398457f.svg"
+          }
+        },
+        "marquee_block_VRjJRz": {
+          "type": "marquee_block",
+          "settings": {
+            "marquee_text": "Free Shipping",
+            "marquee_image": "shopify://shop_images/Vector.svg"
+          }
+        },
+        "marquee_block_6cVEek": {
+          "type": "marquee_block",
+          "settings": {
+            "marquee_text": "Subscribe & Save 20%",
+            "marquee_image": "shopify://shop_images/Group_ecf4023d-0d5a-4b2e-8817-6ae3b71161fe.svg"
+          }
+        },
+        "marquee_block_E63rjV": {
+          "type": "marquee_block",
+          "settings": {
+            "marquee_text": "Backed by Certification",
+            "marquee_image": "shopify://shop_images/Layer_1_80cf97e6-2416-42c0-9203-d91b70b6d2b8.svg"
+          }
+        },
+        "marquee_block_fPAxgK": {
+          "type": "marquee_block",
+          "settings": {
+            "marquee_text": "Lab Verified & Tested",
+            "marquee_image": "shopify://shop_images/Layer_1-1_65747c06-e18c-4af7-b8dd-e0c02398457f.svg"
+          }
+        }
+      },
+      "block_order": [
+        "marquee_block_hGEXxG",
+        "marquee_block_tBpCDx",
+        "marquee_block_F8YkYm",
+        "marquee_block_phpt9w",
+        "marquee_block_VRjJRz",
+        "marquee_block_6cVEek",
+        "marquee_block_E63rjV",
+        "marquee_block_fPAxgK"
+      ],
+      "name": "Marquee Text with Image",
+      "settings": {
+        "color_scheme": "scheme-3280f7d4-14e8-4743-9865-9a5e12c941d7",
+        "seperator": "",
+        "gap_size": 40,
+        "padding_top": 0,
+        "padding_bottom": 0
+      }
+    },
+    "rich_text_eNkFqa": {
+      "type": "rich-text",
+      "blocks": {
+        "heading_zfAhBT": {
+          "type": "heading",
+          "settings": {
+            "heading": "The Regional <strong>Reserve Collection.</strong>",
+            "heading_size": "h2"
+          }
+        }
+      },
+      "block_order": [
+        "heading_zfAhBT"
+      ],
+      "custom_css": [
+        ".gradient {background: #fff; padding-top: 16px; padding-bottom: 0;}",
+        "h2 {display: none;}",
+        ".page-width {max-width: 1095px;}",
+        "@media (min-width: 768px) {.gradient {padding-top: clamp(47px, 5.75vw, 110px); padding-bottom: clamp(16px, 2.61vw, 50px); } h2 {display: block; max-width: 512px; }}"
+      ],
+      "name": "t:sections.rich-text.presets.name",
+      "settings": {
+        "desktop_content_position": "left",
+        "content_alignment": "left",
+        "color_scheme": "scheme-4",
+        "full_width": true,
+        "padding_top": 110,
+        "padding_bottom": 50
+      }
+    },
+    "image_with_text_pETcax": {
+      "type": "image-with-text",
+      "blocks": {
+        "heading_QzXkcW": {
+          "type": "heading",
+          "settings": {
+            "heading": "The Regional <strong>Reserve Collection.</strong>",
+            "heading_size": "h2"
+          }
+        },
+        "text_MwkbFW": {
+          "type": "text",
+          "disabled": true,
+          "settings": {
+            "text": "<p>This selected bundle is designed for those who want to experience the true diversity of Nepali honey. From the wild himalayan Apis laboriosa colonies in <em>Lamjung</em>, <em>Jajarkot</em>, and <em>Rukum</em>, each jar offers a rare taste, texture, where altitude, wild flora, and season shape the honey’s character.</p>",
+            "text_style": "body"
+          }
+        },
+        "liquid_qHTCAL": {
+          "type": "Liquid",
+          "settings": {
+            "custom_liquid": "<div class=\"custom\"><h4>Includes:</h4>\n<hr/>\n\n<p><strong>Lamjung Cliff Honey <svg width=\"29\" height=\"14\" viewBox=\"0 0 29 14\" fill=\"none\" xmlns=\"http://www.w3.org/2000/svg\">\n<g clip-path=\"url(#clip0_5529_17217)\">\n<path d=\"M3.1295 14L7.51079 9.14851L10.7562 12.7987L15.7634 4.38944L17.4788 7.0462L19.3333 4.9901L26.1023 14H29L19.5188 1.36304L17.8034 3.25743L15.6938 0L10.3853 8.89439L7.51079 5.66007L0 14H3.1295Z\" fill=\"#B5731F\"/>\n</g>\n<defs>\n<clipPath id=\"clip0_5529_17217\">\n<rect width=\"29\" height=\"14\" fill=\"white\"/>\n</clipPath>\n</defs>\n</svg>\n<highlight>Alt. 4000m</highlight>\n</strong>\nBright, aromatic, and balanced</p>\n\n<p><strong>Rukum Cliff Honey <svg width=\"29\" height=\"14\" viewBox=\"0 0 29 14\" fill=\"none\" xmlns=\"http://www.w3.org/2000/svg\">\n<g clip-path=\"url(#clip0_5529_17217)\">\n<path d=\"M3.1295 14L7.51079 9.14851L10.7562 12.7987L15.7634 4.38944L17.4788 7.0462L19.3333 4.9901L26.1023 14H29L19.5188 1.36304L17.8034 3.25743L15.6938 0L10.3853 8.89439L7.51079 5.66007L0 14H3.1295Z\" fill=\"#B5731F\"/>\n</g>\n<defs>\n<clipPath id=\"clip0_5529_17217\">\n<rect width=\"29\" height=\"14\" fill=\"white\"/>\n</clipPath>\n</defs>\n</svg>\n<highlight>Alt. 3800m</highlight>\n</strong>\nEarthy & layered, from high-altitude forests</p>\n\n<p><strong>Jajarkot Cliff Honey <svg width=\"29\" height=\"14\" viewBox=\"0 0 29 14\" fill=\"none\" xmlns=\"http://www.w3.org/2000/svg\">\n<g clip-path=\"url(#clip0_5529_17217)\">\n<path d=\"M3.1295 14L7.51079 9.14851L10.7562 12.7987L15.7634 4.38944L17.4788 7.0462L19.3333 4.9901L26.1023 14H29L19.5188 1.36304L17.8034 3.25743L15.6938 0L10.3853 8.89439L7.51079 5.66007L0 14H3.1295Z\" fill=\"#B5731F\"/>\n</g>\n<defs>\n<clipPath id=\"clip0_5529_17217\">\n<rect width=\"29\" height=\"14\" fill=\"white\"/>\n</clipPath>\n</defs>\n</svg>\n<highlight>Alt. 3500m</highlight>\n</strong>\nDeep, bold, and intense, collected from remote western Himalayan cliffs.</p>\n<hr/>\n<p><strong>Luxury Gift Box Set</strong>\nDesigned for protection, presentation, and gifting.\n</p>\n<hr/>\n<p><strong>Hand-crafted Wooden Spoon</strong>\nFor a gentle, precise daily serving.</p>\n<hr/>\n</div>"
+          }
+        },
+        "button_EQhzX9": {
+          "type": "button",
+          "settings": {
+            "button_label": "Shop The Bundle",
+            "button_link": "shopify://products/starter-kit",
+            "button_style_secondary": false,
+            "attributes": ""
+          }
+        },
+        "iconboxes_cmmEaR": {
+          "type": "iconboxes",
+          "disabled": true,
+          "settings": {
+            "iconboxes_text_alignment": "center",
+            "iconboxes_image_1": "shopify://shop_images/No_Fillers.svg",
+            "iconboxes_title_1": "",
+            "iconboxes_description_1": "",
+            "iconboxes_image_2": "shopify://shop_images/No_Fillers.svg",
+            "iconboxes_title_2": "",
+            "iconboxes_description_2": "",
+            "iconboxes_image_3": "shopify://shop_images/No_Fillers.svg",
+            "iconboxes_title_3": "",
+            "iconboxes_description_3": "",
+            "iconboxes_image_4": "shopify://shop_images/No_Fillers.svg",
+            "iconboxes_title_4": "",
+            "iconboxes_description_4": "",
+            "iconboxes_image_5": "shopify://shop_images/No_Fillers.svg",
+            "iconboxes_title_5": "",
+            "iconboxes_description_5": ""
+          }
+        }
+      },
+      "block_order": [
+        "heading_QzXkcW",
+        "text_MwkbFW",
+        "liquid_qHTCAL",
+        "button_EQhzX9",
+        "iconboxes_cmmEaR"
+      ],
+      "custom_css": [
+        ".gradient {background: #fff;}",
+        "h4 {margin: 0;}",
+        ".grid {--grid-desktop-horizontal-spacing: clamp(24px, 2.61vw, 50px); --grid-desktop-vertical-spacing: clamp(24px, 2.61vw, 50px);}",
+        ".button {min-height: auto; padding: clamp(12px, 0.73vw, 14px) 52px; margin-top: 8px; letter-spacing: 0; margin-left: 1px;}"
+      ],
+      "name": "t:sections.image-with-text.presets.name",
+      "settings": {
+        "image": "shopify://shop_images/The_Regional_Reserve_Collection.webp",
+        "height": "adapt",
+        "desktop_image_width": "medium",
+        "layout": "image_first",
+        "image_behavior": "none",
+        "content_layout": "no-overlap",
+        "desktop_content_position": "middle",
+        "desktop_content_alignment": "left",
+        "mobile_content_alignment": "left",
+        "section_color_scheme": "scheme-e0418eeb-85e5-4e72-8731-e95db24077ad",
+        "color_scheme": "scheme-e0418eeb-85e5-4e72-8731-e95db24077ad",
+        "id": "starter_kit_section",
+        "class": "",
+        "padding_top": 0,
+        "padding_bottom": 110,
+        "custom_liquid": "{% assign sec_id = \"#shopify-section-\" | append: section.id %}\n{% style %}\n{{ sec_id }} .page-width{\nmax-width:1127px;\n}\n\n{{ sec_id }} hr {\n  display: block;\n  margin: clamp(8px,0.836vw,16px) 0!important;\n  background: gray;\n  height: 1px;\n  width: 30%;\n}\n{{ sec_id }} .custom p{\ncolor:rgba(var(--color-foreground),0.75)\n}\n{{ sec_id }} .custom p strong{\ndisplay:flex;\ngap:8px;\nalign-items:center;\nfont-weight:500;\nmargin-bottom:6px;\nline-height:1;\ncolor:rgba(var(--color-foreground),1)\n}\n\n@media(min-width:768px){\n{{ sec_id }} .image-with-text__media-item{\n max-width:55%;\n}\n{{ sec_id }} .grid{\ngap:clamp(24px, 2.61vw, 50px) 1%;\njustify-content:space-between;\n}\n{{ sec_id }} .image-with-text__text-item{\nmax-width:39.6%;\n}\n{{sec_id}} h2{\ndisplay:none!important;\n}\n}\n{% endstyle %}"
+      }
+    },
+    "custom_liquid_YQMDdT": {
+      "type": "custom-liquid",
+      "name": "t:sections.custom-liquid.presets.name",
+      "settings": {
+        "custom_liquid": "<style>\n#shopify-section-{{ section.id }} {\n  display: none;\n}\n\n\n@media (max-width: 980px) {\n  #shopify-section-{{ section.id }} {\n    display: block;\n  }\n}\n\n</style>",
+        "color_scheme": "",
+        "padding_top": 0,
+        "padding_bottom": 0
+      }
+    }
+  },
+  "order": [
+    "banner",
+    "image_banner_9F4wgq",
+    "custom_liquid_drjkkG",
+    "product-grid",
+    "products_category_tab_Ywmphy",
+    "multi_column_timeline_RRj4Vj",
+    "marquee_hm7b7m",
+    "rich_text_eNkFqa",
+    "image_with_text_pETcax",
+    "custom_liquid_YQMDdT"
+  ]
+}

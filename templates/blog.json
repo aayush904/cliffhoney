@@ -1,0 +1,172 @@
+/*
+ * ------------------------------------------------------------
+ * IMPORTANT: The contents of this file are auto-generated.
+ *
+ * This file may be updated by the Shopify admin theme editor
+ * or related systems. Please exercise caution as any changes
+ * made to this file may be overwritten.
+ * ------------------------------------------------------------
+ */
+{
+  "sections": {
+    "main": {
+      "type": "main-blog",
+      "disabled": true,
+      "custom_css": [
+        ".main-blog {flex-direction: column;}",
+        "h1 {text-align: center;}",
+        ".blog-articles {max-width: 100%; grid-template-columns: repeat(3, minmax(0, 1fr));}"
+      ],
+      "settings": {
+        "show_image": true,
+        "image_height": "adapt",
+        "show_date": true,
+        "show_author": false,
+        "padding_top": 100,
+        "padding_bottom": 35
+      }
+    },
+    "featured_blog_pXMAMf": {
+      "type": "featured-blog",
+      "disabled": true,
+      "custom_css": [
+        ".blog__posts {padding: 0; margin: 0;}",
+        "h3 {font-family: var(--font-heading-family); margin: 0;}",
+        ".card__information {padding: 16px 0px 0px; display: flex; gap: clamp(10px, 1.8vw, 24px); flex-direction: column;}",
+        ".article-card__tags {display: none;}",
+        ".article_meta {order: -1; font-size: clamp(12px, 1.6vw, 18px); color: var(--color-extra);}"
+      ],
+      "name": "t:sections.featured-blog.presets.name",
+      "settings": {
+        "blog": "honey-guide",
+        "post_limit": 2,
+        "heading": "Blog posts",
+        "heading_size": "h2",
+        "columns_desktop": 1,
+        "show_view_all": false,
+        "show_image": true,
+        "show_date": true,
+        "show_author": false,
+        "color_scheme": "scheme-4",
+        "padding_top": 50,
+        "padding_bottom": 50
+      }
+    },
+    "featured_blogs_slider_hCXBqK": {
+      "type": "featured-blogs-slider",
+      "blocks": {
+        "article_yyWaYX": {
+          "type": "article",
+          "settings": {
+            "article": "honey-guide/mad-honey",
+            "kicker": "",
+            "fallback_image": "shopify://shop_images/Ultimate_Guide_Profile_Image.webp"
+          }
+        },
+        "article_6QVnN6": {
+          "type": "article",
+          "settings": {
+            "article": "honey-guide/bee-pollen",
+            "kicker": "",
+            "fallback_image": "shopify://shop_images/Ultimate_Guide_Profile_Image.webp"
+          }
+        }
+      },
+      "block_order": [
+        "article_yyWaYX",
+        "article_6QVnN6"
+      ],
+      "custom_css": [
+        ".fas__card.fas__card {height: 100%; background: rgb(248, 237, 219);}"
+      ],
+      "name": "Featured articles slider",
+      "settings": {
+        "color_scheme": "scheme-4",
+        "aria_label": "Featured articles",
+        "show_read_time": true,
+        "read_more_label": "Read More",
+        "padding_top": 180,
+        "padding_bottom": 0
+      }
+    },
+    "custom_blog_UwJMUy": {
+      "type": "custom-blog",
+      "custom_css": [
+        ".main-blog {flex-direction: column;}",
+        ".blog-articles {max-width: 100%; grid-template-columns: repeat(3, minmax(0, 1fr));}",
+        ".slider-buttons {display: none;}",
+        ".blog__posts {padding: 0; margin: 0;}",
+        "h3 {font-family: var(--font-heading-family); margin: 0;}",
+        ".card__information {padding: 16px 0px 0px; display: flex; gap: clamp(10px, 0.94vw, 18px); flex-direction: column;}",
+        ".article-card__tags {display: none;}",
+        ".article_meta {order: -1; font-size: clamp(10px, 1.2vw, 14px); color: var(--color-extra);}"
+      ],
+      "name": "Custom Blog Posts",
+      "settings": {
+        "layout": "grid",
+        "per_page": 3,
+        "show_image": true,
+        "image_height": "adapt",
+        "show_date": true,
+        "show_author": false,
+        "color_scheme": "scheme-4",
+        "show_tags": true,
+        "parent_tag": "digestive health | HCH 101 | Healthy Habits",
+        "all_label": "All",
+        "show_search": true,
+        "search_placeholder": "Search Blog",
+        "load_more_label": "See More",
+        "padding_top": 40,
+        "padding_bottom": 0,
+        "custom_code": "{% assign id = \"#shopify-section-\" | append: section.id %}\n\n{% style %}\n@media (max-width: 768px) {\n\n{{ id  }} .blog-articles {\n    flex-direction: row;\n    flex-wrap: wrap;\n  }\n\n{{id}} .blog-articles__article {\nflex: 0 0 calc( 50% - var(--grid-desktop-horizontal-spacing)/2)!important;\n}\n\n}\n{% endstyle %}"
+      }
+    },
+    "products_category_tab_2_CxMePh": {
+      "type": "products-category-tab_2",
+      "custom_css": [
+        "h3 {line-height: 1.2;}",
+        "h3.banner_heading {font-size: clamp(16px, 1.75vw, 3rem);}",
+        "h3:not(.banner_heading) {word-break: break-all; display: -webkit-box; -webkit-box-orient: vertical; -webkit-line-clamp: 1; overflow: hidden; text-overflow: ellipsis;}",
+        "h2 {margin-bottom: clamp(16px, 1.3vw, 24px);}",
+        "h2,.body p {text-align: center; width: 100%;}",
+        ".body p {font-size: clamp(12px, 1.3vw, 24px);}",
+        ".body strong {color: var(--color-extra); font-weight: inherit;}"
+      ],
+      "name": "Products Collection 2",
+      "settings": {
+        "collection": [
+          "all"
+        ],
+        "products_to_show": 4,
+        "title": "Featured Products",
+        "heading_size": "h2",
+        "description": "",
+        "show_description": false,
+        "description_style": "body",
+        "columns_desktop": 4,
+        "enable_desktop_slider": false,
+        "full_width": false,
+        "show_view_all": false,
+        "view_all_style": "solid",
+        "color_scheme": "scheme-4",
+        "image_ratio": "adapt",
+        "image_shape": "default",
+        "show_secondary_image": true,
+        "show_vendor": false,
+        "show_rating": false,
+        "quick_add": "standard",
+        "columns_mobile": "2",
+        "swipe_on_mobile": false,
+        "padding_top": 110,
+        "padding_bottom": 110
+      }
+    }
+  },
+  "order": [
+    "main",
+    "featured_blog_pXMAMf",
+    "featured_blogs_slider_hCXBqK",
+    "custom_blog_UwJMUy",
+    "products_category_tab_2_CxMePh"
+  ]
+}

@@ -1,0 +1,676 @@
+/*
+ * ------------------------------------------------------------
+ * IMPORTANT: The contents of this file are auto-generated.
+ *
+ * This file may be updated by the Shopify admin theme editor
+ * or related systems. Please exercise caution as any changes
+ * made to this file may be overwritten.
+ * ------------------------------------------------------------
+ */
+{
+  "sections": {
+    "main": {
+      "type": "main-page",
+      "disabled": true,
+      "settings": {
+        "padding_top": 50,
+        "padding_bottom": 50
+      }
+    },
+    "image_banner_KETh3i": {
+      "type": "image-banner",
+      "blocks": {
+        "heading_EzhMzd": {
+          "type": "heading",
+          "settings": {
+            "heading": "Wholesale & private labeling",
+            "heading_size": "h1"
+          }
+        },
+        "text_KYKMAM": {
+          "type": "text",
+          "disabled": true,
+          "settings": {
+            "text": "Himalayan cliff honey is a rare and exquisite wild honey variety collected from huge hives of Apis laboriosa, found only in Himalayan forests. It’s loaded with vitamins, minerals, antioxidants, and most importantly, a rare compound called grayanotoxin. A spoonful of it and you will feel energetic and relaxed, each drop connects you with the power of the wild Himalayas.",
+            "text_style": "body"
+          }
+        },
+        "buttons_w7qptN": {
+          "type": "buttons",
+          "disabled": true,
+          "settings": {
+            "button_label_1": "Try Himalayan Cliff Honey",
+            "button_link_1": "#",
+            "button_style_secondary_1": false,
+            "button_label_2": "",
+            "button_link_2": "",
+            "button_style_secondary_2": false
+          }
+        }
+      },
+      "block_order": [
+        "heading_EzhMzd",
+        "text_KYKMAM",
+        "buttons_w7qptN"
+      ],
+      "disabled": true,
+      "custom_css": [
+        ".banner {max-width: var(--max-width); margin: 12rem auto 0 auto; overflow: hidden;}",
+        ".banner__media {background: transparent !important;}",
+        "h1 {max-width: 90%; margin: auto;}",
+        "@media (max-width: 1600px) {.banner {max-width: calc((var(--page-width) + 100vw) / 1.93238); }}",
+        ".banner__box * {color: #fff; letter-spacing: 0;}",
+        "@media (min-width: 768px) {.banner__box {padding: 0; } .banner__content {padding: clamp(4rem, 4.91vw, 9.4rem) 6.8%; }}"
+      ],
+      "name": "t:sections.image-banner.presets.name",
+      "settings": {
+        "image": "shopify://shop_images/Mask_group_1edfa005-a4a7-4b2f-8b4b-eda4a21d738e.webp",
+        "image_overlay_opacity": 0,
+        "image_height": "small",
+        "image_behavior": "none",
+        "desktop_content_position": "middle-center",
+        "desktop_content_alignment": "center",
+        "show_text_box": false,
+        "color_scheme": "scheme-4",
+        "stack_images_on_mobile": true,
+        "mobile_content_alignment": "center",
+        "show_text_below": false,
+        "section_class": "",
+        "section_id": "",
+        "custom_liquid_html": "{% assign imgbanid = \"#shopify-section-\" | append: section.id %}\n{% style %}\n{{ imgbanid }} .media > img {\n  object-fit: cover;\n  border-radius: 32px;\n\n}\n{{ imgbanid }} .button:after{\nbox-shadow:none;\n}\n{% endstyle %}"
+      }
+    },
+    "image_banner_kFiWKy": {
+      "type": "image-banner",
+      "blocks": {
+        "heading_gVcEgE": {
+          "type": "heading",
+          "settings": {
+            "heading": "Wholesale & private labeling",
+            "heading_size": "h1"
+          }
+        },
+        "text_7Vb9Dw": {
+          "type": "text",
+          "disabled": true,
+          "settings": {
+            "text": "Himalayan cliff honey is a rare and exquisite wild honey variety collected from huge hives of Apis laboriosa, found only in Himalayan forests. It’s loaded with vitamins, minerals, antioxidants, and most importantly, a rare compound called grayanotoxin. A spoonful of it and you will feel energetic and relaxed, each drop connects you with the power of the wild Himalayas.",
+            "text_style": "body"
+          }
+        },
+        "buttons_k4iae6": {
+          "type": "buttons",
+          "disabled": true,
+          "settings": {
+            "button_label_1": "Try Himalayan Cliff Honey",
+            "button_link_1": "#",
+            "button_style_secondary_1": false,
+            "button_label_2": "",
+            "button_link_2": "",
+            "button_style_secondary_2": false
+          }
+        }
+      },
+      "block_order": [
+        "heading_gVcEgE",
+        "text_7Vb9Dw",
+        "buttons_k4iae6"
+      ],
+      "custom_css": [
+        ".banner {max-width: var(--max-width); margin: 12rem auto 0 auto; overflow: hidden;}",
+        ".banner__media {background: transparent !important;}",
+        ".banner__box .button {background-color: var(--color-extra) !important; color: #fff; border: none;}",
+        "@media (max-width: 1600px) {.banner {max-width: calc((var(--page-width) + 100vw) / 1.93238); }}",
+        "@media (min-width: 768px) {.banner__box {max-width: 65%; } .banner__box * {color: #fff; letter-spacing: 0; } .banner__box {padding: 0; } .banner__content {padding: clamp(4rem, 4.91vw, 9.4rem) 6.8%; }}"
+      ],
+      "name": "t:sections.image-banner.presets.name",
+      "settings": {
+        "image": "shopify://shop_images/Mask_group_1edfa005-a4a7-4b2f-8b4b-eda4a21d738e.webp",
+        "image_overlay_opacity": 0,
+        "image_height": "small",
+        "image_behavior": "none",
+        "desktop_content_position": "middle-center",
+        "desktop_content_alignment": "center",
+        "show_text_box": false,
+        "color_scheme": "scheme-4",
+        "stack_images_on_mobile": true,
+        "mobile_content_alignment": "center",
+        "show_text_below": true,
+        "section_class": "header-dark",
+        "section_id": "",
+        "custom_liquid_html": "{% assign imgbanid = \"#shopify-section-\" | append: section.id %}\n{% style %}\n{{ imgbanid }} .media > img {\n  object-fit: cover;\n  border-radius: 32px;\nobject-position:30%;\n\n}\n{{ imgbanid }} .banner__box {\n width:100%;\n  margin: auto;\n}\n\n{{ imgbanid }} .button:after{\nbox-shadow:none;\n}\n{% endstyle %}"
+      }
+    },
+    "image_with_text_7VVTnf": {
+      "type": "image-with-text",
+      "blocks": {
+        "heading_8tVcNw": {
+          "type": "heading",
+          "settings": {
+            "heading": "What are all of the benefits of<strong> Himalayan Cliff Honey</strong>?",
+            "heading_size": "h2"
+          }
+        },
+        "text_4VPXEw": {
+          "type": "text",
+          "settings": {
+            "text": "<p><strong>We provide premium Himalayan cliff honey for wholesale and private label that can be customized upon the needs of the client.</strong><br/><br/>Himalayan Cliff Honey is an authentic cliff honey producer, extracted from thousands of metres above in the Himalayas.<br/><br/>The core of our brand lies in our rare and unmatched harvesting sites that are in the remote, far-flung villages of Nepal: Lamjung, Jajarkot and Rukum. The sites are selected and curated based on the altitudes, ranging from 3000 to 4000 metres, known for producing the best quality mad honey in the whole country. We use completely traditional methods upholding a promise of quality in every drop. Unprocessed and pure, our honey comes with certificates of laboratory analysis and QR codes, adding an extra layer of transparency and trust for users. Our products are even recognized and approved by the Nepal Government.</p>",
+            "text_style": "body"
+          }
+        },
+        "liquid_JtzbmQ": {
+          "type": "Liquid",
+          "settings": {
+            "custom_liquid": "<div class=\"buttons\">\n<a href=\"#private\" class=\"button\">Private Labeling</a> \n<a href=\"#distributor\" class=\"button\">Distributor</a>\n</div>"
+          }
+        }
+      },
+      "block_order": [
+        "heading_8tVcNw",
+        "text_4VPXEw",
+        "liquid_JtzbmQ"
+      ],
+      "custom_css": [
+        ".grid {--grid-desktop-horizontal-spacing: clamp(24px, 2.61vw, 5rem);}",
+        ".buttons {display: flex; width: 100%; justify-content: space-between; gap: clamp(1.6rem, 1.25vw, 2.4rem); margin: clamp(24px, 2.61vw, 5rem) 0;}",
+        "highlight {display: contents;}",
+        ".buttons a {width: 100%; padding: 1.6rem;}",
+        "@media (max-width: 480px) {.buttons {flex-wrap: wrap; }}"
+      ],
+      "name": "t:sections.image-with-text.presets.name",
+      "settings": {
+        "image": "shopify://shop_images/Mask_group-1_e59cb098-8590-492c-a3ec-3726a5fcb067.webp",
+        "height": "adapt",
+        "desktop_image_width": "medium",
+        "layout": "text_first",
+        "image_behavior": "none",
+        "content_layout": "no-overlap",
+        "desktop_content_position": "middle",
+        "desktop_content_alignment": "left",
+        "mobile_content_alignment": "center",
+        "section_color_scheme": "scheme-4",
+        "color_scheme": "scheme-4",
+        "id": "",
+        "class": "",
+        "padding_top": 110,
+        "padding_bottom": 110,
+        "custom_liquid": ""
+      }
+    },
+    "custom_liquid_8K9KGC": {
+      "type": "custom-liquid",
+      "custom_css": [
+        ".private .white-label-form,.distributor .form-distributors {display: block;}",
+        ".form-container {max-height: 85dvh; overflow: auto; scrollbar-width: thin; scrollbar-color: #00000025 transparent;}",
+        ".close {position: absolute; top: 30px; right: 30px; width: 28px; height: 28px; display: flex; justify-content: center; font-size: 16px; font-weight: 500; padding-left: 1px; align-items: center; background: #fff; border-radius: 50%; cursor: pointer;}"
+      ],
+      "name": "t:sections.custom-liquid.presets.name",
+      "settings": {
+        "custom_liquid": "<div class=\"portal\">\n  <div class=\"portal-container\">\n    <span class=\"close\">⨉</span>\n\n    {% render 'distributor-form' %}\n    {% render 'private-form' %}\n\n  </div>\n</div>\n\n<script>\ndocument.addEventListener('DOMContentLoaded', () => {\n\n  const portal = document.querySelector('#shopify-section-{{ section.id }} .portal');\n  const closeBtn = document.querySelector('#shopify-section-{{ section.id }} .close');\n  const portalContainer = portal.querySelector('.portal-container');\n\n  closeBtn.addEventListener('click', () => {\n    portal.className = 'portal';\n  });\n\n  ['distributor', 'private'].forEach(type => {\n    const button = document.querySelector(`a[href=\"#${type}\"]`);\n\n    if (!button) return;\n\n    button.addEventListener('click', e => {\n      e.preventDefault();\n\n      portal.className = 'portal';\n      portal.classList.add(type);\n    });\n  });\n\n  document.addEventListener('click', e => {\n    if (portal.className === 'portal') return;\n\n    if (\n      portal.contains(e.target) &&\n      !portalContainer.contains(e.target)\n    ) {\n      portal.className = 'portal';\n    }\n  });\n\n});\n\ndocument.addEventListener('DOMContentLoaded', () => {\n\n  const submittedForm = sessionStorage.getItem('submittedForm');\n\n  if (!submittedForm) return;\n\n  const portal = document.querySelector('.portal');\n\n  if (submittedForm === 'private') {\n    portal.className = 'portal private';\n\n    const success = document.querySelector('.white-label-form .form-success');\n    if (success) success.style.display = 'block';\n  }\n\n  if (submittedForm === 'distributor') {\n    portal.className = 'portal distributor';\n\n    const success = document.querySelector('.form-distributors .form-success');\n    if (success) success.style.display = 'block';\n  }\n});\n</script>\n\n<style>\n.form-container::-webkit-scrollbar {\n  width: 1px;\n  height: 1px;\n}\n\n.form-container::-webkit-scrollbar-track {\n  background: transparent;\n  border-radius: 99px;\n}\n\n.form-container::-webkit-scrollbar-thumb {\n  background: #00000025;\n  border-radius: 99px;\n}\n\n.form-container::-webkit-scrollbar-button {\n  display: none;\n}\n\n.form-container::-webkit-scrollbar-thumb:hover {\n  background: #00000030;\n}\n\n/* Popup hidden by default */\n.portal {\n  display: none;\n}\n\n/* Open popup */\n.portal.private,\n.portal.distributor {\n  display: flex;\n}\n\n/* Hide both forms by default */\n.white-label-form,\n.form-distributors {\n  display: none;\n}\n\n/* Private button => only private form */\n.portal.private .white-label-form {\n  display: block;\n}\n\n.portal.private .form-distributors {\n  display: none;\n}\n\n/* Distributor button => only distributor form */\n.portal.distributor .form-distributors {\n  display: block;\n}\n\n.portal.distributor .white-label-form {\n  display: none;\n}\n\n.portal-container {\n  width: max-content;\n  height: max-content;\n}\n</style>",
+        "color_scheme": "scheme-4",
+        "padding_top": 0,
+        "padding_bottom": 0
+      }
+    },
+    "multicolumn_iKA74Y": {
+      "type": "multicolumn",
+      "blocks": {
+        "column_QWDrhH": {
+          "type": "column",
+          "settings": {
+            "title": "",
+            "text": "",
+            "link_label": "",
+            "link": "",
+            "custom_liquid": "<h2 class=\"h2\">Why <b>Us</b>?</h2>\n<p>\nHimalayan Cliff Honey is dedicated to bringing the highest quality cliff honey to the market. We monitor the entire production process since harvesting, with our team present in the harvesting site, visiting the fields to oversee the whole harvesting process. We own our private storage and packaging facilities, where all the steps from processing to final packaging are conducted following the highest international quality and safety standards.\n</p>\n<p>\nBesides working in close terms with the local honey hunter community and bringing raw, authentic honey to the market, every batch of our production is also tested in an internationally accredited laboratory, which provides a solid verification of the nutritional content and purity. Also, we provide a vertically integrated service helping turn your vision into reality so that your idea of a private label brand is crafted and further nurtured to meet the highest international standards, from initial concept to a trusted global brand.\n</p>\n\n<p>\nHimalayan Cliff Honey is proud to be one of the highest Himalayan cliff honey collectors and distributors in Nepal. Our flexibility in wholesale and private label services guarantees we serve our role as a credible supplier of authentic cliff honey to retailers and suppliers.\n</p>\n<h3>Honey Production</h3>\n<p>\nHimalayan Cliff Honey is a natural product of Nepal, one of the countries popular for producing exquisite and distinctive ”mad honey”. We serve as a trusted supplier of the best quality Himalayan cliff honey to customers worldwide and also offer wholesale and private-label services globally. The cliff honey is renowned for its unique psychedelic effects and medicinal properties.\n</p>\n<a class=\"button\" href=\"/contact\" >Contact Us</a>"
+          }
+        },
+        "column_h66fjY": {
+          "type": "column",
+          "settings": {
+            "title": "",
+            "text": "",
+            "link_label": "",
+            "link": "",
+            "custom_liquid": "<h3>Creating your brand to meet your Business and Market Needs</h3>\n\n<p>\nWhether you’ve an existing or new business concept in mind, we offer full-service solutions- from product development and label design to exporting directly to your doorstep. We have developed a flexible and fully customized approach to give a unique identity to your business and meet your specific market requirements.\n</p>\n<p>\nThe premium batches of honey and all our products are ready and available for you. Simply reach out to us, and our dedicated team members will guide you to bring your finished product to the market in the best and highest quality possible.\n</p>\n<h3>Craftsmen of Mad Honey</h3>\n\n<p>\nOur brand products are solely a gift from the heart of Nepal, brought to you by native harvesters, a skilled group who have crafted and excelled in all the harvesting techniques. Their expertise is not gained overnight; they have met every misstep, every near miss, and every small failure with patience and perseverance, gradually turning into mastery over time.\n</p>\n<p>\nThe generation-old techniques have multiple benefits, ensuring the honey remains the purest form of nature’s gift. The product is even certified by the Nepal Government and tested in internationally recognised laboratories.\n</p>\n<p>\nWe act as a partner that helps your brand succeed with this world-class Himalayan cliff honey. With us, be confident in sourcing, customised packaging, and any other services that you’ve envisioned.\n</p>"
+          }
+        }
+      },
+      "block_order": [
+        "column_QWDrhH",
+        "column_h66fjY"
+      ],
+      "custom_css": [
+        ".grid {--col: clamp(24px, 2.61vw, 5rem); column-gap: var(--col); row-gap: 32px;}",
+        "svg,img {max-width: 100%; margin: var(--col) 0;}",
+        ".grid__item {max-width: calc(50% - (var(--col) / 2)); display: block;}",
+        ".multicolumn {background: #b5731f0d;}",
+        ".multicolumn-card {background: transparent;}",
+        ".multicolumn-card__info {padding: 0;}",
+        "h3:not(:first-of-type) {margin-top: clamp(32px, 2.61vw, 5rem);}",
+        "h2,h3 {margin-bottom: clamp(18px, 1.25vw, 2.4rem);}",
+        "@media (max-width: 980px) {* {text-align: center; } .grid__item {max-width: 100%; }}"
+      ],
+      "name": "t:sections.multicolumn.presets.name",
+      "settings": {
+        "title": "",
+        "description": "",
+        "heading_size": "h2",
+        "image_width": "full",
+        "image_ratio": "adapt",
+        "button_label": "",
+        "button_link": "",
+        "columns_desktop": 3,
+        "column_alignment": "left",
+        "background_style": "primary",
+        "color_scheme": "scheme-4",
+        "swipe_on_desktop": false,
+        "columns_mobile": "1",
+        "swipe_on_mobile": false,
+        "padding_top": 110,
+        "padding_bottom": 110,
+        "section_id": "",
+        "section_class": "",
+        "custom_code": ""
+      }
+    },
+    "multirow_76deCY": {
+      "type": "multirow",
+      "blocks": {
+        "row_jNBBNt": {
+          "type": "row",
+          "settings": {
+            "image": "shopify://shop_images/Distributor.webp",
+            "custom_liquid": "",
+            "caption": "",
+            "heading": "Become Our <strong>distributor</strong>",
+            "text": "<p>We believe passionately in plant-powered health.</p><p>Nature has been innovating and engineering solutions for millions of years. So we have a lot of catching up to do – searching, looking, combining – discovering solutions that nature has already invented.</p><p>We’re lucky to live in a very beautiful and unspoilt corner of the world. We have a front-row seat on the spectacle, so nature is a constant inspiration.</p>",
+            "button_label": "Distributor",
+            "button_link": "#distributor",
+            "block_class": ""
+          }
+        },
+        "row_WU348H": {
+          "type": "row",
+          "settings": {
+            "image": "shopify://shop_images/Private_Labeling.webp",
+            "custom_liquid": "",
+            "caption": "",
+            "heading": "<strong>Private </strong>Labeling",
+            "text": "<p>Along with distributors, Himalayan Cliff Honey is also available for private-label and white labeling, with fully customizable packaging, perfect for brands that aim to offer authentic, high-altitude honey to their customers sourced from up to 4000 metres and beyond. We provide end-to-end support, from label design and packaging customization to worldwide shipping, making it easy for your brand to bring premium Himalayan honey to the market.</p>",
+            "button_label": "Private Labeling",
+            "button_link": "#private",
+            "block_class": ""
+          }
+        }
+      },
+      "block_order": [
+        "row_jNBBNt",
+        "row_WU348H"
+      ],
+      "custom_css": [
+        ".multirow__inner {--grid-desktop-vertical-spacing: clamp(24px, 2.61vw, 5rem); gap: 0; padding: 0;}",
+        ".global-media-settings {background: transparent;}",
+        ".image-with-text__grid {padding: clamp(24px, 2.61vw, 5rem) 16px; margin: 0 auto; --grid-desktop-horizontal-spacing: 5rem; gap: clamp(24px, 2.61vw, 5rem);}",
+        ".image-with-text:nth-child(even) {background: #b5731f0d;}",
+        ".image-with-text__content {padding: 0;}"
+      ],
+      "name": "t:sections.multirow.presets.name",
+      "settings": {
+        "image_height": "adapt",
+        "desktop_image_width": "medium",
+        "image_layout": "alternate-left",
+        "heading_size": "h2",
+        "text_style": "body",
+        "button_style": "primary",
+        "desktop_content_position": "middle",
+        "desktop_content_alignment": "left",
+        "mobile_content_alignment": "center",
+        "section_color_scheme": "scheme-4",
+        "row_color_scheme": "scheme-4",
+        "padding_top": 0,
+        "padding_bottom": 0,
+        "section_id": "",
+        "section_class": ""
+      }
+    },
+    "image_with_text_RniYwn": {
+      "type": "image-with-text",
+      "blocks": {
+        "heading_zQAP8X": {
+          "type": "heading",
+          "settings": {
+            "heading": "Become Our <strong>distributor</strong>",
+            "heading_size": "h2"
+          }
+        },
+        "text_aQ4hm8": {
+          "type": "text",
+          "settings": {
+            "text": "<p>We believe passionately in plant-powered health.</p><p>Nature has been innovating and engineering solutions for millions of years. So we have a lot of catching up to do – searching, looking, combining – discovering solutions that nature has already invented.</p><p>We’re lucky to live in a very beautiful and unspoilt corner of the world. We have a front-row seat on the spectacle, so nature is a constant inspiration.</p>",
+            "text_style": "body"
+          }
+        },
+        "button_LtjBqi": {
+          "type": "button",
+          "settings": {
+            "button_label": "Distributor",
+            "button_link": "#distributor",
+            "button_style_secondary": false,
+            "attributes": ""
+          }
+        }
+      },
+      "block_order": [
+        "heading_zQAP8X",
+        "text_aQ4hm8",
+        "button_LtjBqi"
+      ],
+      "disabled": true,
+      "custom_css": [
+        ".grid {--grid-desktop-horizontal-spacing: clamp(24px, 2.61vw, 5rem);}",
+        ".image-with-text__heading {margin-bottom: clamp(24px, 2.61vw, 5rem);}",
+        ".button {width: 32rem;}"
+      ],
+      "name": "t:sections.image-with-text.presets.name",
+      "settings": {
+        "image": "shopify://shop_images/Rectangle_40034.webp",
+        "height": "adapt",
+        "desktop_image_width": "medium",
+        "layout": "image_first",
+        "image_behavior": "none",
+        "content_layout": "no-overlap",
+        "desktop_content_position": "middle",
+        "desktop_content_alignment": "left",
+        "mobile_content_alignment": "center",
+        "section_color_scheme": "scheme-4",
+        "color_scheme": "scheme-4",
+        "id": "",
+        "class": "",
+        "padding_top": 110,
+        "padding_bottom": 110,
+        "custom_liquid": ""
+      }
+    },
+    "image_with_text_hapTr6": {
+      "type": "image-with-text",
+      "blocks": {
+        "heading_BkMNtW": {
+          "type": "heading",
+          "settings": {
+            "heading": "<strong>Private </strong>Labeling",
+            "heading_size": "h2"
+          }
+        },
+        "text_jegDFd": {
+          "type": "text",
+          "settings": {
+            "text": "<p>There is a huge amount of satisfaction to be gained from doing things well, to know that you’re going to make a difference in people’s lives. That’s our focus. Or we should say, you are.</p><p>Your well-being. Mind, soul and body. Your wellness has no strings attached, just sustainable products that are good for you and good for the planet. And that feels good too.</p>",
+            "text_style": "body"
+          }
+        },
+        "button_6CNkDN": {
+          "type": "button",
+          "settings": {
+            "button_label": "Private Labeling",
+            "button_link": "#private",
+            "button_style_secondary": false,
+            "attributes": ""
+          }
+        }
+      },
+      "block_order": [
+        "heading_BkMNtW",
+        "text_jegDFd",
+        "button_6CNkDN"
+      ],
+      "disabled": true,
+      "custom_css": [
+        ".grid {--grid-desktop-horizontal-spacing: clamp(24px, 2.61vw, 5rem);}",
+        ".button {width: 32rem;}"
+      ],
+      "name": "t:sections.image-with-text.presets.name",
+      "settings": {
+        "image": "shopify://shop_images/Rectangle_40034.webp",
+        "height": "adapt",
+        "desktop_image_width": "medium",
+        "layout": "text_first",
+        "image_behavior": "none",
+        "content_layout": "no-overlap",
+        "desktop_content_position": "middle",
+        "desktop_content_alignment": "left",
+        "mobile_content_alignment": "center",
+        "section_color_scheme": "scheme-4",
+        "color_scheme": "scheme-4",
+        "id": "",
+        "class": "",
+        "padding_top": 0,
+        "padding_bottom": 0,
+        "custom_liquid": ""
+      }
+    },
+    "collapsible_content_tpn64m": {
+      "type": "collapsible-content",
+      "blocks": {
+        "collapsible_row_RwKFXP": {
+          "type": "collapsible_row",
+          "settings": {
+            "heading": "Do you offer wholesale Himalayan Cliff Honey for bulk purchase?",
+            "icon": "none",
+            "row_content": "<p>Yes. We also bulk supply Himalayan Cliff Honey to retailers, importers, private-label brands, and hospitality businesses across markets worldwide. Products are available in multiple bulk formats suitable for food service, retail repacking, and further processing. Contact our dedicated B2B team with your wholesale inquiries to discuss the volume, destination market, and regulatory requirements.</p>",
+            "page": ""
+          }
+        },
+        "collapsible_row_t9737M": {
+          "type": "collapsible_row",
+          "settings": {
+            "heading": "What is the minimum order quantity for any wholesale orders?",
+            "icon": "none",
+            "row_content": "<p>Minimum order quantities vary depending on the product format you choose and destination market.</p><ul><li>Bulk raw honey orders generally start from 60 kg.</li><li>Private label orders with custom packaging come with varying thresholds depending on branding complexity.</li></ul><p>Final MOQs are confirmed after reviewing order details and compliance needs.</p>",
+            "page": ""
+          }
+        },
+        "collapsible_row_ibVWn8": {
+          "type": "collapsible_row",
+          "settings": {
+            "heading": "Do you provide private label and white label honey services?",
+            "icon": "none",
+            "row_content": "<p>Yes. We offer private and white label solutions for businesses seeking origin-verified honey under their own brand. Services include:</p><ul><li>Custom jar sizes and packaging formats</li><li>Label and packaging customization</li><li>Regulatory and export documentation support</li></ul><p>Production is managed from sourcing through final packaging to ensure consistency and compliance.</p>",
+            "page": ""
+          }
+        },
+        "collapsible_row_yYheHd": {
+          "type": "collapsible_row",
+          "settings": {
+            "heading": "What certifications and quality testing does your honey have?",
+            "icon": "none",
+            "row_content": "<p>Each batch is tested by Nepal government-approved laboratories and independent third-party labs. Testing includes purity verification, moisture content, and authenticity parameters. We provide:</p><ul><li>Certificates of Analysis (COA)</li><li>Phytosanitary certificates</li><li>Country-of-origin documentation</li><li>Export clearance documentation</li><li>QR-based traceability data is available upon request.</li></ul>",
+            "page": ""
+          }
+        },
+        "collapsible_row_bnKk6T": {
+          "type": "collapsible_row",
+          "settings": {
+            "heading": "Can you create custom packaging and branding for our honey products?",
+            "icon": "none",
+            "row_content": "<p>Yes. We provide full packaging customization, including jar type, size, labeling, and secondary packaging. Our production partners accommodate retail-ready formats for specialty stores, gift sets, and food service applications. Share your brand guidelines including target retail presentation, and we'll provide mockups and pricing for your private label program.</p>",
+            "page": ""
+          }
+        },
+        "collapsible_row_46JNmR": {
+          "type": "collapsible_row",
+          "settings": {
+            "heading": "Which countries do you export to and how is shipping handled?",
+            "icon": "none",
+            "row_content": "<p>We export to North America, Europe, Australia, the Middle East, and Asia. For shipments, we coordinate with established freight partners to support end-to-end logistics- prepared with complete export documentation and food-grade compliance. We are also flexible to coordinate with the buyer’s freight forwarder or recommend logistics partners experienced in honey and food product transportation. Shipping timelines and costs are determined by destination and order size.</p>",
+            "page": ""
+          }
+        },
+        "collapsible_row_hafFtE": {
+          "type": "collapsible_row",
+          "settings": {
+            "heading": "What are the requirements needed to become a distributor or wholesale partner?",
+            "icon": "none",
+            "row_content": "<p>We work with registered distributors, importers, and retailers with established market presence. Requirements include:</p><ul><li>Valid business registration</li><li>Relevant import licenses</li><li>Demonstrated distribution capability in the target market</li></ul><p>Applicants must submit company details, target market information, and estimated annual volumes for evaluation.</p>",
+            "page": ""
+          }
+        },
+        "collapsible_row_Kp3GPD": {
+          "type": "collapsible_row",
+          "settings": {
+            "heading": "Why should B2B buyers choose Himalayan Cliff Honey as their supplier?",
+            "icon": "none",
+            "row_content": "<p>We aim to provide direct access to one of the world’s rarest honeys to limited buyers. Our supply model is designed to ensure:</p><ul><li>Consistent supply of export-grade honey</li><li>Verified quality testing and compliance documentation</li><li>Flexible wholesale and private-label programs</li><li>Transparent sourcing and batch traceability</li><li>Dedicated B2B account support</li></ul><p>Our focus is on reliability, compliance, and long-term supply partnerships.</p>",
+            "page": ""
+          }
+        }
+      },
+      "block_order": [
+        "collapsible_row_RwKFXP",
+        "collapsible_row_t9737M",
+        "collapsible_row_ibVWn8",
+        "collapsible_row_yYheHd",
+        "collapsible_row_bnKk6T",
+        "collapsible_row_46JNmR",
+        "collapsible_row_hafFtE",
+        "collapsible_row_Kp3GPD"
+      ],
+      "custom_css": [
+        ".grid__item {display: grid; gap: clamp(2px, 1.05vw, 20px) 5%; grid-template-columns: 1fr 1fr;}",
+        ".caption-with-letter-spacing {background: var(--color-extra); width: max-content; margin: 0; padding: clamp(6px, 0.63vw, 12px) clamp(8px, 0.63vw, 12px); color: #fff; letter-spacing: 0; line-height: 1.1; border-radius: 24px; text-transform: capitalize; font-size: clamp(10px, 0.84vw, 16px) !important;}",
+        "@media (max-width: 990px) {.grid__item {display: block; } .collapsible-content__header {flex-direction: column; }}"
+      ],
+      "name": "t:sections.collapsible_content.presets.name",
+      "settings": {
+        "caption": "You're not Alone",
+        "heading": "Questions <strong>Asked By You</strong>",
+        "heading_size": "h2",
+        "heading_alignment": "center",
+        "button_label": "",
+        "button_link": "",
+        "layout": "none",
+        "container_color_scheme": "scheme-115c0f00-6e48-4035-b511-680a9158c036",
+        "color_scheme": "scheme-115c0f00-6e48-4035-b511-680a9158c036",
+        "open_first_collapsible_row": true,
+        "image_ratio": "adapt",
+        "desktop_layout": "image_second",
+        "padding_top": 110,
+        "padding_bottom": 110
+      }
+    },
+    "blocks_m3RNny": {
+      "type": "_blocks",
+      "blocks": {
+        "ai_gen_block_6fb6749_BTc73R": {
+          "type": "ai_gen_block_6fb6749",
+          "settings": {
+            "media_type": "custom_code",
+            "image": "shopify://shop_images/Rectangle_40034.webp",
+            "custom_code": "<iframe src=\"https://www.google.com/maps/embed?pb=!1m17!1m12!1m3!1d3534.0996113088254!2d85.29488808754452!3d27.65238966659639!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m2!1m1!2zMjfCsDM5JzA4LjYiTiA4NcKwMTcnNTkuMSJF!5e0!3m2!1sen!2snp!4v1768993863606!5m2!1sen!2snp\" width=\"600\" height=\"450\" style=\"width:100%;height:100%;border:0;\" allowfullscreen=\"\" loading=\"lazy\" referrerpolicy=\"no-referrer-when-downgrade\"></iframe>",
+            "heading": "<p>Want to <strong>Get in </strong>with us?</p>",
+            "description": "<p>If you’ve any Himalayan cliff honey-related queries, we have a dedicated team that always hears you, just fill the form below or mail us with your related curiosity!</p><p>Please allow us 2 to 3 business days for one of our team members to get back to you.</p>",
+            "button_text": "Send message",
+            "success_message": "Thank you for your message! We'll get back to you soon.",
+            "contact_phone": "+977 9704510179",
+            "contact_phone_2": "",
+            "contact_email": "contact@cliffhoney.com",
+            "show_social_icons": true,
+            "color_scheme": "scheme-4",
+            "heading_size": 52,
+            "description_size": 16,
+            "image_border_radius": 8,
+            "input_border_radius": 20,
+            "button_border_radius": 40,
+            "social_icon_size": 40
+          },
+          "blocks": {}
+        }
+      },
+      "block_order": [
+        "ai_gen_block_6fb6749_BTc73R"
+      ],
+      "custom_css": [
+        "img {max-width: 75rem;}",
+        ".color-scheme-4 {margin: auto; padding: clamp(47px, 5.75vw, 110px) 16px; padding-bottom: clamp(47px, 5.75vw, 110px);}",
+        "h1 strong {color: var(--color-extra);}",
+        "@media (max-width: 768px) {img {max-width: 100%; } h1 br {display: none; } .color-scheme-4 {padding-bottom: 48px; }}"
+      ],
+      "settings": {}
+    },
+    "multicolumn_V9ajcD": {
+      "type": "multicolumn",
+      "blocks": {
+        "column_VDGq8a": {
+          "type": "column",
+          "settings": {
+            "title": "",
+            "text": "",
+            "link_label": "",
+            "link": "",
+            "custom_liquid": "<h2>**Please note the following terms for Cliff  Honey Wholesale purchases**</h2>\n<p>\nInternational freight costs are regularly changing, while we can discuss your options with you it is your responsibility to find the solution that best suits you.\n</p>\n<p>\nAll quotes will be provided in USD dollars.\n</p>\n\n<p>\nInternational transaction fees including fees for importation and customs clearances are the responsibility of the purchaser. Further to this the purchaser is required to adhere to all local government requirements in regards to FDA approvals and similar\n</p>"
+          }
+        },
+        "column_UehXc8": {
+          "type": "column",
+          "settings": {
+            "title": "",
+            "text": "",
+            "link_label": "",
+            "link": "",
+            "custom_liquid": "<p>\nPurchasers are not permitted to sell on marketplaces like ebay, Amazon Walmart, Etsy . Neither the wholesale customer or their customers are permitted to sell on marketplace platforms.\n</p>\n<p>\nWhile we will supply all relevant testing documentation we have, where there are further requirements requested for the country wise certification process we will accommodate as best we can but can not guarantee that you will not have to carry out your own tests or certifications to comply with local legislation.\n</p>\n<p>\n<highlight>Note:</highlight> We look forward to starting the conversation and looking at possibilities for Mad Honey wholesale opportunities with you. Get in touch with one of the team by using the contact form below.</p>"
+          }
+        }
+      },
+      "block_order": [
+        "column_VDGq8a",
+        "column_UehXc8"
+      ],
+      "custom_css": [
+        "svg,img {max-width: 100%;}",
+        ".grid {--col: clamp(24px, 2.61vw, 5rem); gap: 32px var(--col); align-items: end;}",
+        ".grid__item {max-width: calc(50% - (var(--col) / 2)); display: block; height: max-content;}",
+        ".multicolumn-card {background: transparent; height: max-content;}",
+        ".multicolumn-card__info {padding: 0;}",
+        "h3:not(:first-of-type) {margin-top: clamp(32px, 2.61vw, 5rem);}",
+        "h2,h3 {margin-bottom: clamp(18px, 1.25vw, 2.4rem);}",
+        "@media (max-width: 980px) {* {text-align: center; } .grid__item {max-width: 100%; }}"
+      ],
+      "name": "t:sections.multicolumn.presets.name",
+      "settings": {
+        "title": "",
+        "description": "",
+        "heading_size": "h2",
+        "image_width": "full",
+        "image_ratio": "adapt",
+        "button_label": "",
+        "button_link": "",
+        "columns_desktop": 3,
+        "column_alignment": "left",
+        "background_style": "primary",
+        "color_scheme": "scheme-115c0f00-6e48-4035-b511-680a9158c036",
+        "swipe_on_desktop": false,
+        "columns_mobile": "1",
+        "swipe_on_mobile": false,
+        "padding_top": 110,
+        "padding_bottom": 110,
+        "section_id": "",
+        "section_class": "",
+        "custom_code": ""
+      }
+    }
+  },
+  "order": [
+    "main",
+    "image_banner_KETh3i",
+    "image_banner_kFiWKy",
+    "image_with_text_7VVTnf",
+    "custom_liquid_8K9KGC",
+    "multicolumn_iKA74Y",
+    "multirow_76deCY",
+    "image_with_text_RniYwn",
+    "image_with_text_hapTr6",
+    "collapsible_content_tpn64m",
+    "blocks_m3RNny",
+    "multicolumn_V9ajcD"
+  ]
+}

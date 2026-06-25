@@ -1,0 +1,169 @@
+<!-- marquee-text.liquid -->
+{{ 'marquee.css' | asset_url | stylesheet_tag }}
+
+{%- style -%}
+  .section-{{ section.id }}-padding {
+    padding-top: clamp({{ section.settings.padding_top | times: 0.43 | round: 0 }}px, {{ section.settings.padding_top | divided_by: 19.13 }}vw, {{ section.settings.padding_top  }}px);
+    padding-bottom: clamp({{ section.settings.padding_bottom | times: 0.43 | round: 0 }}px, {{ section.settings.padding_bottom | divided_by: 19.13 }}vw, {{ section.settings.padding_bottom  }}px);
+  }
+
+  .section-{{ section.id }}-padding .marquee-text .marquee-block img{
+    margin-right: clamp(8px, {{ section.settings.gap_size | times: 0.3 | divided_by: 19.13 }}vw, {{  section.settings.gap_size | times: 0.3 | default: 80 }}px);
+    height:clamp(14px, 0.94vw, 16px);
+  }
+
+  {% if section.settings.seperator == blank %}
+    .section-{{ section.id }}-padding .marquee-text .marquee-block{
+      margin-left:clamp(24px, {{ section.settings.gap_size | divided_by: 19.13 }}vw, {{ section.settings.gap_size }}px);
+    }
+  {% else %}
+    .section-{{ section.id }}-padding .marquee-text span:before{
+      content: "{{ section.settings.seperator }}";
+      margin-left:clamp(16px, {{ section.settings.gap_size | divided_by: 19.13 }}vw, {{ section.settings.gap_size | default: 80 }}px);
+    }
+  {% endif %}
+
+  /* @media screen and (min-width: 76.8rem) {
+    .section-{{ section.id }}-padding {
+      padding-top: {{ section.settings.padding_top }}px;
+      padding-bottom: {{ section.settings.padding_bottom }}px;
+    }
+  } */
+{%- endstyle -%}
+
+<div class="section-{{ section.id }}-padding">
+  <div class="marquee-wrapper color-{{ section.settings.color_scheme }}">
+    <div class="marquee-text rotate-left fadeout-horizontal">
+      <div class="marquee-text-track">
+        {% for block in section.blocks %}
+          <div class="marquee-block">
+            {% if block.settings.marquee_image != blank %}
+              <img
+                src="{{ block.settings.marquee_image | image_url }}"
+                alt="{{block.settings.marquee_image.alt}}"
+                width="{{ block.settings.marquee_image.width }}"
+                height="{{ block.settings.marquee_image.height }}"
+                class="marquee-image"
+              >
+            {% endif %}
+            {% if block.settings.marquee_text != blank %}
+              <span>{{ block.settings.marquee_text }}</span>
+            {% endif %}
+          </div>
+        {% endfor %}
+
+        {% for block in section.blocks %}
+          <div aria-hidden="true" class="marquee-block">
+            {% if block.settings.marquee_image != blank %}
+              <img
+                src="{{ block.settings.marquee_image | image_url }}"
+                alt="{{block.settings.marquee_image.alt}}"
+                width="{{ block.settings.marquee_image.width }}"
+                height="{{ block.settings.marquee_image.height }}"
+                class="marquee-image"
+              >
+            {% endif %}
+            {% if block.settings.marquee_text != blank %}
+              <span>{{ block.settings.marquee_text }}</span>
+            {% endif %}
+          </div>
+        {% endfor %}
+      </div>
+    </div>
+  </div>
+</div>
+
+{% schema %}
+{
+  "name": "Marquee Text with Image",
+  "settings": [
+    {
+      "type": "color_scheme",
+      "id": "color_scheme",
+      "label": "t:sections.all.colors.label",
+      "default": "scheme-1"
+    },
+    {
+      "type": "header",
+      "content": "Marquee Settings"
+    },
+    {
+      "type": "select",
+      "id": "seperator",
+      "label": "Seperator Style",
+      "options": [
+        {
+          "value": "",
+          "label": "None"
+        },
+        {
+          "value": "•",
+          "label": "Dot (•)"
+        },
+        {
+          "value": "|",
+          "label": "Pipe (|)"
+        }
+      ]
+    },
+    {
+      "type": "range",
+      "id": "gap_size",
+      "min": 0,
+      "max": 100,
+      "step": 2,
+      "unit": "px",
+      "label": "Gap Size Between Items",
+      "default": 80
+    },
+    {
+      "type": "header",
+      "content": "t:sections.all.padding.section_padding_heading"
+    },
+    {
+      "type": "range",
+      "id": "padding_top",
+      "min": 0,
+      "max": 110,
+      "step": 5,
+      "unit": "px",
+      "label": "t:sections.all.padding.padding_top",
+      "default": 35
+    },
+    {
+      "type": "range",
+      "id": "padding_bottom",
+      "min": 0,
+      "max": 150,
+      "step": 5,
+      "unit": "px",
+      "label": "t:sections.all.padding.padding_bottom",
+      "default": 35
+    }
+  ],
+  "blocks": [
+    {
+      "type": "marquee_block",
+      "name": "Marquee Text Block",
+      "settings": [
+        {
+          "type": "text",
+          "label": "Marquee Text",
+          "id": "marquee_text",
+          "default": "Marquee Text Here"
+        },
+        {
+          "type": "image_picker",
+          "label": "Image",
+          "id": "marquee_image"
+        }
+      ]
+    }
+  ],
+  "presets": [
+    {
+      "name": "Marquee Text with Image"
+    }
+  ]
+}
+{% endschema %}

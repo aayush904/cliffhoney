@@ -1,0 +1,582 @@
+{%- liquid
+  assign parents = section.settings.parent_tag | default: '' | split: '|'
+  assign tags = blog.all_tags
+
+  assign pairs = ''
+  assign unmatched_str = ''
+
+  assign min_parent_down = ''
+
+  for p in parents
+    assign parent = p | strip
+    if parent == blank
+      continue
+    endif
+
+    assign parent_down = parent | downcase
+
+    if min_parent_down == blank
+      assign min_parent_down = parent_down
+    else
+      if parent_down < min_parent_down
+        assign min_parent_down = parent_down
+      endif
+    endif
+  endfor
+
+  for t in tags
+    assign tag_clean = t | strip
+    assign tag_down = tag_clean | downcase
+
+    if tag_down == 'all'
+      continue
+    endif
+
+    assign tag_len = tag_down | size
+    assign matched = false
+
+    for p in parents
+      assign parent = p | strip
+      if parent == blank
+        continue
+      endif
+
+      assign parent_down = parent | downcase
+      assign parent_space_down = parent_down | append: ' '
+      assign parent_space_len = parent_space_down | size
+
+      assign starts_slice = ''
+      if tag_len >= parent_space_len
+        assign starts_slice = tag_down | slice: 0, parent_space_len
+      endif
+
+      assign is_exact = false
+      if tag_down == parent_down
+        assign is_exact = true
+      endif
+
+      assign is_prefixed = false
+      if starts_slice == parent_space_down
+        assign is_prefixed = true
+      endif
+
+      if is_exact or is_prefixed
+        assign matched = true
+
+        if is_exact
+          assign pair = parent | append: '::'
+        else
+          assign tail = tag_clean | slice: parent_space_len, tag_clean.size | strip
+          assign pair = parent | append: '::' | append: tail
+        endif
+
+        if pairs == blank
+          assign pairs = pair
+        else
+          assign pairs = pairs | append: '||' | append: pair
+        endif
+
+        break
+      endif
+    endfor
+
+    unless matched
+      if unmatched_str == blank
+        assign unmatched_str = tag_clean
+      else
+        assign unmatched_str = unmatched_str | append: '||' | append: tag_clean
+      endif
+    endunless
+  endfor
+
+  assign pair_list = pairs | split: '||'
+  assign unmatched_sorted = unmatched_str | split: '||' | sort
+
+  assign before_groups_str = ''
+  assign after_groups_str = ''
+
+  for u in unmatched_sorted
+    assign u_clean = u | strip
+    if u_clean == blank
+      continue
+    endif
+
+    assign u_down = u_clean | downcase
+    assign goes_before = false
+
+    if min_parent_down != blank
+      if u_down < min_parent_down
+        assign goes_before = true
+      endif
+    else
+      assign goes_before = true
+    endif
+
+    if goes_before
+      if before_groups_str == blank
+        assign before_groups_str = u_clean
+      else
+        assign before_groups_str = before_groups_str | append: '||' | append: u_clean
+      endif
+    else
+      if after_groups_str == blank
+        assign after_groups_str = u_clean
+      else
+        assign after_groups_str = after_groups_str | append: '||' | append: u_clean
+      endif
+    endif
+  endfor
+
+  assign before_groups = before_groups_str | split: '||'
+  assign after_groups = after_groups_str | split: '||'
+-%}
+
+<div class="blog-filter-wrapper" data-blog-filter>
+  <button class="filter-toggle" aria-expanded="false" type="button">☰ Filter</button>
+
+  <nav class="blog-categories" aria-label="Article Filters">
+    {%- assign all_active = false -%}
+    {%- if current_tags == blank or current_tags.size == 0 -%}
+      {%- assign all_active = true -%}
+    {%- endif -%}
+
+    <a href="{{ blog.url }}" class="category-link{% if all_active %} active{% endif %}">All</a>
+
+    {%- for u in before_groups -%}
+      {%- assign label = u | strip -%}
+      {%- if label == blank -%}{%- continue -%}{%- endif -%}
+      {%- assign handle = label | handleize -%}
+      {%- assign is_active = false -%}
+      {%- if current_tags contains label -%}{%- assign is_active = true -%}{%- endif -%}
+      <a href="{{ blog.url }}/tagged/{{ handle }}" class="category-link{% if is_active %} active{% endif %}">
+        {{- label -}}
+      </a>
+    {%- endfor -%}
+
+    {%- for p in parents -%}
+      {%- assign parent = p | strip -%}
+      {%- if parent == blank -%}{%- continue -%}{%- endif -%}
+
+      {%- assign children_str = '' -%}
+      {%- assign any_child_active = false -%}
+
+      {%- for item in pair_list -%}
+        {%- if item == blank -%}{%- continue -%}{%- endif -%}
+
+        {%- assign parts = item | split: '::' -%}
+        {%- assign k = parts[0] | strip -%}
+        {%- assign v = parts | slice: 1, 99 | join: '::' | strip -%}
+
+        {%- if k == parent and v != blank -%}
+          {%- if children_str == blank -%}
+            {%- assign children_str = v -%}
+          {%- else -%}
+            {%- assign children_str = children_str | append: '||' | append: v -%}
+          {%- endif -%}
+
+          {%- assign full_tag = parent | append: ' ' | append: v -%}
+          {%- if current_tags contains full_tag -%}
+            {%- assign any_child_active = true -%}
+          {%- endif -%}
+        {%- endif -%}
+      {%- endfor -%}
+
+      {%- if children_str != blank -%}
+        {%- assign children = children_str | split: '||' | sort -%}
+        <details
+          class="dropdown"
+          {% if any_child_active %}
+            open
+          {% endif %}
+        >
+          <summary>
+            <span>{{ parent }}</span>
+            <span class="arrow">
+              <svg
+                xmlns="http://www.w3.org/2000/svg"
+                width="17"
+                height="16"
+                viewBox="0 0 17 16"
+                aria-hidden="true"
+                focusable="false"
+              >
+                <path d="M1.5 5L8.5 11L15.5 5" stroke="#364639" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+              </svg>
+            </span>
+          </summary>
+          <ul>
+            {%- for c in children -%}
+              {%- assign child = c | strip -%}
+              {%- if child == blank -%}{%- continue -%}{%- endif -%}
+              {%- assign full_tag = parent | append: ' ' | append: child -%}
+              {%- assign full_handle = full_tag | handleize -%}
+              <li>
+                <a href="{{ blog.url }}/tagged/{{ full_handle }}">{{ child }}</a>
+              </li>
+            {%- endfor -%}
+          </ul>
+        </details>
+      {%- endif -%}
+    {%- endfor -%}
+
+    {%- for u in after_groups -%}
+      {%- assign label = u | strip -%}
+      {%- if label == blank -%}{%- continue -%}{%- endif -%}
+      {%- assign handle = label | handleize -%}
+      {%- assign is_active = false -%}
+      {%- if current_tags contains label -%}{%- assign is_active = true -%}{%- endif -%}
+      <a href="{{ blog.url }}/tagged/{{ handle }}" class="category-link{% if is_active %} active{% endif %}">
+        {{- label -}}
+      </a>
+    {%- endfor -%}
+  </nav>
+</div>
+
+<script>
+  (() => {
+    const wrappers = document.querySelectorAll('[data-blog-filter]');
+    if (!wrappers.length) return;
+
+    const isMobile = () => window.matchMedia('(max-width: 998px)').matches;
+
+    const lockScroll = () => document.documentElement.classList.add('blog-filter-lock');
+    const unlockScroll = () => document.documentElement.classList.remove('blog-filter-lock');
+
+    wrappers.forEach((wrapper) => {
+      const toggleBtn = wrapper.querySelector('.filter-toggle');
+      const nav = wrapper.querySelector('.blog-categories');
+      if (!toggleBtn || !nav) return;
+
+      const dropdowns = Array.from(wrapper.querySelectorAll('.dropdown'));
+
+      const ensureMobileHeader = () => {
+        if (nav.querySelector('[data-filter-mobile-header]')) return;
+
+        const header = document.createElement('div');
+        header.setAttribute('data-filter-mobile-header', '');
+        header.className = 'blog-filter-mobilebar';
+
+        const title = document.createElement('div');
+        title.className = 'blog-filter-mobilebar__title';
+        title.textContent = 'Filter';
+
+        const close = document.createElement('button');
+        close.type = 'button';
+        close.className = 'blog-filter-mobilebar__close';
+        close.setAttribute('aria-label', 'Close filters');
+        close.innerHTML = '✕';
+
+        header.appendChild(title);
+        header.appendChild(close);
+        nav.prepend(header);
+
+        close.addEventListener('click', () => closeMenu());
+      };
+
+      const closeAllDropdowns = () => dropdowns.forEach((d) => d.removeAttribute('open'));
+
+      const openMenu = () => {
+        ensureMobileHeader();
+        nav.classList.add('active');
+        toggleBtn.setAttribute('aria-expanded', 'true');
+        if (isMobile()) lockScroll();
+        closeAllDropdowns();
+        const closeBtn = nav.querySelector('.blog-filter-mobilebar__close');
+        if (closeBtn) closeBtn.focus({ preventScroll: true });
+      };
+
+      const closeMenu = () => {
+        nav.classList.remove('active');
+        toggleBtn.setAttribute('aria-expanded', 'false');
+        unlockScroll();
+        closeAllDropdowns();
+        toggleBtn.focus({ preventScroll: true });
+      };
+
+      toggleBtn.addEventListener('click', () => {
+        const isOpen = nav.classList.contains('active');
+        if (isOpen) closeMenu();
+        else openMenu();
+      });
+
+      if (dropdowns.length) {
+        dropdowns.forEach((dropdown) => {
+          const summary = dropdown.querySelector('summary');
+          if (!summary) return;
+
+          summary.addEventListener('click', (e) => {
+            e.preventDefault();
+            const isOpen = dropdown.hasAttribute('open');
+            closeAllDropdowns();
+            if (!isOpen) dropdown.setAttribute('open', 'true');
+          });
+
+          dropdown.addEventListener('mouseenter', () => {
+            if (window.innerWidth < 1024) return;
+            closeAllDropdowns();
+            dropdown.setAttribute('open', 'true');
+          });
+
+          dropdown.addEventListener('mouseleave', () => {
+            if (window.innerWidth < 1024) return;
+            dropdown.removeAttribute('open');
+          });
+        });
+      }
+
+      document.addEventListener('keydown', (e) => {
+        if (e.key !== 'Escape') return;
+        if (!nav.classList.contains('active')) return;
+        closeMenu();
+      });
+
+      document.addEventListener('click', (e) => {
+        if (!isMobile()) return;
+        if (!nav.classList.contains('active')) return;
+        if (wrapper.contains(e.target)) return;
+        closeMenu();
+      });
+
+      window.addEventListener(
+        'resize',
+        () => {
+          if (!isMobile() && nav.classList.contains('active')) {
+            nav.classList.remove('active');
+            toggleBtn.setAttribute('aria-expanded', 'false');
+            unlockScroll();
+            closeAllDropdowns();
+          }
+        },
+        { passive: true }
+      );
+    });
+  })();
+</script>
+
+{% style %}
+        #shopify-section-{{ section.id }} .blog-categories {
+          display: flex;
+          align-items: center;
+          justify-content: center;
+          gap: clamp(1rem,1.56vw,30px);
+          background-color: #CFE8D5;
+          border-radius: 8px;
+          font-family: Arial, sans-serif;
+        }
+
+        #shopify-section-{{ section.id }} .category-link,
+        #shopify-section-{{ section.id }} .dropdown summary {
+          font-weight: 600;
+          color: #364639;
+          text-decoration: none;
+          padding: 1rem;
+          cursor: pointer;
+          white-space: nowrap;
+          list-style: none;
+          text-transform:capitalize;
+        }
+  #shopify-section-{{ section.id }} details.dropdown[open] summary{
+    border-bottom-left-radius: 0;
+    border-bottom-right-radius: 0;
+  }
+        #shopify-section-{{ section.id }} details.dropdown[open] summary,
+        #shopify-section-{{ section.id }} .category-link:hover,
+        #shopify-section-{{ section.id }} .dropdown summary:hover {
+          opacity: 0.7;
+        }
+
+        #shopify-section-{{ section.id }} .category-link.active {
+          text-decoration: underline;
+        }
+
+        #shopify-section-{{ section.id }} .dropdown {
+          position: relative;
+        }
+
+        #shopify-section-{{ section.id }} .dropdown summary {
+          display: flex;
+          align-items: center;
+          justify-content: space-between;
+          gap: 1rem;
+        }
+
+        #shopify-section-{{ section.id }} .dropdown summary::-webkit-details-marker {
+          display: none;
+        }
+
+        #shopify-section-{{ section.id }} .arrow {
+          display: flex;
+          transition: transform 0.25s ease;
+          fill: none;
+        }
+        #shopify-section-{{ section.id }} .arrow svg{
+          height:auto;
+          max-width:10px;
+        }
+
+        #shopify-section-{{ section.id }} .dropdown[open] .arrow {
+          transform: rotate(180deg);
+        }
+
+        #shopify-section-{{ section.id }} .dropdown ul {
+          position: absolute;
+          top: 100%;
+          left: 50%;
+          transform: translateX(-50%);
+          background-color: #364639;
+          padding: 1rem;
+          border-radius: 12px;
+          list-style: none;
+          margin: 0;
+          min-width: 200px;
+          z-index: 10;
+          border-top-left-radius: 0;
+          border-top-right-radius: 0;
+        }
+
+        #shopify-section-{{ section.id }} .dropdown ul li {
+          margin-bottom: 0.75rem;
+        }
+
+        #shopify-section-{{ section.id }} .dropdown ul li:last-child {
+            margin-bottom: 0;
+        }
+
+        #shopify-section-{{ section.id }} .dropdown ul a {
+            text-transform:capitalize;
+          color: #fff;
+          text-decoration: none;
+          font-weight: 600;
+        }
+
+        #shopify-section-{{ section.id }} .dropdown ul a:hover {
+          opacity: 0.8;
+        }
+
+        #shopify-section-{{ section.id }} .blog-filter-wrapper {
+            width: 100%;
+            text-align: start;
+            position: relative;
+            z-index: 2;
+            min-width: 25%;
+
+        }
+
+        #shopify-section-{{ section.id }} .filter-toggle {
+          display: none;
+          background: #364639;
+          color: #fff;
+          font-weight: 700;
+          border: none;
+          padding: 0.75rem 1.25rem;
+          border-radius: 10px;
+          cursor: pointer;
+          min-width: 25%;
+        }
+
+
+    @media (max-width: 998px) {
+      #shopify-section-{{ section.id }} .filter-toggle {
+        display: inline-flex;
+        align-items: center;
+        gap: 0.5rem;
+        justify-content: center;
+      }
+
+      #shopify-section-{{ section.id }} .blog-categories {
+        display: none;
+      }
+
+      #shopify-section-{{ section.id }} .blog-categories.active {
+        display: flex;
+        position: fixed;
+        inset: 0;
+        z-index: 9999;
+        flex-direction: column;
+        align-items: stretch;
+        justify-content: flex-start;
+        gap: 0.5rem;
+        padding: 16px;
+        padding-top: calc(var(--header-height,13rem) + 100px);
+        background-color: #CFE8D5;
+        overflow: auto;
+        -webkit-overflow-scrolling: touch;
+      }
+
+      #shopify-section-{{ section.id }} .blog-filter-mobilebar {
+        position: fixed;
+        inset: calc(var(--header-height,13rem) + 60px) 0 auto 0;
+        height: max-content;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        padding: 0 16px;
+        background-color: #CFE8D5;
+        z-index: 10000;
+      }
+
+      #shopify-section-{{ section.id }} .blog-filter-mobilebar__title {
+        font-weight: 700;
+        color: #364639;
+        font-size: clamp(16px, 1.25vw, 24px);
+      }
+
+      #shopify-section-{{ section.id }} .blog-filter-mobilebar__close {
+        position: absolute;
+        top: 50%;
+        right: 16px;
+        transform: translateY(-50%);
+        width: 42px;
+        height: 42px;
+        border-radius: 999px;
+        border: none;
+        background: none;
+        color: #364639;
+        font-weight: 800;
+        line-height: 1;
+        cursor: pointer;
+      }
+
+      #shopify-section-{{ section.id }} .blog-filter-mobilebar__close:focus-visible {
+        outline: 2px solid #364639;
+        outline-offset: 2px;
+      }
+
+      #shopify-section-{{ section.id }} .category-link,
+      #shopify-section-{{ section.id }} .dropdown summary {
+        width: 100%;
+        padding: 14px 14px;
+        border-radius: 10px;
+        background: rgba(255, 255, 255, 0.65);
+      }
+
+      #shopify-section-{{ section.id }} .dropdown ul {
+        position: static;
+        transform: none;
+        background: rgba(255, 255, 255, 0.65);
+        padding: 10px;
+        border-radius: 10px;
+        border-top-left-radius: 0;
+        border-top-right-radius: 0;
+      }
+
+      #shopify-section-{{ section.id }} .dropdown ul a {
+        color: #364639;
+      }
+
+      #shopify-section-{{ section.id }} .blog-filter-wrapper {
+        width: max-content;
+        text-align: start;
+        position: relative;
+        z-index: 2;
+        min-width: 25%;
+      }
+    }
+
+    @media(max-width:580px){
+      #shopify-section-{{ section.id }} .filter-toggle,
+      #shopify-section-{{ section.id }} .blog-filter-wrapper {
+        width:100%;
+    }
+    }
+{% endstyle %}

@@ -1,0 +1,1168 @@
+{%- comment -%}
+  SUBS UI (Complete)
+  - Only subscription products in swatches + data (selling_plan_groups.size > 0)
+  - Default product = first subscription product
+  - Variants grouped under option headings (option name + pills)
+  - Pill badge uses variant metafield: v.metafields.custom.badge.value {name,color}
+  - Pill subtext uses variant metafield: v.metafields.custom.serving_size.value
+  - Subscription frequency uses CUSTOM selector (button + dropdown) like your screenshot
+{%- endcomment -%}
+
+{% assign products_collection = collections.all %}
+
+{%- if products_collection != blank and products_collection.products_count > 0 -%}
+  {%- assign uid = products_collection.handle | default: 'subs' -%}
+
+  {%- assign default_sub_product = blank -%}
+  {%- for p in products_collection.products -%}
+    {%- if p.selling_plan_groups.size > 0 -%}
+      {%- assign default_sub_product = p -%}
+      {%- break -%}
+    {%- endif -%}
+  {%- endfor -%}
+
+  {%- if default_sub_product != blank -%}
+    <div id="featured-all-products" class="subs-ui" data-subs-ui="{{ uid }}">
+      <script type="application/json" data-subs-data>
+        {
+          "active_handle": {{ default_sub_product.handle | json }},
+          "money_format": {{ shop.money_format | json }},
+          "products": [
+            {%- assign first_out = true -%}
+            {%- for product in products_collection.products -%}
+              {%- if product.selling_plan_groups.size > 0 -%}
+                {%- unless first_out -%},{%- endunless -%}
+                {%- assign first_out = false -%}
+                {
+                  "id": {{ product.id | json }},
+                  "handle": {{ product.handle | json }},
+                  "title": {{ product.title | json }},
+                  "url": {{ product.url | json }},
+                  "options": [
+                    {%- for opt in product.options_with_values -%}
+                      {
+                        "name": {{ opt.name | json }},
+                        "position": {{ opt.position | json }},
+                        "values": {{ opt.values | json }}
+                      }{%- unless forloop.last -%},{%- endunless -%}
+                    {%- endfor -%}
+                  ],
+                  "selected_or_first_available_variant_id": {{ product.selected_or_first_available_variant.id | json }},
+                  "variants": [
+                    {%- for v in product.variants -%}
+                      {
+                        "id": {{ v.id | json }},
+                        "title": {{ v.title | json }},
+                        "available": {{ v.available | json }},
+                        "options": {{ v.options | json }},
+                        "price": {{ v.price | json }},
+                        "compare_at_price": {{ v.compare_at_price | default: 0 | json }},
+                        "featured_image": {%- if v.featured_image -%}{{ v.featured_image | image_url: width: 1200 | json }}{%- else -%}null{%- endif -%},
+                        "serving_size": {{ v.metafields.custom.serving_size.value | json }},
+                        "badge": {
+                          "name": {{ v.metafields.custom.badge.value.name | json }},
+                          "color": {{ v.metafields.custom.badge.value.color | json }}
+                        },
+                        "selling_plans": [
+                          {%- if v.selling_plan_allocations and v.selling_plan_allocations.size > 0 -%}
+                            {%- for a in v.selling_plan_allocations -%}
+                              {
+                                "id": {{ a.selling_plan.id | json }},
+                                "name": {{ a.selling_plan.name | split: "," | first | json }},
+                                {% if settings.subscription_percentage_discount != blank  %}
+                                  {% assign discount = a.price | times: settings.subscription_percentage_discount | divided_by: 100 | round %}
+                                  "price": {{ a.price | minus: discount | json }},
+                                  "compare_at_price": {{ a.price | json }}
+                                {% else %}
+                                  "price": {{ a.price | json }},
+                                  "compare_at_price": {{ a.compare_at_price | default: 0 | json }}
+                                {% endif %}
+                                {% comment %} "price": {{ a.price | json }},
+                                "compare_at_price": {{ a.compare_at_price | default: 0 | json }} {% endcomment %}
+                              }{%- unless forloop.last -%},{%- endunless -%}
+                            {%- endfor -%}
+                          {%- endif -%}
+                        ]
+                      }{%- unless forloop.last -%},{%- endunless -%}
+                    {%- endfor -%}
+                  ],
+                                    "featured_image": {%- if product.featured_image -%}{{ product.featured_image | image_url: width: 800 | json }}{%- else -%}""{%- endif -%},
+                  "description_html": {{ product.description | json }},
+                  "images": [
+                    {%- for img in product.images -%}
+                      {{ img | image_url: width: 800 | json }}{%- unless forloop.last -%},{%- endunless -%}
+                    {%- endfor -%}
+                  ]
+                }
+              {%- endif -%}
+            {%- endfor -%}
+          ]
+        }
+      </script>
+
+      <div class="subs-card">
+        <product-form class="subs-form-wrap">
+          <form
+            action="{{ routes.cart_add_url }}"
+            method="post"
+            class="subs-form"
+            accept-charset="UTF-8"
+            enctype="multipart/form-data"
+            novalidate="novalidate"
+            data-type="add-to-cart-form"
+          >
+            <!-- Header -->
+            <div class="subs-head">
+              <h2 class="subs-title h2" data-title></h2>
+              <div class="subs-price-line">
+                <span class="subs-price" data-price></span>
+                <span class="subs-compare" data-compare hidden></span>
+                <span class="subs-save" data-badge hidden></span>
+              </div>
+              <div class="subs-meta" data-meta></div>
+            </div>
+
+            <!-- Options grouped (name + pills) -->
+            <div class="subs-options" data-options></div>
+
+            <div class="subs-divider" aria-hidden="true"></div>
+
+            <!-- Swatches = subscription products only -->
+            <div class="subs-swatches" data-swatches aria-label="Choose product"></div>
+
+            <!-- Frequency (CUSTOM SELECTOR) -->
+            <div class="subs-block" data-frequency-block>
+              <div class="subs-label">Choose Your Frequency</div>
+
+              <div class="subs-select" data-plan-ui>
+                <!-- hidden native select (data source only) -->
+                <select data-plan-select class="subs-native-select" aria-label="Subscription frequency"></select>
+
+                <!-- trigger -->
+                <button
+                  type="button"
+                  class="subs-select-btn"
+                  data-plan-btn
+                  aria-haspopup="listbox"
+                  aria-expanded="false"
+                >
+                  <span data-plan-label>Choose frequency</span>
+                  <span class="subs-caret" aria-hidden="true"></span>
+                </button>
+
+                <!-- menu -->
+                <div class="subs-select-menu" data-plan-menu role="listbox" tabindex="-1" hidden></div>
+              </div>
+            </div>
+
+            <!-- Qty + ATC -->
+            <div class="subs-cta">
+              <div class="subs-qty" data-qty>
+                <button type="button" class="subs-qty-btn" data-qty-minus aria-label="Decrease quantity">
+                  <svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                    <path d="M5 12H19" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"/>
+                  </svg>
+                </button>
+                <input
+                  class="subs-qty-input"
+                  type="number"
+                  name="quantity"
+                  value="1"
+                  min="1"
+                  inputmode="numeric"
+                  aria-label="Quantity"
+                >
+                <button type="button" class="subs-qty-btn" data-qty-plus aria-label="Increase quantity">
+                  <svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                    <path d="M5 12H19" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"/>
+                    <path d="M12 19L12 5" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"/>
+                  </svg>
+                </button>
+              </div>
+
+              <button type="submit" name="add" class="subs-atc">
+                Add to Cart
+                <div class="loading__spinner hidden" aria-hidden="true">
+                  <svg xmlns="http://www.w3.org/2000/svg" class="spinner" viewBox="0 0 66 66">
+                    <circle stroke-width="6" cx="33" cy="33" r="30" fill="none" class="path"></circle>
+                  </svg>
+                </div>
+              </button>
+            </div>
+
+            {% comment %} <div class="subs-foot"><span>Text 1</span><span>Text 2</span><span>Text 3</span></div> {% endcomment %}
+            {% if settings.subscription_message %}
+              <div class="subs-message" style="display:grid; margin-top:16px; gap:16px; grid-template-columns:1fr 1fr;">
+                {% assign msg = settings.subscription_message | json %}
+                {% assign lines = msg | split: '\n' %}
+                {% for line in lines %}
+                  {% assign line_clean = line | strip | remove: '"' %}
+                  {% if line_clean != blank %}
+                    <span style="display:flex; align-items: center; gap: 6px;">
+                      <svg
+                        style="width:clamp(12px,1.25vw,24px); height:auto; aspect-ratio:1/1; flex-shrink:0; transform:scale(0.9);"
+                        viewBox="0 0 24 24"
+                        fill="none"
+                        xmlns="http://www.w3.org/2000/svg"
+                      >
+                        <circle cx="12" cy="12" r="11.5" stroke="#52B600"/>
+                        <path d="M6 11L9.61865 16L19 9" stroke="#52B600" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                      </svg>
+                      {{ line_clean }}
+                    </span>
+                  {% endif %}
+                {% endfor %}
+              </div>
+            {% endif %}
+
+            <!-- Hidden -->
+            <input type="hidden" name="form_type" value="product">
+            <input type="hidden" name="utf8" value="✓">
+            <input type="hidden" name="id" data-variant-id value="">
+            <input type="hidden" name="product-id" data-product-id value="">
+            <input type="hidden" name="selling_plan" data-selling-plan value="">
+            <input type="hidden" name="section-id" value="{{ section.id }}">
+          </form>
+        </product-form>
+      </div>
+    </div>
+
+    <style>
+      [data-subs-ui='{{ uid }}'] {
+        --card: #f6e6cf;
+        --ink: #3b1700;
+        --muted: rgba(47, 42, 35, 0.68);
+        --line: rgba(47, 42, 35, 0.22);
+        --pill: #3b170066;
+        --gold: #ffbe32;
+        --gold-soft: #ffdb77;
+        font-family: var(--font-body-family, system-ui, -apple-system, Segoe UI, Roboto, Arial);
+      }
+
+      [data-subs-ui='{{ uid }}'] * {
+        letter-spacing: 0;
+      }
+
+      .subs-card {
+        background: #ffffff;
+        border-radius: 22px;
+        padding: clamp(16px, 1.67vw, 32px);
+        margin: 3px;
+        width: 100%;
+        max-width: 646px;
+        box-shadow: 0 3px 3px rgba(0, 0, 0, 0.08);
+        color: var(--ink);
+      }
+
+      .subs-head {
+        display: flex;
+        flex-direction: column;
+        gap: 8px;
+      }
+
+      .subs-title {
+        margin: 2px 0 0;
+        font-family: var(--font-heading-family, Georgia, 'Times New Roman', serif);
+        font-weight: 700;
+        letter-spacing: 0;
+        color: rgba(var(--color-foreground), 1);
+      }
+
+      .subs-price-line {
+        display: flex;
+        align-items: center;
+        gap: clamp(8px, 0.836vw, 16px);
+        flex-wrap: wrap;
+      }
+      .subs-price {
+        font-weight: 600;
+        font-size: clamp(18px, 1.567vw, 30px);
+        color: rgba(var(--color-foreground), 1);
+      }
+      .subs-compare {
+        font-size: clamp(18px, 1.567vw, 30px);
+        font-weight: 400;
+        text-decoration: line-through;
+        color: rgba(var(--color-foreground), 1);
+        opacity: 0.35;
+      }
+
+      .subs-save {
+        font-size: clamp(12px, 1.25vw, 24px);
+        font-weight: 900;
+        padding: 10px 14px;
+        border-radius: 999px;
+        background: var(--gold-soft);
+        line-height: 1;
+      }
+      .subs-meta {
+        font-size: 13px;
+        color: var(--muted);
+        font-weight: 650;
+      }
+
+      .subs-divider:empty {
+        height: 1px;
+        display: block;
+        background: var(--line);
+        margin: clamp(18px, 1.67vw, 32px) 0 clamp(12px, 1.11vw, 20px) 0;
+      }
+
+      /* Grouped options */
+      .subs-options {
+        margin-top: 14px;
+        display: flex;
+        flex-direction: column;
+        gap: 12px;
+      }
+      .subs-opt {
+        display: flex;
+        flex-direction: column;
+        gap: 10px;
+      }
+
+      .subs-opt-name {
+        font-weight: 900;
+        font-size: clamp(12.5px, 1.25vw, 24px);
+        opacity: 0.9;
+      }
+
+      .subs-opt-pills {
+        display: grid;
+        grid-template-columns: repeat(3, minmax(0, 1fr));
+        gap: 10px;
+      }
+
+      .subs-pack {
+        position: relative;
+        border: 1.5px solid rgba(47, 42, 35, 0.22);
+        border-radius: 14px;
+        background: transparent;
+        padding: 18px 10px 12px;
+        cursor: pointer;
+        text-align: center;
+        transition: transform 0.12s ease, box-shadow 0.12s ease, border-color 0.12s ease;
+      }
+
+      .subs-pack:hover {
+        transform: translateY(-1px);
+      }
+
+      .subs-pack.is-active {
+        border-color: var(--gold);
+        box-shadow: 0 0 0 1px var(--gold-soft);
+      }
+
+      .subs-pack.is-disabled {
+        opacity: 0.45;
+        cursor: not-allowed;
+      }
+
+      .subs-pack-badge {
+        position: absolute;
+        top: -8px;
+        left: 50%;
+        transform: translateX(-50%);
+        font-size: clamp(8px, 1vw, 12px);
+        padding: 2px 8px;
+        border-radius: 999px;
+        white-space: nowrap;
+        border: 1px solid rgba(47, 42, 35, 0.18);
+        color: #ffffff;
+        background: #87511c;
+      }
+
+      .subs-pack .t {
+        font-weight: 700;
+        font-size: clamp(16px, 1.25vw, 24px);
+        color: var(--ink);
+        line-height: 1.1;
+        font-family: var(--font-heading-family, Georgia, 'Times New Roman', serif);
+      }
+
+      .subs-pack .s {
+        margin-top: 4px;
+        font-size: clamp(10px, 0.84vw, 16px);
+        color: var(--ink);
+        min-height: 14px;
+      }
+
+      /* Swatches */
+      .subs-swatches {
+        display: flex;
+        gap: 10px;
+        flex-wrap: wrap;
+        margin-top: 10px;
+      }
+      .subs-swatch {
+        width: calc(100% / 7 - (10px * 6 / 7));
+        height: calc(100% / 7 - (10px * 6 / 7));
+        border-radius: 999px;
+        border: 1px solid rgba(47, 42, 35, 0.22);
+        background: rgba(255, 255, 255, 0.65);
+        padding: 3px;
+        cursor: pointer;
+      }
+      .subs-swatch.is-active {
+        border-color: var(--gold);
+        box-shadow: 0 0 0 2px var(--gold-soft);
+        background: rgba(255, 255, 255, 0.85);
+      }
+      .subs-swatch img {
+        width: 100%;
+        height: 100%;
+        border-radius: 999px;
+        display: block;
+        object-fit: cover;
+      }
+
+      /* Frequency label */
+      .subs-block {
+        margin-top: 10px;
+      }
+
+      .subs-label {
+        font-weight: 900;
+        font-size: clamp(12px, 1.25vw, 24px);
+        margin: clamp(12px, 1.11vw, 20px) 0;
+      }
+
+      /* --- Custom frequency selector (like your images) --- */
+      .subs-native-select {
+        position: absolute !important;
+        width: 1px !important;
+        height: 1px !important;
+        padding: 0 !important;
+        margin: -1px !important;
+        overflow: hidden !important;
+        clip: rect(0, 0, 0, 0) !important;
+        white-space: nowrap !important;
+        border: 0 !important;
+      }
+
+      .subs-select {
+        position: relative;
+      }
+
+      .subs-select-btn {
+        width: 100%;
+        border-radius: 999px;
+        border: 1.5px solid rgba(47, 42, 35, 0.55);
+        background: transparent;
+        padding: clamp(12px, 1.11vw, 20px) clamp(18px, 1.67vw, 32px);
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        gap: 12px;
+        cursor: pointer;
+        color: var(--ink);
+        text-align: left;
+        font-size: clamp(12px, 1.11vw, 20px);
+      }
+
+      .subs-select-btn:focus-visible {
+        outline: none;
+        box-shadow: 0 0 0 3px var(--gold-soft);
+      }
+
+      .subs-caret {
+        width: 10px;
+        height: 10px;
+        border-right: 2px solid currentColor;
+        border-bottom: 2px solid currentColor;
+        transform: translateY(-1px) rotate(45deg);
+        opacity: 0.7;
+        pointer-events: none;
+        flex: 0 0 auto;
+      }
+
+      .subs-select-menu {
+        margin-top: 0;
+        position: absolute;
+        top: 0;
+        left: 0;
+        border-radius: 18px;
+        border: 1px solid rgba(47, 42, 35, 0.55);
+        background: var(--card);
+        padding: 10px;
+        box-shadow: 0 14px 30px rgba(0, 0, 0, 0.08);
+      }
+
+      .subs-plan-opt {
+        width: 100%;
+        border: 0;
+        background: transparent;
+        padding: 8px;
+        border-radius: 12px;
+        cursor: pointer;
+        text-align: left;
+        color: var(--ink);
+        font-weight: 400;
+        font-size: clamp(12px, 1.11vw, 20px);
+        transition: all 0.2s ease;
+      }
+      .subs-plan-opt:hover:not(.is-active) {
+        color: #87511c;
+      }
+      .subs-plan-opt.is-active {
+        background: rgba(242, 181, 61, 0.18);
+        box-shadow: 0 0 0 1px rgba(242, 181, 61, 0.25) inset;
+      }
+
+      /* Qty + ATC */
+      .subs-cta {
+        display: flex;
+        gap: 12px;
+        align-items: center;
+        margin-top: 14px;
+      }
+      .subs-qty {
+        display: flex;
+        align-items: center;
+        height: 46px;
+        border-radius: 999px;
+        border: 1.5px solid rgba(47, 42, 35, 0.55);
+        background: rgba(255, 255, 255, 0.78);
+        overflow: hidden;
+        min-width: 140px;
+        justify-content: space-evenly;
+      }
+
+      .subs-qty-btn {
+        width: clamp(12px, 1.25vw, 24px);
+        height: clamp(12px, 1.25vw, 24px);
+        border: 0;
+        background: transparent;
+        cursor: pointer;
+        color: var(--ink);
+        display: flex;
+        align-items: center;
+        justify-content: center;
+      }
+
+      .subs-qty-input {
+        width: 64px;
+        height: 100%;
+        border: 0;
+        background: transparent;
+        text-align: center;
+        outline: none;
+        font-weight: 600;
+        color: var(--ink);
+        font-size: clamp(12px, 1.11vw, 20px);
+        box-shadow: none !important;
+      }
+      .subs-atc {
+        flex: 1;
+        border-radius: 999px;
+        border: 0;
+        background: var(--gold);
+        color: #ffffff;
+        font-weight: 600;
+        cursor: pointer;
+        padding: clamp(5px, 0.62vw, 12px) clamp(18px, 1.67vw, 32px);
+        font-size: clamp(12px, 1.11vw, 20px);
+        box-shadow: 0 10px 18px rgba(242, 181, 61, 0.28);
+      }
+
+      .subs-atc.loading {
+        cursor: not-allowed;
+        position: relative;
+        opacity: 0.75;
+      }
+
+      .subs-atc.loading .loading__spinner {
+        position: absolute;
+        top: 50%;
+        left: 50%;
+        transform: translate(-50%, -50%);
+      }
+
+      .subs-foot {
+        display: flex;
+        justify-content: space-between;
+        margin-top: 10px;
+        font-size: 12px;
+        color: var(--muted);
+        font-weight: 650;
+      }
+    </style>
+    <script defer>
+      (function () {
+        var uid = '{{ uid }}';
+
+        function ready(fn) {
+          if (document.readyState === 'loading') document.addEventListener('DOMContentLoaded', fn);
+          else fn();
+        }
+
+        function qs(sel, ctx) {
+          return (ctx || document).querySelector(sel);
+        }
+
+        function qsa(sel, ctx) {
+          return Array.prototype.slice.call((ctx || document).querySelectorAll(sel));
+        }
+
+        function closest(el, sel) {
+          while (el && el.nodeType === 1) {
+            if (el.matches(sel)) return el;
+            el = el.parentElement;
+          }
+          return null;
+        }
+
+        function setHidden(el, hidden) {
+          if (!el) return;
+          el.hidden = !!hidden;
+        }
+
+        function setText(el, txt) {
+          if (!el) return;
+          el.textContent = txt == null ? '' : String(txt);
+        }
+
+        function setValue(el, val) {
+          if (!el) return;
+          el.value = val == null ? '' : String(val);
+        }
+
+        function setAttr(el, name, val) {
+          if (!el) return;
+          el.setAttribute(name, val == null ? '' : String(val));
+        }
+
+        function getValue(el) {
+          return el ? el.value : '';
+        }
+
+        function updateAnywhere(selector, apply) {
+          var nodes = qsa(selector);
+          for (var i = 0; i < nodes.length; i++) apply(nodes[i]);
+        }
+
+        ready(function () {
+          var root = qs('[data-subs-ui="' + uid + '"]');
+          if (!root) return;
+
+          var dataEl = qs('[data-subs-data]', root);
+          if (!dataEl) return;
+
+          var state;
+          try {
+            state = JSON.parse(dataEl.textContent || '{}');
+          } catch (e) {
+            return;
+          }
+
+          var products = state.products || [];
+          if (!products.length) return;
+
+          var els = {
+            price: qs('[data-price]', root),
+            compare: qs('[data-compare]', root),
+            badge: qs('[data-badge]', root),
+            meta: qs('[data-meta]', root),
+            options: qs('[data-options]', root),
+            swatches: qs('[data-swatches]', root),
+            frequencyBlock: qs('[data-frequency-block]', root),
+
+            planUI: qs('[data-plan-ui]', root),
+            planSelect: qs('[data-plan-select]', root),
+            planBtn: qs('[data-plan-btn]', root),
+            planMenu: qs('[data-plan-menu]', root),
+            planLabel: qs('[data-plan-label]', root),
+
+            hiddenVariant: qs('[data-variant-id]', root),
+            hiddenProduct: qs('[data-product-id]', root),
+            hiddenPlan: qs('[data-selling-plan]', root),
+          };
+
+          function formatMoney(cents) {
+            if (window.Shopify && typeof window.Shopify.formatMoney === 'function') {
+              return window.Shopify.formatMoney(cents, state.money_format || '${{amount}}');
+            }
+            var n = (Number(cents || 0) / 100).toFixed(2);
+            return '$' + n;
+          }
+
+          function getProduct(handle) {
+            for (var i = 0; i < products.length; i++) if (products[i].handle === handle) return products[i];
+            return products[0];
+          }
+
+          function findVariantById(prod, id) {
+            var vs = prod && prod.variants ? prod.variants : [];
+            for (var i = 0; i < vs.length; i++) if (String(vs[i].id) === String(id)) return vs[i];
+            return vs[0] || null;
+          }
+
+          function matchVariantByOptions(prod, selected) {
+            var vs = prod && prod.variants ? prod.variants : [];
+            outer: for (var i = 0; i < vs.length; i++) {
+              var v = vs[i];
+              var vo = v.options || [];
+              for (var p = 0; p < selected.length; p++) {
+                if (selected[p] != null && String(vo[p]) !== String(selected[p])) continue outer;
+              }
+              return v;
+            }
+            return vs[0] || null;
+          }
+
+          function setPriceDisplay(price, compare) {
+            price = Number(price || 0);
+            compare = Number(compare || 0);
+
+            setText(els.price, formatMoney(price));
+
+            if (compare > price) {
+              setHidden(els.compare, false);
+              setText(els.compare, formatMoney(compare));
+              var pct = Math.round((1 - price / compare) * 100);
+              if (pct > 0) {
+                setHidden(els.badge, false);
+                setText(els.badge, 'Save ' + pct + '%');
+              } else {
+                setHidden(els.badge, true);
+              }
+            } else {
+              setHidden(els.compare, true);
+              setHidden(els.badge, true);
+            }
+          }
+
+          function computeMeta(variant) {
+            var txt = (variant && (variant.title || (variant.options || []).join(' / '))) || '';
+            var m = String(txt).match(/(\d{2,4})\s?(g|gm|grams|ml)\b/i);
+            setText(els.meta, m ? 'Jar Size: ' + m[1] + (m[2].toLowerCase().indexOf('m') === 0 ? 'ml' : 'g') : '');
+          }
+
+          function buildSwatches(activeHandle) {
+            var html = '';
+            for (var i = 0; i < products.length; i++) {
+              var p = products[i];
+              var on = p.handle === activeHandle;
+              html +=
+                '<button type="button" class="subs-swatch' +
+                (on ? ' is-active' : '') +
+                '" data-handle="' +
+                p.handle +
+                '" aria-label="' +
+                (p.title || '') +
+                '">' +
+                '<img src="' +
+                (p.featured_image || '') +
+                '" alt="' +
+                (p.title || '') +
+                '" loading="lazy" width="44" height="44">' +
+                '</button>';
+            }
+            if (els.swatches) els.swatches.innerHTML = html;
+          }
+
+          function badgeMarkup(v) {
+            var b = v && v.badge ? v.badge : null;
+            if (!b || !b.name) return '';
+            var bg = b.color ? String(b.color) : '';
+            var style = bg ? ' style="background:' + b.color + ';"' : '';
+            return '<span class="subs-pack-badge"' + style + '>' + String(b.name) + '</span>';
+          }
+
+          function buildOptionsUI(prod, selectedValues) {
+            var opts = prod.options || [];
+            var html = '';
+
+            for (var i = 0; i < opts.length; i++) {
+              var opt = opts[i];
+              var posIndex = (opt.position || i + 1) - 1;
+              var values = opt.values || [];
+              var pills = '';
+
+              for (var j = 0; j < values.length; j++) {
+                var val = values[j];
+
+                var test = selectedValues.slice();
+                test[posIndex] = val;
+                var v = matchVariantByOptions(prod, test);
+
+                var isOn = String(selectedValues[posIndex]) === String(val);
+                var isAvail = v ? !!v.available : false;
+
+                var small = v && v.serving_size ? String(v.serving_size) : '';
+
+                pills +=
+                  '<button type="button" class="subs-pack' +
+                  (isOn ? ' is-active' : '') +
+                  (!isAvail ? ' is-disabled' : '') +
+                  '" data-opt-index="' +
+                  posIndex +
+                  '" data-opt-value="' +
+                  String(val).replace(/"/g, '&quot;') +
+                  '">' +
+                  badgeMarkup(v) +
+                  '<div class="t">' +
+                  String(val) +
+                  '</div>' +
+                  '<div class="s">' +
+                  (small ? small : '&nbsp;') +
+                  '</div>' +
+                  '</button>';
+              }
+
+              html +=
+                '<div class="subs-opt" data-opt="' +
+                posIndex +
+                '">' +
+                '<div class="subs-opt-name">' +
+                (opt.name || 'Option ' + (i + 1)) +
+                '</div>' +
+                '<div class="subs-opt-pills">' +
+                pills +
+                '</div>' +
+                '</div>';
+            }
+
+            if (els.options) els.options.innerHTML = html;
+          }
+
+          function closePlanMenu() {
+            if (!els.planMenu || !els.planBtn) return;
+            els.planMenu.hidden = true;
+            els.planBtn.setAttribute('aria-expanded', 'false');
+          }
+
+          function openPlanMenu() {
+            if (!els.planMenu || !els.planBtn) return;
+            if (!els.planMenu.children.length) return;
+            els.planMenu.hidden = false;
+            els.planBtn.setAttribute('aria-expanded', 'true');
+          }
+
+          function togglePlanMenu() {
+            if (!els.planMenu || !els.planBtn) return;
+            if (els.planMenu.hidden) openPlanMenu();
+            else closePlanMenu();
+          }
+
+          function renderPlanMenuFromSelect() {
+            if (!els.planMenu || !els.planSelect) return;
+
+            var opts = els.planSelect.options;
+            var html = '';
+            for (var i = 0; i < opts.length; i++) {
+              var o = opts[i];
+              var isActive = String(o.value) === String(els.planSelect.value);
+              html +=
+                '<button type="button" class="subs-plan-opt' +
+                (isActive ? ' is-active' : '') +
+                '" role="option" aria-selected="' +
+                (isActive ? 'true' : 'false') +
+                '" data-plan-val="' +
+                String(o.value).replace(/"/g, '&quot;') +
+                '">' +
+                (o.text || '') +
+                '</button>';
+            }
+
+            els.planMenu.innerHTML = html;
+
+            var selectedText = '';
+            if (els.planSelect.selectedIndex >= 0) selectedText = opts[els.planSelect.selectedIndex].text || '';
+            if (els.planLabel) els.planLabel.textContent = selectedText || 'Choose frequency';
+          }
+
+          function applyPlanPrice(variant, planId) {
+            var plans = variant && variant.selling_plans ? variant.selling_plans : [];
+            for (var i = 0; i < plans.length; i++) {
+              if (String(plans[i].id) === String(planId)) {
+                setValue(els.hiddenPlan, String(plans[i].id));
+                setPriceDisplay(plans[i].price, plans[i].compare_at_price);
+                return;
+              }
+            }
+            setValue(els.hiddenPlan, '');
+            setPriceDisplay(variant.price, variant.compare_at_price);
+          }
+
+          function buildPlanOptions(variant) {
+            var plans = variant && variant.selling_plans ? variant.selling_plans : [];
+            var html = '';
+
+            for (var i = 0; i < plans.length; i++) {
+              var sp = plans[i];
+              html += '<option value="' + sp.id + '">' + (sp.name || '') + '</option>';
+            }
+
+            if (els.planSelect) els.planSelect.innerHTML = html;
+
+            if (plans.length) {
+              setValue(els.planSelect, String(plans[0].id));
+              setValue(els.hiddenPlan, String(plans[0].id));
+              setPriceDisplay(plans[0].price, plans[0].compare_at_price);
+            } else {
+              setValue(els.planSelect, '');
+              setValue(els.hiddenPlan, '');
+              setPriceDisplay(variant.price, variant.compare_at_price);
+            }
+
+            renderPlanMenuFromSelect();
+            closePlanMenu();
+
+            if (els.frequencyBlock) els.frequencyBlock.style.display = plans.length ? '' : 'none';
+          }
+
+          var currentProd = null;
+          var currentVariant = null;
+          var rafSync = 0;
+
+          function getVariantLabel(variant) {
+            if (!variant) return '';
+            var opts = variant.options || [];
+            var parts = [];
+            for (var i = 0; i < opts.length; i++)
+              if (opts[i] != null && String(opts[i]).trim() !== '') parts.push(String(opts[i]));
+            return parts.length ? parts.join(' | ') : variant.title || '';
+          }
+
+          function pickImageUrl(v, p) {
+            var img =
+              (v &&
+                (v.featured_image ||
+                  v.featured_media ||
+                  v.image ||
+                  (v.featured_image && v.featured_image.src) ||
+                  (v.featured_media && v.featured_media.preview_image && v.featured_media.preview_image.src) ||
+                  (v.image && v.image.src) ||
+                  (v.images && v.images[0]) ||
+                  (v.featured_image && v.featured_image.url) ||
+                  (v.featured_media && v.featured_media.url))) ||
+              (p &&
+                (p.featured_image ||
+                  (p.featured_media && p.featured_media.preview_image && p.featured_media.preview_image.src))) ||
+              '';
+            return typeof img === 'string' ? img : '';
+          }
+
+          function syncHeader(prod, variant) {
+            currentProd = prod || currentProd;
+            currentVariant = variant || currentVariant;
+
+            var p = currentProd;
+            var v = currentVariant;
+
+            var title = (p && p.title) || '';
+            var description = (p && p.description_html) || '';
+            var vtxt = getVariantLabel(v);
+            var img = pickImageUrl(v, p);
+
+            updateAnywhere('.{{selectorclass}} [data-title]', function (el) {
+              el.textContent = title;
+            });
+
+            updateAnywhere('.{{selectorclass}} [data-description]', function (el) {
+              el.innerHTML = description;
+            });
+
+            updateAnywhere('.{{selectorclass}} [data-variants]', function (el) {
+              el.textContent = vtxt;
+            });
+
+            updateAnywhere('.{{selectorclass}} [data-image]', function (el) {
+              if ('src' in el) el.src = img;
+              else el.setAttribute('src', img);
+            });
+          }
+
+          function scheduleSync() {
+            if (!currentProd || !currentVariant) return;
+            if (rafSync) return;
+            rafSync = requestAnimationFrame(function () {
+              rafSync = 0;
+              syncHeader(currentProd, currentVariant);
+            });
+          }
+
+          var mo = new MutationObserver(function (mutations) {
+            for (var i = 0; i < mutations.length; i++) {
+              var m = mutations[i];
+
+              if (m.type === 'attributes') {
+                var a = m.attributeName;
+                if (a === 'data-title' || a === 'data-image' || a === 'data-variants') {
+                  scheduleSync();
+                  return;
+                }
+                continue;
+              }
+
+              if (m.type === 'childList') {
+                var added = m.addedNodes;
+                if (!added || !added.length) continue;
+
+                for (var j = 0; j < added.length; j++) {
+                  var n = added[j];
+                  if (!n || n.nodeType !== 1) continue;
+
+                  if (
+                    (n.matches && n.matches('[data-title],[data-image],[data-variants]')) ||
+                    (n.querySelector && n.querySelector('[data-title],[data-image],[data-variants]'))
+                  ) {
+                    scheduleSync();
+                    return;
+                  }
+                }
+              }
+            }
+          });
+
+          mo.observe(document.documentElement, {
+            subtree: true,
+            childList: true,
+            attributes: true,
+            attributeFilter: ['data-title', 'data-image', 'data-variants'],
+          });
+
+          function render(handle, forcedVariantId) {
+            var prod = getProduct(handle);
+
+            var variant = forcedVariantId
+              ? findVariantById(prod, forcedVariantId)
+              : findVariantById(prod, prod.selected_or_first_available_variant_id);
+
+            if (!variant) return;
+
+            var selectedValues = variant.options && variant.options.length ? variant.options.slice() : [];
+
+            syncHeader(prod, variant);
+            computeMeta(variant);
+
+            buildSwatches(prod.handle);
+            buildOptionsUI(prod, selectedValues);
+
+            setValue(els.hiddenVariant, String(variant.id));
+            setValue(els.hiddenProduct, String(prod.id));
+
+            buildPlanOptions(variant);
+          }
+
+          function setSelectionFromPill(optIndex, optValue) {
+            var activeHandleEl = qs('.subs-swatch.is-active', root);
+            var handle = activeHandleEl
+              ? activeHandleEl.getAttribute('data-handle')
+              : state.active_handle || products[0].handle;
+            var prod = getProduct(handle);
+
+            var selected = [];
+            var groups = qsa('.subs-opt', root);
+            for (var i = 0; i < groups.length; i++) {
+              var group = groups[i];
+              var idx = parseInt(group.getAttribute('data-opt'), 10);
+              var active = qs('.subs-pack.is-active', group);
+              selected[idx] = active ? active.getAttribute('data-opt-value') : null;
+            }
+
+            selected[optIndex] = optValue;
+
+            var variant = matchVariantByOptions(prod, selected);
+            if (!variant) return;
+
+            syncHeader(prod, variant);
+            computeMeta(variant);
+
+            setValue(els.hiddenVariant, String(variant.id));
+            setValue(els.hiddenProduct, String(prod.id));
+
+            buildOptionsUI(prod, variant.options || selected);
+            buildPlanOptions(variant);
+          }
+
+          root.addEventListener('click', function (e) {
+            var sw = closest(e.target, '.subs-swatch');
+            if (sw && sw.getAttribute('data-handle')) {
+              render(sw.getAttribute('data-handle'));
+              return;
+            }
+
+            var pill = closest(e.target, '.subs-pack');
+            if (pill && pill.hasAttribute('data-opt-index')) {
+              if (pill.classList.contains('is-disabled')) return;
+              var idx = parseInt(pill.getAttribute('data-opt-index'), 10);
+              var val = pill.getAttribute('data-opt-value');
+              setSelectionFromPill(idx, val);
+              return;
+            }
+
+            var minus = closest(e.target, '[data-qty-minus]');
+            var plus = closest(e.target, '[data-qty-plus]');
+            if (minus || plus) {
+              var wrap = closest(e.target, '[data-qty]');
+              var input = wrap ? qs('input[type="number"]', wrap) : null;
+              if (!input) return;
+              var v = parseInt(input.value || '1', 10);
+              if (plus) v += 1;
+              if (minus) v = Math.max(1, v - 1);
+              input.value = String(v);
+            }
+          });
+
+          if (els.planBtn) {
+            els.planBtn.addEventListener('click', function (e) {
+              e.preventDefault();
+              togglePlanMenu();
+            });
+          }
+
+          if (els.planMenu) {
+            els.planMenu.addEventListener('click', function (e) {
+              var btn = closest(e.target, '[data-plan-val]');
+              if (!btn) return;
+
+              setValue(els.planSelect, String(btn.getAttribute('data-plan-val')));
+
+              var active = qs('.subs-swatch.is-active', root);
+              var handle = active ? active.getAttribute('data-handle') : state.active_handle || products[0].handle;
+              var prod = getProduct(handle);
+              var variant = findVariantById(
+                prod,
+                getValue(els.hiddenVariant) || prod.selected_or_first_available_variant_id
+              );
+
+              applyPlanPrice(variant, getValue(els.planSelect));
+              renderPlanMenuFromSelect();
+              closePlanMenu();
+            });
+          }
+
+          if (els.planSelect) {
+            els.planSelect.addEventListener('change', function () {
+              var active = qs('.subs-swatch.is-active', root);
+              var handle = active ? active.getAttribute('data-handle') : state.active_handle || products[0].handle;
+              var prod = getProduct(handle);
+              var variant = findVariantById(
+                prod,
+                getValue(els.hiddenVariant) || prod.selected_or_first_available_variant_id
+              );
+
+              applyPlanPrice(variant, getValue(els.planSelect));
+              renderPlanMenuFromSelect();
+            });
+          }
+
+          document.addEventListener('click', function (e) {
+            if (!els.planUI) return;
+            if (!els.planUI.contains(e.target)) closePlanMenu();
+          });
+
+          document.addEventListener('keydown', function (e) {
+            if (e.key === 'Escape') closePlanMenu();
+          });
+
+          window.addEventListener('load', scheduleSync, { passive: true });
+
+          render(state.active_handle || products[0].handle);
+        });
+      })();
+    </script>
+  {%- endif -%}
+{%- endif -%}

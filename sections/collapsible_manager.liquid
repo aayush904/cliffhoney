@@ -1,0 +1,350 @@
+<div id="collapsible-manager-container" class="section-{{ section.id }}-padding page-width">
+  <collapsible-manager></collapsible-manager>
+</div>
+
+<script>
+    class CollapsibleManager extends HTMLElement {
+      connectedCallback() {
+        const sections = [...document.querySelectorAll('.collapsible_sections')];
+        const container = this;
+        container.classList.add('collapsible-manager');
+
+        const wrappers = [];
+
+        /* ---------- UTILITIES ---------- */
+  {% comment %}
+        const reexecuteScripts = (parent) => {
+          const oldScripts = parent.querySelectorAll('script');
+          oldScripts.forEach((oldScript) => {
+            const newScript = document.createElement('script');
+
+            if (oldScript.src) newScript.src = oldScript.src;
+            else newScript.textContent = oldScript.textContent;
+
+            oldScript.replaceWith(newScript);
+          });
+        }; {% endcomment %}
+
+
+
+        const getBaseHeight = () => {
+          container.style.height = 'max-content';
+
+          const style = getComputedStyle(container);
+          const gap = parseFloat(style.gap || 0);
+          const wrappersCount = wrappers.length;
+          return new Promise((resolve) => {
+            setTimeout(() => {
+              resolve(container.offsetHeight + Math.max(0, wrappersCount - 1) * gap);
+            }, 350);
+          });
+        };
+
+        const collapseSection = (sec) => {
+          if (sec.dataset.state === 'closed') return;
+          sec.dataset.state = 'closed';
+          sec.style.maxHeight = sec.scrollHeight + 'px';
+          requestAnimationFrame(() => {
+            sec.style.opacity = '0';
+            sec.style.maxHeight = '0px';
+          });
+          sec.addEventListener(
+            'transitionend',
+            (e) => {
+              if (e.propertyName !== 'max-height') return;
+              sec.style.visibility = 'hidden';
+              sec.style.pointerEvents = 'none';
+            },
+            { once: true }
+          );
+        };
+
+        const expandSection = (sec) => {
+          if (sec.dataset.state === 'open') return;
+          sec.dataset.state = 'open';
+          sec.style.visibility = 'visible';
+          sec.style.pointerEvents = 'auto';
+          sec.style.opacity = '1';
+          sec.style.maxHeight = sec.scrollHeight + 'px';
+        };
+
+        const updateHeight = () => {
+          // find open section
+          const active = wrappers.find(({ section }) => section.dataset.state === 'open');
+
+          // collapse all instantly to measure base
+          sections.forEach((s) => {
+            s.style.transition = 'none';
+            s.style.maxHeight = '0px';
+            s.style.opacity = '0';
+            s.style.visibility = 'hidden';
+            s.dataset.state = 'closed';
+            s.offsetHeight;
+            s.style.transition = '';
+          });
+
+          const baseHeight = getBaseHeight();
+
+          if (!active) {
+            container.style.height = baseHeight + 'px';
+            return;
+          }
+
+          // restore active
+          expandSection(active.section);
+          active.wrapper.style.marginBottom = active.section.scrollHeight + 'px';
+          container.style.height = baseHeight + active.section.scrollHeight + 'px';
+        };
+
+        const toggleSection = (sec, wrapper, btn) => {
+          const isMobile = window.innerWidth < 768;
+          const isOpen = sec.dataset.state === 'open';
+
+          // close all others
+          wrappers.forEach(({ section, btn: b, wrapper: w }) => {
+            if (section !== sec) {
+              collapseSection(section);
+              w.style.marginBottom = '0px';
+              b.classList.remove('active');
+            }
+          });
+
+          if (isOpen) {
+            // just close clicked
+            collapseSection(sec);
+            wrapper.style.marginBottom = '0px';
+            btn.classList.remove('active');
+          } else {
+            // open clicked
+            expandSection(sec);
+            wrapper.style.marginBottom = sec.scrollHeight + 'px';
+            btn.classList.add('active');
+          }
+
+          requestAnimationFrame(updateHeight);
+        };
+
+        /* ---------- BUILD UI ---------- */
+
+        sections.forEach((sec) => {
+          const title = sec.querySelector('h2')?.textContent.trim() || 'Untitled';
+
+          const wrapper = document.createElement('div');
+          wrapper.className = 'collapsible-wrapper';
+          wrapper.className = 'collapsible-wrapper';
+          const colorSchemeClass = [...sec.classList].find((cls) => cls.startsWith('color-scheme'));
+          if (colorSchemeClass) wrapper.classList.add(colorSchemeClass);
+          wrapper.id = sec.parentElement.id;
+
+          const btn = document.createElement('button');
+          btn.className = 'collapse-btn font-serf';
+          btn.textContent = title;
+          wrapper.appendChild(btn);
+          wrapper.appendChild(sec);
+          container.appendChild(wrapper);
+
+          {% comment %} reexecuteScripts(sec); {% endcomment %}
+
+          // init collapsed state
+          sec.dataset.state = 'closed';
+          sec.style.maxHeight = '0px';
+          sec.style.opacity = '0';
+          sec.style.visibility = 'hidden';
+          sec.style.overflow = 'hidden';
+
+          wrappers.push({ wrapper, btn, section: sec });
+
+          btn.addEventListener('click', () => toggleSection(sec, wrapper, btn));
+        });
+
+        /* ---------- INITIAL DESKTOP OPEN ---------- */
+        if (window.innerWidth >= 768 && wrappers.length) {
+          const f = wrappers[0];
+          f.btn.classList.add('active');
+          expandSection(f.section);
+          f.wrapper.style.marginBottom = f.section.scrollHeight + 'px';
+        }
+
+        requestAnimationFrame(updateHeight);
+
+        /* ---------- RESIZE HANDLER ---------- */
+        window.addEventListener('resize', () => requestAnimationFrame(updateHeight));
+      }
+    }
+
+    customElements.define('collapsible-manager', CollapsibleManager);
+</script>
+
+{% style %}
+  .section-{{ section.id }}-padding {
+    padding-top: clamp({{ section.settings.padding_top | times: 0.43 | round: 0 }}px, {{ section.settings.padding_top | divided_by: 19.13 }}vw, {{ section.settings.padding_top  }}px);
+    padding-bottom: clamp({{ section.settings.padding_bottom | times: 0.43 | round: 0 }}px, {{ section.settings.padding_bottom | divided_by: 19.13 }}vw, {{ section.settings.padding_bottom  }}px);
+  }
+
+  /* @media screen and (min-width: 768px) {
+    .section-{{ section.id }}-padding {
+      padding-top: {{ section.settings.padding_top }}px;
+      padding-bottom: {{ section.settings.padding_bottom }}px;
+    }
+  } */
+
+  .collapsible_sections {
+    position: absolute;
+    left: 0;
+    width: 100%;
+    overflow: hidden;
+    max-height: 0;
+    opacity: 0;
+    visibility: hidden;
+    transition: max-height 0.35s ease, opacity 0.25s ease;
+  }
+
+  @media (max-width: 767px) {
+    .collapsible_sections {
+      transition: none;
+    }
+
+    collapsible-manager {
+      transition: none;
+    }
+
+    .collapse-btn:after {
+      transition: none;
+    }
+  }
+
+  collapsible-manager {
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    gap: 0;
+    transition: height 0.35s ease;
+    overflow: hidden;
+  }
+
+  .collapsible-wrapper {
+    flex:1;
+    background:transparent!important;
+    position:relative;
+  }
+
+  .collapse-btn {
+    width: 100%;
+    padding: 16px;
+    border: none;
+    text-align: left;
+    background: transparent;
+    font-weight: bold;
+    font-size: 14px;
+    cursor: pointer;
+    color: inherit;
+    letter-spacing: 0.02em;
+  }
+
+  .collapsible-wrapper
+  .mh-field select{
+    color: inherit;
+  }
+
+  .collapse-btn.active {
+    background: var(--gradient-background);
+  }
+
+  .collapse-btn:after {
+    content: url('data:image/svg+xml,<svg width="16" height="16" viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M0.666504 4.66699L7.99984 12.0003L15.3332 4.66699" stroke="%234B5441"/></svg>');
+    float: right;
+    transition: transform 0.3s ease;
+  }
+
+  .collapse-btn.active:after {
+    transform: rotate(-180deg);
+    transform-origin: center;
+  }
+
+  .collapsible_sections{
+    padding: clamp(16px, 2.09vw, 40px) clamp(16px, 1.568vw, 30px);
+    border-radius: 0;
+  }
+
+  @media (min-width: 768px) {
+    collapsible-manager {
+      flex-direction: row;
+      gap: 20px;
+    }
+
+    .collapsible_sections{
+      border-radius: clamp(24px,1.88vw,36px);
+    }
+
+    .collapsible-wrapper {
+      position: static;
+    }
+
+    .collapse-btn {
+      font-size: clamp(16px, 1.568vw, 30px);
+      border-radius: 32px;
+      text-align: center;
+      border: 2px solid var(--gradient-background);
+      opacity: 0.6;
+    }
+
+    .collapse-btn.active {
+      background: var(--gradient-background);
+      margin-bottom: 20px;
+      font-size: clamp(16px, 1.568vw, 30px);
+      color: rgb(var(--color-foreground));
+      position: static;
+      width: 100%;
+      border: 2px solid #FFC822;
+      opacity: 1;
+    }
+
+    .collapse-btn:after {
+      content: unset;
+    }
+  }
+{% endstyle %}
+
+{% schema %}
+{
+  "name": "Collapsible Manager",
+  "settings": [
+    {
+      "type": "text",
+      "id": "target_class",
+      "label": "Target sections class name",
+      "default": "collapsible_sections",
+      "info": "Enter the class name of the sections you want to make collapsible, e.g. 'collapsible_sections' \n the respective custom css section wont work so you will have to add the css on the collapsible manager sections."
+    },
+    {
+      "type": "header",
+      "content": "t:sections.all.padding.section_padding_heading"
+    },
+    {
+      "type": "range",
+      "id": "padding_top",
+      "min": 0,
+      "max": 150,
+      "step": 5,
+      "unit": "px",
+      "label": "t:sections.all.padding.padding_top",
+      "default": 110
+    },
+    {
+      "type": "range",
+      "id": "padding_bottom",
+      "min": 0,
+      "max": 150,
+      "step": 5,
+      "unit": "px",
+      "label": "t:sections.all.padding.padding_bottom",
+      "default": 110
+    }
+  ],
+  "presets": [
+    {
+      "name": "Collapsible Manager"
+    }
+  ]
+}
+{% endschema %}

@@ -1,0 +1,1149 @@
+/*
+ * ------------------------------------------------------------
+ * IMPORTANT: The contents of this file are auto-generated.
+ *
+ * This file may be updated by the Shopify admin theme editor
+ * or related systems. Please exercise caution as any changes
+ * made to this file may be overwritten.
+ * ------------------------------------------------------------
+ */
+{
+  "sections": {
+    "main": {
+      "type": "main-product",
+      "blocks": {
+        "inventory_3bjkbx": {
+          "type": "inventory",
+          "disabled": true,
+          "settings": {
+            "text_style": "body",
+            "inventory_threshold": 10,
+            "show_inventory_quantity": true
+          }
+        },
+        "title": {
+          "type": "title",
+          "settings": {}
+        },
+        "rating_mBGhfF": {
+          "type": "rating",
+          "settings": {}
+        },
+        "custom_liquid_zk43GD": {
+          "type": "custom_liquid",
+          "settings": {
+            "custom_liquid": "{% assign grade = product.metafields.custom.grade.value %}\n{% assign sub_title= product.metafields.custom.sub_title.value%}\n{% if grade !=blank or sub_title !=blank %}\n<div class=\"product-attribute\">\n{% if grade !=blank %}\n<div class=\"product_grade\">\n{{grade}}\n</div>\n{% endif %}\n{% if sub_title !=blank %}\n<div class=\"product_subtitle\">\n{{sub_title}}\n</div>\n{% endif %}\n</div>\n<style>\n#MainProduct-{{section.id}} .product-attribute{\ndisplay:inline-flex;\ngap:clamp(8px,0.63vw,12px);\njustify-content:start;\nalign-items:center;\nmargin-top: 0;\n}\n\n.product_grade{\npadding:clamp(8px,0.63vw,12px) 14px;\nbackground: linear-gradient(90deg, #FFBC02 0%, #FFD430 25%, #FFED62 50%, #FFD432 75%, #FFBC02 100%);\nborder-radius:32px;\nfont-weight:600;\nfont-size:clamp(12px,1.05vw,20px);\ncolor:rgb(var(--color-button-text));\n}\n.product_subtitle{\nfont-size:clamp(16px,1.25vw,24px);\n}\n</style>\n{% endif %}"
+          }
+        },
+        "price": {
+          "type": "price",
+          "disabled": true,
+          "settings": {}
+        },
+        "text_EP37JD": {
+          "type": "text",
+          "disabled": true,
+          "settings": {
+            "text": "Praesent Praesent ex Nunc placerat non vitae ullamcorper facilisis luctus consectetur amet, Ut sit nec ipsum urna nec lacus, consectetur elit lacus, dignissim, hendrerit Cras placerat volutpat amet, Lorem dui tincidunt",
+            "text_style": "body"
+          }
+        },
+        "custom_liquid_hrBaQG": {
+          "type": "custom_liquid",
+          "disabled": true,
+          "settings": {
+            "custom_liquid": "<div class=\"scroll-container\" style=\"width:100%;overflow:auto;\"><img src=\"https://cdn.shopify.com/s/files/1/0686/0721/3628/files/Cliff_Honey.svg?v=1762511479\" alt=\"Features of Himalayan Cliff Honey\" width=\"629\" height=\"113\" style=\"width:auto; height:clamp(64px,5.91vw,113px)\"/></div>"
+          }
+        },
+        "description": {
+          "type": "description",
+          "settings": {}
+        },
+        "complementary_QmWWhC": {
+          "type": "complementary",
+          "disabled": true,
+          "settings": {
+            "block_heading": "Pairs well with",
+            "make_collapsible_row": false,
+            "icon": "none",
+            "product_list_limit": 10,
+            "products_per_page": 1,
+            "pagination_style": "dots",
+            "image_ratio": "portrait",
+            "enable_quick_add": false
+          }
+        },
+        "combineproducts_cwj9JV": {
+          "type": "combineproducts",
+          "settings": {
+            "block_heading": "Pick your altitude",
+            "products_pair_well_with": [
+              "himalayan-cliff-honey-jajarkot",
+              "himalayan-cliff-honey-rukum",
+              "himalayan-cliff-honey-lamjung",
+              "cliff-honey-variety"
+            ]
+          }
+        },
+        "variant_picker": {
+          "type": "variant_picker",
+          "settings": {
+            "picker_type": "button",
+            "swatch_shape": "square"
+          }
+        },
+        "custom_liquid_YknFUj": {
+          "type": "custom_liquid",
+          "settings": {
+            "custom_liquid": "{% render 'custom-selling-plan' %}\n<style>\n.shopify_subscriptions_app_block_purchase_options,.shopify_subscriptions_app_block_container{\ndisplay:none!important;}\n</style>"
+          }
+        },
+        "quantity_selector": {
+          "type": "quantity_selector",
+          "settings": {}
+        },
+        "buy_buttons": {
+          "type": "buy_buttons",
+          "settings": {
+            "show_dynamic_checkout": false,
+            "show_gift_card_recipient": false
+          }
+        },
+        "custom_liquid_37an4N": {
+          "type": "custom_liquid",
+          "settings": {
+            "custom_liquid": "<div class=\"shipping dont_change_class\" style=\"display:flex; gap:1rem; align-items:center; margin-bottom: clamp(16px, 1.25vw, 24px);\"><svg width=\"24\" height=\"24\" viewBox=\"0 0 24 24\" fill=\"none\" xmlns=\"http://www.w3.org/2000/svg\">\n<circle cx=\"12\" cy=\"12\" r=\"12\" fill=\"#FFA832\"/>\n<path d=\"M6 11L9.61865 16L18.5 8.5\" stroke=\"black\" stroke-linecap=\"round\" stroke-linejoin=\"round\"/>\n</svg> Fast, Free Shipping Worldwide\n</div>"
+          }
+        },
+        "custom_liquid_qDE8k4": {
+          "type": "custom_liquid",
+          "settings": {
+            "custom_liquid": "{% assign today = 'now' | date: \"%s\" %}\n{% assign min_delivery = today | plus: 604800 %}\n{% assign max_delivery = today | plus: 1209600 %}\n\n{% assign order_day = today | date: \"%-d\" %}\n{% assign min_day = min_delivery | date: \"%-d\" %}\n{% assign max_day = max_delivery | date: \"%-d\" %}\n\n{%- comment -%}\nORDER DATE SUFFIX\n{%- endcomment -%}\n{% capture order_suffix %}{% if order_day == '1' or order_day == '21' or order_day == '31' %}st{% elsif order_day == '2' or order_day == '22' %}nd{% elsif order_day == '3' or order_day == '23' %}rd {% else %}th{% endif %}{% endcapture %}\n\n{%- comment -%}\nMIN DELIVERY SUFFIX\n{%- endcomment -%}\n{% capture min_suffix -%}{% if min_day == '1' or min_day == '21' or min_day == '31' %}st{% elsif min_day == '2' or min_day == '22' %}nd{% elsif min_day == '3' or min_day == '23' %}rd{% else %}th{% endif %}{%- endcapture %}\n\n{%- comment -%}\nMAX DELIVERY SUFFIX\n{%- endcomment -%}\n{% capture max_suffix %}{% if max_day == '1' or max_day == '21' or max_day == '31' %}st{% elsif max_day == '2' or max_day == '22' %}nd{% elsif max_day == '3' or max_day == '23' %}rd{% else %}th{% endif %}{% endcapture %}\n\n{% assign order_date = today | date: \"%b \" | append: order_day | append: order_suffix %}\n{% assign min_date = min_delivery | date: \"%b \" | append: min_day | append: min_suffix %}\n{% assign max_date = max_delivery | date: \"%b \" | append: max_day | append: max_suffix %}\n\n\n<div id=\"delivery-box\" class=\"delivery-box\">\n  <div class=\"delivery-item\">\n<svg class=\"icon\" viewBox=\"0 0 32 32\" fill=\"none\" xmlns=\"http://www.w3.org/2000/svg\">\n<path d=\"M4.48047 25.6C4.48047 26.92 5.56047 28 6.88047 28H26.0805C27.4005 28 28.4805 26.92 28.4805 25.6V10H23.5725C22.9983 6.6004 20.0409 4 16.4805 4C12.9201 4 9.96267 6.6004 9.38907 10H4.48047V25.6ZM16.4805 6.4C18.7119 6.4 20.5875 7.933 21.1227 10H11.8383C12.3735 7.933 14.2491 6.4 16.4805 6.4Z\" fill=\"currentColor\"/>\n</svg>\n    <span class=\"h3\">Order Now</span>\n    <p class=\"date-text\">{{ order_date }}</p>\n  </div>\n\n  <div class=\"divider\"><span class=\"visually-hidden\">divider</span></div>\n \n  <div class=\"delivery-item\">\n    <svg class=\"icon\" viewBox=\"0 0 32 32\" fill=\"none\" xmlns=\"http://www.w3.org/2000/svg\">\n<path d=\"M16.0002 16.0003C16.7335 16.0003 17.3613 15.7392 17.8835 15.217C18.4057 14.6948 18.6668 14.067 18.6668 13.3337C18.6668 12.6003 18.4057 11.9725 17.8835 11.4503C17.3613 10.9281 16.7335 10.667 16.0002 10.667C15.2668 10.667 14.6391 10.9281 14.1168 11.4503C13.5946 11.9725 13.3335 12.6003 13.3335 13.3337C13.3335 14.067 13.5946 14.6948 14.1168 15.217C14.6391 15.7392 15.2668 16.0003 16.0002 16.0003ZM16.0002 29.3337C12.4224 26.2892 9.75016 23.4614 7.9835 20.8503C6.21683 18.2392 5.3335 15.8225 5.3335 13.6003C5.3335 10.267 6.40572 7.61144 8.55016 5.63366C10.6946 3.65588 13.1779 2.66699 16.0002 2.66699C18.8224 2.66699 21.3057 3.65588 23.4502 5.63366C25.5946 7.61144 26.6668 10.267 26.6668 13.6003C26.6668 15.8225 25.7835 18.2392 24.0168 20.8503C22.2502 23.4614 19.5779 26.2892 16.0002 29.3337Z\" fill=\"currentColor\"/>\n</svg>\n\n    <span class=\"h3\">Delivered Spill-Free</span>\n    <p class=\"date-text\">{{ min_date }} - {{ max_date }}</p>\n  </div>\n</div>\n\n{%style%}\n#delivery-box {\n  display: flex;\n  border: 1px solid #d8d8d0;\n  border-radius: clamp(12px,1.05vw,2rem);\n  overflow: hidden;\n  margin: 20px auto;\n}\n\n#delivery-box .delivery-item {\n  flex: 1;\n  text-align: center;\n  padding: clamp(8px,0.84vw,16px);\n}\n\n#delivery-box .icon {\n  width: clamp(18px,1.25vw,24px);\n  height: clamp(18px,1.25vw,24px);\n  color: rgba(var(--color-button-text),0.68);\n}\n\n#delivery-box .delivery-item .h3 {\n  font-size: clamp(12px,1.05vw,20px);\n  font-weight: 700;\n  color: rgba(var(--color-foreground),1);\n  margin: clamp(4px,0.42vw,8px) 0;\n  display:block;\n  letter-spacing:0;\n}\n\n#delivery-box .date-text {\n  font-size: clamp(10px,0.73vw,14px);\n  color: var(--color-extra);\nmargin:0;\n}\n\n#delivery-box .divider {\n  width: 0px;\n  padding:0.5px;\n  background-color: #d8d8d080;\nposition:relative;\n}\n\n#delivery-box .divider::after {\n    content: '';\n    border-bottom: 1px solid;\n    border-right: 1px solid;\n    border-color: #d8d8d080;\n    background: rgba(var(--color-background),1);\n    top: 50%;\n    left: 0%;\n    transform: rotate(-45deg) translate(-10%, -50%);\n    position: absolute;\n    width: clamp(10px, 0.84vw, 16px);\n    height: clamp(10px, 0.84vw, 16px);\n}\n{%endstyle%}"
+          }
+        },
+        "custom_liquid_WmyPAL": {
+          "type": "custom_liquid",
+          "settings": {
+            "custom_liquid": "<p>\n All Himalayan Cliff Honey is ethically produced, and <highlight>sourced from the high Mountain Regions of Nepal and Third-Party lab tested </highlight> for purity and potency.<p>"
+          }
+        },
+        "collapsible_tab_qHfYR8": {
+          "type": "collapsible_tab",
+          "settings": {
+            "heading": "What is Cliff Honey?",
+            "icon": "none",
+            "content": "<p>Cliff Honey is a rare, wild-harvested Himalayan honey, collected from high-altitude cliffs and rich native flora, combining natural enzymes, minerals, antioxidants, and raw energy into one pure, powerful spoon.</p>",
+            "page": ""
+          }
+        },
+        "collapsible_tab_xjVipk": {
+          "type": "collapsible_tab",
+          "settings": {
+            "heading": "Who’s it for?",
+            "icon": "none",
+            "content": "<p>Cliff Honey is suitable for men and women over 18 years of age who are not currently pregnant or breastfeeding. It fits a wide range of diets and lifestyles, including paleo, vegetarian, clean eating, and intermittent fasting, when consumed in moderation.</p>",
+            "page": ""
+          }
+        },
+        "collapsible_tab_hDnGkp": {
+          "type": "collapsible_tab",
+          "settings": {
+            "heading": "Benefits",
+            "icon": "none",
+            "content": "<p>Daily support for:</p><ul><li>Natural energy & stamina</li><li>Digestive balance & gut comfort</li><li>Immune strength</li><li>Mental clarity & overall vitality</li></ul>",
+            "page": ""
+          }
+        }
+      },
+      "block_order": [
+        "inventory_3bjkbx",
+        "title",
+        "rating_mBGhfF",
+        "custom_liquid_zk43GD",
+        "price",
+        "text_EP37JD",
+        "custom_liquid_hrBaQG",
+        "description",
+        "complementary_QmWWhC",
+        "combineproducts_cwj9JV",
+        "variant_picker",
+        "custom_liquid_YknFUj",
+        "quantity_selector",
+        "buy_buttons",
+        "custom_liquid_37an4N",
+        "custom_liquid_qDE8k4",
+        "custom_liquid_WmyPAL",
+        "collapsible_tab_qHfYR8",
+        "collapsible_tab_xjVipk",
+        "collapsible_tab_hDnGkp"
+      ],
+      "custom_css": [
+        ".product-form__quantity {min-width: 100%; margin-bottom: 0;}",
+        "@media (min-width: 1280px) {.scroll-container {width: 100%; } .scroll-container img {max-width: 100%; }}"
+      ],
+      "settings": {
+        "enable_sticky_info": true,
+        "color_scheme": "scheme-a7c211df-00e1-478d-bf54-a39de4538c59",
+        "media_size": "medium",
+        "constrain_to_viewport": true,
+        "media_fit": "cover",
+        "gallery_layout": "thumbnail_slider",
+        "mobile_thumbnails": "show",
+        "media_position": "left",
+        "image_zoom": "hover",
+        "hide_variants": false,
+        "enable_video_looping": false,
+        "padding_top": 150,
+        "padding_bottom": 10
+      }
+    },
+    "1766486635289de7b7": {
+      "type": "_blocks",
+      "blocks": {
+        "ai_sticky_YnHNJf": {
+          "type": "ai_sticky",
+          "name": "Sticky ATC",
+          "settings": {
+            "trigger_offset": 900,
+            "show_rating": true,
+            "onetime_label": "One-time purchase",
+            "button_text": "Add to cart",
+            "sold_out_text": "Sold out",
+            "color_scheme": "scheme-90543d91-404e-4e39-8967-abd30d459db3"
+          },
+          "blocks": {}
+        }
+      },
+      "block_order": [
+        "ai_sticky_YnHNJf"
+      ],
+      "settings": {}
+    },
+    "image_with_text_xj7EaR": {
+      "type": "image-with-text",
+      "blocks": {
+        "heading_TKxXcR": {
+          "type": "heading",
+          "settings": {
+            "heading": "Where is it <strong>from</strong>?",
+            "heading_size": "h2"
+          }
+        }
+      },
+      "block_order": [
+        "heading_TKxXcR"
+      ],
+      "custom_css": [
+        ".grid {flex-direction: column-reverse; --grid-desktop-vertical-spacing: clamp(24px, 2.61vw, 5rem);}",
+        ".image-with-text__content {padding: 0 !important;}",
+        ".grid__item {width: 100%;}",
+        "img {border-radius: clamp(16px, 3.35vw, 64px);}"
+      ],
+      "name": "t:sections.image-with-text.presets.name",
+      "settings": {
+        "image": "shopify://shop_images/lamjung.webp",
+        "height": "adapt",
+        "desktop_image_width": "medium",
+        "layout": "image_first",
+        "image_behavior": "none",
+        "content_layout": "no-overlap",
+        "desktop_content_position": "middle",
+        "desktop_content_alignment": "center",
+        "mobile_content_alignment": "center",
+        "section_color_scheme": "scheme-4",
+        "color_scheme": "scheme-4",
+        "id": "",
+        "class": "",
+        "padding_top": 110,
+        "padding_bottom": 110,
+        "custom_liquid": ""
+      }
+    },
+    "image_with_text_h6cbC9": {
+      "type": "image-with-text",
+      "blocks": {
+        "heading_hmX7na": {
+          "type": "heading",
+          "settings": {
+            "heading": "<strong>Lamjung's </strong>Harvest",
+            "heading_size": "h2"
+          }
+        },
+        "text_GnVVRi": {
+          "type": "text",
+          "settings": {
+            "text": "<p>Did you know that between the peaks of Manaslu and Annapurna lies Lamjung, where Gurung communities have practiced cliff honey hunting for centuries? Harvested from towering cliffs at 3,000–4,000 meters, this wild honey is shaped by red rhododendrons, wildflowers, and mountain herbs. Light amber in color with a smooth texture, it delivers floral notes and subtle herbal hints—born from pristine high-altitude landscapes.</p>",
+            "text_style": "body"
+          }
+        },
+        "iconboxes_7jGfB8": {
+          "type": "iconboxes",
+          "settings": {
+            "iconboxes_text_alignment": "left",
+            "iconboxes_image_1": "shopify://shop_images/nepal_flag.svg",
+            "iconboxes_title_1": "Origin",
+            "iconboxes_description_1": "Western Nepal",
+            "iconboxes_image_2": "shopify://shop_images/colr_drop.svg",
+            "iconboxes_title_2": "Color",
+            "iconboxes_description_2": "Reddish Brown",
+            "iconboxes_image_3": "shopify://shop_images/Taste_9155e87b-dfa2-41d0-b48c-6296388e4949.svg",
+            "iconboxes_title_3": "Taste",
+            "iconboxes_description_3": "Earthy  Aroma",
+            "iconboxes_title_4": "",
+            "iconboxes_description_4": "",
+            "iconboxes_title_5": "",
+            "iconboxes_description_5": ""
+          }
+        },
+        "caption_Qaxmam": {
+          "type": "caption",
+          "settings": {
+            "caption": "Product of Nepal",
+            "text_style": "subtitle",
+            "text_size": "large"
+          }
+        }
+      },
+      "block_order": [
+        "heading_hmX7na",
+        "text_GnVVRi",
+        "iconboxes_7jGfB8",
+        "caption_Qaxmam"
+      ],
+      "custom_css": [
+        "img {object-fit: contain; mix-blend-mode: multiply;}",
+        "h3 {margin-bottom: 0; margin-top: 1.8rem; font-weight: 700; line-height: 1;}",
+        ".image-with-text__iconbox {max-width: 100% !important;}",
+        ".image-with-text__iconbox p {margin: 0; font-size: clamp(12px, 1.05vw, 20px);}",
+        ".subtitle {margin-top: clamp(16px, 2.51vw, 48px); font-size: clamp(18px, 1.88vw, 36px);}",
+        ".grid {--grid-desktop-horizontal-spacing: 6.5rem;}"
+      ],
+      "name": "t:sections.image-with-text.presets.name",
+      "settings": {
+        "image": "shopify://shop_images/lamjung_District.webp",
+        "height": "adapt",
+        "desktop_image_width": "medium",
+        "layout": "text_first",
+        "image_behavior": "none",
+        "content_layout": "no-overlap",
+        "desktop_content_position": "middle",
+        "desktop_content_alignment": "left",
+        "mobile_content_alignment": "center",
+        "section_color_scheme": "scheme-1",
+        "color_scheme": "scheme-4",
+        "id": "",
+        "class": "",
+        "padding_top": 0,
+        "padding_bottom": 110,
+        "custom_liquid": "{% assign secid= '#shopify-section-' | append: section.id %}\n\n<style>\n{{ secid }} .image-with-text__iconboxes {justify-content: space-between; width: 100%; margin-top: clamp(24px,2.51vw, 48px); flex-wrap: nowrap !important;}\n</style>"
+      }
+    },
+    "multicolumn_pxCwUR": {
+      "type": "multicolumn",
+      "blocks": {
+        "column_nRRVbL": {
+          "type": "column",
+          "settings": {
+            "image": "shopify://shop_images/Jajarkot_Jar.webp",
+            "title": "Jajarkot",
+            "text": "",
+            "link_label": "",
+            "link": "",
+            "custom_liquid": "<ul>\n<li>\n<svg width=\"48\" height=\"48\">\n  <use href=\"{{'honey-icons.svg'| asset_url}}#icon-altitude\"></use>\n</svg>\n<p><b>Altitude:</b> 2400-3500m</p>\n</li>\n\n<li>\n<svg width=\"48\" height=\"48\">\n  <use href=\"{{'honey-icons.svg'| asset_url}}#icon-honey-drop\"></use></svg>\n<p><b>Color:</b> Golden Amber\n</p></li>\n\n<li>\n<svg width=\"48\" height=\"48\">\n  <use href=\"{{'honey-icons.svg'| asset_url}}#icon-honey-dipper\"></use></svg>\n<p><b>Taste:</b> Mellow & Floral</p>\n</li>\n\n<li>\n<svg width=\"48\" height=\"48\">\n  <use href=\"{{'honey-icons.svg'| asset_url}}#icon-star\"></use></svg>\n<b>Potency:</b>\n<svg class=\"stars\" viewBox=\"0 0 128 24\" fill=\"none\" xmlns=\"http://www.w3.org/2000/svg\">\n<path d=\"M12 0L14.6942 8.2918H23.4127L16.3593 13.4164L19.0534 21.7082L12 16.5836L4.94658 21.7082L7.64074 13.4164L0.587322 8.2918H9.30583L12 0Z\" fill=\"#B5742A\"/>\n<path d=\"M38 0L40.6942 8.2918H49.4127L42.3593 13.4164L45.0534 21.7082L38 16.5836L30.9466 21.7082L33.6407 13.4164L26.5873 8.2918H35.3058L38 0Z\" fill=\"#B5742A\"/>\n<path d=\"M64 0L66.6942 8.2918H75.4127L68.3593 13.4164L71.0534 21.7082L64 16.5836L56.9466 21.7082L59.6407 13.4164L52.5873 8.2918H61.3058L64 0Z\" fill=\"#B5742A\"/>\n<path d=\"M90 0L92.6942 8.2918H101.413L94.3593 13.4164L97.0534 21.7082L90 16.5836L82.9466 21.7082L85.6407 13.4164L78.5873 8.2918H87.3058L90 0Z\" fill=\"#B5742A\"/>\n<path d=\"M116 0L118.694 8.2918H127.413L120.359 13.4164L123.053 21.7082L116 16.5836L108.947 21.7082L111.641 13.4164L104.587 8.2918H113.306L116 0Z\" fill=\"#B5742A\"/>\n</svg>\n</li>\n</ul>\n<p>Gentle efforts-ideal for first-time users.</p>"
+          }
+        },
+        "column_ciP7cM": {
+          "type": "column",
+          "settings": {
+            "image": "shopify://shop_images/2.RukumJar_c60c18b8-613a-4da1-aa3a-924ab6b2e03c.webp",
+            "title": "Rukum",
+            "text": "",
+            "link_label": "",
+            "link": "",
+            "custom_liquid": "<ul>\n<li>\n<svg width=\"48\" height=\"48\">\n  <use href=\"{{'honey-icons.svg'| asset_url}}#icon-altitude\"></use>\n</svg>\n<p><b>Altitude:</b> 2600-3800m</p>\n</li>\n\n<li>\n<svg width=\"48\" height=\"48\">\n  <use href=\"{{'honey-icons.svg'| asset_url}}#icon-honey-drop\"></use></svg>\n<p><b>Color:</b> Reddish Gold\n</p></li>\n\n<li>\n<svg width=\"48\" height=\"48\">\n  <use href=\"{{'honey-icons.svg'| asset_url}}#icon-honey-dipper\"></use></svg>\n<p><b>Taste:</b> Sweet & Herbal</p>\n</li>\n\n<li>\n<svg width=\"48\" height=\"48\">\n  <use href=\"{{'honey-icons.svg'| asset_url}}#icon-star\"></use></svg>\n<b>Potency:</b>\n<svg class=\"stars\" viewBox=\"0 0 128 24\" fill=\"none\" xmlns=\"http://www.w3.org/2000/svg\">\n<path d=\"M12 0L14.6942 8.2918H23.4127L16.3593 13.4164L19.0534 21.7082L12 16.5836L4.94658 21.7082L7.64074 13.4164L0.587322 8.2918H9.30583L12 0Z\" fill=\"#B5742A\"/>\n<path d=\"M38 0L40.6942 8.2918H49.4127L42.3593 13.4164L45.0534 21.7082L38 16.5836L30.9466 21.7082L33.6407 13.4164L26.5873 8.2918H35.3058L38 0Z\" fill=\"#B5742A\"/>\n<path d=\"M64 0L66.6942 8.2918H75.4127L68.3593 13.4164L71.0534 21.7082L64 16.5836L56.9466 21.7082L59.6407 13.4164L52.5873 8.2918H61.3058L64 0Z\" fill=\"#B5742A\"/>\n<path d=\"M90 0L92.6942 8.2918H101.413L94.3593 13.4164L97.0534 21.7082L90 16.5836L82.9466 21.7082L85.6407 13.4164L78.5873 8.2918H87.3058L90 0Z\" fill=\"#B5742A\"/>\n<path d=\"M116 0L118.694 8.2918H127.413L120.359 13.4164L123.053 21.7082L116 16.5836L108.947 21.7082L111.641 13.4164L104.587 8.2918H113.306L116 0Z\" fill=\"#B5742A\"/>\n</svg>\n</li>\n</ul>\n<p>Balanced & smooth-a favorite for wellness blends.</p>"
+          }
+        },
+        "column_PtLfeC": {
+          "type": "column",
+          "settings": {
+            "image": "shopify://shop_images/1.LamjungJar_4e631941-7c19-4e7f-be6a-6e1c0352b38f.webp",
+            "title": "Lamjung",
+            "text": "",
+            "link_label": "",
+            "link": "",
+            "custom_liquid": "<ul>\n<li>\n<svg width=\"48\" height=\"48\">\n  <use href=\"{{'honey-icons.svg'| asset_url}}#icon-altitude\"></use>\n</svg>\n<p><b>Altitude:</b> 2800-4000m</p>\n</li>\n\n<li>\n<svg width=\"48\" height=\"48\">\n  <use href=\"{{'honey-icons.svg'| asset_url}}#icon-honey-drop\"></use></svg>\n<p><b>Color:</b> Deep Amber Red\n</p></li>\n\n<li>\n<svg width=\"48\" height=\"48\">\n  <use href=\"{{'honey-icons.svg'| asset_url}}#icon-honey-dipper\"></use></svg>\n<p><b>Taste:</b> Earthy & Bold</p>\n</li>\n\n<li>\n<svg width=\"48\" height=\"48\">\n  <use href=\"{{'honey-icons.svg'| asset_url}}#icon-star\"></use></svg>\n<b>Potency:</b>\n<svg class=\"stars\" viewBox=\"0 0 128 24\" fill=\"none\" xmlns=\"http://www.w3.org/2000/svg\">\n<path d=\"M12 0L14.6942 8.2918H23.4127L16.3593 13.4164L19.0534 21.7082L12 16.5836L4.94658 21.7082L7.64074 13.4164L0.587322 8.2918H9.30583L12 0Z\" fill=\"#B5742A\"/>\n<path d=\"M38 0L40.6942 8.2918H49.4127L42.3593 13.4164L45.0534 21.7082L38 16.5836L30.9466 21.7082L33.6407 13.4164L26.5873 8.2918H35.3058L38 0Z\" fill=\"#B5742A\"/>\n<path d=\"M64 0L66.6942 8.2918H75.4127L68.3593 13.4164L71.0534 21.7082L64 16.5836L56.9466 21.7082L59.6407 13.4164L52.5873 8.2918H61.3058L64 0Z\" fill=\"#B5742A\"/>\n<path d=\"M90 0L92.6942 8.2918H101.413L94.3593 13.4164L97.0534 21.7082L90 16.5836L82.9466 21.7082L85.6407 13.4164L78.5873 8.2918H87.3058L90 0Z\" fill=\"#B5742A\"/>\n<path d=\"M116 0L118.694 8.2918H127.413L120.359 13.4164L123.053 21.7082L116 16.5836L108.947 21.7082L111.641 13.4164L104.587 8.2918H113.306L116 0Z\" fill=\"#B5742A\"/>\n</svg>\n</li>\n</ul>\n<p>Most potent & aromatic-prized for its intensity.</p>"
+          }
+        }
+      },
+      "block_order": [
+        "column_nRRVbL",
+        "column_ciP7cM",
+        "column_PtLfeC"
+      ],
+      "custom_css": [
+        ".gradient {overflow: hidden;}",
+        ".grid__item {width: auto;}",
+        ".multicolumn-card__info {padding: clamp(8px, 1.67vw, 32px);}",
+        "h3 {font-family: var(--font-heading-family); line-height: 1.1; font-size: clamp(24px, 2.51vw, 48px); font-weight: 700; color: var(--color-extra);}",
+        "@media (min-width: 769px) {.grid__item {margin-right: clamp(16px, 1.25vw, 24px); max-width: 32%; width: 100%; } .grid__item:last-child {margin-right: 0 !important; }}"
+      ],
+      "name": "t:sections.multicolumn.presets.name",
+      "settings": {
+        "title": "Types of<strong> Himalayan cliff honey</strong>",
+        "description": "Cliff honey varies by region - shaped by altitude, flora, and harvest season.",
+        "heading_size": "h2",
+        "image_width": "full",
+        "image_ratio": "adapt",
+        "button_label": "",
+        "button_link": "",
+        "columns_desktop": 3,
+        "column_alignment": "center",
+        "background_style": "primary",
+        "color_scheme": "scheme-4",
+        "swipe_on_desktop": false,
+        "columns_mobile": "1",
+        "swipe_on_mobile": false,
+        "padding_top": 0,
+        "padding_bottom": 0,
+        "section_id": "",
+        "section_class": "hover-active",
+        "custom_code": "{% assign secid= '#shopify-section-' | append: section.id %}\n\n<style>\n{{ secid }} .content-container:after {\n  content:none;\n}\n{{ secid }} h2{\nmargin-bottom: clamp(16px, 1.67vw, 32px);\n}\n{{ secid }} ul .multicolumn-card .custom-code > p{\nmax-width:90%;\nmargin:6px auto auto;\n    font-size: clamp(1rem, 0.94vw, 1.8rem);\npadding-top:clamp(2px,0.21vw,4px);\n}\n\n{{ secid }} img{\nmix-blend-mode:multiply;\n}\n\n{{ secid }} .multicolumn__title{\njustify-content:center;\nmargin-bottom: clamp(24px,4.18vw,80px);\ntext-align:center;\n}\n\n{{ secid }} .multicolumn__title p{\nmargin:0;\n}\n\n{{secid}} ul ul{\npadding:0;\n max-width: max-content;\n margin:0 auto;\n}\n\n{{secid}} .multicolumn-card-spacing{\nmargin:0;\npadding: clamp(16px, 1.67vw, 32px) clamp(8px, 1.25vw, 24px);\npadding-top:0;\npadding-bottom:0;\n}\n{{secid}} ul ul li {\n    text-align: left;\n    max-width:max-content;\n    list-style: none;\n    display: flex;\n    margin: 0;\n    margin-bottom: clamp(8px,0.63vw,12px);\n    gap: 12px;\n    align-items: center;\n    font-size: clamp(1rem, 1.05vw, 2rem);\n}\n\n{{secid}} ul ul li svg {\nwidth:clamp(18px,2.51vw,48px);\nheight:clamp(18px,2.51vw,48px);\nfill:transparent;\n}\n\n{{secid}} li .stars{\nwidth:auto;\naspect-ratio:128/24;\nheight: clamp(16px,1.25vw,24px);\n}\n\n{{ secid }} .multicolumn-card {\n  border-radius: 16px;\n  outline: 2px solid transparent;\n    outline-offset: -2px;\n  background: #ffecc3;\n  transition: all 0.5s ease;\n  opacity: 0.6 !important;\n}\n\n{{ secid }} li.is-active .multicolumn-card{\n  opacity: 1!important;\n  outline: 2px solid #B5731F99;\n\n}\n\n{{ secid }} .grid {\n  flex-wrap: nowrap;\n  gap: 0;\n  justify-content: space-between;\n}\n{{secid}} .splide__slide {\nmargin-right:clamp(16px,1.25vw,24px);}\n.multicolumn-card__info > :nth-child(2){\nmargin-top:clamp(10px,0.84vw,16px);\n}\n@media(max-width:768px){\n{{ secid }} .multicolumn-card {\nmin-width:58.75dvw;\n\n}}\n</style>\n\n{{ 'splide.min.css' | asset_url | stylesheet_tag }}\n<script src=\"{{ 'splide.min.js' | asset_url }}\" defer></script>\n\n<script>\ndocument.addEventListener('DOMContentLoaded', function () {\n  if (typeof Splide === 'undefined') return;\n\n  var sectionRoot = document.getElementById('shopify-section-{{ section.id }}');\n  if (!sectionRoot) return;\n  var list = sectionRoot.querySelector('ul[id^=\"Slider-\"]');\n  if (!list || list.closest('.splide')) return;\n\n  // Add splide classes + our own stable index\n  var items = Array.prototype.slice.call(list.children);\n  list.classList.add('splide__list');\n  items.forEach(function (li, i) {\n    li.classList.add('splide__slide');\n    li.setAttribute('data-nav-index', String(i));\n    li.style.cursor = 'pointer';\n  });\n\n  // Wrap with splide structure\n  var track = document.createElement('div');\n  track.className = 'splide__track';\n\n  var root = document.createElement('div');\n  root.className = 'splide';\n\n  list.parentNode.insertBefore(root, list);\n  root.appendChild(track);\n  track.appendChild(list);\n\n  var splide = new Splide(root, {\n    perPage: 3,\n    focus: 'center',\npadding: { left: '16px', right: '16px' },\n    pagination: false,\n    arrows: false,\n    breakpoints: {\n      990: {\n        perPage: 3,\n        type: 'loop',\n      },\n      768: {\n        perPage: 1,\n        type: 'loop',\n        focus: 'center',\npadding: { left: '18.5vw', right: '18.5vw' },\n        gap:'16px',\n      }\n    }\n  });\n\n  function getTargetIndex(slideEl) {\n    // Prefer our stable index (original slides)\n    var v = slideEl.getAttribute('data-nav-index');\n    if (v != null) return parseInt(v, 10);\n\n    // Fallback (for clones if Splide adds them)\n    v = slideEl.getAttribute('data-splide-index');\n    if (v != null) return parseInt(v, 10);\n\n    return null;\n  }\n\n  function goToSlideFromEvent(e) {\n    var slide = e.target.closest('.splide__slide');\n    if (!slide || !root.contains(slide)) return;\n\n    var idx = getTargetIndex(slide);\n    if (idx == null || Number.isNaN(idx)) return;\n\n    splide.go(idx);\n  }\n\n  splide.on('mounted', function () {\n    // CLICK -> activate slide\n    root.addEventListener('click', function (e) {\n      // If your slide contains <a> and you still want navigation, remove next 3 lines.\n      var link = e.target.closest('a');\n      if (link && !(e.metaKey || e.ctrlKey || e.shiftKey || e.altKey)) e.preventDefault();\n\n      goToSlideFromEvent(e);\n    }, true);\n\n    // HOVER -> activate slide (desktop only)\nif (window.matchMedia('(hover: hover) and (pointer: fine)').matches) {\n  root.addEventListener('pointerenter', function (e) {\n    var slide = e.target.closest('.splide__slide');\n    if (!slide || !root.contains(slide)) return;\n\n    // Prefer Splide's index (works on clones)\n    var idx = slide.getAttribute('data-splide-index');\n    if (idx == null) idx = slide.getAttribute('data-nav-index');\n    if (idx == null) return;\n\n    splide.go(parseInt(idx, 10));\n  }, true);\n}\n\n  });\n  splide.mount();\n});\n</script>"
+      }
+    },
+    "multi_column_timeline_7dWadU": {
+      "type": "multi-column-timeline",
+      "blocks": {
+        "timeline_item_QjRTPC": {
+          "type": "timeline_item",
+          "settings": {
+            "period": "2017–2020",
+            "title": "The <strong>first </strong>Leap",
+            "bullets": "Founded in Nepal by 2nd gen Nepali beekeepers family\nYears with the honey hunting community created Himalayan Cliff Honey.\nFrom Nepali flowers, fauna, seasons, and regions to US, we started our journey  \nTogether with one goal : building a luxury honey brand from Nepal"
+          }
+        },
+        "timeline_item_JYr7mC": {
+          "type": "timeline_item",
+          "settings": {
+            "period": "2021–2025",
+            "title": "The <strong>buzz </strong>starts",
+            "bullets": "Started a fully automated, HACCP- and GMP-certified honey processing facility\nAdded multiple Himalayan honey types and bee products\nBegan structured collaborations with honey stores and skincare brands\nWorking with 300+ honey hunters and 200+ beekeepers across Nepal"
+          }
+        },
+        "timeline_item_8qhGzX": {
+          "type": "timeline_item",
+          "settings": {
+            "period": "2026-Beyond",
+            "title": "<strong>12k+</strong> Honey Jars Sold",
+            "bullets": "Find Nepal Honey at U.S. marketplace like amazon, etsy and walmart \nA #1 bestseller on Rare Honey, giving the best honey brands in the world \nIt’s official! We’ve served over +12,000 jars of honey \nFrom Nepal to the world And more to come…"
+          }
+        }
+      },
+      "block_order": [
+        "timeline_item_QjRTPC",
+        "timeline_item_JYr7mC",
+        "timeline_item_8qhGzX"
+      ],
+      "custom_css": [
+        "h2 {padding-top: clamp(2rem, 2.09vw, 4rem);}"
+      ],
+      "name": "Honey Legacy Timeline",
+      "settings": {
+        "heading": "Honey Legacy",
+        "heading_accent": "Almost A Decade!",
+        "background_style": "none",
+        "color_scheme": "scheme-9d2c0c65-03cd-4aee-be49-5b37cc6b1f9f",
+        "show_placeholders": false,
+        "placeholder_img_left": "shopify://shop_images/Mask_group_b768beaf-3d53-443d-a092-59c198343bbc.webp",
+        "placeholder_img_right": "shopify://shop_images/Mask_group_ba4fa17e-2850-498d-a409-d80c60eaab91.webp",
+        "show_connector": true,
+        "connector_width": 2,
+        "padding_top": 110,
+        "padding_bottom": 110,
+        "section_id": "",
+        "section_class": ""
+      }
+    },
+    "marquee_GqpWVL": {
+      "type": "marquee",
+      "blocks": {
+        "marquee_block_hGEXxG": {
+          "type": "marquee_block",
+          "settings": {
+            "marquee_text": "Free Shipping",
+            "marquee_image": "shopify://shop_images/Vector.svg"
+          }
+        },
+        "marquee_block_tBpCDx": {
+          "type": "marquee_block",
+          "settings": {
+            "marquee_text": "Subscribe & Save 20%",
+            "marquee_image": "shopify://shop_images/Group_ecf4023d-0d5a-4b2e-8817-6ae3b71161fe.svg"
+          }
+        },
+        "marquee_block_F8YkYm": {
+          "type": "marquee_block",
+          "settings": {
+            "marquee_text": "Backed by Certification",
+            "marquee_image": "shopify://shop_images/Layer_1_80cf97e6-2416-42c0-9203-d91b70b6d2b8.svg"
+          }
+        },
+        "marquee_block_phpt9w": {
+          "type": "marquee_block",
+          "settings": {
+            "marquee_text": "Lab Verified & Tested",
+            "marquee_image": "shopify://shop_images/Layer_1-1_65747c06-e18c-4af7-b8dd-e0c02398457f.svg"
+          }
+        },
+        "marquee_block_VRjJRz": {
+          "type": "marquee_block",
+          "settings": {
+            "marquee_text": "Free Shipping",
+            "marquee_image": "shopify://shop_images/Vector.svg"
+          }
+        },
+        "marquee_block_6cVEek": {
+          "type": "marquee_block",
+          "settings": {
+            "marquee_text": "Subscribe & Save 20%",
+            "marquee_image": "shopify://shop_images/Group_ecf4023d-0d5a-4b2e-8817-6ae3b71161fe.svg"
+          }
+        },
+        "marquee_block_E63rjV": {
+          "type": "marquee_block",
+          "settings": {
+            "marquee_text": "Backed by Certification",
+            "marquee_image": "shopify://shop_images/Layer_1_80cf97e6-2416-42c0-9203-d91b70b6d2b8.svg"
+          }
+        },
+        "marquee_block_fPAxgK": {
+          "type": "marquee_block",
+          "settings": {
+            "marquee_text": "Lab Verified & Tested",
+            "marquee_image": "shopify://shop_images/Layer_1-1_65747c06-e18c-4af7-b8dd-e0c02398457f.svg"
+          }
+        }
+      },
+      "block_order": [
+        "marquee_block_hGEXxG",
+        "marquee_block_tBpCDx",
+        "marquee_block_F8YkYm",
+        "marquee_block_phpt9w",
+        "marquee_block_VRjJRz",
+        "marquee_block_6cVEek",
+        "marquee_block_E63rjV",
+        "marquee_block_fPAxgK"
+      ],
+      "name": "Marquee Text with Image",
+      "settings": {
+        "color_scheme": "scheme-3280f7d4-14e8-4743-9865-9a5e12c941d7",
+        "seperator": "",
+        "gap_size": 40,
+        "padding_top": 0,
+        "padding_bottom": 0
+      }
+    },
+    "custom_liquid_HDNkCG": {
+      "type": "custom-liquid",
+      "disabled": true,
+      "name": "t:sections.custom-liquid.presets.name",
+      "settings": {
+        "custom_liquid": "<script>\nclass CollapsibleManager extends HTMLElement {\n  connectedCallback() {\n    const sections = document.querySelectorAll('.collapsible_sections');\n    const buttons = [];\n\n    sections.forEach(sec => {\n      const h2 = sec.querySelector('h2');\n      const title = h2 ? h2.textContent.trim() : \"Untitled\";\n\n      const btn = document.createElement('button');\n      btn.textContent = title;\n      btn.className = 'collapse-btn';\n      this.appendChild(btn);\n      buttons.push({ btn, sec });\n\n      // Initially hide all sections\n      sec.style.display = \"none\";\n\n      btn.addEventListener('click', () => {\n        const isMobile = window.innerWidth < 768;\n\n        if (isMobile) {\n          // Toggle visibility on mobile\n          const visible = sec.style.display === \"block\";\n          sec.style.display = visible ? \"none\" : \"block\";\n        } else {\n          // On desktop, show clicked section and hide others\n          buttons.forEach(({ btn: b, sec: s }) => {\n            s.style.display = s === sec ? \"block\" : \"none\";\n          });\n        }\n      });\n    });\n\n    // Optional: On desktop load, show first section by default\n    if (window.innerWidth >= 768 && sections.length) {\n      sections.forEach((sec, i) => {\n        sec.style.display = i === 0 ? \"block\" : \"none\";\n      });\n    }\n\n    // Optional: Update on window resize\n    window.addEventListener('resize', () => {\n      if (window.innerWidth >= 768 && sections.length) {\n        // On desktop: only show first visible section or first by default\n        let visibleFound = false;\n        sections.forEach(sec => {\n          if (sec.style.display === \"block\") visibleFound = true;\n        });\n        if (!visibleFound) {\n          sections.forEach((sec, i) => {\n            sec.style.display = i === 0 ? \"block\" : \"none\";\n          });\n        }\n      }\n    });\n  }\n}\n\ncustomElements.define('collapsible-manager', CollapsibleManager);\n\n\n</script>\n<collapsible-manager></collapsible-manager>",
+        "color_scheme": "",
+        "padding_top": 40,
+        "padding_bottom": 50
+      }
+    },
+    "image_with_text_JBgNfr": {
+      "type": "image-with-text",
+      "blocks": {
+        "heading_9ki47L": {
+          "type": "heading",
+          "settings": {
+            "heading": "Health Benefits",
+            "heading_size": "h2"
+          }
+        },
+        "text_dzxJMj": {
+          "type": "text",
+          "settings": {
+            "text": "<ul><li><strong>Natural energy:</strong> Packed with floral sugars provides a boost of energy.</li><li><strong>Stress Relief & Relaxation:</strong> Powered with grayanotoxin promotes calmness and a sense of well-being.</li><li><strong>Immunity:</strong> Rich in antioxidants to help strengthen the body’s natural defenses.</li><li><strong>Digestive Wellness:</strong> Supports gut health and metabolism.</li><li><strong>Natural Vitality:</strong> Holistic wellness and sustained energy to support balance and vitality every day.</li></ul><p><strong>Ingredients</strong>: Pure cliff honey<br/><br/></p>",
+            "text_style": "body"
+          }
+        }
+      },
+      "block_order": [
+        "heading_9ki47L",
+        "text_dzxJMj"
+      ],
+      "name": "t:sections.image-with-text.presets.name",
+      "settings": {
+        "image": "shopify://shop_images/Mask_group_ace8790c-9689-44ab-9d09-10a4ad6a9617.webp",
+        "height": "adapt",
+        "desktop_image_width": "medium",
+        "layout": "image_first",
+        "image_behavior": "none",
+        "content_layout": "no-overlap",
+        "desktop_content_position": "middle",
+        "desktop_content_alignment": "left",
+        "mobile_content_alignment": "center",
+        "section_color_scheme": "scheme-7a4d66da-e244-43dd-8634-bf536818eca5",
+        "color_scheme": "scheme-7a4d66da-e244-43dd-8634-bf536818eca5",
+        "id": "",
+        "class": "collapsible_sections",
+        "padding_top": 35,
+        "padding_bottom": 35,
+        "custom_liquid": ""
+      }
+    },
+    "image_with_text_JHBMCa": {
+      "type": "image-with-text",
+      "blocks": {
+        "heading_wKgKfP": {
+          "type": "heading",
+          "settings": {
+            "heading": "Size & Serving",
+            "heading_size": "h2"
+          }
+        },
+        "text_i6gHw8": {
+          "type": "text",
+          "settings": {
+            "text": "<p>Consume in very small amounts only. Not recommended for individuals under 18 years. Do not exceed the suggested serving. Avoid use if allergic to bee products. Consult a healthcare professional before use.</p>",
+            "text_style": "body"
+          }
+        },
+        "liquid_crRVze": {
+          "type": "Liquid",
+          "settings": {
+            "custom_liquid": "<div class=\"mh-row animate--slide-in\">\n  <div class=\"mh-field\">\n    <label>Your age range</label>\n    <select class=\"ageRange\">\n      <option value=\"Under Age\">Under Age</option>\n      <option value=\"Adult 18+\">Adult 18+</option>\n    </select>\n  </div>\n\n\n  <div class=\"mh-field\">\n    <label>Your weight range</label>\n    <select class=\"weightRange\">\n      <option value=\"40-60\">40-60</option>\n      <option value=\"61-80\">61-80</option>\n      <option value=\"81-100\">81-100</option>\n      <option value=\"100+\">100+</option>\n    </select>\n  </div>\n</div>\n<button class=\"animate--slide-in button button-primary\">Calculate</button>\n<style>\n.mh-row {\n  width:100%;\n  display: flex;\n--gap:clamp(12px,1.25vw,24px);\n  gap: var(--gap);\n  align-items: flex-start;\nmargin:clamp(24px,1.67vw,32px) 0;\n}\n\n.mh-field label {\n  font-size: calc(14px,1.6vw,24px);\n  font-weight: 500;\n}\n\n.mh-field .highlight {\n  color: var(--color-extra); \n}\n\n.mh-field {\n  position: relative;\nwidth:calc(50% - var(--gap)/2);\n}\n\n.mh-field select {\n  margin-top: 8px;\n  width: 150px;\n  padding: clamp(12.5px,1.15vw,22px);\npadding-right:45px;\n  border-radius: 30px;\n  border: 1px solid rgba(var(--color-button),1);\n  font-size: 15px;\n  appearance: none;\n  cursor: pointer;\n  background: transparent;\n width: 100%;\n  background-image: url(\"data:image/svg+xml;utf8,<svg width='18' height='18' viewBox='0 0 24 24' fill='none' xmlns='http://www.w3.org/2000/svg'><path d='M1 7L12 18L23 7' stroke='%233D3939' stroke-width='2'/></svg>\");\n  background-repeat: no-repeat;\n  background-position: right clamp(12px,1.31vw,25px) center;\n  background-size: clamp(12px,0.84vw,16px);\n}\n\n.mh-field select {\nbox-shadow:none!important;\n  outline:none!important\n}\n\n#result {\n  margin-top: 20px;\n  color: #333;\n}\n\nh4{\nfont-family:var(--font-body-family);\nmargin-top: clamp(24px,1.67vw,32px);\nmargin-bottom: clamp(16px,1.25vw,24px);\nfont-weight: 600;\n}\n\n.two-col-list {\n  column-count: 2;\n  column-gap: 20px;\n  padding: 0;\n  list-style-type:disc;\n  margin: 0;\n  margin-left:1.5em;\n}\n\n.two-col-list li {\n  -webkit-column-break-inside: avoid;      \n  margin-bottom: 6px;\n  font-size: 15px;\nlist-style-type:disc;\n}\n\n#collapsible_calc_section button{\nmin-width:100%;\n}\n\n@media(min-width:768px){\n#collapsible_calc_section *:not(.button){\ntext-align:start;\n}\n}\n\n</style>"
+          }
+        },
+        "button_CFJgz9": {
+          "type": "button",
+          "disabled": true,
+          "settings": {
+            "button_label": "Button label",
+            "button_link": "#",
+            "button_style_secondary": false,
+            "attributes": "id=\"\""
+          }
+        },
+        "liquid_BGqtQy": {
+          "type": "Liquid",
+          "settings": {
+            "custom_liquid": "<h4 class=\"animate--slide-in\">Suggested dosage for you:</h4>\n<div class=\"animate--slide-in result\">{{product.title}} is not recommended for individuals under 18 years.</div>\n{% comment %}\n<h4 class=\"animate--slide-in\">Tips to Use</h4>\n<ul class=\"animate--slide-in two-col-list\">\n<li>orci consectetur Donec faucibus vitae maximus sed ipsum luctus.</li>\n<li>orci consectetur Donec faucibus vitae maximus sed ipsum luctus.</li>\n</ul>\n{% endcomment %}"
+          }
+        },
+        "liquid_zgf9Fg": {
+          "type": "Liquid",
+          "settings": {
+            "custom_liquid": "<script>\nconst madHoneyData = {\n  \"Under Age\": {\n    \"40-60\": \"{{product.title}} is not recommended for individuals under 18 years.\",\n    \"61-80\": \"{{product.title}} is not recommended for individuals under 18 years.\",\n    \"81-100\": \"{{product.title}} is not recommended for individuals under 18 years.\",\n    \"100+\": \"{{product.title}} is not recommended for individuals under 18 years.\"\n  },\n  \"Adult 18+\": {\n    \"40-60\": \"0.5 teaspoon(s)\",\n    \"61-80\": \"0.75 - 1 teaspoon(s)\",\n    \"81-100\": \"1 - 1.25 teaspoon(s)\",\n    \"100+\": \"1.25 - 1.5 teaspoon(s)\"\n  }\n};\n\n\ndocument.querySelector(\"#shopify-section-{{ section.id }} .button\").addEventListener(\"click\", () => {\n  const age = document.querySelector(\"#shopify-section-{{section.id}} .ageRange\").value;\n  const weight = document.querySelector(\"#shopify-section-{{section.id}} .weightRange\").value;\n\n  const dosage = madHoneyData[age][weight];\n\ndocument.querySelector(\"#shopify-section-{{section.id}} .result\").innerText =\n    `${dosage}`;\n});\n</script>"
+          }
+        }
+      },
+      "block_order": [
+        "heading_wKgKfP",
+        "text_i6gHw8",
+        "liquid_crRVze",
+        "button_CFJgz9",
+        "liquid_BGqtQy",
+        "liquid_zgf9Fg"
+      ],
+      "custom_css": [
+        "img {aspect-ratio: 666/548.2; object-fit: cover; width: auto; border-radius: 16px;}",
+        "@media (max-width: 767px) {.grid {flex-direction: column-reverse; }}"
+      ],
+      "name": "t:sections.image-with-text.presets.name",
+      "settings": {
+        "image": "shopify://shop_images/Mask_group_ace8790c-9689-44ab-9d09-10a4ad6a9617.webp",
+        "height": "adapt",
+        "desktop_image_width": "medium",
+        "layout": "image_first",
+        "image_behavior": "none",
+        "content_layout": "no-overlap",
+        "desktop_content_position": "middle",
+        "desktop_content_alignment": "left",
+        "mobile_content_alignment": "center",
+        "section_color_scheme": "scheme-7a4d66da-e244-43dd-8634-bf536818eca5",
+        "color_scheme": "scheme-7a4d66da-e244-43dd-8634-bf536818eca5",
+        "id": "collapsible_calc_section",
+        "class": "collapsible_sections",
+        "padding_top": 0,
+        "padding_bottom": 0,
+        "custom_liquid": ""
+      }
+    },
+    "multicolumn_nMwdV8": {
+      "type": "multicolumn",
+      "blocks": {
+        "column_ni7Wfy": {
+          "type": "column",
+          "settings": {
+            "image": "shopify://shop_images/Superfood_Honey_Eat_It.webp",
+            "title": "Eat it",
+            "text": "<p>Drizzle over breakfast bowls, yogurt, fresh fruit or eat straight from the spoon</p>",
+            "link_label": "",
+            "link": "",
+            "custom_liquid": "<style>\n#collapsible_icon_section h2 {\n  font-weight: 700;\n  width: 100%;\n  text-align: center;\n}\n#collapsible_icon_section h3 {\n  font-weight: 700;\n  font-family: inter;\n}\n#collapsible_icon_section .multicolumn-card__info {\n  padding: 0;\n  padding-top: 2rem;\n}\n#collapsible_icon_section .multicolumn-card-spacing,\n#collapsible_icon_section .multicolumn-list {\n  padding: 0;\n  margin: 0;\n}\n#collapsible_icon_section strong {\n  font-weight: normal;\n}\n#collapsible_icon_section .multicolumn-card{\n background:none;\n}\n#collapsible_icon_section h3 strong {\n  font-weight: 700;\n}\n#collapsible_icon_section .multicolumn.background-primary .multicolumn-card {\n  background: none;\n}\n#collapsible_icon_section .multicolumn .title-wrapper-with-link {\n  margin-bottom: 5rem;\n}\n@media screen and (min-width: 768px) {\n #collapsible_icon_section  .grid--2-col-tablet-down .grid__item {\n    width: calc(20% - 6px);\n  }\n}\n</style>"
+          }
+        },
+        "column_mDfJin": {
+          "type": "column",
+          "settings": {
+            "image": "shopify://shop_images/Superfood_Honey_In_Dressing.webp",
+            "title": "In Dressings",
+            "text": "<p>Mix into salads or combine with oils and lemon for flavorful, nutrient-rich dressings</p>",
+            "link_label": "",
+            "link": "",
+            "custom_liquid": ""
+          }
+        },
+        "column_Cw37Nr": {
+          "type": "column",
+          "settings": {
+            "image": "shopify://shop_images/webp.webp",
+            "title": "In Drinks",
+            "text": "<p>Stir into smoothies, milk or any other drink as a replacement for sugar.</p>",
+            "link_label": "",
+            "link": "",
+            "custom_liquid": ""
+          }
+        },
+        "column_pxGemt": {
+          "type": "column",
+          "settings": {
+            "image": "shopify://shop_images/Superfood_Honey_As_Topping.webp",
+            "title": "As a Topping",
+            "text": "<p>Spread on toast, pancakes, or desserts for a natural sweetener and superfood boost.</p>",
+            "link_label": "",
+            "link": "",
+            "custom_liquid": ""
+          }
+        }
+      },
+      "block_order": [
+        "column_ni7Wfy",
+        "column_mDfJin",
+        "column_Cw37Nr",
+        "column_pxGemt"
+      ],
+      "custom_css": [],
+      "name": "t:sections.multicolumn.presets.name",
+      "settings": {
+        "title": "Enjoy it with",
+        "description": "",
+        "heading_size": "h2",
+        "image_width": "full",
+        "image_ratio": "adapt",
+        "button_label": "",
+        "button_link": "",
+        "columns_desktop": 4,
+        "column_alignment": "center",
+        "background_style": "primary",
+        "color_scheme": "scheme-7a4d66da-e244-43dd-8634-bf536818eca5",
+        "swipe_on_desktop": false,
+        "columns_mobile": "2",
+        "swipe_on_mobile": false,
+        "padding_top": 0,
+        "padding_bottom": 0,
+        "section_id": "collapsible_icon_section",
+        "section_class": "collapsible_sections",
+        "custom_code": ""
+      }
+    },
+    "image_with_text_X4xaaJ": {
+      "type": "image-with-text",
+      "blocks": {
+        "heading_rrjPrn": {
+          "type": "heading",
+          "settings": {
+            "heading": "Traceability",
+            "heading_size": "h2"
+          }
+        },
+        "text_Yzw7yC": {
+          "type": "text",
+          "settings": {
+            "text": "<p>At Himalayan Cliff Honey, we are rooted in nature, people, and tradition. Every jar comes directly from native cliffside hives in Nepal, carefully harvested by experienced Gurung, Magar, and Chhetri honey hunters using centuries-old techniques.</p><p>Our cliff honey is collected once or twice a year, handled in small batches, and stored in certified units to preserve its natural enzymes, bioactive compounds, and delicate flavor with minimal processing.</p><p>Each jar includes a QR code that allows you to trace your honey back to its harvest region, season, and the beekeeper. The code also provides batch details and third-party quality testing information, ensuring full transparency from the cliff to your jar.</p>",
+            "text_style": "body"
+          }
+        }
+      },
+      "block_order": [
+        "heading_rrjPrn",
+        "text_Yzw7yC"
+      ],
+      "name": "t:sections.image-with-text.presets.name",
+      "settings": {
+        "image": "shopify://shop_images/Mask_group_ab83c3d6-d667-411f-8c14-ea9fb81c7e5d.webp",
+        "height": "adapt",
+        "desktop_image_width": "medium",
+        "layout": "image_first",
+        "image_behavior": "none",
+        "content_layout": "no-overlap",
+        "desktop_content_position": "middle",
+        "desktop_content_alignment": "left",
+        "mobile_content_alignment": "center",
+        "section_color_scheme": "scheme-7a4d66da-e244-43dd-8634-bf536818eca5",
+        "color_scheme": "scheme-7a4d66da-e244-43dd-8634-bf536818eca5",
+        "id": "",
+        "class": "collapsible_sections",
+        "padding_top": 35,
+        "padding_bottom": 35,
+        "custom_liquid": ""
+      }
+    },
+    "collapsible_manager_EmzJd4": {
+      "type": "collapsible_manager",
+      "custom_css": [
+        ".section-width {padding: 0;}",
+        "@media screen and (max-width: 767px) {.multicolumn .title-wrapper-with-link, .image-with-text__heading {margin-bottom: 12px; } .collapsible_sections {--grid-mobile-horizontal-spacing: 16px; --grid-mobile-verticle-spacing: 16px; }}"
+      ],
+      "name": "Collapsible Manager",
+      "settings": {
+        "target_class": "collapsible_sections",
+        "padding_top": 110,
+        "padding_bottom": 110
+      }
+    },
+    "product_review_video_slider_3iWDAb": {
+      "type": "product-review-video-slider",
+      "blocks": {
+        "review_yjr6ze": {
+          "type": "review",
+          "settings": {
+            "video": "shopify://files/videos/YTDown.com_Shorts_Mad-Honey-Nepal-on-Best-Food-Review-madh_Media_emGOhOeadiI_001_720p.mp4",
+            "product_1": "rukum-s-harvest-mad-honey-copy",
+            "product_2": "himalayan-cliff-honey-rukum",
+            "product_3": "",
+            "product_4": ""
+          }
+        },
+        "review_wqrqFk": {
+          "type": "review",
+          "settings": {
+            "video": "shopify://files/videos/YTDown.com_Shorts_Mad-Honey-Nepal-on-Best-Food-Review-madh_Media_emGOhOeadiI_001_720p.mp4",
+            "product_1": "lamjung-s-harvest",
+            "product_2": "himalayan-cliff-honey-jajarkot",
+            "product_3": "",
+            "product_4": ""
+          }
+        },
+        "review_Ag3AFG": {
+          "type": "review",
+          "settings": {
+            "video": "shopify://files/videos/YTDown.com_Shorts_Mad-Honey-Nepal-on-Best-Food-Review-madh_Media_emGOhOeadiI_001_720p.mp4",
+            "product_1": "himalayan-cliff-honey-rukum",
+            "product_2": "",
+            "product_3": "",
+            "product_4": ""
+          }
+        },
+        "review_nrV9T4": {
+          "type": "review",
+          "settings": {
+            "video": "shopify://files/videos/YTDown.com_Shorts_Mad-Honey-Nepal-on-Best-Food-Review-madh_Media_emGOhOeadiI_001_720p.mp4",
+            "product_1": "himalayan-cliff-honey-jajarkot",
+            "product_2": "",
+            "product_3": "",
+            "product_4": ""
+          }
+        },
+        "review_XH9byY": {
+          "type": "review",
+          "settings": {
+            "video": "shopify://files/videos/YTDown.com_Shorts_Mad-Honey-Nepal-on-Best-Food-Review-madh_Media_emGOhOeadiI_001_720p.mp4",
+            "product_1": "rukum-s-harvest-mad-honey-copy",
+            "product_2": "",
+            "product_3": "",
+            "product_4": ""
+          }
+        },
+        "review_eVXTdJ": {
+          "type": "review",
+          "settings": {
+            "video": "shopify://files/videos/YTDown.com_Shorts_Mad-Honey-Nepal-on-Best-Food-Review-madh_Media_emGOhOeadiI_001_720p.mp4",
+            "product_1": "himalayan-cliff-honey-rukum",
+            "product_2": "",
+            "product_3": "",
+            "product_4": ""
+          }
+        },
+        "review_dCWNBJ": {
+          "type": "review",
+          "settings": {
+            "video": "shopify://files/videos/YTDown.com_Shorts_Mad-Honey-Nepal-on-Best-Food-Review-madh_Media_emGOhOeadiI_001_720p.mp4",
+            "product_1": "rukum-s-harvest-mad-honey-copy",
+            "product_2": "",
+            "product_3": "",
+            "product_4": ""
+          }
+        }
+      },
+      "block_order": [
+        "review_yjr6ze",
+        "review_wqrqFk",
+        "review_Ag3AFG",
+        "review_nrV9T4",
+        "review_XH9byY",
+        "review_eVXTdJ",
+        "review_dCWNBJ"
+      ],
+      "disabled": true,
+      "name": "Product Reviews Video",
+      "settings": {
+        "color_scheme": "scheme-4",
+        "heading": "Reviewed by <strong>our users</strong>",
+        "description": "<p>Just ask our thousands of happy customers</p>",
+        "padding_top": 110,
+        "padding_bottom": 0
+      }
+    },
+    "related-products": {
+      "type": "related-products",
+      "settings": {
+        "heading": "You may also like",
+        "heading_size": "h1",
+        "products_to_show": 3,
+        "columns_desktop": 3,
+        "columns_mobile": "2",
+        "color_scheme": "scheme-4",
+        "image_ratio": "adapt",
+        "image_shape": "default",
+        "show_secondary_image": true,
+        "show_vendor": false,
+        "show_rating": true,
+        "padding_top": 0,
+        "padding_bottom": 100
+      }
+    },
+    "marquee_4ijYGi": {
+      "type": "marquee",
+      "blocks": {
+        "marquee_block_hGEXxG": {
+          "type": "marquee_block",
+          "settings": {
+            "marquee_text": "Free Shipping",
+            "marquee_image": "shopify://shop_images/Vector.svg"
+          }
+        },
+        "marquee_block_tBpCDx": {
+          "type": "marquee_block",
+          "settings": {
+            "marquee_text": "Subscribe & Save 20%",
+            "marquee_image": "shopify://shop_images/Group_ecf4023d-0d5a-4b2e-8817-6ae3b71161fe.svg"
+          }
+        },
+        "marquee_block_F8YkYm": {
+          "type": "marquee_block",
+          "settings": {
+            "marquee_text": "Backed by Certification",
+            "marquee_image": "shopify://shop_images/Layer_1_80cf97e6-2416-42c0-9203-d91b70b6d2b8.svg"
+          }
+        },
+        "marquee_block_phpt9w": {
+          "type": "marquee_block",
+          "settings": {
+            "marquee_text": "Lab Verified & Tested",
+            "marquee_image": "shopify://shop_images/Layer_1-1_65747c06-e18c-4af7-b8dd-e0c02398457f.svg"
+          }
+        },
+        "marquee_block_VRjJRz": {
+          "type": "marquee_block",
+          "settings": {
+            "marquee_text": "Free Shipping",
+            "marquee_image": "shopify://shop_images/Vector.svg"
+          }
+        },
+        "marquee_block_6cVEek": {
+          "type": "marquee_block",
+          "settings": {
+            "marquee_text": "Subscribe & Save 20%",
+            "marquee_image": "shopify://shop_images/Group_ecf4023d-0d5a-4b2e-8817-6ae3b71161fe.svg"
+          }
+        },
+        "marquee_block_E63rjV": {
+          "type": "marquee_block",
+          "settings": {
+            "marquee_text": "Backed by Certification",
+            "marquee_image": "shopify://shop_images/Layer_1_80cf97e6-2416-42c0-9203-d91b70b6d2b8.svg"
+          }
+        },
+        "marquee_block_fPAxgK": {
+          "type": "marquee_block",
+          "settings": {
+            "marquee_text": "Lab Verified & Tested",
+            "marquee_image": "shopify://shop_images/Layer_1-1_65747c06-e18c-4af7-b8dd-e0c02398457f.svg"
+          }
+        }
+      },
+      "block_order": [
+        "marquee_block_hGEXxG",
+        "marquee_block_tBpCDx",
+        "marquee_block_F8YkYm",
+        "marquee_block_phpt9w",
+        "marquee_block_VRjJRz",
+        "marquee_block_6cVEek",
+        "marquee_block_E63rjV",
+        "marquee_block_fPAxgK"
+      ],
+      "name": "Marquee Text with Image",
+      "settings": {
+        "color_scheme": "scheme-3280f7d4-14e8-4743-9865-9a5e12c941d7",
+        "seperator": "",
+        "gap_size": 40,
+        "padding_top": 0,
+        "padding_bottom": 0
+      }
+    },
+    "collapsible_content_t6QUi4": {
+      "type": "collapsible-content",
+      "blocks": {
+        "collapsible_row_HiiLHn": {
+          "type": "collapsible_row",
+          "settings": {
+            "heading": "What is Cliff Honey?",
+            "icon": "none",
+            "row_content": "<p>Cliff honey, also known as <a href=\"https://cliffhoney.com/blogs/honey-guide/mad-honey\" target=\"_blank\" title=\"mad honey\">mad honey</a>, is wild-harvested from cliffside hives at elevations of 3,000–4,000 meters. These giant honeybees prefer to choose sheer rocks as a site to build their hives, that too standing deep inside the forests of red rhododendrons, wildflowers, and medicinal herbs. Our Lamjung harvest comes from the peaks between Manaslu and Annapurna, collected by Gurung honey hunters using generations-old rope techniques passed down for centuries.</p>",
+            "page": ""
+          }
+        },
+        "collapsible_row_qjgdr4": {
+          "type": "collapsible_row",
+          "settings": {
+            "heading": "What does our honey taste like?",
+            "icon": "none",
+            "row_content": "<p>This harvest has its own signature notes: light amber color with smooth, creamy texture. The profile shows gentle floral sweetness balanced with subtle herbal undertones- reflecting the diverse high-altitude flora where bees forage. The delicate, approachable flavor makes it ideal if you are trying authentic Himalayan cliff honey for the first time.</p>",
+            "page": ""
+          }
+        },
+        "collapsible_row_taFCjT": {
+          "type": "collapsible_row",
+          "settings": {
+            "heading": "How is mad honey different from regular honey?",
+            "icon": "none",
+            "row_content": "<p>Regular honey is farm-raised, pasteurized, and filtered- commercial processing removes compounds that are sensitive to heat and filtration. Cliff honey comes from wild bees foraging on high-altitude rhododendron and therapeutic flora. Its uniqueness is in being available in the market in the raw form, without any heat treatment, additives, or processing. The thick texture, complex flavor, and natural properties cannot be replicated by commercial honey production.</p>",
+            "page": ""
+          }
+        },
+        "collapsible_row_VzTKUX": {
+          "type": "collapsible_row",
+          "settings": {
+            "heading": "What is the recommended dosage?",
+            "icon": "none",
+            "row_content": "<p>Start with a small amount (no more than one tablespoon), preferably best taken with food. Individual tolerance varies, so moderation is essential. This honey is intended for occasional use only and should not be consumed frequently or in excess.</p>",
+            "page": ""
+          }
+        },
+        "collapsible_row_dWjWWM": {
+          "type": "collapsible_row",
+          "settings": {
+            "heading": "Who should avoid consuming cliff honey?",
+            "icon": "none",
+            "row_content": "<p>Himalayan Cliff Honey must be avoided by pregnant and breastfeeding women, as no safety related studies are available. This product is also not for children under 18, further, those with heart conditions, low blood pressure, or cardiac medications require physician approval. For all users, discontinue the honey before two weeks of surgery. This product is for healthy adults only.</p>",
+            "page": ""
+          }
+        },
+        "collapsible_row_i6MWmi": {
+          "type": "collapsible_row",
+          "settings": {
+            "heading": "How should I use this honey for best results?",
+            "icon": "none",
+            "row_content": "<p>Himalayan cliff honey can be mixed with lukewarm water below 40°C- both morning or evening consumption is permitted. Don't combine the honey with alcohol. Use should remain occasional and conservative.</p>",
+            "page": ""
+          }
+        },
+        "collapsible_row_zbQHfX": {
+          "type": "collapsible_row",
+          "settings": {
+            "heading": "How should I store this honey?",
+            "icon": "none",
+            "row_content": "<p>Like regular honey, store Himalayan cliff honey at room temperature in a cool and dry place- away from direct sunlight and heat. Don’t refrigerate as it can induce crystallization. In case of crystallization, simply warm the sealed jar in lukewarm water to restore the smoothness. Use only clean and dry utensils to prevent moisture contamination.</p>",
+            "page": ""
+          }
+        },
+        "collapsible_row_yPiHyi": {
+          "type": "collapsible_row",
+          "settings": {
+            "heading": "How is our honey ethically sourced?",
+            "icon": "none",
+            "row_content": "<p>Gurung communities in central Nepal, depend on honey hunting as their primary income source. We source directly from these families, ensuring fair compensation and sustainable harvesting that protects wild bee populations. Every jar you purchase supports traditional mountain communities directly.</p>",
+            "page": ""
+          }
+        }
+      },
+      "block_order": [
+        "collapsible_row_HiiLHn",
+        "collapsible_row_qjgdr4",
+        "collapsible_row_taFCjT",
+        "collapsible_row_VzTKUX",
+        "collapsible_row_dWjWWM",
+        "collapsible_row_i6MWmi",
+        "collapsible_row_zbQHfX",
+        "collapsible_row_yPiHyi"
+      ],
+      "custom_css": [
+        ".grid__item {display: grid; gap: clamp(2px, 1.05vw, 20px) 5%; grid-template-columns: 1fr 1fr;}",
+        ".caption-with-letter-spacing {background: var(--color-extra); width: max-content; margin: 0; padding: clamp(6px, 0.63vw, 12px) clamp(8px, 0.63vw, 12px); color: #fff; letter-spacing: 0; line-height: 1.1; border-radius: 24px; text-transform: capitalize; font-size: clamp(10px, 0.84vw, 16px) !important;}",
+        "@media (max-width: 990px) {.grid__item {display: block; } .collapsible-content__header {flex-direction: column; }}"
+      ],
+      "name": "t:sections.collapsible_content.presets.name",
+      "settings": {
+        "caption": "You're not Alone",
+        "heading": "Questions <strong>Asked By You</strong>",
+        "heading_size": "h2",
+        "heading_alignment": "center",
+        "button_label": "",
+        "button_link": "",
+        "layout": "none",
+        "container_color_scheme": "scheme-4",
+        "color_scheme": "scheme-115c0f00-6e48-4035-b511-680a9158c036",
+        "open_first_collapsible_row": true,
+        "image_ratio": "adapt",
+        "desktop_layout": "image_second",
+        "padding_top": 110,
+        "padding_bottom": 110
+      }
+    },
+    "177329779494ec22c1": {
+      "type": "apps",
+      "blocks": {
+        "judge_me_reviews_review_widget_WfjeNa": {
+          "type": "shopify://apps/judge-me-reviews/blocks/review_widget/61ccd3b1-a9f2-4160-9fe9-4fec8413e5d8",
+          "settings": {
+            "review_data": "sample_data",
+            "max_width": 1200,
+            "show_shop_reviews": false,
+            "empty_state": "hide_widget"
+          }
+        }
+      },
+      "block_order": [
+        "judge_me_reviews_review_widget_WfjeNa"
+      ],
+      "settings": {
+        "include_margins": true
+      }
+    }
+  },
+  "order": [
+    "main",
+    "1766486635289de7b7",
+    "image_with_text_xj7EaR",
+    "image_with_text_h6cbC9",
+    "multicolumn_pxCwUR",
+    "multi_column_timeline_7dWadU",
+    "marquee_GqpWVL",
+    "custom_liquid_HDNkCG",
+    "image_with_text_JBgNfr",
+    "image_with_text_JHBMCa",
+    "multicolumn_nMwdV8",
+    "image_with_text_X4xaaJ",
+    "collapsible_manager_EmzJd4",
+    "product_review_video_slider_3iWDAb",
+    "related-products",
+    "marquee_4ijYGi",
+    "collapsible_content_t6QUi4",
+    "177329779494ec22c1"
+  ]
+}

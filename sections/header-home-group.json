@@ -1,0 +1,156 @@
+/*
+ * ------------------------------------------------------------
+ * IMPORTANT: The contents of this file are auto-generated.
+ *
+ * This file may be updated by the Shopify admin theme editor
+ * or related systems. Please exercise caution as any changes
+ * made to this file may be overwritten.
+ * ------------------------------------------------------------
+ */
+{
+  "name": "t:sections.header.name",
+  "type": "header",
+  "sections": {
+    "marquee_KmbjGL": {
+      "type": "marquee",
+      "blocks": {
+        "marquee_block_hGEXxG": {
+          "type": "marquee_block",
+          "settings": {
+            "marquee_text": "Free Shipping",
+            "marquee_image": "shopify://shop_images/Vector.svg"
+          }
+        },
+        "marquee_block_tBpCDx": {
+          "type": "marquee_block",
+          "settings": {
+            "marquee_text": "Subscribe & Save 20%",
+            "marquee_image": "shopify://shop_images/Group_ecf4023d-0d5a-4b2e-8817-6ae3b71161fe.svg"
+          }
+        },
+        "marquee_block_F8YkYm": {
+          "type": "marquee_block",
+          "settings": {
+            "marquee_text": "Backed by Certification",
+            "marquee_image": "shopify://shop_images/Layer_1_80cf97e6-2416-42c0-9203-d91b70b6d2b8.svg"
+          }
+        },
+        "marquee_block_phpt9w": {
+          "type": "marquee_block",
+          "settings": {
+            "marquee_text": "Lab Verified & Tested",
+            "marquee_image": "shopify://shop_images/Layer_1-1_65747c06-e18c-4af7-b8dd-e0c02398457f.svg"
+          }
+        },
+        "marquee_block_VRjJRz": {
+          "type": "marquee_block",
+          "settings": {
+            "marquee_text": "Free Shipping",
+            "marquee_image": "shopify://shop_images/Vector.svg"
+          }
+        },
+        "marquee_block_6cVEek": {
+          "type": "marquee_block",
+          "settings": {
+            "marquee_text": "Subscribe & Save 20%",
+            "marquee_image": "shopify://shop_images/Group_ecf4023d-0d5a-4b2e-8817-6ae3b71161fe.svg"
+          }
+        },
+        "marquee_block_E63rjV": {
+          "type": "marquee_block",
+          "settings": {
+            "marquee_text": "Backed by Certification",
+            "marquee_image": "shopify://shop_images/Layer_1_80cf97e6-2416-42c0-9203-d91b70b6d2b8.svg"
+          }
+        },
+        "marquee_block_fPAxgK": {
+          "type": "marquee_block",
+          "settings": {
+            "marquee_text": "Lab Verified & Tested",
+            "marquee_image": "shopify://shop_images/Layer_1-1_65747c06-e18c-4af7-b8dd-e0c02398457f.svg"
+          }
+        }
+      },
+      "block_order": [
+        "marquee_block_hGEXxG",
+        "marquee_block_tBpCDx",
+        "marquee_block_F8YkYm",
+        "marquee_block_phpt9w",
+        "marquee_block_VRjJRz",
+        "marquee_block_6cVEek",
+        "marquee_block_E63rjV",
+        "marquee_block_fPAxgK"
+      ],
+      "name": "Marquee Text with Image",
+      "settings": {
+        "color_scheme": "scheme-3280f7d4-14e8-4743-9865-9a5e12c941d7",
+        "seperator": "",
+        "gap_size": 40,
+        "padding_top": 0,
+        "padding_bottom": 0
+      }
+    },
+    "header": {
+      "type": "header",
+      "blocks": {
+        "collection_menu_tQePn7": {
+          "type": "CollectionMenu",
+          "settings": {
+            "element_name": "Shop",
+            "button_text": "Shop All",
+            "button_link": "shopify://collections/all-1",
+            "enable_accordion_sliders": false
+          }
+        },
+        "descriptive_menu_XDUYk4": {
+          "type": "DescriptiveMenu",
+          "settings": {
+            "element_name": "Learn",
+            "descriptive_image": "shopify://shop_images/Mask_group_76c492eb-6886-4cbc-b9dd-b7c1c208c6cc.webp"
+          }
+        }
+      },
+      "block_order": [
+        "collection_menu_tQePn7",
+        "descriptive_menu_XDUYk4"
+      ],
+      "custom_css": [
+        ".header--middle-left .header__inline-menu {justify-content: end;}",
+        "@media (max-width: 768px) {.header__heading-logo {max-width: 100px; } .header__heading-link {padding: 0; } .header__icon--cart .icon {width: 3.2rem; height: 3.2rem; }}"
+      ],
+      "settings": {
+        "logo_position": "middle-left",
+        "mobile_logo_position": "center",
+        "menu": "main-menu",
+        "menu_type_desktop": "mega",
+        "sticky_header_type": "always",
+        "show_line_separator": true,
+        "color_scheme": "scheme-4",
+        "menu_color_scheme": "scheme-10103a1e-674e-4118-8e6b-1dd24f22fa9c",
+        "enable_search": false,
+        "enable_country_selector": false,
+        "enable_language_selector": false,
+        "enable_customer_avatar": true,
+        "margin_bottom": 0,
+        "padding_top": 18,
+        "padding_bottom": 18
+      }
+    },
+    "custom_liquid_9qcEtg": {
+      "type": "custom-liquid",
+      "disabled": true,
+      "name": "t:sections.custom-liquid.presets.name",
+      "settings": {
+        "custom_liquid": "<style>\n#shopify-section-{{section.id}} *{\ndisplay:none;\n}\n\n.header__menu-item,.header__icons {\n    -webkit-filter: brightness(1.4);\n  -moz-filter: brightness(1.4);\n  -ms-filter: brightness(1.4);\n  -o-filter: brightness(1.4);\n  filter: brightness(1.4);\n}\n</style>",
+        "color_scheme": "",
+        "padding_top": 0,
+        "padding_bottom": 0
+      }
+    }
+  },
+  "order": [
+    "marquee_KmbjGL",
+    "header",
+    "custom_liquid_9qcEtg"
+  ]
+}

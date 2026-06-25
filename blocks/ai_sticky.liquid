@@ -1,0 +1,1160 @@
+{% doc %}
+  @prompt
+    Make a sticky ATC button with product title rating, price, variants Selectors and Subscription plan selector (default will have "one time Purchase" then other values must be real values of subscription plan available on the current product)
+    
+    Only the selected varient's  subscription plans must shown on the subscription field. If the varient is changed the the subscription plan values must also be changed as per the selected varient
+{% enddoc %}
+{% assign ai_gen_id = block.id | replace: '_', '' | downcase %}
+
+{% style %}
+    .ai-sticky-atc-{{ ai_gen_id }} {
+      display: block;
+      position: fixed;
+      bottom: 0px;
+      left: 0;
+      right: 0;
+      background-color: rgb(var(--color-background));
+      box-shadow: 0 -2px 15px rgba(0, 0, 0, 0.08);
+      z-index: 9999;
+      transform: translateY(100%);
+      transition: transform 0.3s ease;
+      padding: 12px 0;
+      pointer-events: none;
+    }
+
+    .ai-sticky-atc-{{ ai_gen_id }}.visible {
+      transform: translateY(0);
+      pointer-events: auto;
+    }
+
+    .ai-sticky-atc-container-{{ ai_gen_id }} {
+      margin: 0 auto;
+      display: grid;
+      grid-template-columns: 0.4fr  1fr max-content 0.3fr;
+      align-items: center;
+      gap: 18px;
+    }
+
+    .ai-sticky-atc-product-info-{{ ai_gen_id }} {
+      display: flex;
+      align-items: center;
+      gap: clamp(12px,0.94vw,18px);
+      grid-column: 1;
+    }
+
+    .ai-sticky-atc-image-{{ ai_gen_id }} {
+      width: clamp(48px, 4.18vw, 80px);
+      height: clamp(48px, 4.18vw, 80px);
+      border-radius: 50%;
+      overflow: hidden;
+      box-shadow: -1px -2px 23px 0px #0000001A;
+      flex-shrink: 0;
+    }
+
+    .ai-sticky-atc-image-{{ ai_gen_id }} img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+    }
+
+    .ai-sticky-atc-info-{{ ai_gen_id }} {
+      display: flex;
+      flex-direction: column;
+      gap: 2px;
+    }
+
+    .ai-sticky-atc-title-{{ ai_gen_id }} {
+      font-size: clamp(16px,1.15vw,22px);
+      font-weight: 700;
+      color: rgb(var(--color-button-text));
+      margin: 0;
+      line-height: 1;
+      letter-spacing:-1px;
+    }
+
+    .ai-sticky-atc-rating-{{ ai_gen_id }} {
+      display: flex;
+      align-items: center;
+      gap: 6px;
+    }
+
+    .ai-sticky-atc-stars-{{ ai_gen_id }} {
+      display: flex;
+      gap: 1px;
+    }
+
+    .ai-sticky-atc-star-{{ ai_gen_id }} {
+      width: clamp(12px,0.84vw, 16px);
+      height: clamp(12px,0.84vw, 16px);
+      fill: var(--color-extra);
+    }
+
+    .ai-sticky-atc-star-{{ ai_gen_id }}.empty {
+      fill: rgba(var(--color-button-text), 0.3);
+    }
+
+    .ai-sticky-atc-rating-count-{{ ai_gen_id }} {
+      font-size: clamp(8px,0.63vw,12px);
+      color:  rgba(var(--color-button-text), 1);
+    }
+
+    .ai-sticky-atc-selectors-container-{{ ai_gen_id }} {
+      display: flex;
+      align-items: center;
+      gap: clamp(4px,0.42vw,8px);
+      grid-column: 2;
+      justify-content: flex-end;
+    }
+
+    .ai-sticky-atc-selector-wrapper-{{ ai_gen_id }} {
+      position: relative;
+      flex: 1;
+      max-width: max-content;
+    }
+
+    .ai-sticky-atc-custom-select-{{ ai_gen_id }} {
+      position: relative;
+      min-width: max-content;
+      width: 20vw;
+      max-width: 242px;
+    }
+
+    @media screen and (max-width: 990px) {
+    .ai-sticky-atc-selector-wrapper-{{ ai_gen_id }}{
+      max-width:100%;
+    }
+    .ai-sticky-atc-custom-select-{{ ai_gen_id }} {
+        width: 100%;
+        max-width: 100%;
+        min-width: 100%;
+      }
+    }
+
+    .ai-sticky-atc-custom-select-trigger-{{ ai_gen_id }} {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 12px 12px 12px 30px;
+      background: #ffffff;
+      border: 1px solid rgba(var(--color-button), 0.6);
+      border-radius: 12px;
+      cursor: pointer;
+      transition: all 0.2s ease;
+      min-height: 28px;
+      position: relative;
+    }
+
+    .radio-select::before {
+      content: '';
+      position: absolute;
+      left: 8px;
+      top: 50%;
+      transform: translateY(-50%);
+      width: 16px;
+      height: 16px;
+      border: 1px solid rgba(var(--color-button-text), 0.6);
+      border-radius: 50%;
+      background-color: transparent;
+    }
+
+
+  .radio-select.selected::after {
+      content: '';
+      position: absolute;
+      left: 7px;
+      top: 50%;
+      transform: translate(50%,-50%);
+      width: 9px;
+      height: 9px;
+      background: var(--color-extra);
+      border-radius: 50%;
+    }
+
+
+    .ai-sticky-atc-custom-select-trigger-{{ ai_gen_id }}:hover {
+      border-color: rgba(var(--color-button), 1);
+    }
+
+    .ai-sticky-atc-custom-select-{{ ai_gen_id }}.active .ai-sticky-atc-custom-select-trigger-{{ ai_gen_id }} {
+      border-color: var(--color-extra);
+    }
+
+    .ai-sticky-atc-custom-select-trigger-{{ ai_gen_id }} .icon{
+      color: rgb(var(--color-button-text));
+    }
+
+    .ai-sticky-atc-select-value-{{ ai_gen_id }} {
+      font-size: clamp(12px,0.84vw, 16px);
+      letter-spacing: 0;
+      color: rgb(var(--color-button-text));
+      flex: 1;
+      line-height: 1.1;
+      text-overflow: ellipsis;
+      overflow: hidden;
+      -webkit-box-orient: vertical;
+      display: -webkit-box;
+      -webkit-line-clamp: 1;
+      word-break: break-all;
+    }
+
+    .ai-sticky-atc-custom-select-trigger-{{ ai_gen_id }} .svg-wrapper {
+      width: clamp(12px,0.84vw, 16px);
+      height: clamp(12px,0.84vw, 16px);
+      transition: transform 0.2s ease;
+      flex-shrink: 0;
+      margin-left: 8px;
+      opacity: 0.6;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+
+    .ai-sticky-atc-custom-select-trigger-{{ ai_gen_id }} .svg-wrapper svg {
+      width: 100%;
+      height: 100%;
+    }
+
+    .ai-sticky-atc-custom-select-{{ ai_gen_id }}.active .svg-wrapper {
+      transform: rotate(180deg);
+    }
+
+    .ai-sticky-atc-custom-options-{{ ai_gen_id }} {
+      position: absolute;
+      bottom: calc(100% + 4px);
+      left: 0;
+      right: 0;
+      background: #ffffff;
+      border: 1.5px solid rgba(var(--color-foreground), 0.15);
+      border-radius: 12px;
+      box-shadow: 0 8px 24px rgba(0, 0, 0, 0.12);
+      opacity: 0;
+      visibility: hidden;
+      transform: translateY(8px);
+      transition: all 0.2s ease;
+      z-index: 1000;
+      max-height: 280px;
+      overflow-y: auto;
+      padding: 8px;
+    }
+
+    .ai-sticky-atc-custom-select-{{ ai_gen_id }}.active .ai-sticky-atc-custom-options-{{ ai_gen_id }} {
+      opacity: 1;
+      visibility: visible;
+      transform: translateY(0);
+    }
+
+    .ai-sticky-atc-custom-option-{{ ai_gen_id }} {
+      display: flex;
+      align-items: center;
+      padding: 12px 0px 12px 30px;
+      cursor: pointer;
+      transition: all 0.15s ease;
+      border-radius: 10px;
+      margin-bottom: 2px;
+      letter-spacing: 0;
+      position: relative;
+    }
+
+    .ai-sticky-atc-custom-option-{{ ai_gen_id }}:hover {
+      background-color: rgba(var(--color-button), 0.1);
+    }
+
+  ]
+
+    .ai-sticky-atc-custom-option-{{ ai_gen_id }}:hover {
+      background-color: rgba(255, 140, 66, 0.06);
+    }
+
+    .ai-sticky-atc-custom-option-{{ ai_gen_id }}:last-child {
+      margin-bottom: 0;
+    }
+
+
+
+    .ai-sticky-atc-option-label-{{ ai_gen_id }} {
+      font-size: clamp(10px,0.73vw,14px);
+      letter-spacing: 0;
+      font-weight: 500;
+      color: rgb(var(--color-button-text));
+      flex: 1;
+      line-height: 1.4;
+    }
+
+    .ai-sticky-atc-custom-option-{{ ai_gen_id }}.selected .ai-sticky-atc-option-label-{{ ai_gen_id }} {
+      font-weight: 600;
+      color: rgba(var(--color-button-text), 1);
+    }
+
+    .ai-sticky-atc-select-{{ ai_gen_id }} {
+      display: none;
+    }
+
+    .ai-sticky-atc-price-wrapper-{{ ai_gen_id }} {
+      display: flex;
+      flex-direction: column;
+      align-items: flex-end;
+      gap: 2px;
+      grid-column: 3;
+    }
+
+    .ai-sticky-atc-price-line-{{ ai_gen_id }} {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      font-family: var(--font-heading-family);
+    }
+
+    .ai-sticky-atc-compare-price-{{ ai_gen_id }} {
+      font-size: clamp(12px,0.84vw, 16px);
+      color: rgba(var(--color-button-text),0.6);
+      text-decoration: line-through;
+      font-weight: 500;
+    }
+
+    .ai-sticky-atc-price-{{ ai_gen_id }} {
+      font-size: clamp(12px,0.84vw, 16px);
+      font-weight: 700;
+      color: rgb(var(--color-button-text));
+    }
+
+    .ai-sticky-atc-per-serving-{{ ai_gen_id }} {
+      font-size: 12px;
+      color: rgb(var(--color-foreground));
+      opacity: 0.6;
+      font-weight: 500;
+    }
+
+    .ai-sticky-atc-button-{{ ai_gen_id }} {
+      padding: 12px clamp(24px,1.67vw,32px);
+      background: var(--color-extra);
+      color: rgb(var(--color-button-text, 0, 0, 0));
+      border: none;
+      border-radius: 28px;
+      font-size: clamp(12px,0.94vw,18px);
+      font-weight: 500;
+      cursor: pointer;
+      transition: all 0.2s ease;
+      white-space: nowrap;
+      box-shadow: 0 4px 12px rgba(var(--color-shadow), 0.15);
+      grid-column: 4;
+      width: 100%;
+      margin-bottom:0;
+      min-height:max-content;
+    }
+
+    .ai-sticky-atc-button-{{ ai_gen_id }}:before,
+    .ai-sticky-atc-button-{{ ai_gen_id }}:after {
+      content:none;
+    }
+
+    .ai-sticky-atc-button-{{ ai_gen_id }}:hover {
+      transform: translateY(-1px);
+      box-shadow: 0 6px 16px rgba(var(--color-shadow), 0.25);
+    }
+
+    .ai-sticky-atc-button-{{ ai_gen_id }}:active {
+      transform: translateY(0);
+    }
+
+    .ai-sticky-atc-button-{{ ai_gen_id }}:disabled {
+      opacity: 0.5;
+      cursor: not-allowed;
+      transform: none;
+    }
+
+    @media screen and (max-width: 989px) {
+      .ai-sticky-atc-container-{{ ai_gen_id }} {
+        grid-template-columns: repeat(2, 1fr);
+        grid-template-rows: auto auto auto;
+        gap: 12px;
+      }
+
+      .ai-sticky-atc-product-info-{{ ai_gen_id }} {
+        grid-column: 1;
+        grid-row: 1;
+      }
+
+      .ai-sticky-atc-price-wrapper-{{ ai_gen_id }} {
+        grid-column: 2;
+        grid-row: 1;
+        align-items: flex-end;
+      }
+
+      .ai-sticky-atc-selectors-container-{{ ai_gen_id }} {
+        grid-column: 1 / 3;
+        grid-row: 2;
+      }
+
+      .ai-sticky-atc-selector-wrapper-{{ ai_gen_id }} {
+        flex: 1;
+      }
+
+      .ai-sticky-atc-button-{{ ai_gen_id }} {
+        grid-column: 1 / 3;
+        grid-row: 3;
+      }
+
+      .ai-sticky-atc-container-{{ ai_gen_id }} {
+        gap: 10px;
+      }
+
+      .radio-select{
+      padding:5px 10px;
+    }
+
+    @media screen and (max-width: 380px) {
+            .ai-sticky-atc-selectors-container-{{ ai_gen_id }} {
+        flex-direction: column;
+            }
+            .ai-sticky-atc-selector-wrapper-{{ ai_gen_id }}{
+        width:100%;
+            }
+    }
+      .radio-select::before,.radio-select.selected::after {
+        content:none;
+      }
+
+    }
+{% endstyle %}
+
+<sticky-add-to-cart-{{ ai_gen_id }}
+  class="ai-sticky-atc-{{ ai_gen_id }} color-{{ block.settings.color_scheme }}"
+  data-product-id="{{ product.id }}"
+  data-trigger-offset="{{ block.settings.trigger_offset }}"
+  {{ block.shopify_attributes }}
+>
+  <product-form>
+    <form
+      action="{{ routes.cart_add_url }}"
+      method="post"
+      class="page-width ai-sticky-atc-container-{{ ai_gen_id }}"
+      data-sticky-form
+      accept-charset="UTF-8"
+      class="form"
+      enctype="multipart/form-data"
+      novalidate="novalidate"
+      data-type="add-to-cart-form"
+    >
+      <!-- Product Info (Image + Title + Rating) -->
+      <div class="ai-sticky-atc-product-info-{{ ai_gen_id }}">
+        <div class="ai-sticky-atc-image-{{ ai_gen_id }}">
+          {% if product.featured_image %}
+            <img
+              src="{{ product.featured_image | image_url: width: 120 }}"
+              alt="{{ product.featured_image.alt | escape }}"
+              width="80"
+              height="80"
+              loading="lazy"
+            >
+          {% endif %}
+        </div>
+
+        <div class="ai-sticky-atc-info-{{ ai_gen_id }}">
+          <h3 class="ai-sticky-atc-title-{{ ai_gen_id }}">{{ product.title }}</h3>
+
+          {% if block.settings.show_rating and product.metafields.reviews.rating.value %}
+            <div class="ai-sticky-atc-rating-{{ ai_gen_id }}">
+              <div class="ai-sticky-atc-stars-{{ ai_gen_id }}">
+                {% assign rating_value = product.metafields.reviews.rating.value | round %}
+                {% for i in (1..5) %}
+                  <svg
+                    class="ai-sticky-atc-star-{{ ai_gen_id }} {% if i > rating_value %}empty{% endif %}"
+                    viewBox="0 0 20 20"
+                    xmlns="http://www.w3.org/2000/svg"
+                  >
+                    <path d="M10 15l-5.878 3.09 1.123-6.545L.489 6.91l6.572-.955L10 0l2.939 5.955 6.572.955-4.756 4.635 1.123 6.545z"/>
+                  </svg>
+                {% endfor %}
+              </div>
+              {% if product.metafields.reviews.rating_count %}
+                <span class="ai-sticky-atc-rating-count-{{ ai_gen_id }}">
+                  {{- product.metafields.reviews.rating_count }} reviews</span
+                >
+              {% endif %}
+            </div>
+          {% endif %}
+        </div>
+      </div>
+
+      <!-- Selectors Container (Variants + Subscription) -->
+      <div class="ai-sticky-atc-selectors-container-{{ ai_gen_id }}">
+        {% unless product.has_only_default_variant %}
+          {% for option in product.options_with_values %}
+            <div class="ai-sticky-atc-selector-wrapper-{{ ai_gen_id }}">
+              <div
+                class="ai-sticky-atc-custom-select-{{ ai_gen_id }}"
+                data-custom-select
+                data-option-position="{{ option.position }}"
+              >
+                <div
+                  class="radio-select selected ai-sticky-atc-custom-select-trigger-{{ ai_gen_id }}"
+                  data-select-trigger
+                >
+                  <span class="ai-sticky-atc-select-value-{{ ai_gen_id }}" data-select-value>
+                    {%- assign first_value = option.values | first -%}
+                    {%- assign option_discount = 0 -%}
+                    {%- assign has_discount = false -%}
+                    {%- for variant in product.variants -%}
+                      {%- assign option_index = option.position | minus: 1 -%}
+                      {%- if variant.options[option_index] == first_value -%}
+                        {%- if variant.compare_at_price > variant.price -%}
+                          {%- assign price_diff = variant.compare_at_price | minus: variant.price -%}
+                          {%- assign option_discount = price_diff
+                            | times: 100.0
+                            | divided_by: variant.compare_at_price
+                            | round
+                          -%}
+                          {%- if option_discount > 0 -%}
+                            {%- assign has_discount = true -%}
+                          {%- endif -%}
+                          {%- break -%}
+                        {%- endif -%}
+                      {%- endif -%}
+                    {%- endfor -%}
+                    {{- first_value -}}
+                    {%- if has_discount %} | +{{ option_discount }}% Off{% endif -%}
+                  </span>
+                  <span class="svg-wrapper">
+                    {{- 'icon-caret.svg' | inline_asset_content -}}
+                  </span>
+                </div>
+                <div class="ai-sticky-atc-custom-options-{{ ai_gen_id }}" data-select-options>
+                  {% for value in option.values %}
+                    {% assign option_discount = 0 %}
+                    {% assign has_discount = false %}
+                    {% for variant in product.variants %}
+                      {% assign option_index = option.position | minus: 1 %}
+                      {% if variant.options[option_index] == value %}
+                        {% if variant.compare_at_price > variant.price %}
+                          {% assign price_diff = variant.compare_at_price | minus: variant.price %}
+                          {% assign option_discount = price_diff
+                            | times: 100.0
+                            | divided_by: variant.compare_at_price
+                            | round
+                          %}
+                          {% if option_discount > 0 %}
+                            {% assign has_discount = true %}
+                          {% endif %}
+                          {% break %}
+                        {% endif %}
+                      {% endif %}
+                    {% endfor %}
+                    <div
+                      class="radio-select ai-sticky-atc-custom-option-{{ ai_gen_id }} {% if forloop.first %}selected{% endif %}"
+                      data-option-value="{{ value | escape }}"
+                    >
+                      <span class="ai-sticky-atc-option-label-{{ ai_gen_id }}">
+                        {{ value -}}
+                        {%- if has_discount %} | +{{ option_discount }}% Off{% endif -%}
+                      </span>
+                    </div>
+                  {% endfor %}
+                </div>
+              </div>
+              <select
+                id="sticky-option-{{ option.position }}-{{ ai_gen_id }}"
+                class="ai-sticky-atc-select-{{ ai_gen_id }}"
+                data-option-select
+                data-option-position="{{ option.position }}"
+              >
+                {% for value in option.values %}
+                  <option
+                    value="{{ value | escape }}"
+                    {% if forloop.first %}
+                      selected
+                    {% endif %}
+                  >
+                    {{ value }}
+                  </option>
+                {% endfor %}
+              </select>
+            </div>
+          {% endfor %}
+        {% endunless %}
+
+        <div class="ai-sticky-atc-selector-wrapper-{{ ai_gen_id }}">
+          <div class="ai-sticky-atc-custom-select-{{ ai_gen_id }}" data-custom-select data-subscription-select>
+            <div class="radio-select selected ai-sticky-atc-custom-select-trigger-{{ ai_gen_id }}" data-select-trigger>
+              <span class="ai-sticky-atc-select-value-{{ ai_gen_id }}" data-select-value>
+                {{- block.settings.onetime_label -}}
+              </span>
+              <span class="svg-wrapper">
+                {{- 'icon-caret.svg' | inline_asset_content -}}
+              </span>
+            </div>
+            <div class="ai-sticky-atc-custom-options-{{ ai_gen_id }}" data-select-options>
+              <div
+                class="radio-select ai-sticky-atc-custom-option-{{ ai_gen_id }} selected"
+                data-option-value="onetime"
+              >
+                <span class="ai-sticky-atc-option-label-{{ ai_gen_id }}">{{ block.settings.onetime_label }}</span>
+              </div>
+            </div>
+          </div>
+          <select
+            id="sticky-subscription-{{ ai_gen_id }}"
+            class="ai-sticky-atc-select-{{ ai_gen_id }}"
+            data-subscription-select-hidden
+          >
+            <option value="onetime">{{ block.settings.onetime_label }}</option>
+          </select>
+        </div>
+      </div>
+
+      <!-- Price -->
+      <div class="ai-sticky-atc-price-wrapper-{{ ai_gen_id }}">
+        <div class="ai-sticky-atc-price-line-{{ ai_gen_id }}">
+          {% if product.selected_or_first_available_variant.compare_at_price
+              > product.selected_or_first_available_variant.price
+          %}
+            <span class="ai-sticky-atc-compare-price-{{ ai_gen_id }}" data-compare-price>
+              {{ product.selected_or_first_available_variant.compare_at_price | money }}
+            </span>
+          {% endif %}
+          <span class="ai-sticky-atc-price-{{ ai_gen_id }}" data-price>
+            {{ product.selected_or_first_available_variant.price | money }}
+          </span>
+        </div>
+        {% if product.metafields.custom.per_serving_price %}
+          <div class="ai-sticky-atc-per-serving-{{ ai_gen_id }}">
+            {{ product.metafields.custom.serving_size }}
+          </div>
+        {% endif %}
+      </div>
+
+      <!-- Hidden Fields -->
+      <input type="hidden" name="id" data-variant-id value="{{ product.selected_or_first_available_variant.id }}">
+      <input type="hidden" name="selling_plan" data-selling-plan value="">
+
+      <!-- Add to Cart Button -->
+      <button
+        id="ProductSubmitButton-{{ai_gen_id}}"
+        type="submit"
+        name="add"
+        class="ai-sticky-atc-button-{{ ai_gen_id }} product-form__submit button button--full-width"
+        aria-haspopup="dialog"
+      >
+        {% if product.selected_or_first_available_variant.available %}
+          {{ block.settings.button_text }}
+        {% else %}
+          {{ block.settings.sold_out_text }}
+        {% endif -%}
+
+        <div class="loading__spinner hidden">
+          <svg xmlns="http://www.w3.org/2000/svg" class="spinner" viewBox="0 0 66 66">
+            <circle stroke-width="6" cx="33" cy="33" r="30" fill="none" class="path"></circle>
+          </svg>
+        </div>
+      </button>
+      {% comment %}
+        <button
+          type="submit"
+          class="ai-sticky-atc-button-{{ ai_gen_id }}"
+          data-add-to-cart
+          {% unless product.selected_or_first_available_variant.available %}
+            disabled
+          {% endunless %}
+        >
+          {% if product.selected_or_first_available_variant.available %}
+            {{ block.settings.button_text }}
+          {% else %}
+            {{ block.settings.sold_out_text }}
+          {% endif %}
+        </button>
+      {% endcomment %}
+    </form>
+  </product-form>
+</sticky-add-to-cart-{{ ai_gen_id }}>
+
+<script>
+  (function () {
+    class StickyAddToCart{{ ai_gen_id }} extends HTMLElement {
+      constructor() {
+        super();
+        this.productData = null; // { variants: [...] }
+        this.currentVariant = null;
+        this.priceElement = null;
+        this.priceLineElement = null;
+      }
+
+      connectedCallback() {
+        this.triggerOffset = parseInt(this.dataset.triggerOffset, 10) || 300;
+
+        this.form = this.querySelector('[data-sticky-form]');
+        this.variantIdInput = this.querySelector('[data-variant-id]');
+        this.sellingPlanInput = this.querySelector('[data-selling-plan]');
+
+        this.subscriptionSelect = this.querySelector('[data-subscription-select-hidden]');
+        this.subscriptionCustomSelect = this.querySelector('[data-subscription-select]');
+
+        this.optionSelects = this.querySelectorAll('[data-option-select]');
+        this.addToCartButton = this.querySelector('#ProductSubmitButton-{{ ai_gen_id }}');
+
+        this.setupCustomSelects();
+        this.setupScrollListener();
+        this.setupEventListeners();
+
+        this.hydrateFromGlobalObject();
+
+        setTimeout(() => {
+          this.updateFooterPadding();
+          this.setupResizeListener();
+        }, 200);
+      }
+
+      hydrateFromGlobalObject() {
+        var handle = this.dataset.productHandle || '';
+        var store = window.__CSP_PRODUCT_DATA__ || {};
+        var data = handle ? store[handle] : null;
+
+        // Fallback: if handle missing, try first product in store (safe for single-product pages)
+        if (!data) {
+          var keys = Object.keys(store);
+          if (keys.length) data = store[keys[0]];
+        }
+
+        if (!data || !data.variants || !data.variants.length) {
+          console.warn('Sticky ATC: __CSP_PRODUCT_DATA__ not found for handle:', handle);
+          return;
+        }
+
+        this.productData = { variants: data.variants };
+
+        // Set current variant
+        var initialId = this.variantIdInput && this.variantIdInput.value;
+        this.currentVariant =
+          this.productData.variants.find(v => String(v.id) === String(initialId)) || this.productData.variants[0];
+
+        if (this.variantIdInput) this.variantIdInput.value = this.currentVariant.id;
+
+        // Sync sticky option selects + UI to variant
+        this.syncOptionSelectsFromVariant(this.currentVariant);
+
+        // Update price/availability + subscription options
+        this.updatePrice(this.currentVariant);
+        this.updateAvailability(this.currentVariant);
+        this.updateSubscriptionOptions();
+      }
+
+      updateFooterPadding() {
+        var footer = document.querySelector('footer.footer');
+        if (footer) footer.style.paddingBottom = this.offsetHeight + 'px';
+      }
+
+      setupResizeListener() {
+        var t;
+        window.addEventListener('resize', () => {
+          clearTimeout(t);
+          t = setTimeout(() => this.updateFooterPadding(), 100);
+        });
+      }
+
+      setupScrollListener() {
+        var ticking = false;
+        var onScroll = () => {
+          if (ticking) return;
+          ticking = true;
+          window.requestAnimationFrame(() => {
+            this.handleScroll();
+            ticking = false;
+          });
+        };
+        window.addEventListener('scroll', onScroll, { passive: true });
+        this.handleScroll();
+        setTimeout(() => this.handleScroll(), 120);
+      }
+
+      handleScroll() {
+        var y = window.pageYOffset || document.documentElement.scrollTop || 0;
+        if (y > this.triggerOffset) this.classList.add('visible');
+        else this.classList.remove('visible');
+      }
+
+      setupCustomSelects() {
+        var customSelects = this.querySelectorAll('[data-custom-select]');
+
+        customSelects.forEach(select => {
+          var trigger = select.querySelector('[data-select-trigger]');
+          if (!trigger) return;
+
+          trigger.addEventListener('click', (e) => {
+            e.stopPropagation();
+            customSelects.forEach(s => { if (s !== select) s.classList.remove('active'); });
+            select.classList.toggle('active');
+          });
+        });
+
+        document.addEventListener('click', () => {
+          customSelects.forEach(s => s.classList.remove('active'));
+        });
+
+        this.bindOptionClicks();
+      }
+
+      bindOptionClicks() {
+        var nodes = this.querySelectorAll('[data-custom-select] [data-option-value]');
+        nodes.forEach(node => {
+          if (node.__stickyBound) return;
+          node.__stickyBound = true;
+
+          node.addEventListener('click', () => {
+            var parent = node.closest('[data-custom-select]');
+            if (!parent) return;
+
+            var value = node.dataset.optionValue;
+            var labelEl = node.querySelector('.ai-sticky-atc-option-label-{{ ai_gen_id }}');
+            var label = labelEl ? labelEl.textContent.trim() : value;
+
+            var optionsWrap = parent.querySelector('[data-select-options]');
+            var valueDisplay = parent.querySelector('[data-select-value]');
+
+            if (optionsWrap) {
+              optionsWrap.querySelectorAll('[data-option-value]').forEach(o => o.classList.remove('selected'));
+              node.classList.add('selected');
+            }
+            if (valueDisplay) valueDisplay.textContent = label;
+
+            // Variant option select
+            if (parent.hasAttribute('data-option-position')) {
+              var pos = parent.dataset.optionPosition;
+              var hidden = this.querySelector('[data-option-select][data-option-position="' + pos + '"]');
+              if (hidden) {
+                hidden.value = value;
+                hidden.dispatchEvent(new Event('change', { bubbles: true }));
+              }
+            }
+
+            // Subscription select
+            if (parent.hasAttribute('data-subscription-select')) {
+              this.subscriptionSelect.value = value;
+              this.subscriptionSelect.dispatchEvent(new Event('change', { bubbles: true }));
+            }
+
+            parent.classList.remove('active');
+          });
+        });
+      }
+
+      setupEventListeners() {
+        this.optionSelects.forEach(select => {
+          select.addEventListener('change', () => this.handleOptionChange());
+        });
+
+        if (this.subscriptionSelect) {
+          this.subscriptionSelect.addEventListener('change', () => this.handleSubscriptionChange());
+        }
+
+        // Optional read-only sync from main product (won’t interfere)
+        document.addEventListener('variant:change', (e) => {
+          var v = e && e.detail && e.detail.variant;
+          if (!v || !v.id || !this.productData) return;
+
+          var match = this.productData.variants.find(x => String(x.id) === String(v.id));
+          if (!match) return;
+
+          this.currentVariant = match;
+          this.variantIdInput.value = match.id;
+
+          this.syncOptionSelectsFromVariant(match);
+          this.updatePrice(match);
+          this.updateAvailability(match);
+          this.updateSubscriptionOptions();
+        });
+      }
+
+      handleOptionChange() {
+        if (!this.productData) return;
+
+        var selected = Array.from(this.optionSelects).map(s => s.value);
+
+        var variant = this.productData.variants.find(v => {
+          if (!v.options) return false;
+          for (var i = 0; i < selected.length; i++) {
+            if (String(v.options[i]) !== String(selected[i])) return false;
+          }
+          return true;
+        });
+
+        if (!variant) return;
+
+        this.currentVariant = variant;
+        this.variantIdInput.value = variant.id;
+
+        this.updatePrice(variant);
+        this.updateAvailability(variant);
+        this.updateSubscriptionOptions();
+      }
+
+      syncOptionSelectsFromVariant(variant) {
+        if (!variant || !variant.options || !this.optionSelects.length) return;
+
+        // Update hidden selects
+        this.optionSelects.forEach((select, idx) => {
+          if (variant.options[idx] != null) select.value = variant.options[idx];
+        });
+
+        // Update custom UI selection states + labels
+        this.optionSelects.forEach((select) => {
+          var pos = select.getAttribute('data-option-position');
+          var custom = this.querySelector('[data-custom-select][data-option-position="' + pos + '"]');
+          if (!custom) return;
+
+          var value = select.value;
+          var optionsWrap = custom.querySelector('[data-select-options]');
+          var valueEl = custom.querySelector('[data-select-value]');
+          if (!optionsWrap || !valueEl) return;
+
+          optionsWrap.querySelectorAll('[data-option-value]').forEach(n => n.classList.remove('selected'));
+
+          // Find matching node without CSS.escape
+          var node = null;
+          optionsWrap.querySelectorAll('[data-option-value]').forEach(n => {
+            if (String(n.dataset.optionValue) === String(value)) node = n;
+          });
+
+          if (node) {
+            node.classList.add('selected');
+            var label = node.querySelector('.ai-sticky-atc-option-label-{{ ai_gen_id }}');
+            if (label) valueEl.textContent = label.textContent.trim();
+          }
+        });
+      }
+
+      updateSubscriptionOptions() {
+        if (!this.currentVariant || !this.subscriptionSelect || !this.subscriptionCustomSelect) return;
+
+        var plans = (this.currentVariant.selling_plan && this.currentVariant.selling_plan.length)
+          ? this.currentVariant.selling_plan
+          : [];
+
+        var currentValue = this.subscriptionSelect.value;
+
+        // Hidden select rebuild
+        var frag = document.createDocumentFragment();
+        var ot = document.createElement('option');
+        ot.value = 'onetime';
+        ot.textContent = '{{ block.settings.onetime_label }}';
+        frag.appendChild(ot);
+
+        plans.forEach(p => {
+          var opt = document.createElement('option');
+          opt.value = String(p.id);
+          opt.textContent = p.name;
+          frag.appendChild(opt);
+        });
+
+        this.subscriptionSelect.innerHTML = '';
+        this.subscriptionSelect.appendChild(frag);
+
+        // Custom options rebuild
+        var customOptions = this.subscriptionCustomSelect.querySelector('[data-select-options]');
+        var customValue = this.subscriptionCustomSelect.querySelector('[data-select-value]');
+        if (!customOptions || !customValue) return;
+
+        var cfrag = document.createDocumentFragment();
+        var make = (val, text, selected) => {
+          var d = document.createElement('div');
+          d.className = 'radio-select ai-sticky-atc-custom-option-{{ ai_gen_id }}' + (selected ? ' selected' : '');
+          d.dataset.optionValue = val;
+          d.innerHTML = '<span class="ai-sticky-atc-option-label-{{ ai_gen_id }}">' + text + '</span>';
+          return d;
+        };
+
+        cfrag.appendChild(make('onetime', '{{ block.settings.onetime_label }}', true));
+        plans.forEach(p => cfrag.appendChild(make(String(p.id), p.name, false)));
+
+        customOptions.innerHTML = '';
+        customOptions.appendChild(cfrag);
+
+        this.bindOptionClicks();
+
+        // Keep selection if still valid for this variant; else reset to onetime
+        var stillValid = (currentValue !== 'onetime') && plans.some(p => String(p.id) === String(currentValue));
+
+        if (stillValid) {
+          this.subscriptionSelect.value = currentValue;
+
+          // mark selected in custom list
+          customOptions.querySelectorAll('.ai-sticky-atc-custom-option-{{ ai_gen_id }}').forEach(n => n.classList.remove('selected'));
+          customOptions.querySelectorAll('[data-option-value]').forEach(n => {
+            if (String(n.dataset.optionValue) === String(currentValue)) {
+              n.classList.add('selected');
+              var l = n.querySelector('.ai-sticky-atc-option-label-{{ ai_gen_id }}');
+              if (l) customValue.textContent = l.textContent.trim();
+            }
+          });
+        } else {
+          this.subscriptionSelect.value = 'onetime';
+          this.sellingPlanInput.value = '';
+          customValue.textContent = '{{ block.settings.onetime_label }}';
+        }
+
+        this.handleSubscriptionChange();
+      }
+
+      handleSubscriptionChange() {
+        var val = this.subscriptionSelect.value;
+
+        if (val === 'onetime') {
+          this.sellingPlanInput.value = '';
+          this.updatePrice(this.currentVariant);
+          return;
+        }
+
+        this.sellingPlanInput.value = val;
+
+        var plans = (this.currentVariant && this.currentVariant.selling_plan) ? this.currentVariant.selling_plan : [];
+        var plan = plans.find(p => String(p.id) === String(val));
+        if (plan) this.updatePriceWithPlan(plan);
+      }
+
+      updatePrice(variant) {
+        if (!this.priceElement) {
+          this.priceElement = this.querySelector('[data-price]');
+          this.priceLineElement = this.querySelector('.ai-sticky-atc-price-line-{{ ai_gen_id }}');
+        }
+
+        var compareEl = this.querySelector('[data-compare-price]');
+        if (this.priceElement) this.priceElement.textContent = this.formatMoney(variant.price);
+
+        if (variant.compare_at_price && variant.compare_at_price > variant.price) {
+          if (compareEl) {
+            compareEl.textContent = this.formatMoney(variant.compare_at_price);
+            compareEl.style.display = 'inline';
+          } else if (this.priceLineElement && this.priceElement) {
+            var n = document.createElement('span');
+            n.className = 'ai-sticky-atc-compare-price-{{ ai_gen_id }}';
+            n.setAttribute('data-compare-price', '');
+            n.textContent = this.formatMoney(variant.compare_at_price);
+            this.priceLineElement.insertBefore(n, this.priceElement);
+          }
+        } else if (compareEl) {
+          compareEl.style.display = 'none';
+        }
+      }
+
+      updatePriceWithPlan(plan) {
+        if (!this.priceElement) {
+          this.priceElement = this.querySelector('[data-price]');
+          this.priceLineElement = this.querySelector('.ai-sticky-atc-price-line-{{ ai_gen_id }}');
+        }
+
+        var compareEl = this.querySelector('[data-compare-price]');
+
+        var p = plan.price || 0;
+        var c = plan.compare_at_price || 0;
+
+        if (this.priceElement) this.priceElement.textContent = this.formatMoney(p);
+
+        if (c && c > p) {
+          if (compareEl) {
+            compareEl.textContent = this.formatMoney(c);
+            compareEl.style.display = 'inline';
+          } else if (this.priceLineElement && this.priceElement) {
+            var n = document.createElement('span');
+            n.className = 'ai-sticky-atc-compare-price-{{ ai_gen_id }}';
+            n.setAttribute('data-compare-price', '');
+            n.textContent = this.formatMoney(c);
+            this.priceLineElement.insertBefore(n, this.priceElement);
+          }
+        } else if (compareEl) {
+          compareEl.style.display = 'none';
+        }
+      }
+
+      updateAvailability(variant) {
+        if (!this.addToCartButton) return;
+
+        if (variant.available) {
+          this.addToCartButton.disabled = false;
+          this.addToCartButton.childNodes[0].nodeValue = '{{ block.settings.button_text }}';
+        } else {
+          this.addToCartButton.disabled = true;
+          this.addToCartButton.childNodes[0].nodeValue = '{{ block.settings.sold_out_text }}';
+        }
+      }
+
+      formatMoney(cents) {
+        var amt = (cents || 0) / 100;
+        return '{{ cart.currency.symbol }}' + amt.toFixed(2);
+      }
+    }
+
+    customElements.define('sticky-add-to-cart-{{ ai_gen_id }}', StickyAddToCart{{ ai_gen_id }});
+  })();
+</script>
+
+{% schema %}
+{
+  "name": "Sticky ATC",
+  "tag": null,
+  "settings": [
+    {
+      "type": "header",
+      "content": "Behavior"
+    },
+    {
+      "type": "range",
+      "id": "trigger_offset",
+      "min": 100,
+      "max": 1000,
+      "step": 50,
+      "unit": "px",
+      "label": "Scroll trigger distance",
+      "default": 300
+    },
+    {
+      "type": "header",
+      "content": "Display Settings"
+    },
+    {
+      "type": "checkbox",
+      "id": "show_rating",
+      "label": "Show product reviews",
+      "info": "Displays real product reviews from review apps",
+      "default": true
+    },
+    {
+      "type": "header",
+      "content": "Subscription Settings"
+    },
+    {
+      "type": "text",
+      "id": "onetime_label",
+      "label": "One-time purchase label",
+      "default": "One-time purchase"
+    },
+    {
+      "type": "header",
+      "content": "Button"
+    },
+    {
+      "type": "text",
+      "id": "button_text",
+      "label": "Button text",
+      "default": "Add to cart"
+    },
+    {
+      "type": "text",
+      "id": "sold_out_text",
+      "label": "Sold out text",
+      "default": "Sold out"
+    },
+    {
+      "type": "header",
+      "content": "Color Scheme"
+    },
+    {
+      "type": "color_scheme",
+      "id": "color_scheme",
+      "label": "Color scheme",
+      "default": "scheme-1"
+    }
+  ],
+  "presets": [
+    {
+      "name": "Sticky ATC"
+    }
+  ]
+}
+{% endschema %}

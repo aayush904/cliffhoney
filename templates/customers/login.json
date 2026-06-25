@@ -1,0 +1,31 @@
+/*
+ * ------------------------------------------------------------
+ * IMPORTANT: The contents of this file are auto-generated.
+ *
+ * This file may be updated by the Shopify admin theme editor
+ * or related systems. Please exercise caution as any changes
+ * made to this file may be overwritten.
+ * ------------------------------------------------------------
+ */
+{
+  "sections": {
+    "main": {
+      "type": "main-login",
+      "custom_css": [
+        "h1 {color: var(--color-extra);}",
+        "button {width: 100%;}",
+        "label {font-weight: 500;}",
+        "a {text-transform: capitalize;}",
+        ".customer:not(.account):not(.order) {margin: 70px auto 20px auto;}"
+      ],
+      "settings": {
+        "enable_shop_login_button": true,
+        "padding_top": 150,
+        "padding_bottom": 110
+      }
+    }
+  },
+  "order": [
+    "main"
+  ]
+}

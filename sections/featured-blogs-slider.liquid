@@ -1,0 +1,652 @@
+{{ 'component-slider.css' | asset_url | stylesheet_tag }}
+{{ 'component-slideshow.css' | asset_url | stylesheet_tag }}
+
+{%- liquid
+  assign per_view_desktop = section.settings.per_view_desktop | default: 1
+-%}
+
+<section
+  id="shopify-section-{{ section.id }}"
+  class="section color-{{ section.settings.color_scheme }}"
+>
+  <div class="page-width section-{{ section.id }}-padding">
+    <slider-component class="fas fas--{{ section.id }}">
+      <div class="fas__wrap">
+        <ul
+          id="Slider-{{ section.id }}"
+          class="fas__grid slider slider--everywhere grid grid--1-col"
+          role="list"
+          data-autoplay="true"
+          data-speed="{{ section.settings.change_slides_speed }}"
+          aria-label="{{ section.settings.aria_label | escape }}"
+        >
+          {%- for block in section.blocks -%}
+            {%- liquid
+              assign a = block.settings.article
+              if a == blank
+                continue
+              endif
+
+              assign minutes = 1
+              assign words = a.content | strip_html | strip | split: ' ' | size
+              assign calc = words | divided_by: 200
+              if calc > 0
+                assign minutes = calc
+              endif
+
+              assign image_obj = a.image
+              if image_obj == blank and block.settings.fallback_image != blank
+                assign image_obj = block.settings.fallback_image
+              endif
+            -%}
+
+            <li
+              id="Slide-{{ section.id }}-{{ forloop.index }}"
+              class="fas__slide slider__slide grid__item{% if forloop.first %} is-active{% endif %}"
+              role="group"
+              aria-roledescription="slide"
+              aria-hidden="{% if forloop.first %}false{% else %}true{% endif %}"
+              aria-label="{{ forloop.index }} {{ 'general.slider.of' | t | default: 'of' }} {{ section.blocks.size }}"
+              {{ block.shopify_attributes }}
+            >
+              <div class="fas__card">
+                <div class="fas__media">
+                  {%- if image_obj != blank -%}
+                    {%- liquid
+                      assign sizes = '(min-width: 990px) 40vw, 100vw'
+                      assign widths = '375, 550, 750, 990, 1200, 1500, 1800, 2400'
+                      assign h = image_obj.width | divided_by: image_obj.aspect_ratio | round
+                    -%}
+                    {{
+                      image_obj
+                      | image_url: width: 2400
+                      | image_tag:
+                        class: 'fas__img',
+                        loading: 'lazy',
+                        decoding: 'async',
+                        sizes: sizes,
+                        widths: widths,
+                        height: h
+                    }}
+                  {%- else -%}
+                    <div class="fas__img fas__img--placeholder" aria-hidden="true"></div>
+                  {%- endif -%}
+                </div>
+
+                <div class="fas__content">
+                  {%- if block.settings.kicker != blank -%}
+                    <div class="fas__kicker">{{ block.settings.kicker | escape }}</div>
+                  {%- endif -%}
+
+                  {%- if section.settings.show_read_time -%}
+                    <div class="fas__meta">{{ minutes }} min read</div>
+                  {%- endif -%}
+
+                  <h2 class="fas__title">
+                    <a href="{{ a.url }}">{{ a.title | escape }}</a>
+                  </h2>
+
+                  <a class="fas__link" href="{{ a.url }}">
+                    {{ section.settings.read_more_label | escape }}
+                    <span aria-hidden="true">→</span>
+                  </a>
+                </div>
+              </div>
+            </li>
+          {%- endfor -%}
+        </ul>
+
+        {%- if section.blocks.size > 1 -%}
+          <div class="slider-buttons fas__nav">
+            <button
+              type="button"
+              class="slider-button slider-button--prev"
+              name="previous"
+              aria-controls="Slider-{{ section.id }}"
+            >
+              <span class="visually-hidden">{{ 'general.slider.previous_slide' | t | default: 'Previous slide' }}</span>
+              {{- 'icon-caret.svg' | inline_asset_content -}}
+            </button>
+
+            {% comment %}
+              <div class="slider-counter caption" aria-hidden="true">
+                <span class="slider-counter--current">1</span>
+                <span class="slider-counter--separator"> / </span>
+                <span class="slider-counter--total">{{ section.blocks.size }}</span>
+              </div>
+            {% endcomment %}
+
+            <button
+              type="button"
+              class="slider-button slider-button--next"
+              name="next"
+              aria-controls="Slider-{{ section.id }}"
+            >
+              <span class="visually-hidden">{{ 'general.slider.next_slide' | t | default: 'Next slide' }}</span>
+              {{- 'icon-caret.svg' | inline_asset_content -}}
+            </button>
+          </div>
+        {%- endif -%}
+      </div>
+    </slider-component>
+  </div>
+
+  {%- style -%}
+    #shopify-section-{{ section.id }} .fas__nav{
+      z-index: 10;
+      pointer-events: auto;
+    }
+
+    #shopify-section-{{ section.id }} .fas__slide{
+      z-index: 0;
+    }
+
+    #shopify-section-{{ section.id }} .fas__slide.is-active{
+      z-index: 1;
+    }
+
+    .section-{{ section.id }}-padding{
+      padding-top: clamp({{ section.settings.padding_top | times: 0.54 | round: 0 }}px, {{ section.settings.padding_top | divided_by: 19.13 }}vw, {{ section.settings.padding_top }}px);
+      padding-bottom: clamp({{ section.settings.padding_bottom | times: 0.43 | round: 0 }}px, {{ section.settings.padding_bottom | divided_by: 19.13 }}vw, {{ section.settings.padding_bottom }}px);
+    }
+
+    #shopify-section-{{ section.id }} .fas__wrap{
+      position: relative;
+      border-radius: 14px;
+      overflow: hidden;
+      background: rgb(var(--color-background));
+    }
+
+    #shopify-section-{{ section.id }} .fas__grid{
+      margin: 0;
+      padding: 0;
+      list-style: none;
+      scroll-snap-type: x mandatory;
+    }
+
+    #shopify-section-{{ section.id }} .fas__slide{
+      scroll-snap-align: start;
+      width: 100%;
+    }
+
+    #shopify-section-{{ section.id }} .fas__card{
+      display: grid;
+      grid-template-columns: 1fr;
+      min-height: 320px;
+      background: rgb(var(--color-background));
+    }
+
+    #shopify-section-{{ section.id }} .fas__media{
+      position: relative;
+      width: 100%;
+      aspect-ratio: 16 / 9;
+      overflow: hidden;
+      background: rgba(var(--color-foreground), 0.06);
+      /* max-height:250px; */
+    }
+
+    #shopify-section-{{ section.id }} .fas__img{
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      display: block;
+    }
+
+    #shopify-section-{{ section.id }} .fas__img--placeholder{
+      width: 100%;
+      height: 100%;
+    }
+
+    #shopify-section-{{ section.id }} .fas__content{
+      padding: clamp(24px, 2.1vw, 40px) clamp(18px, 2.8vw, 54px) clamp(24px, 2.4vw, 46px);
+      display: flex;
+      flex-direction: column;
+      gap: 14px;
+      align-content: start;
+      justify-content: center;
+      min-height: max-content;
+    }
+
+    #shopify-section-{{ section.id }} .fas__kicker{
+      font-weight: 600;
+      letter-spacing: 0.02em;
+      opacity: 0.85;
+    }
+
+    #shopify-section-{{ section.id }} .fas__meta{
+      font-weight: 600;
+      opacity: 0.85;
+    }
+
+    #shopify-section-{{ section.id }} .fas__title{
+      margin: 0;
+      line-height: 1.05;
+      font-size: calc(var(--font-heading-scale) * clamp(2rem, 2.4vw, 4.6rem));
+
+    }
+    #shopify-section-{{ section.id }} .fas__title a{
+      letter-spacing: 0.5px;
+    }
+
+    #shopify-section-{{ section.id }} .fas__title a{
+      text-decoration: none;
+      color: rgb(var(--color-foreground));
+    }
+
+    #shopify-section-{{ section.id }} .fas__link{
+      display: inline-flex;
+      gap: 10px;
+      align-items: center;
+      text-decoration: none;
+      font-weight: 600;
+      color: rgb(var(--color-foreground));
+      margin-top: 4px;
+    }
+
+    #shopify-section-{{ section.id }} .fas__nav{
+      position: absolute;
+      right: 16px;
+      bottom: 16px;
+      display: flex;
+      gap: 10px;
+      z-index: 2;
+    }
+
+    /* Make arrows round like screenshot */
+    #shopify-section-{{ section.id }} .slider-button{
+      width: clamp(30px, 2.3vw, 44px);
+      height: clamp(30px, 2.3vw, 44px);
+      border-radius: 999px;
+      background: rgb(var(--color-background));
+      border: 0;
+      box-shadow: 0 1px 0 rgba(0,0,0,.06);
+    }
+
+    #shopify-section-{{ section.id }} .slider-button svg{
+      width: clamp(10px, 0.84vw, 16px);
+      height: clamp(10px, 0.84vw, 16px);
+    }
+
+    #shopify-section-{{ section.id }} .slider-button--next svg{
+      transform: rotate(-90deg);
+    }
+
+    #shopify-section-{{ section.id }} .slider-button--prev svg{
+      transform: rotate(90deg);
+    }
+
+    /* Fade/overlap track (NO absolute sizing issues) */
+    #shopify-section-{{ section.id }} .fas__wrap{
+      position: relative;
+      overflow: hidden;
+    }
+
+    #shopify-section-{{ section.id }} .fas__grid{
+      margin: 0;
+      padding: 0;
+      list-style: none;
+      display: grid;           /* key: overlap slides + keep height */
+      overflow: hidden;
+      cursor: grab;
+      user-select: none;
+      -webkit-user-select: none;
+      touch-action: pan-y;
+    }
+
+    #shopify-section-{{ section.id }} .fas__grid.is-dragging{
+      cursor: grabbing;
+    }
+
+    #shopify-section-{{ section.id }} .fas__grid.is-dragging a{
+      pointer-events: none;
+    }
+
+    /* All slides occupy same grid cell */
+    #shopify-section-{{ section.id }} .fas__slide{
+      grid-area: 1 / 1;
+      opacity: 0;
+      pointer-events: none;
+      transition: opacity 280ms ease;
+    }
+
+    #shopify-section-{{ section.id }} .fas__slide.is-active{
+      opacity: 1;
+      pointer-events: auto;
+    }
+
+    /* Prevent native image drag ghost */
+    #shopify-section-{{ section.id }} .fas__img{
+      -webkit-user-drag: none;
+      user-drag: none;
+    }
+
+    @media (prefers-reduced-motion: reduce){
+      #shopify-section-{{ section.id }} .fas__slide{
+        transition: none;
+      }
+    }
+
+
+
+    @media screen and (min-width: 990px){
+      #shopify-section-{{ section.id }} .fas__card{
+        grid-template-columns: 38% 62%;
+      }
+
+      #shopify-section-{{ section.id }} .fas__media{
+        aspect-ratio: auto;
+        height: 100%;
+        min-height: 0;
+      }
+    }
+
+    @media (prefers-reduced-motion: reduce){
+      #shopify-section-{{ section.id }} .fas__grid{
+        scroll-behavior: auto;
+      }
+    }
+  {%- endstyle -%}
+
+  <script>
+    (() => {
+      const sec = document.querySelector('#shopify-section-{{ section.id }}');
+      if (!sec) return;
+
+      const track = sec.querySelector('#Slider-{{ section.id }}');
+      if (!track) return;
+
+      const slides = Array.from(track.querySelectorAll('.slider__slide'));
+      if (!slides.length) return;
+
+      const prev = sec.querySelector('.slider-button--prev[aria-controls="Slider-{{ section.id }}"]');
+      const next = sec.querySelector('.slider-button--next[aria-controls="Slider-{{ section.id }}"]');
+
+      const reduce = window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+
+      const autoplay = String(track.dataset.autoplay) === 'true' && !reduce && slides.length > 1;
+      const intervalMs = Math.max(2, Number(track.dataset.speed || 6)) * 1000;
+
+      let i = Math.max(
+        0,
+        slides.findIndex((s) => s.classList.contains('is-active'))
+      );
+      let down = false;
+      let dragging = false;
+      let x0 = 0;
+      let moved = 0;
+      let pointerId = null;
+
+      let blockClickUntil = 0;
+      let t = 0,
+        resume = 0;
+
+      const mod = (n, m) => ((n % m) + m) % m;
+
+      const unlock = () => {
+        [prev, next].forEach((b) => {
+          if (!b) return;
+          b.disabled = false;
+          b.removeAttribute('disabled');
+          b.removeAttribute('aria-disabled');
+        });
+      };
+
+      const sync = () => {
+        slides.forEach((s, idx) => {
+          const on = idx === i;
+          s.classList.toggle('is-active', on);
+          s.setAttribute('aria-hidden', on ? 'false' : 'true');
+        });
+        unlock();
+      };
+
+      const go = (n) => {
+        i = mod(n, slides.length);
+        sync();
+      };
+
+      const stop = () => {
+        clearInterval(t);
+        t = 0;
+        clearTimeout(resume);
+        resume = 0;
+      };
+
+      const start = () => {
+        if (!autoplay || t) return;
+        t = setInterval(() => {
+          if (!document.hidden && !down) go(i + 1);
+        }, intervalMs);
+      };
+
+      const pause = (ms) => {
+        if (!autoplay) return;
+        stop();
+        resume = setTimeout(start, ms);
+      };
+
+      // Prevent native image/link drag ghost
+      track.addEventListener('dragstart', (e) => e.preventDefault());
+
+      // Block accidental click right after a swipe
+      track.addEventListener(
+        'click',
+        (e) => {
+          if (performance.now() < blockClickUntil) {
+            e.preventDefault();
+            e.stopPropagation();
+          }
+        },
+        true
+      );
+
+      const threshold = () => Math.min(90, Math.max(40, track.clientWidth * 0.12));
+      const dragStartPx = 6; // must move this much before we treat it as a drag
+
+      const pd = (e) => {
+        if (e.pointerType === 'mouse' && e.button !== 0) return;
+
+        down = true;
+        dragging = false;
+        moved = 0;
+        x0 = e.clientX;
+        pointerId = e.pointerId;
+
+        pause(6000);
+        // IMPORTANT: don't setPointerCapture here, or links won't click.
+      };
+
+      const pm = (e) => {
+        if (!down) return;
+
+        const dx = e.clientX - x0;
+        moved = Math.max(moved, Math.abs(dx));
+
+        // Only enter drag mode AFTER the user actually moves
+        if (!dragging && moved >= dragStartPx) {
+          dragging = true;
+          track.classList.add('is-dragging');
+          try {
+            track.setPointerCapture(pointerId);
+          } catch (_) {}
+        }
+
+        if (dragging) {
+          e.preventDefault();
+        }
+      };
+
+      const pu = (e) => {
+        if (!down) return;
+
+        down = false;
+
+        if (dragging) {
+          track.classList.remove('is-dragging');
+
+          try {
+            track.releasePointerCapture(pointerId);
+          } catch (_) {}
+
+          const dx = e.clientX - x0;
+          if (Math.abs(dx) > threshold()) {
+            go(dx < 0 ? i + 1 : i - 1);
+          }
+
+          // Block click that often fires after swipe
+          blockClickUntil = performance.now() + 350;
+        }
+
+        dragging = false;
+        pointerId = null;
+      };
+
+      const onPrev = (e) => {
+        e.preventDefault();
+        e.stopPropagation();
+        pause(6000);
+        go(i - 1);
+      };
+
+      const onNext = (e) => {
+        e.preventDefault();
+        e.stopPropagation();
+        pause(6000);
+        go(i + 1);
+      };
+
+      if (prev) prev.addEventListener('click', onPrev, { capture: true });
+      if (next) next.addEventListener('click', onNext, { capture: true });
+
+      track.addEventListener('pointerdown', pd);
+      track.addEventListener('pointermove', pm, { passive: false });
+      window.addEventListener('pointerup', pu, { passive: true });
+      window.addEventListener('pointercancel', pu, { passive: true });
+
+      sec.addEventListener('mouseenter', stop, { passive: true });
+      sec.addEventListener('mouseleave', start, { passive: true });
+      sec.addEventListener('focusin', stop);
+      sec.addEventListener('focusout', () => {
+        if (!sec.contains(document.activeElement)) start();
+      });
+
+      document.addEventListener('visibilitychange', () => {
+        if (document.hidden) stop();
+        else start();
+      });
+
+      // Keep Dawn from disabling buttons later
+      unlock();
+      setTimeout(unlock, 0);
+      setTimeout(unlock, 150);
+      setTimeout(unlock, 600);
+
+      window.addEventListener(
+        'load',
+        () => {
+          unlock();
+          sync();
+          start();
+        },
+        { passive: true }
+      );
+
+      if (window.MutationObserver) {
+        const mo = new MutationObserver(unlock);
+        if (prev) mo.observe(prev, { attributes: true, attributeFilter: ['disabled', 'aria-disabled'] });
+        if (next) mo.observe(next, { attributes: true, attributeFilter: ['disabled', 'aria-disabled'] });
+      }
+
+      sync();
+      start();
+    })();
+  </script>
+
+  {% schema %}
+{
+  "name": "Featured articles slider",
+  "tag": "section",
+  "class": "section",
+  "settings": [
+    {
+      "type": "color_scheme",
+      "id": "color_scheme",
+      "label": "t:sections.all.colors.label",
+      "default": "background-1"
+    },
+    {
+      "type": "text",
+      "id": "aria_label",
+      "label": "Accessibility label",
+      "default": "Featured articles"
+    },
+    {
+      "type": "checkbox",
+      "id": "show_read_time",
+      "label": "Show read time",
+      "default": true
+    },
+    {
+      "type": "text",
+      "id": "read_more_label",
+      "label": "Read more label",
+      "default": "Read More"
+    },
+    {
+      "type": "header",
+      "content": "t:sections.all.padding.section_padding_heading"
+    },
+    {
+      "type": "range",
+      "id": "padding_top",
+      "min": 0,
+      "max": 200,
+      "step": 2,
+      "unit": "px",
+      "label": "t:sections.all.padding.padding_top",
+      "default": 36
+    },
+    {
+      "type": "range",
+      "id": "padding_bottom",
+      "min": 0,
+      "max": 200,
+      "step": 2,
+      "unit": "px",
+      "label": "t:sections.all.padding.padding_bottom",
+      "default": 36
+    }
+  ],
+  "blocks": [
+    {
+      "type": "article",
+      "name": "Article",
+      "settings": [
+        {
+          "type": "article",
+          "id": "article",
+          "label": "Select article"
+        },
+        {
+          "type": "text",
+          "id": "kicker",
+          "label": "Kicker (optional)",
+          "default": "OLIPOP 101 • Flavors"
+        },
+        {
+          "type": "image_picker",
+          "id": "fallback_image",
+          "label": "Fallback image (if article has no image)"
+        }
+      ]
+    }
+  ],
+  "presets": [
+    {
+      "name": "Featured articles slider",
+      "blocks": [{ "type": "article" }, { "type": "article" }, { "type": "article" }]
+    }
+  ]
+}
+  {% endschema %}
+</section>

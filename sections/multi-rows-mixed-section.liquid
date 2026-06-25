@@ -1,0 +1,608 @@
+{% comment %}
+  This is a Shopify Liquid version of the SEO-friendly HTML content for the Shilajit Guide.
+  Assuming chapters are stored in a section schema or metafields.
+{% endcomment %}
+
+{% style %}
+  {% assign sid = '#shopify-section-' | append: section.id %}
+
+  {{ sid }} .main-wrapper{
+    display:flex;
+    padding:clamp(48px,5.75vw,11rem) 16px;
+    --gap:clamp(24px,2.61vw,5rem);
+    gap:var(--gap);
+    margin:0 auto;
+    --toc:25rem;
+  }
+
+  {{ sid }} .main-section{
+    width:calc(100% - var(--toc) - var(--gap));
+  }
+
+  {{ sid }} .toc-wrapper{
+    width:var(--toc);
+  }
+
+  {{ sid }} .toc{
+    width:100%;
+    padding:1.6rem;
+    border-radius:10px;
+    position:sticky;
+    top:13rem;
+    height:fit-content;
+    border: 1px solid rgba(var(--color-button), 0.6);
+    margin:0 auto;
+  }
+
+  {{ sid }} .toc h4{
+    margin:0;
+    font-weight:600;
+    font-size:clamp(18px,1.25vw,2.4rem);
+    line-height:1.3;
+  }
+
+  {{ sid }} .toc hr{
+    width:65%;
+    height:1px;
+    background:#a3a3a3;
+    margin:16px auto;
+  }
+
+  {{ sid }} .toc ul{
+    list-style:none;
+    padding:0;
+    margin:0;
+    display:flex;
+    flex-direction:column;
+    gap:10px;
+  }
+
+  {{ sid }} .toc li{
+    margin:0;
+    font-size:clamp(1.2rem,0.73vw,1.4rem);
+    letter-spacing:0;
+    line-height:17px;
+  }
+
+  {{ sid }} .toc li strong,
+  {{ sid }} .toc li b{
+    font-size:clamp(1rem,0.63vw,1.2rem);
+  }
+
+  {{ sid }} .toc a{
+    text-decoration:none;
+    color: rgba(var(--color-foreground), 1);
+  }
+
+  {{ sid }} .main{
+    flex-grow:1;
+  }
+
+  {{ sid }} .chapters,
+  {{ sid }} nav-heading{
+    width:100%;
+    margin:0 auto;
+    display:grid;
+  }
+
+  {{ sid }} .chapter_head{
+    color:#ffffff;
+    font-size:clamp(18px, 1.568vw, 30px);
+  }
+
+  {{ sid }} .chapter_title{
+    color:#ffffff;
+    font-size: clamp(1.2rem, 0.94vw, 1.8rem);
+    font-family:var(--font-body-family);
+    font-weight:400;
+  }
+
+  {{ sid }} nav-heading{
+    font-weight:700;
+    margin:var(--gap) auto;
+    font-size:3.2rem;
+    font-family:var(--font-heading-family);
+  }
+
+  {{ sid }} .chapters{
+    grid-template-columns:repeat(3, 1fr);
+    gap:clamp(8px,1.25vw,2.4rem);
+    margin-bottom:var(--gap);
+  }
+
+  {{ sid }} .chapter-card{
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    padding: clamp(12px, 1.67vw, 3.2rem);
+    border-radius: clamp(12px,1.25vw,24px);
+    border: 1px solid rgba(var(--color-button), 0.6);
+    letter-spacing: 0;
+    text-decoration: none;
+    position: relative;
+    margin-top: 0rem;
+    gap: clamp(18px,2.51vw, 48px);
+
+  }
+  {{ sid }} .chapter-card div{
+    display:flex;
+    flex-direction:column;
+    gap:clamp(10px,1.25vw, 24px);
+  }
+
+  {{ sid }} .chapter-card h4{
+    margin:0;
+    padding-right: clamp(10px,0.85vw,16px);
+    padding-bottom:clamp(8px,0.63vw,12px);
+    color:rgba(var(--color-button), 0.6);
+    font-size:clamp(1.4rem, 1.05vw, 2rem);
+    font-family:var(--font-body-family);
+    font-weight:500;
+    line-height:1;
+    border-bottom:1px solid rgba(var(--color-button), 0.2);
+    min-width:max-content;
+    width:max-content;
+  }
+
+  {{ sid }} .chapter-card h3{
+    line-height:1.2;
+    font-size:clamp(1.6rem, 1.25vw, 2.4rem);
+    margin:0;
+    font-weight:700;
+    font-family:var(--font-body-family);
+    color:rgba(var(--color-foreground), 1);
+  }
+
+  {{ sid }} .chapter-card p{
+    margin:0;
+    color:rgba(var(--color-foreground), 1);
+  }
+
+  {{ sid }} .chapter-card .btn{
+    color:rgba(var(--color-button), 0.6);
+  }
+
+  {{ sid }} .chapter-section{
+    padding:0;
+    margin-bottom:2rem;
+    border-radius:8px;
+    display:flex;
+    flex-direction:column;
+    gap:32px;
+    width:100%;
+    margin-right:auto;
+  }
+
+  {{ sid }} .chapter-section div{
+    display:flex;
+    flex-direction:column;
+    gap:32px;
+  }
+
+  {{ sid }} .chapter-section nav p *,
+  {{ sid }} .toc strong:not(:first-child){
+    font-weight:400;
+    margin:0;
+  }
+
+  {{ sid }} .chapter-section p{
+    line-height:1.4;
+    margin:0;
+  }
+
+  {{ sid }} .chapter-section nav:not(:first-child){
+    margin-top:2.4rem;
+  }
+
+  {{ sid }} .chapter-section nav{
+    display:flex;
+    padding:3.2rem 5.6rem;
+    flex-direction:column;
+    gap:10px;
+    background:var(--color-extra);
+  }
+
+  {{ sid }} .chapter-section nav h2,
+  {{ sid }} .chapter-section nav p{
+    color:#fff;
+    line-height:1.1;
+  }
+
+  {{ sid }} .chapter-section nav h2,
+  {{ sid }} .chapter-section nav p{
+    margin:0;
+  }
+
+  {{ sid }} .chapter-section nav ancor{
+    transform:translateY(-13.5rem);
+  }
+
+  {{ sid }} .chapter-section highlight,
+  {{ sid }} .custom-html highlight{
+    display:block;
+    padding:clamp(24px, 2.93vw, 5.6rem) var(--gap);
+    background:#f9f0de;
+    color:rgba(var(--color-foreground), 1);
+    line-height:1.4;
+  }
+
+  {{ sid }} .chapter-section h3{
+    font-family:Lato;
+    font-weight:700;
+    font-size:clamp(16px, 1.25vw, 24px);
+    margin-bottom:-8px;
+  }
+
+  {{ sid }} .chapter-section h4{
+    margin-bottom: 0;
+  }
+
+  {{ sid }} .chapter-section .table-container{
+    padding-bottom:8px;
+  }
+
+  @media (max-width: 1167px){
+    {{ sid }} .chapters,
+    {{ sid }} nav-heading{
+      width:100%;
+      max-width:100%;
+      padding:0 16px;
+    }
+  }
+
+  @media (max-width: 1024px){
+    {{ sid }} .chapter-section,
+    {{ sid }} .chapter-section div{
+      gap:24px;
+    }
+
+    {{ sid }} .chapter-section{
+      margin-right:0;
+      width:100%;
+    }
+
+    {{ sid }} .chapter-section highlight{
+      padding:16px;
+    }
+
+    {{ sid }} .chapter-section h3{
+      font-size:16px;
+    }
+
+    {{ sid }} .container{
+      gap:2rem;
+    }
+
+    {{ sid }} .main-wrapper{
+      --toc:18rem;
+    }
+
+    {{ sid }} .sm\:hidden{
+      display:none;
+    }
+
+    {{ sid }} .chapters{
+      grid-template-columns:repeat(2, 1fr);
+    }
+
+    {{ sid }} .main-section{
+      width:100%;
+    }
+
+    {{ sid }} .toc h4{
+      text-align:center;
+    }
+
+    {{ sid }} .toc-wrapper{
+      display:none;
+    }
+
+    {{ sid }} .toc-wrapper.active{
+      position:fixed !important;
+      left:0;
+      bottom:0;
+      margin-right:0;
+      margin-bottom:0;
+      width:100%;
+      height:100%;
+      background:#00000080;
+      z-index:99;
+      display:block;
+    }
+
+    {{ sid }} .toc{
+      position:fixed;
+      left:50%;
+      top:50%;
+      transform:translate(-50%, -50%);
+      max-width:clamp(300px, 90vw, 600px);
+      max-height:80vh;
+      overflow-y:auto;
+      border-radius:10px;
+    }
+
+    {{ sid }} .toc ul{
+      margin:0 auto;
+    }
+
+    {{ sid }} .toc ul,
+    {{ sid }} .toc li{
+      max-width:max-content;
+    }
+
+    {{ sid }} .toc-btn{
+      position:fixed;
+      left:2rem;
+      bottom:6rem;
+      height:5rem;
+      width:5rem;
+      border-radius:50%;
+      background:#68453d;
+      z-index:999;
+      display:block;
+      overflow:hidden;
+    }
+
+    {{ sid }} .toc-btn span{
+      height:2px;
+      background:#fff;
+      width:2rem;
+      display:block;
+      position:absolute;
+      top:50%;
+      left:50%;
+      transform:translate(-50%, -50%);
+      transform-origin:center center;
+      transition:all 0.5s ease;
+    }
+
+    {{ sid }} .toc-btn span:nth-child(1){
+      top:35%;
+    }
+
+    {{ sid }} .toc-btn span:nth-child(3){
+      top:65%;
+    }
+
+    {{ sid }} .toc-btn.active span:nth-child(1){
+      transform:rotate(45deg) translate(-5%, 450%);
+    }
+
+    {{ sid }} .toc-btn.active span:nth-child(2){
+      display:none;
+    }
+
+    {{ sid }} .toc-btn.active span:nth-child(3){
+      transform:rotate(-45deg) translate(-5%,-450%);
+    }
+  }
+
+  @media (max-width: 768px){
+    {{ sid }} .chapter-section{
+      max-width:100%;
+    }
+
+    {{ sid }} .main-section{
+      width:100%;
+    }
+
+    {{ sid }} .chapter-section nav{
+      padding:2.4rem 3.2rem;
+    }
+  }
+
+  @media (max-width: 450px){
+    {{ sid }} .chapters{
+      grid-template-columns:1fr;
+    }
+  }
+{% endstyle %}
+
+<div class="page-width main-wrapper color-{{ section.settings.color_scheme }}">
+  <aside class="toc-wrapper">
+    <div class="toc main-section" aria-label="Table of contents">
+      <h4 class="font-sans text-center">Table of Contents</h4>
+      <hr>
+      <nav>
+        <ul>
+          {% for block in section.blocks %}
+            {% if block.type == 'chapter' %}
+              <li>
+                <a href="#{{ block.settings.chapter | handleize }}"
+                  ><strong>{{- block.settings.chapter }}: </strong>
+                  {{- block.settings.subtitle | replace: '<strong>', '' | replace: '</strong>', '' -}}
+                </a>
+              </li>
+            {% endif %}
+          {% endfor %}
+        </ul>
+      </nav>
+    </div>
+  </aside>
+  <div class="main-section px-[16px]">
+    <div class="toc-btn sm:block fixed hidden">
+      <span></span>
+      <span></span>
+      <span></span>
+    </div>
+    {% if section.settings.custom_liquid %}
+      <div class="custom-html" style="padding:0 16px;">
+        {{ section.settings.custom_liquid }}
+      </div>
+    {% endif %}
+    <nav-heading class="nav-heading">{{ section.settings.navigation_label }}</nav-heading>
+    <section id="chapter-cards" class="chapters">
+      {% for block in section.blocks %}
+        {% if block.type == 'chapter' %}
+          <a href="#{{ block.settings.chapter | handleize}}" class="chapter-card">
+            <div>
+              <h4>
+                {{ block.settings.chapter }}
+              </h4>
+              <h3>{{ block.settings.subtitle }}</h3>
+              <p>{{ block.settings.excerpt }}</p>
+            </div>
+            <span class="btn">{{ section.settings.navigation_btn_text }}</span>
+          </a>
+        {% endif %}
+      {% endfor %}
+    </section>
+
+    <section class="chapter-section">
+      {% for block in section.blocks %}
+        {% if block.type == 'chapter' %}
+          <nav>
+            <ancor class="absolute" id="{{ block.settings.chapter | handleize }}"></ancor>
+            <div class="chapter_head h2">{{ block.settings.chapter }}</div>
+            <h2 class="chapter_title">
+              {{ block.settings.subtitle | replace: '<strong>', '' | replace: '</strong>', '' -}}
+            </h2>
+          </nav>
+        {% endif %}
+
+        {% if block.type == 'content' %}
+          {% if block.settings.richtext_content != blank %}
+            <div>{{ block.settings.richtext_content }}</div>
+          {% endif %}
+          {% if block.settings.html_content != blank %}
+            <div>{{ block.settings.html_content }}</div>
+          {% endif %}
+          {% if block.settings.image %}
+            <img
+              src="{{ block.settings.image | image_url }}"
+              alt="{{ block.settings.image_caption }}"
+              height="auto"
+              width="auto"
+            >
+          {% endif %}
+        {% endif %}
+      {% endfor %}
+    </section>
+  </div>
+</div>
+
+<script>
+  document.addEventListener('DOMContentLoaded', function () {
+    const tocBtn = document.querySelector('.toc-btn');
+    const tocWrapper = document.querySelector('.toc-wrapper');
+    const tocElement = document.querySelector('.toc');
+
+    tocBtn.addEventListener('click', function (e) {
+      e.stopPropagation();
+      tocBtn.classList.toggle('active');
+      tocWrapper.classList.toggle('active');
+    });
+
+    tocWrapper.addEventListener('click', function (e) {
+      if (!tocElement.contains(e.target) && !tocBtn.contains(e.target)) {
+        tocWrapper.classList.remove('active');
+        tocBtn.classList.remove('active');
+      }
+    });
+
+    document.addEventListener('click', function (e) {
+      if (!tocWrapper.contains(e.target)) {
+        tocBtn.classList.toggle('active');
+        tocWrapper.classList.remove('active');
+      }
+    });
+  });
+</script>
+
+{% schema %}
+{
+  "name": "Basmil Mixed Section",
+  "settings": [
+    {
+      "type": "header",
+      "content": "Table of Contents"
+    },
+    {
+      "type": "text",
+      "id": "toc_heading",
+      "label": "Table of Contents Heading"
+    },
+    {
+      "type": "header",
+      "content": "Navigation Card"
+    },
+    {
+      "type": "text",
+      "id": "navigation_label",
+      "label": "Navigation Label"
+    },
+    {
+      "type": "text",
+      "id": "navigation_btn_text",
+      "label": "Navigation Button Text"
+    },
+    {
+      "type": "color_scheme",
+      "id": "color_scheme",
+      "label": "t:sections.all.colors.label",
+      "default": "scheme-1"
+    },
+    {
+      "type": "liquid",
+      "id": "custom_liquid",
+      "label": "Custom Html/Liquid"
+    }
+  ],
+  "blocks": [
+    {
+      "type": "chapter",
+      "name": "Chapter",
+      "settings": [
+        {
+          "type": "html",
+          "id": "chapter",
+          "label": "Chapter Title(e.g., Chapter 1)"
+        },
+        {
+          "type": "html",
+          "id": "subtitle",
+          "label": "Chapter Subtitle"
+        },
+
+        {
+          "type": "textarea",
+          "id": "excerpt",
+          "label": "Chapter Excerpt"
+        }
+      ]
+    },
+    {
+      "type": "content",
+      "name": "Content",
+      "settings": [
+        {
+          "type": "richtext",
+          "id": "richtext_content",
+          "label": "Rich Text Content"
+        },
+        {
+          "type": "html",
+          "id": "html_content",
+          "label": "HTML Content"
+        },
+        {
+          "type": "image_picker",
+          "id": "image",
+          "label": "Image"
+        },
+        {
+          "type": "text",
+          "id": "image_caption",
+          "label": "Image Caption"
+        }
+      ]
+    }
+  ],
+  "presets": [
+    {
+      "name": "Basmil Mixed Section",
+      "category": "Custom"
+    }
+  ]
+}
+{% endschema %}

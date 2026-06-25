@@ -1,0 +1,321 @@
+{% style %}
+    #shopify-section-{{ section.id }} .white-label-form.container {
+    max-width: 100%;
+    background: #ffffff;
+    padding: 32px 16px;
+    border-radius: 16px;
+    max-width: calc(100% - 32px);
+    width: 780px;
+  }
+
+  #shopify-section-{{ section.id }} h3 {
+    margin-bottom: 3.2rem;
+    text-align: center;
+    font-weight: 600;
+  }
+
+  #shopify-section-{{ section.id }} .form-group,
+  #shopify-section-{{ section.id }} .g-recaptcha {
+    margin-bottom: 20px;
+  }
+
+  #shopify-section-{{ section.id }} form {
+    text-align: center;
+  }
+
+  #shopify-section-{{ section.id }} .row {
+    display: flex;
+    gap: 20px;
+    margin-bottom: 20px;
+  }
+
+  #shopify-section-{{ section.id }} .col {
+    flex: 1;
+  }
+
+  #shopify-section-{{ section.id }} input,
+  #shopify-section-{{ section.id }} textarea {
+    width: 100%;
+    padding: 1.85rem 16px;
+    background: transparent;
+    border: 2px solid #d9d9d9;
+    border-radius: 32px;
+    color: #000000;
+    margin-top: 5px;
+    font-size: clamp(10px, 0.84vw, 16px);
+    line-height: 1.2;
+  }
+
+  #shopify-section-{{ section.id }} input::placeholder,
+  #shopify-section-{{ section.id }} textarea::placeholder {
+    color: #d9d9d9;
+  }
+
+  #shopify-section-{{ section.id }} input:focus,
+  #shopify-section-{{ section.id }} textarea:focus {
+    outline: none;
+    box-shadow: none;
+    border-color: #be935f;
+  }
+
+  #shopify-section-{{ section.id }} .button {
+    width: 100%;
+    position: relative;
+    padding: 1rem 2rem;
+    font-size: 1rem;
+    font-weight: 600;
+    background-color: #be935f;
+    color: white;
+    border: none;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+  }
+
+  #shopify-section-{{ section.id }} .button:disabled {
+    background-color: #ddd;
+    cursor: not-allowed;
+  }
+
+  #shopify-section-{{ section.id }} .loading-spinner {
+    border: 4px solid #f3f3f3;
+    border-top: 4px solid #be935f;
+    border-radius: 50%;
+    width: 20px;
+    height: 20px;
+    animation: spin 2s linear infinite;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    display: none;
+  }
+
+  @keyframes spin {
+    0% {
+      transform: rotate(0deg);
+    }
+    100% {
+      transform: rotate(360deg);
+    }
+  }
+
+  #shopify-section-{{ section.id }} .error {
+    color: red;
+    font-size: 12px;
+    margin-top: 5px;
+  }
+
+  #shopify-section-{{ section.id }} .message {
+    padding: 1rem;
+    font-size: 14px;
+    margin-top: 15px;
+    border-radius: 5px;
+  }
+
+  #shopify-section-{{ section.id }} .message.success {
+    background-color: green;
+    color: white;
+  }
+
+  #shopify-section-{{ section.id }} .message.error {
+    background-color: red;
+    color: white;
+  }
+
+  .message.success{
+  background:#22c55e;
+  color:#fff;
+  padding:15px;
+  border-radius:10px;
+  margin-bottom:20px;
+  text-align:center;
+}
+
+#shopify-section-{{ section.id }} .message.success {
+  background: #22c55e;
+  color: #fff;
+  padding: 20px;
+  border-radius: 12px;
+  text-align: center;
+  margin: 20px 0;
+}
+
+#shopify-section-{{ section.id }} .message.success h3 {
+  margin: 0 0 10px;
+}
+
+#shopify-section-{{ section.id }} .message.success p {
+  margin: 0;
+}
+{% endstyle %}
+
+<div class="white-label-form form-container container">
+ <h3 class="bigger text-tertiary font-serif">
+    Personal / Company Details
+  </h3>
+
+  
+{% form 'contact' %}
+{% if form.posted_successfully? %}
+<script>
+{% comment %} sessionStorage.setItem('submittedForm', 'private'); {% endcomment %}
+</script>
+<div class="message success form-success" style="display:none;">
+  Thank you! Your application has been submitted successfully.
+</div>
+{% endif %}
+
+           <input
+        type="hidden"
+        name="contact[subject]"
+         value="PRIVATE_FORM"
+                        >
+
+         <div class="row font-sans product-option">
+           <div class="col">
+          <input
+              type="text"
+             name="contact[First Name]"
+             placeholder="First Name"
+            required
+            >
+          </div>
+
+      <div class="col">
+        <input
+          type="text"
+          name="contact[Last Name]"
+          placeholder="Last Name"
+          required
+        >
+      </div>
+    </div>
+
+    <div class="form-group font-sans product-option">
+      <input
+        type="text"
+        name="contact[Company Name]"
+        placeholder="Company Name"
+      >
+    </div>
+
+    <div class="form-group font-sans product-option">
+      <input
+        type="text"
+        name="contact[Business Address]"
+        placeholder="Business Address"
+        required
+      >
+    </div>
+
+    <div class="form-group font-sans product-option">
+      <input
+        type="text"
+        name="contact[Street Address]"
+        placeholder="Street Address"
+        required
+      >
+    </div>
+
+    <div class="row font-sans product-option">
+      <div class="col">
+        <input
+          type="text"
+          name="contact[Country]"
+          placeholder="Country"
+          required
+        >
+      </div>
+
+      <div class="col">
+        <input
+          type="text"
+          name="contact[Zip Code]"
+          placeholder="Zip Code"
+          required
+        >
+      </div>
+    </div>
+
+    <div class="row font-sans product-option">
+      <div class="col">
+        <input
+          type="text"
+          name="contact[City]"
+          placeholder="City"
+          required
+        >
+      </div>
+
+      <div class="col">
+        <input
+          type="text"
+          name="contact[State]"
+          placeholder="State"
+          required
+        >
+      </div>
+    </div>
+
+    <div class="form-group font-sans product-option">
+      <input
+        type="email"
+        name="contact[email]"
+        placeholder="Email Address"
+        required
+      >
+    </div>
+
+    <div class="form-group font-sans product-option">
+      <input
+        type="tel"
+        name="contact[Phone Number]"
+        placeholder="Phone Number"
+        required
+      >
+    </div>
+
+    <h3 class="bigger text-tertiary font-serif">
+      Details About Enquiry
+    </h3>
+
+    <div class="form-group font-sans product-option">
+      <input
+        type="text"
+        name="contact[Enquiry For]"
+        placeholder="Enquiry For"
+        required
+      >
+    </div>
+
+    <div class="form-group font-sans product-option">
+      <input
+        type="text"
+        name="contact[KGs to Order]"
+        placeholder="KGs to Order"
+        required
+      >
+    </div>
+
+    <div class="form-group font-sans product-option">
+      <textarea
+        name="contact[body]"
+        placeholder="Any Other Comments"
+        rows="5"
+      ></textarea>
+    </div>
+
+        <button
+        type="submit"
+        onclick="sessionStorage.setItem('submittedForm','private')"
+        >
+         Submit Private Label Application
+         </button>
+
+
+
+{% endform %}
+ </div>
+
+ 
+

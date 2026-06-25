@@ -1,0 +1,16 @@
+{% comment %} {%- assign heading_text = heading_text | default: block.settings.heading -%} {% endcomment %}
+
+{%- case heading_text -%}
+  {%- when 'hxxl' -%}
+    h1
+  {%- when 'hxl' -%}
+    h2
+  {%- when 'h0' -%}
+    h3
+  {%- when 'h1' -%}
+    h4
+  {%- when 'h2' -%}
+    h5
+  {%- else -%}
+    h6
+{%- endcase -%}

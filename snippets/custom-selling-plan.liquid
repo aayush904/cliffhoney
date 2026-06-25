@@ -1,0 +1,1211 @@
+{% comment %}
+  <div id="custom-purchase-selector" class="custom-purchase-selector">
+    <div class="purchase-option-header">
+      <legend class="form__label">Select Purchase Plan</legend>
+    </div>
+
+    <div class="purchase-options">
+      <div class="option">
+        <input type="radio" name="customPurchaseOption" value="subscribe_save" id="subscribe-radio">
+        <div style="">
+          <label for="subscribe-radio" class="purchase-option subscribe-option" id="subscribe-option-label">
+            <div class="custom-checkbox"><div class="checkbox-selector"></div></div>
+            <div class="option-title-container">
+              <span class="option-title"
+                >Subscribe & <save>Save</save> <span class="subscribe-percentage" id="subscribe-percentage"></span
+              ></span>
+              <span class="option-price subscribe-price" id="subscribe-price-value">$60.00</span>
+            </div>
+          </label>
+          <div class="option-content">
+            <div id="subscribe-options-container" class="subscribe-options-container hidden">
+              <div>
+                <select id="subscribe-plan-select" class="subscribe-plan-select"></select>
+              </div>
+            </div>
+            <div id="subscribe-benefits" class="subscribe-benefits hidden">
+              <ul>
+                <li>Full control, cancel anytime.</li>
+                <li>Always <span class="discount-percentage">20%</span> Off + Free shipping every order.</li>
+              </ul>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="option">
+        <input id="one-time-radio" type="radio" name="customPurchaseOption" value="one_time" checked>
+        <label for="one-time-radio" class="purchase-option one-time-option">
+          <div class="custom-checkbox"><div class="checkbox-selector"></div></div>
+          <div class="option-content">
+            <div class="option-title-container">
+              <span class="option-title">One-Time Purchase</span>
+              <span class="option-price one-time-price" id="one-time-price">
+                {{ product.selected_or_first_available_variant.price | money }}
+              </span>
+            </div>
+          </div>
+        </label>
+      </div>
+    </div>
+  </div>
+
+  <script>
+      document.addEventListener('DOMContentLoaded', function () {
+        const selectorContainer = document.querySelectorAll('product-info');
+
+        selectorContainer.forEach((productInfoTag) => {
+          // Get all required elements
+          const elements = {
+            variantIdInput: productInfoTag.querySelector('input[name="id"]'),
+            purchaseOptionRadios: productInfoTag.querySelectorAll('input[name="customPurchaseOption"]'),
+            subscribeContainer: productInfoTag.querySelector('.subscribe-options-container'),
+            planSelect: productInfoTag.querySelector('.subscribe-plan-select'),
+            subscribeBenefits: productInfoTag.querySelector('.subscribe-benefits'),
+            subscribePercentage: productInfoTag.querySelector('.subscribe-percentage'),
+            discountPercentage: productInfoTag.querySelector('.discount-percentage'),
+            oneTimePrice: productInfoTag.querySelector('.one-time-price'),
+            subscribePriceValue: productInfoTag.querySelector('.subscribe-price'),
+            subscribeRadio: productInfoTag.querySelector('[name="customPurchaseOption"]'),
+            subscribeOptionLabel: productInfoTag.querySelector('.subscribe-option'),
+            oneTimeRadio: productInfoTag.querySelector('input[name="customPurchaseOption"][value="one_time"]'),
+          };
+
+          // Helper functions
+          const helpers = {
+            parsePrice: (priceStr) => parseFloat(priceStr.replace(/[^0-9.]/g, '')),
+            extractPercentage: (text) => {
+              const match = text.match(/(\d+)%/);
+              return match ? match[0] : '0%';
+            },
+            calculateDiscount: (original, discounted) => Math.round(((original - discounted) / original) * 100) + '%',
+            variantHasSubscriptions: (variantId) => {
+              const section = productInfoTag.querySelector(
+                `.shopify_subscriptions_app_block[data-variant-id="${variantId}"]`
+              );
+              return section && section.querySelectorAll('ul.shopify_subscriptions_app_block_label_children li').length > 0;
+            },
+          };
+
+          // Update subscription options when variant changes
+          function updateSubscriptionOptions() {
+            const variantId = elements.variantIdInput.value;
+            const hasSubscriptions = helpers.variantHasSubscriptions(variantId);
+
+            // Update UI state
+            elements.subscribeRadio.disabled = !hasSubscriptions;
+            elements.subscribeOptionLabel.classList.toggle('disabled', !hasSubscriptions);
+            elements.oneTimeRadio.checked = true;
+            elements.subscribeContainer.classList.add('hidden');
+            elements.subscribeBenefits.classList.add('hidden');
+
+            const variantSection = productInfoTag.querySelector(
+              `.shopify_subscriptions_app_block[data-variant-id="${variantId}"]`
+            );
+
+            // Update one-time price
+            if (variantSection) {
+              const oneTimeRadio = variantSection.querySelector('input[data-radio-type="one_time_purchase"]');
+              if (oneTimeRadio?.dataset.variantPrice) {
+                elements.oneTimePrice.textContent = oneTimeRadio.dataset.variantPrice.split(' ')[0];
+              }
+            }
+
+            {% comment %} if (!hasSubscriptions) {
+              document.getElementById('custom-purchase-selector').style.display = 'none';
+              document.getElementById('price-{{ section.id }}').style.display = 'block';
+              return;
+            } else {
+              document.getElementById('custom-purchase-selector').style.display = 'block';
+              document.getElementById('price-{{ section.id }}').style.display = 'none';
+            } {% endcomment %}
+
+            // Update subscription options
+            elements.planSelect.innerHTML = '';
+            const planItems = variantSection.querySelectorAll('ul.shopify_subscriptions_app_block_label_children li');
+
+            planItems.forEach((item, index) => {
+              const radio = item.querySelector('input[type="radio"]');
+              if (!radio) return;
+
+              const option = document.createElement('option');
+              option.value = radio.dataset.sellingPlanId;
+              option.textContent = item.textContent.trim();
+              option.dataset.price = radio.dataset.variantPrice.split(' ')[0];
+              option.dataset.comparePrice = radio.dataset.variantCompareAtPrice.split(' ')[0];
+              elements.planSelect.appendChild(option);
+
+              // Set initial values for first option
+              if (index === 0) {
+                const original = helpers.parsePrice(
+                  radio.dataset.variantCompareAtPrice.split(' ')[0] || radio.dataset.variantPrice.split(' ')[0]
+                );
+                const discounted = helpers.parsePrice(radio.dataset.variantPrice.split(' ')[0]);
+                const percentage = helpers.calculateDiscount(original, discounted);
+
+                elements.subscribePercentage.textContent = percentage;
+                elements.discountPercentage.textContent = percentage;
+                elements.subscribePriceValue.textContent = radio.dataset.variantPrice.split(' ')[0];
+              }
+            });
+          }
+
+          // Handle subscription plan selection
+          function handleSubscriptionChange() {
+            const variantId = elements.variantIdInput.value;
+            const variantSection = productInfoTag.querySelector(
+              `.shopify_subscriptions_app_block[data-variant-id="${variantId}"]`
+            );
+            const selectedOption = elements.planSelect.options[elements.planSelect.selectedIndex];
+
+            if (!variantSection || !selectedOption?.value) return;
+
+            const planRadio = variantSection.querySelector(`input[data-selling-plan-id="${selectedOption.value}"]`);
+            if (!planRadio) return;
+
+            planRadio.click();
+            elements.subscribePriceValue.textContent = selectedOption.dataset.price;
+
+            const percentage = helpers.extractPercentage(selectedOption.textContent);
+            elements.subscribePercentage.textContent = percentage;
+            elements.discountPercentage.textContent = percentage;
+          }
+
+          // Event listeners
+          elements.purchaseOptionRadios.forEach((radio) => {
+            radio.addEventListener('change', function () {
+              const variantId = elements.variantIdInput.value;
+              const variantSection = productInfoTag.querySelector(
+                `.shopify_subscriptions_app_block[data-variant-id="${variantId}"]`
+              );
+
+              if (radio.value === 'one_time') {
+                elements.subscribeContainer.classList.add('hidden');
+                elements.subscribeBenefits.classList.add('hidden');
+                const oneTimeRadio = variantSection?.querySelector('input[data-radio-type="one_time_purchase"]');
+                if (oneTimeRadio) oneTimeRadio.click();
+              } else if (variantSection && elements.planSelect.options.length) {
+                elements.subscribeContainer.classList.remove('hidden');
+                elements.subscribeBenefits.classList.remove('hidden');
+                const firstPlanRadio = variantSection.querySelector(
+                  `input[data-selling-plan-id="${elements.planSelect.options[0].value}"]`
+                );
+                if (firstPlanRadio) firstPlanRadio.click();
+              }
+            });
+          });
+
+          elements.planSelect.addEventListener('change', handleSubscriptionChange);
+
+          // Watch for variant changes
+          if (elements.variantIdInput) {
+            new MutationObserver(() => updateSubscriptionOptions()).observe(elements.variantIdInput, {
+              attributes: true,
+              attributeFilter: ['value'],
+            });
+          }
+
+          // Initial setup
+          updateSubscriptionOptions();
+        });
+      });
+  </script>
+
+  {% style %}
+    .custom-purchase-selector {
+      margin: 1.5rem 0;
+      font-family: sans-serif;
+    }
+
+    legend{
+      font-size:2.4rem
+    }
+
+    .purchase-options {
+      display: flex;
+      flex-direction: column;
+      border: 1px solid #4b5441;
+      border-radius: 16px;
+      gap: 0;
+      overflow: hidden;
+    }
+
+    .purchase-option {
+      display: flex;
+      align-items: center;
+      cursor: pointer;
+      padding: 2.4rem 2rem;
+      justify-content: left;
+      gap: 1.2rem;
+      color: rgb(var(--color-foreground));
+      transition: all 0.2s ease;
+
+      * {
+        color: inherit;
+      }
+    }
+
+    .purchase-options .option:last-of-type .purchase-option {
+      border-top: 1px solid #4b5441;
+    }
+
+    .purchase-options input[type='radio'] {
+      display: none;
+      opacity: 0;
+      visibility: hidden;
+    }
+
+    .purchase-options .custom-checkbox {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      background-color: transparent;
+      border: 1px solid rgb(var(--color-foreground));
+      border-radius: 50%;
+      aspect-ratio: 1 / 1;
+      --width: clamp(20px,1.25vw,2.4rem);
+      width: var(--width);
+      min-width: var(--width);
+      position: relative;
+    }
+
+    .purchase-options .option:has(input[type='radio']:checked) .custom-checkbox .checkbox-selector {
+        {% comment %}
+          position: absolute;
+          top: 50%;
+          left: 50%;
+          transform: translate(-50%, -50%);
+        {% endcomment %}
+        {% comment %} content: ''; {% endcomment %}
+        display: block !important;
+        --width: clamp(10px,0.73vw,1.4rem);
+        width: var(--width);
+        min-width: var(--width);
+        aspect-ratio: 1 / 1;
+        height: auto;
+        background-color: rgb(var(--color-foreground));
+        border-radius: 50%;
+        z-index: 2;
+    }
+
+    .option-content {
+      flex: 1;
+      width: 100%;
+    }
+
+    .option-title-container {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      line-height: 1;
+      width: 100%;
+      font-weight: 500;
+      font-size: clamp(12px,0.94vw,18px);
+      color: #333;
+    }
+
+    {% comment %} @media(max-width:1280px){
+    .option-title-container {
+      font-size: 16px;
+    }
+    } {% endcomment %}
+
+    .option-price {
+      font-weight: normal;
+    }
+
+    #subscribe-percentage,
+    .discount-percentage,
+    save {
+      color: var(--color-extra) !important;
+      font-weight: 500;
+    }
+
+    .subscribe-benefits {
+      margin: auto;
+      margin-top: 0.75rem;
+      padding-bottom: 2rem;
+      width: 80%;
+    }
+
+    .subscribe-benefits ul {
+      margin: 2rem 0 0 3.2rem;
+      padding-left: 0;
+      color: #555;
+      font-size: 1.8rem;
+      line-height: 1.4;
+    }
+
+    .subscribe-benefits li {
+      margin-bottom: 0.25rem;
+      font-size: clamp(12px,0.84vw,16px);
+    }
+
+    .subscribe-options-container {
+      display: flex;
+    }
+
+    .subscribe-options-container.hidden,
+    .subscribe-benefits.hidden {
+      display: none;
+    }
+
+    .subscribe-plan-select {
+      padding: clamp(1rem, 1.05vw, 2rem) clamp(2rem, 1.67vw, 3.2rem);
+      line-height: 1;
+      border-radius: 60px;
+      border: 1px solid rgb(var(--color-foreground));
+      background-color: transparent;
+      font-size: clamp(12px,1.05vw,20px);
+      font-weight: 400;
+      appearance: none;
+      -moz-appearance: none;
+      -ms-appearance: none;
+      outline: none;
+      cursor: pointer;
+      box-shadow: none;
+      -webkit-appearance: none;
+      color: rgb(var(--color-foreground));
+      position: relative;
+      width: 100%;
+    }
+
+    .subscribe-options-container div {
+      width: 80%;
+      position: relative;
+      margin: 0 auto;
+    }
+
+    .subscribe-options-container div&&:after {
+      content: '';
+      width: clamp(8px,0.57vw,11px);
+      aspect-ratio: 1 / 1;
+      border-right: 1.5px solid #4b5441;
+      border-bottom: 1.5px solid #4b5441;
+      position: absolute;
+      right: 2.2rem;
+      top: 50%;
+      transform: translateY(-50%) rotate(45deg);
+      pointer-events: none;
+    }
+
+    .purchase-option.disabled {
+      opacity: 0.6;
+      cursor: not-allowed;
+      background-color: #f9f9f9;
+    }
+
+    .purchase-option.disabled input[type='radio'] {
+      cursor: not-allowed;
+      pointer-events: none;
+    }
+
+    .shopify_subscriptions_app_block {
+      position: absolute;
+      width: 0;
+      height: 0;
+      opacity: 0;
+      overflow: hidden;
+    }
+  {% endstyle %}
+{% endcomment %}
+
+{%- comment -%}
+  Behavior you asked:
+
+  ✅ Default: Subscribe & Save is checked (card active + body open) ✅ When Subscribe is checked: - One-time card is
+  dimmed by default, but on hover it becomes opacity:1 (preview) ✅ When One-time is checked: - Subscribe card is dimmed
+  by default - Hovering Subscribe card temporarily opens the body (smooth) + opacity:1 - Hover out closes again - BUT body
+  becomes “locked open / active” only when Subscribe is clicked (checked)
+
+  ✅ Tick list ALWAYS shows "10% OFF on recurring orders" - Free products list items render only if metafield has products
+
+  No widget syncing, no fetch, Safari 12 safe (no :has)
+{%- endcomment -%}
+
+{% style %}
+  .csp-plan {
+    margin: 1.5rem 0;
+  }
+  {% comment %} .csp-plan__header legend {
+    font-size: 2.4rem;
+  } {% endcomment %}
+
+  .csp-wrap {
+    overflow: hidden;
+    background: #fff7e9;
+  }
+
+  .csp-card {
+    overflow: visible;
+    border: 2px solid #3D393999;
+    --gap: clamp(8px,0.63vw,12px);
+    --paddingX: clamp(16px,1.25vw,24px);
+  }
+
+
+  .csp-radio {
+    position: absolute;
+    opacity: 0;
+    pointer-events: none;
+  }
+
+  .csp-top {
+    display: flex;
+    align-items: center;
+    padding: clamp(16px,1.20vw,23px) var(--paddingX);
+    padding-bottom:clamp(16px,1.67vw,3.2rem);
+    cursor: pointer;
+    gap: var(--gap);
+    user-select: none;
+  }
+
+      .csp-plan.is-body-locked .csp-card[data-card='subscribe'] .csp-top,
+  .csp-plan.is-hover-open .csp-card[data-card='subscribe'] .csp-top {
+    padding: clamp(16px,1.20vw,23px) var(--paddingX);
+    padding-bottom:clamp(12px,1vw,1.6rem);
+  }
+
+  .csp-card:first-child{
+    border-top-left-radius: 16px;
+    border-top-right-radius: 16px;
+  }
+
+  .csp-card:first-child:not(.is-active),.csp-card:first-child:not(.is-active):hover{
+    border-bottom:none;
+  }
+  .csp-card:last-child:not(.is-active),.csp-card:last-child:not(.is-active):hover{
+    border-top:none;
+  }
+
+  .csp-card:last-child{
+    border-bottom-left-radius: 16px;
+    border-bottom-right-radius: 16px;
+  }
+
+  .csp-card.is-active,.csp-card:hover {
+    border: 2px solid rgb(var(--color-button));
+    background: #fff1da;
+  }
+
+  /* default dim state controlled by JS */
+  .csp-card.is-dim .csp-top {
+    opacity: 0.55;
+    transition: opacity 0.22s ease;
+  }
+  .csp-card:not(.is-dim) .csp-top {
+    opacity: 1;
+    transition: opacity 0.22s ease;
+  }
+
+  .csp-card.is-disabled .csp-top {
+    opacity: 0.45;
+    cursor: not-allowed;
+  }
+  .csp-card.is-disabled {
+    pointer-events: none;
+  }
+
+  .csp-dot {
+    width: clamp(16px, 1.3vw, 24px);
+    height: clamp(16px, 1.3vw, 24px);
+    aspect-ratio: 1 / 1;
+    border-radius: 999px;
+    border: 2px solid #4b2a00;
+    position: relative;
+    flex: 0 0 auto;
+  }
+  .csp-dot__fill {
+    display: none;
+    position: absolute;
+    inset: clamp(2px, 0.21vw, 4px);
+    background: #4b2a00;
+    border-radius: 999px;
+  }
+  .csp-card.is-active .csp-dot__fill {
+    display: block;
+  }
+
+  .csp-head {
+    flex: 1 1 auto;
+    min-width: 0;
+  }
+
+  .csp-row {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 12px;
+  }
+
+  .csp-title {
+    font-weight: 600;
+    font-size: clamp(12px, 1.25vw, 24px);
+    color: #3b1a00;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    line-height: 1.2;
+    flex: 1 1 auto;
+    min-width: 0;
+  }
+
+  .csp-prices {
+    font-weight: 500;
+    font-size: clamp(14px, 1.1vw, 20px);
+    color: #3b1a00;
+    display: flex;
+    flex-direction: column;
+    align-items: flex-end;
+    gap: 6px;
+    min-width: 84px;
+    line-height: 1.1;
+  }
+  .csp-compare {
+    font-weight: 400;
+    opacity: 0.55;
+    text-decoration: line-through;
+  }
+
+  /* Pills no hover */
+  .csp-pill {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    padding: 6px 14px;
+    border-radius: 999px;
+    line-height: 1;
+    white-space: nowrap;
+  }
+  .csp-pill--yellow {
+    background: #ffd23a;
+    color: #2a1a00;
+  }
+  .csp-pill--brown {
+    background: #b67a00;
+    color: #fff;
+  }
+
+  {% comment %} .csp-sub-title-plain {
+    display: none;
+  }
+  .csp-sub-title-styled {
+    display: none;
+  } {% endcomment %}
+
+  .csp-body {
+    overflow: hidden;
+  }
+
+  .csp-subline {
+    font-weight: 400;
+    font-size: clamp(10px, 1.2vw, 20px);
+    color: #3b1a00;
+    opacity: 0.85;
+    margin: 0 0 clamp(12px,1vw,1.6rem);
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    justify-content: space-between;
+  }
+
+  /* Dropdown */
+  .csp-select-wrap {
+    position: relative;
+    max-width: 80%;
+  }
+
+  @media (max-width: 768px) {
+    .csp-select-wrap {
+      max-width: 100%;
+    }
+  }
+
+  hr.csp-select-divider {
+      margin-left: calc(var(--paddingX)*-1 - var(--gap));
+      width: clamp(100% + var(--paddingX)*2);
+  }
+  .csp-select-divider{
+    margin: clamp(16px,1.8vw,24px) auto;
+    background: rgba(var(--color-button),1);
+    {% comment %} width: calc(100% + clamp(16px,1.8vw,20px));
+    margin-left: clamp(-16px,-1.8vw,-20px) {% endcomment %}
+  }
+  .csp-select {
+    width: 100%;
+    padding: 14px 56px 14px 22px;
+    border-radius: 999px;
+    border: 2px solid #4b2a00;
+    background: rgba(255, 255, 255, 0.14);
+    color: #3b1a00;
+    font-weight: 400;
+    font-size: clamp(10px, 1.2vw, 20px);
+    -webkit-appearance: none;
+    -moz-appearance: none;
+    appearance: none;
+    outline: none;
+    cursor: pointer;
+  }
+  .csp-select:focus {
+    box-shadow: 0 0 0 3px rgba(242, 138, 0, 0.22);
+  }
+  .csp-select-arrow {
+    position: absolute;
+    right: 18px;
+    top: 50%;
+    width: 12px;
+    height: 12px;
+    border-right: 2px solid #4b2a00;
+    border-bottom: 2px solid #4b2a00;
+    transform: translateY(-55%) rotate(45deg);
+    pointer-events: none;
+  }
+
+  .csp-divider {
+    height: 1px;
+    background: rgba(242, 138, 0, 0.55);
+    margin: 18px 0;
+  }
+
+  /* Tick list (always visible area, even without free products) */
+  .csp-ticks {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+    font-weight: 400;
+    font-size: clamp(10px, 1.2vw, 20px);
+    color: #3b1a00;
+  }
+  .csp-tick {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+  }
+  .csp-check {
+    color: #65b400;
+    flex: 0 0 auto;
+  }
+  .csp-tick__text {
+    flex: 1 1 auto;
+    min-width: 0;
+  }
+  .csp-tick__right {
+    display: flex;
+    align-items: baseline;
+    gap: 10px;
+  }
+  .csp-tick__compare {
+    opacity: 0.55;
+    text-decoration: line-through;
+  }
+  .csp-tick__free {
+    font-weight: 700;
+  }
+
+  /* ===== Body open/close animation rules =====
+     - locked open only when subscribe checked (JS adds is-body-locked)
+     - hover-open when one-time checked and subscribe hovered (JS adds is-hover-open)
+  */
+  .csp-card[data-card='subscribe'] .csp-body {
+    max-height: 0;
+    opacity: 0;
+    transition: max-height 0.28s ease, opacity 0.22s ease, padding 0.22s ease;
+    padding:0;
+  }
+
+  .csp-plan.is-body-locked .csp-card[data-card='subscribe'] .csp-body,
+  .csp-plan.is-hover-open .csp-card[data-card='subscribe'] .csp-body {
+    max-height: 900px;
+    opacity: 1;
+    padding-top: 0;
+    padding-bottom: var(--paddingX);
+    padding-right: var(--paddingX);
+    padding-left: calc(var(--gap) + var(--paddingX) + 18px);
+  }
+
+
+
+  @media (max-width: 640px) {
+    .csp-prices {
+      min-width: 64px;
+    }
+  }
+{% endstyle %}
+
+{% comment %}
+  <script>
+    window.__CSP_PRODUCT_DATA__ = window.__CSP_PRODUCT_DATA__ || {};
+    (function () {
+      var handle = {{ product.handle | json }};
+
+      window.__CSP_PRODUCT_DATA__[handle] = {
+        id: {{ product.id | json }},
+        handle: handle,
+        title: {{ product.title | json }},
+        url: {{ product.url | json }},
+        description_html: {{ product.description | json }},
+
+        featured_image: {% if product.featured_image %}
+          {{ product.featured_image | image_url: width: 1200 | json }}
+        {% else %}
+          ""
+        {% endif %},
+
+        images: [
+          {% for img in product.images %}
+            {{ img | image_url: width: 1600 | json }}{% unless forloop.last %},{% endunless %}
+          {% endfor %}
+        ],
+
+        options: [
+          {% for opt in product.options_with_values %}
+            {
+              name: {{ opt.name | json }},
+              position: {{ opt.position | json }},
+              values: {{ opt.values | json }}
+            }{% unless forloop.last %},{% endunless %}
+          {% endfor %}
+        ],
+
+        selected_or_first_available_variant_id: {{ product.selected_or_first_available_variant.id | json }},
+
+        variants: [
+          {% for v in product.variants %}
+            {
+              id: {{ v.id | json }},
+              title: {{ v.title | json }},
+              available: {{ v.available | json }},
+              options: {{ v.options | json }},
+              price: {{ v.price | json }},
+              compare_at_price: {{ v.compare_at_price | default: 0 | json }},
+              featured_image: {% if v.featured_image %}
+                {{ v.featured_image | image_url: width: 1200 | json }}
+              {% else %}
+                null
+              {% endif %},
+
+              selling_plan: [
+                {% if v.selling_plan_allocations and v.selling_plan_allocations.size > 0 %}
+                  {% for a in v.selling_plan_allocations %}
+                    {
+                      id: {{ a.selling_plan.id | json }},
+                      name: {{ a.selling_plan.name | json }},
+                      price: {{ a.price | json }},
+                      compare_at_price: {{ a.compare_at_price | default: 0 | json }}
+                    }{% unless forloop.last %},{% endunless %}
+                  {% endfor %}
+                {% endif %}
+              ]
+            }{% unless forloop.last %},{% endunless %}
+          {% endfor %}
+        ]
+      };
+    })();
+  </script>
+{% endcomment %}
+
+{%- assign free_products = product.metafields.custom.free_products.value -%}
+
+<div class="csp-plan" data-csp-selector data-product-handle="{{ product.handle }}">
+  <div class="csp-plan__header">
+    <legend class="form__label">Select Purchase Plan</legend>
+  </div>
+
+  <div class="csp-wrap">
+    <!-- SUBSCRIBE -->
+    <div class="csp-card" data-card="subscribe">
+      <input
+        class="csp-radio"
+        type="radio"
+        name="customPurchaseOption"
+        value="subscribe_save"
+        id="csp-subscribe-{{ section.id }}"
+        checked
+      >
+
+      <label class="csp-top" for="csp-subscribe-{{ section.id }}">
+        <span class="csp-dot" aria-hidden="true"><span class="csp-dot__fill"></span></span>
+
+        <div class="csp-head">
+          <div class="csp-row">
+            <div class="csp-title">
+              <span class="csp-sub-title-plain">Subscribe &amp; save</span>
+              <span class="csp-sub-title-styled">
+                Subscribe &amp; &nbsp;<span class="csp-pill csp-pill--yellow"
+                  >Save&nbsp;<span class="csp-sub-pct"></span
+                ></span>
+              </span>
+            </div>
+
+            <div class="csp-prices">
+              <span class="csp-price csp-sub-price"></span>
+            </div>
+          </div>
+        </div>
+      </label>
+
+      <div class="csp-body">
+        <div class="csp-subline">
+          Subscribe &amp; Save | Cancel anytime
+          <span class="csp-compare csp-sub-compare"></span>
+        </div>
+
+        <div class="csp-select-wrap">
+          <select class="csp-select csp-plan-select" aria-label="Subscription frequency"></select>
+          <span class="csp-select-arrow" aria-hidden="true"></span>
+        </div>
+
+        <hr class="csp-select-divider">
+
+        <div class="csp-divider"></div>
+
+        <ul class="csp-ticks" role="list">
+          <li class="csp-tick">
+            <span class="csp-check" aria-hidden="true">
+              <svg viewBox="0 0 24 24" width="18" height="18" fill="none">
+                <circle cx="12" cy="12" r="10" stroke="currentColor" stroke-width="2"></circle>
+                <path d="M7 12.5l3 3 7-8" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"></path>
+              </svg>
+            </span>
+            <span class="csp-tick__text"><strong>10% OFF</strong> on recurring orders</span>
+            <span class="csp-tick__right"></span>
+          </li>
+
+          {%- if free_products != blank -%}
+            {%- for fp in free_products -%}
+              {%- assign fp_compare = fp.compare_at_price -%}
+              {%- if fp_compare == blank or fp_compare <= 0 -%}
+                {%- assign fp_compare = fp.price -%}
+              {%- endif -%}
+              <li class="csp-tick">
+                <span class="csp-check" aria-hidden="true">
+                  <svg viewBox="0 0 24 24" width="18" height="18" fill="none">
+                    <circle cx="12" cy="12" r="10" stroke="currentColor" stroke-width="2"></circle>
+                    <path d="M7 12.5l3 3 7-8" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"></path>
+                  </svg>
+                </span>
+
+                <span class="csp-tick__text"><strong>Free</strong> {{ fp.title }}</span>
+
+                <span class="csp-tick__right">
+                  <span class="csp-tick__compare">{{ fp_compare | money }}</span>
+                  <span class="csp-tick__free">Free</span>
+                </span>
+              </li>
+            {%- endfor -%}
+          {%- endif -%}
+        </ul>
+      </div>
+    </div>
+
+    <!-- ONE TIME -->
+    <div class="csp-card" data-card="onetime">
+      <input
+        class="csp-radio"
+        type="radio"
+        name="customPurchaseOption"
+        value="one_time"
+        id="csp-onetime-{{ section.id }}"
+      >
+
+      <label class="csp-top" for="csp-onetime-{{ section.id }}">
+        <span class="csp-dot" aria-hidden="true"><span class="csp-dot__fill"></span></span>
+
+        <div class="csp-head">
+          <div class="csp-row">
+            <div class="csp-title">
+              One-Time Purchase &nbsp;<span class="csp-pill csp-pill--brown"
+                >Save&nbsp;<span class="csp-ot-pct"></span
+              ></span>
+            </div>
+
+            <div class="csp-prices">
+              <span class="csp-price csp-ot-price"></span>
+              <span class="csp-compare csp-ot-compare"></span>
+            </div>
+          </div>
+        </div>
+      </label>
+    </div>
+  </div>
+</div>
+
+<script>
+  (function () {
+    if (window.__CSP_PLAN_SELECTOR_HOVER_V6__) return;
+    window.__CSP_PLAN_SELECTOR_HOVER_V6__ = true;
+
+    function money(cents) {
+      try {
+        if (window.Shopify && typeof Shopify.formatMoney === 'function') {
+          return Shopify.formatMoney(cents, Shopify.money_format || '{{amount}}');
+        }
+      } catch (e) {}
+      return '$' + (cents / 100).toFixed(2);
+    }
+
+    function pctNumber(compare, price) {
+      if (!compare || !price || compare <= price) return 0;
+      return Math.round(((compare - price) / compare) * 100);
+    }
+
+    function getVariant(data, id) {
+      if (!data || !data.variants) return null;
+      for (var i = 0; i < data.variants.length; i++) {
+        if (String(data.variants[i].id) === String(id)) return data.variants[i];
+      }
+      return null;
+    }
+
+    function findForm(productInfo) {
+      return (
+        productInfo.querySelector('form[action^="/cart/add"]') ||
+        productInfo.querySelector('product-form form') ||
+        productInfo.querySelector('form')
+      );
+    }
+
+    function ensureSellingPlanInput(form) {
+      if (!form) return null;
+      var input = form.querySelector('input[name="selling_plan"]');
+      if (!input) {
+        input = document.createElement('input');
+        input.type = 'hidden';
+        input.name = 'selling_plan';
+        input.value = '';
+        form.appendChild(input);
+      }
+      return input;
+    }
+
+    function setElDisplay(el, show) {
+      if (!el) return;
+      el.style.display = show ? '' : 'none';
+    }
+
+    function init(productInfo) {
+      var root = productInfo.querySelector('[data-csp-selector]');
+      if (!root) return;
+
+      var handle = root.getAttribute('data-product-handle');
+      var data = window.__CSP_PRODUCT_DATA__ && window.__CSP_PRODUCT_DATA__[handle];
+      if (!data) return;
+
+      var variantIdInput = productInfo.querySelector('input[name="id"]');
+      if (!variantIdInput) return;
+
+      var form = findForm(productInfo);
+      var sellingPlanInput = ensureSellingPlanInput(form);
+
+      var subRadio = root.querySelector('input[value="subscribe_save"]');
+      var otRadio = root.querySelector('input[value="one_time"]');
+
+      var subCard = root.querySelector('[data-card="subscribe"]');
+      var otCard = root.querySelector('[data-card="onetime"]');
+
+      var planSel = root.querySelector('.csp-plan-select');
+
+      var subPrice = root.querySelector('.csp-sub-price');
+      var subComp = root.querySelector('.csp-sub-compare');
+      var subPctEl = root.querySelector('.csp-sub-pct');
+      var subPill = root.querySelector('.csp-sub-title-styled .csp-pill');
+
+      var subPlain = root.querySelector('.csp-sub-title-plain');
+      var subStyled = root.querySelector('.csp-sub-title-styled');
+
+      var otPrice = root.querySelector('.csp-ot-price');
+      var otComp = root.querySelector('.csp-ot-compare');
+      var otPctEl = root.querySelector('.csp-ot-pct');
+      var otPill = root.querySelector('[data-card="onetime"] .csp-pill--brown');
+
+      var hoverOpenTimer = null;
+
+      function setSubscribeTitleMode(hasPlans) {
+        // If no subscription: show plain title only (no styling on "save")
+        setElDisplay(subPlain, !hasPlans);
+        setElDisplay(subStyled, hasPlans);
+      }
+
+      function fillPlans(variant) {
+        planSel.innerHTML = '';
+        var plans = variant && variant.selling_plan ? variant.selling_plan : [];
+        var hasPlans = !!(plans && plans.length);
+
+        setSubscribeTitleMode(hasPlans);
+
+        if (!hasPlans) {
+          subRadio.disabled = true;
+          subCard.classList.add('is-disabled');
+          subPrice.textContent = '';
+          subComp.textContent = '';
+          if (subPctEl) subPctEl.textContent = '';
+          setElDisplay(subPill, false);
+          return false;
+        }
+
+        subRadio.disabled = false;
+        subCard.classList.remove('is-disabled');
+
+        for (var i = 0; i < plans.length; i++) {
+          var p = plans[i];
+          var opt = document.createElement('option');
+          opt.value = String(p.id);
+          opt.textContent = p.name || 'Delivery plan ' + p.id;
+          opt.dataset.price = String(p.price || 0);
+          opt.dataset.compare = String(p.compare_at_price || 0);
+          planSel.appendChild(opt);
+        }
+
+        if (planSel.selectedIndex < 0) planSel.selectedIndex = 0;
+        return true;
+      }
+
+      function paintOneTime(variant) {
+        var p = variant ? variant.price || 0 : 0;
+        var c = variant ? variant.compare_at_price || 0 : 0;
+
+        if (otPrice) otPrice.textContent = p ? money(p) : '';
+        if (otComp) otComp.textContent = c && c > p ? money(c) : '';
+
+        var s = pctNumber(c, p);
+        if (otPctEl) otPctEl.textContent = s ? s + '%' : '';
+        // ✅ If save < 1 => hide the pill entirely
+        setElDisplay(otPill, s >= 1);
+      }
+
+      function paintSubscribe(variant) {
+        var oneTime = variant ? variant.price || 0 : 0;
+
+        var opt = planSel.options[planSel.selectedIndex];
+        if (!opt) {
+          setElDisplay(subPill, false);
+          return;
+        }
+
+        var sp = parseInt(opt.dataset.price || '0', 10) || 0;
+        var sc = parseInt(opt.dataset.compare || '0', 10) || 0;
+        if (!sc) sc = oneTime;
+
+        if (subPrice) subPrice.textContent = sp ? money(sp) : '';
+        if (subComp) subComp.textContent = sc > sp ? money(sc) : '';
+
+        var s = pctNumber(sc, sp);
+        if (subPctEl) subPctEl.textContent = s ? s + '%' : '';
+        // ✅ If save < 1 => hide the pill entirely
+        setElDisplay(subPill, s >= 1);
+      }
+
+      function setActiveState() {
+        if (subRadio.checked) {
+          root.classList.remove('is-hover-open');
+          subCard.classList.add('is-active');
+          otCard.classList.remove('is-active');
+          subCard.classList.remove('is-dim');
+          otCard.classList.add('is-dim');
+          root.classList.add('is-sub-checked');
+          root.classList.remove('is-ot-checked');
+        } else {
+          subCard.classList.remove('is-active');
+          otCard.classList.add('is-active');
+          subCard.classList.add('is-dim');
+          otCard.classList.remove('is-dim');
+          root.classList.remove('is-sub-checked');
+          root.classList.add('is-ot-checked');
+        }
+
+        if (subRadio.checked) root.classList.add('is-body-locked');
+        else root.classList.remove('is-body-locked');
+
+        if (sellingPlanInput) {
+          sellingPlanInput.value = subRadio.checked && planSel && planSel.value ? planSel.value : '';
+        }
+      }
+
+      function render() {
+        var variant = getVariant(data, variantIdInput.value);
+
+        paintOneTime(variant);
+
+        var hasPlans = fillPlans(variant);
+        if (hasPlans) paintSubscribe(variant);
+
+        if (!hasPlans) {
+          subRadio.checked = false;
+          otRadio.checked = true;
+          if (sellingPlanInput) sellingPlanInput.value = '';
+        } else {
+          // Default subscribe checked (your HTML already checked)
+          if (!subRadio.checked && !otRadio.checked) subRadio.checked = true;
+        }
+
+        setActiveState();
+      }
+
+      function attachHoverPreview() {
+        subCard.addEventListener('mouseenter', function () {
+          if (subRadio.disabled) return;
+          if (otRadio.checked) {
+            clearTimeout(hoverOpenTimer);
+            root.classList.add('is-hover-open');
+            subCard.classList.remove('is-dim');
+          }
+        });
+
+        subCard.addEventListener('mouseleave', function () {
+          if (otRadio.checked) {
+            clearTimeout(hoverOpenTimer);
+            hoverOpenTimer = setTimeout(function () {
+              root.classList.remove('is-hover-open');
+            }, 80);
+          }
+        });
+
+        otCard.addEventListener('mouseenter', function () {
+          if (subRadio.checked) otCard.classList.remove('is-dim');
+        });
+
+        otCard.addEventListener('mouseleave', function () {
+          if (subRadio.checked) otCard.classList.add('is-dim');
+        });
+      }
+
+      root.addEventListener('change', function (e) {
+        if (e.target === subRadio || e.target === otRadio) {
+          root.classList.remove('is-hover-open');
+          setActiveState();
+          return;
+        }
+
+        if (e.target === planSel) {
+          if (!subRadio.disabled) subRadio.checked = true;
+          paintSubscribe(getVariant(data, variantIdInput.value));
+          setActiveState();
+        }
+      });
+
+      document.addEventListener('variant:change', function (e) {
+        if (e && e.target && productInfo.contains(e.target)) render();
+      });
+
+      var last = variantIdInput.value;
+      setInterval(function () {
+        var now = variantIdInput.value;
+        if (now !== last) {
+          last = now;
+          render();
+        }
+      }, 200);
+
+      attachHoverPreview();
+      render();
+    }
+
+    document.addEventListener('product-info:loaded', function () {
+      var infos = document.querySelectorAll('product-info');
+      for (var i = 0; i < infos.length; i++) init(infos[i]);
+    });
+  })();
+</script>

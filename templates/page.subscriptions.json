@@ -1,0 +1,231 @@
+/*
+ * ------------------------------------------------------------
+ * IMPORTANT: The contents of this file are auto-generated.
+ *
+ * This file may be updated by the Shopify admin theme editor
+ * or related systems. Please exercise caution as any changes
+ * made to this file may be overwritten.
+ * ------------------------------------------------------------
+ */
+{
+  "sections": {
+    "main": {
+      "type": "main-page",
+      "disabled": true,
+      "custom_css": [
+        ".page-width {padding: clamp(47px, 5.75vw, 110px) 16px; margin-top: var(--header-height); max-width: 60vw;}",
+        "@media (max-width: 980px) {.page-width {max-width: 100%; }}"
+      ],
+      "settings": {
+        "padding_top": 110,
+        "padding_bottom": 110
+      }
+    },
+    "image_with_text_eELNWd": {
+      "type": "image-with-text",
+      "blocks": {
+        "heading_7WaUdU": {
+          "type": "heading",
+          "settings": {
+            "heading": "<strong>Rarest Honey </strong>on Your Fingertips",
+            "heading_size": "h1"
+          }
+        },
+        "text_WccmiT": {
+          "type": "text",
+          "settings": {
+            "text": "<p>Never run out of your favorite Honey when you Subscribe to Cliff Honey. Other benefits you’ll get is:</p><ul><li>Save 20% on first order</li><li>Save 10% on recurring orders</li><li>Skip, or cancel anytime</li></ul><p><a href=\"#subscribe\" title=\"#subscribe\">Subscribe Anytime</a></p><p>Already a subscriber? <a href=\"/account/login\" title=\"User Login\">Sign in!</a></p>",
+            "text_style": "body"
+          }
+        }
+      },
+      "block_order": [
+        "heading_7WaUdU",
+        "text_WccmiT"
+      ],
+      "custom_css": [
+        "a:not([href=\"#subscribe\"]) {font-weight: 700; color: #017ec7; letter-spacing: 0;}",
+        "a[href=\"#subscribe\"] {background: #ffbe32; padding: clamp(12px, 1.25vw, 16px) clamp(24px, 3.35vw, 64px); border-radius: clamp(18px, 67vw, 60px); font-size: clamp(16px, 1.25vw, 24px); color: #3b1700;}",
+        "li {display: flex; gap: 10px; font-weight: 700; align-items: center; list-style-type: none; margin-bottom: clamp(10px, 0.8vw, 16px);}",
+        "ul {padding-left: 5px;}",
+        ".body *:not(li) {margin: 0;}",
+        ".body {display: flex; flex-direction: column; gap: clamp(16px, 2vw, 32px);}"
+      ],
+      "name": "t:sections.image-with-text.presets.name",
+      "settings": {
+        "image": "shopify://shop_images/Group_1.webp",
+        "height": "adapt",
+        "desktop_image_width": "medium",
+        "layout": "text_first",
+        "image_behavior": "none",
+        "content_layout": "no-overlap",
+        "desktop_content_position": "middle",
+        "desktop_content_alignment": "left",
+        "mobile_content_alignment": "left",
+        "section_color_scheme": "scheme-4",
+        "color_scheme": "scheme-4",
+        "id": "",
+        "class": "",
+        "padding_top": 150,
+        "padding_bottom": 150,
+        "custom_liquid": "<style>\n#shopify-section-{{section.id}} li::before {\n  content: url('data:image/svg+xml,<svg width=\"24\" height=\"24\" viewBox=\"0 0 24 24\" fill=\"none\" xmlns=\"http://www.w3.org/2000/svg\"><circle cx=\"12\" cy=\"12\" r=\"12\" fill=\"%23FFBE32\"/><path d=\"M6 11L9.61865 16L18.5 8.5\" stroke=\"%233B1700\" stroke-linecap=\"round\" stroke-linejoin=\"round\"/></svg>');\nwidth:clamp(16px,1.25vw,24px);\nheight:clamp(16px,1.25vw,24px);\n\n#shopify-section-{{section.id}} .rte:after{\ncontent: none;!important\n}\n}\n</style>"
+      }
+    },
+    "multirow_YJy4PV": {
+      "type": "multirow",
+      "blocks": {
+        "row_WEwgr6": {
+          "type": "row",
+          "settings": {
+            "custom_liquid": "<div style=\"margin:0 auto; max-width:540px; display:flex; justify-content:center; align-items:center; position:relative;\">\n<svg style=\"aspect-ratio:1/1; width:100%\" viewBox=\"0 0 540 586\" fill=\"none\" xmlns=\"http://www.w3.org/2000/svg\">\n<path d=\"M210.973 15.5884C247.575 -5.19614 292.383 -5.19616 328.985 15.5884L404.969 58.736L480.258 103.088C516.526 124.453 538.93 163.33 539.264 205.48L539.958 292.979L539.264 380.479C538.93 422.629 516.526 461.506 480.258 482.871L404.969 527.223L328.985 570.37C292.383 591.155 247.575 591.155 210.973 570.37L134.99 527.223L59.7002 482.871C23.4327 461.506 1.02871 422.629 0.694274 380.479L0 292.979L0.694274 205.48C1.02871 163.33 23.4327 124.453 59.7003 103.088L134.99 58.736L210.973 15.5884Z\" fill=\"#C27F4C\"/>\n</svg>\n<img \nstyle=\"aspect-ratio:1/1; width:100%; position:absolute;top:50%;left:50%;transform:translate(-50%,-50%);\" \nclass=\"subs-img\"\ndata-image\nsrc=\"{{collections.all.products[0].featured_image | image_url: width: 500}}\">\n</div>\n\n<div class=\"grid\" style=\"flex-direction:row; margin-top: 32px;gap:32px; justify-content:center;\">\n<div class=\"item\">Nutrition Rich</div>\n<div class=\"item\">High Potent</div>\n<div class=\"item\">Raw & Natural</div>\n</div>\n<style>\n.top-section .image-with-text__media-item img{\nmax-width:100%;\n}\n.top-section .item{\nfont-weight:600;\n}\n</style>",
+            "caption": "",
+            "heading": "",
+            "text": "",
+            "button_label": "",
+            "button_link": "",
+            "block_class": "top-section"
+          }
+        },
+        "row_jELteG": {
+          "type": "row",
+          "settings": {
+            "custom_liquid": "{% render \"featured-all-products\", selectorclass: 'subscriptions-container' %}\n{% assign id = \"#shopify-section-\" | append: section.id %}\n\n{% style %}\n\n{{id}} .image-with-text .global-media-settings{\nbackground:transparent;\n}\n\n{{ id }} .image-with-text:not(.subscription){\n grid-column:1/-1; \ngrid-row-start: var(--index-row);\ngrid-row-end: var(--index-row);\n}\n\n{{ id }} .subscription{\ngrid-column: span 1 / span 1;\ngrid-column-end:3;\ngrid-row-start: 1;\ngrid-row-end: var(--count-rows);\nz-index:2;\n}\n@media(max-width:980px){\n{{ id }} .subscription {\ngrid-column: 1 / -1;\ngrid-row-start: var(--index-row);\ngrid-row-end: var(--index-row);\nmax-height:max-content;\nbackground:rgba(255, 236, 210, 1);\nz-index:0;\n}\n.subs-ui{\nmargin:0 16px!important;\n}\n\n\n}\n\n{{ id }} .subscription .image-with-text__media{\n height: auto;\n}\n\n{{ id }} .subscription .grid{\nposition:sticky;\ntop: calc(var(--header-height) + 16px);\nmax-width: max-content;\nmargin:0;\nmargin-bottom: clamp(48px, 5.75vw, 11rem);\n}\n\n{{ id }} .subscription .gradient, {{ id }} .subscription .gradient::after{\nbackground:transparent;\n}\n\n{{ id }} .image-with-text:not(.subscription) .grid {\n flex-direction:column;\n}\n\n{{ id }} .image-with-text:not(.subscription):first-of-type{\nclip-path: polygon(100% 100%, 0% 100% , 0.00% 1.60%, 3.33% 0.90%, 6.67% 0.52%, 10.00% 0.52%, 13.33% 0.90%, 16.67% 1.60%, 20.00% 2.50%, 23.33% 3.43%, 26.67% 4.25%, 30.00% 4.80%, 33.33% 5.00%, 36.67% 4.80%, 40.00% 4.25%, 43.33% 3.43%, 46.67% 2.50%, 50.00% 1.60%, 53.33% 0.90%, 56.67% 0.52%, 60.00% 0.52%, 63.33% 0.90%, 66.67% 1.60%, 70.00% 2.50%, 73.33% 3.43%, 76.67% 4.25%, 80.00% 4.80%, 83.33% 5.00%, 86.67% 4.80%, 90.00% 4.25%, 93.33% 3.43%, 96.67% 2.50%, 100.00% 1.60%);\n}\n\n{{ id }} .image-with-text:not(.subscription){\npadding: clamp(48px, 7.85vw, 15rem) 16px!important;\nclip-path: polygon(100% 100%, 0% 100% , 0.00% 3.06%, 4.00% 2.14%, 8.00% 1.35%, 12.00% 0.73%, 16.00% 0.30%, 20.00% 0.10%, 24.00% 0.12%, 28.00% 0.37%, 32.00% 0.84%, 36.00% 1.50%, 40.00% 2.32%, 44.00% 3.25%, 48.00% 4.26%, 52.00% 5.28%, 56.00% 6.27%, 60.00% 7.17%, 64.00% 7.94%, 68.00% 8.55%, 72.00% 8.95%, 76.00% 9.13%, 80.00% 9.08%, 84.00% 8.81%, 88.00% 8.32%, 92.00% 7.64%, 96.00% 6.80%, 100.00% 5.86%);\nmargin-top: calc(clamp(48px, 6.8vw,130px)* -1);\n}\n\n{{ id }} .image-with-text:not(.subscription):nth-child(1){\nbackground:rgba(255, 236, 210, 1);\n}\n\n{{ id }} .image-with-text:not(.subscription):nth-child(3), {{ id }} .image-with-text:not(.subscription):nth-child(5){\nbackground:rgba(255, 251, 239, 1);\n}\n\n{{ id }} .image-with-text:not(.subscription):nth-child(4){\nbackground:rgba(194, 127, 76, 1);\n}\n{% endstyle %}",
+            "caption": "",
+            "heading": "",
+            "text": "",
+            "button_label": "",
+            "button_link": "",
+            "block_class": "subscription"
+          }
+        },
+        "row_GGXACg": {
+          "type": "row",
+          "settings": {
+            "custom_liquid": "{%assign intproduct = collections.all.products[0] %}\n<div style=\"display:flex; align-items:center;\">\n<div style=\"\">\n<img \ndata-image\nsrc=\"{{ intproduct.featured_image | image_url: width: 100 }}\" class=\"subs-img\"\nstyle=\"width:clamp(48px, 5.12vw, 98px);\"\n>\n</div>\n<div>\n<h3 data-title class=\"subs-title\">{{ intproduct.title }}</h3>\n<span data-variants>{{ intproduct.selected_or_first_available_variant.title }}</span>\n</div>\n</div>\n\n<div data-description>\n{{intproduct.description}}\n</div>",
+            "caption": "",
+            "heading": "",
+            "text": "",
+            "button_label": "",
+            "button_link": "",
+            "block_class": ""
+          }
+        },
+        "row_cfxqaa": {
+          "type": "row",
+          "settings": {
+            "custom_liquid": "<h2>Why we love it</h2>\n<div style=\"overflow:visible; display:grid; grid-template-columns:1fr 1fr; gap:clamp(16px,1.67vw,32px)\">\n<div>\n<svg viewBox=\"0 0 98 98\" fill=\"none\" xmlns=\"http://www.w3.org/2000/svg\">\n<circle cx=\"49\" cy=\"49\" r=\"48.5\" stroke=\"#FEF0D2\"/>\n</svg>\n<h4>Keep your honey stocked at the best price.</h4>\n<p>Save 10% free shipping within US in every recurring Order</p>\n</div>\n\n<div>\n<svg viewBox=\"0 0 98 98\" fill=\"none\" xmlns=\"http://www.w3.org/2000/svg\">\n<circle cx=\"49\" cy=\"49\" r=\"48.5\" stroke=\"#FEF0D2\"/>\n</svg>\n\n\n<h4>Be the First to taste our rarest honey</h4>\n<p>Cliff Honey subscribers receive early\naccess to new launches</p>\n\n\n</div>\n\n\n<div>\n<svg viewBox=\"0 0 98 98\" fill=\"none\" xmlns=\"http://www.w3.org/2000/svg\">\n<circle cx=\"49\" cy=\"49\" r=\"48.5\" stroke=\"#FEF0D2\"/>\n</svg>\n\n<h4>A Little extra something from time to time.</h4>\n<p>We love to show appreciation to our subscribers with discounts and more</p>\n</div>\n\n\n<div>\n<svg  viewBox=\"0 0 98 98\" fill=\"none\" xmlns=\"http://www.w3.org/2000/svg\">\n<circle cx=\"49\" cy=\"49\" r=\"48.5\" stroke=\"#FEF0D2\"/>\n</svg>\n\n<h4>Stress Free- no string attached.</h4>\n<p>Early ship order. Cancel your subscription at any time.</p>\n</div>\n</div>\n<style>\n.white *{\ncolor:#ffffff;\nletter-spacing:0;\n}\n.white svg{\n width:10px;\n stroke-width:24px;\nborder-radius:50%;\nmargin:0!important;\nmargin-left: -15px!important;\n//width:clamp(48px,5.12vw,98px)\n\n}\n.white svg, .white h4{\ndisplay:inline;\nmargin-bottom: clamp(8px,0.84vw,16px)\n}\n</style>",
+            "caption": "",
+            "heading": "",
+            "text": "",
+            "button_label": "",
+            "button_link": "",
+            "block_class": "white"
+          }
+        },
+        "row_Q4wMgN": {
+          "type": "row",
+          "settings": {
+            "custom_liquid": "<div class=\"faq-wrapper\">\n<h2>Faqs</h2>\n  <faq>\n    <h4 class=\"question\">\nWhat is included in the Himalayan Cliff Honey subscription?\n</h4>\n    <p class=\"answer\">All of our products are available for subscription, just a click and cliff honey from the Himalayas of Nepal gets delivered to your doorstep regularly.\n<br><br>\nYou can choose the number of jars and the variants you want.\n</p>\n  </faq>\n    <faq>\n    <h4 class=\"question\">\nHow does the subscription work?\n</h4>\n    <p class=\"answer\">\nOnce you subscribe, your chosen products arrive at your doorstep automatically- in the time period you select. By subscribing, you receive 10% off every single jar each time with autobilling processed before each shipment.</p>\n  </faq>\n    <faq>\n    <h4 class=\"question\">\nHow do I manage or update my subscription?\n</h4>\n    <p class=\"answer\">You can change your preferred product or update other subscription details from your account. Edit your preferences, shipping address or payment and manage your subscription anytime by logging into your account. Simple as that.\n</p>\n  </faq>\n    <faq>\n    <h4 class=\"question\">Is there a discount or benefit for subscribing?\n</h4>\n    <p class=\"answer\">Yes! Subscribers get 20% off on their first purchase and 10% afterwards, on each repeated purchase. For one-time purchasers, the discount is 10%. As Himalayan cliff honey is harvested only at specific times of the year, subscribing gives you early access to fresh harvests and limited edition batches.\n</p>\n  </faq>\n    <faq>\n    <h4 class=\"question\">What is your cancellation policy?\n</h4>\n    <p class=\"answer\">Cancelling is as easy as subscribing. Just unsubscribe from your account and you’re done. For a full refund, make sure to cancel the subscription before the order has been shipped. If the order has already been processed for shipment, it cannot be cancelled, but our team will guide you on return or exchange options.\n</p>\n  </faq>\n<faq>\n    <h4 class=\"question\">\nWhen should I expect my Honey?\n</h4>\n    <p class=\"answer\">\nYou’ll receive your jar of honey 4 to 7 days after the order date. For confirmation, you will receive an email with tracking once the order has been shipped.\n</p>\n  </faq>\n<faq>\n <h4 class=\"question\">\nWhat are the payment options? \n</h4>\n    <p class=\"answer\">\nWe accept all major credit cards for our subscriptions or you can easily check out through PayPal Express, Apple Pay or Shop Pay. Each order is billed right before it ships!\n</p>\n  </faq>\n<faq>\n <h4 class=\"question\">\nHow can I use dedicated support?\n</h4>\n    <p class=\"answer\">\nShoot us an email at contact@cliffhoney.com or message us at Whatsapp. \n</p>\n  </faq>\n</div>\n{% style %}\n.faq-wrapper {\n  width: 100%;\n}\n\n.faq-wrapper faq {\n  display: block;                 \n  border-bottom: 1px solid currentColor; \n}\n\n.faq-wrapper faq:last-child {\n  border-bottom: 0;\n}\n\n.faq-wrapper .question {\n  margin: 0;\n  padding: 18px 0;\n  cursor: pointer;\n  display: flex;\n  align-items: center;\n  justify-content: space-between;\n  user-select: none;\n}\n\n\n.faq-wrapper .question::after {\n  content: url('data:image/svg+xml,<svg viewBox=\"0 0 24 24\" fill=\"none\" xmlns=\"http://www.w3.org/2000/svg\"><path d=\"M1 7L12 18L23 7\" stroke=\"%234B5441\" stroke-width=\"2\"/></svg>');\n  transition: transform 200ms ease;\nmargin-left: 18px;\n  flex: 0 0 clamp(12px, 0.94vw,18px);\n}\n\n\n.faq-wrapper .answer {\n  margin: 0;\n  overflow: hidden;\n  max-height: 0;\n  opacity: 0;\n  transition: max-height 260ms ease, opacity 200ms ease;\n  padding: 0; \n}\n\n\n.faq-wrapper faq.is-open .answer {\n  opacity: 1;\n  max-height: 500px;\n  padding: 0 0 18px 0;\n}\n\n.faq-wrapper faq.is-open .question::after {\n  transform: rotate(-180deg); \n}\n\n{% endstyle %}\n<script>\n(() => {\n  const wrappers = document.querySelectorAll('.faq-wrapper');\n  if (!wrappers.length) return;\n\n  wrappers.forEach((wrapper) => {\n    const items = Array.from(wrapper.querySelectorAll('faq'));\n\n    const closeItem = (item) => {\n      item.classList.remove('is-open');\n      const answer = item.querySelector('.answer');\n      if (answer) answer.style.maxHeight = '0px';\n      const q = item.querySelector('.question');\n      if (q) q.setAttribute('aria-expanded', 'false');\n    };\n\n    const openItem = (item) => {\n      item.classList.add('is-open');\n      const answer = item.querySelector('.answer');\n      if (answer) answer.style.maxHeight = answer.scrollHeight + 'px';\n      const q = item.querySelector('.question');\n      if (q) q.setAttribute('aria-expanded', 'true');\n    };\n\n    items.forEach((item) => {\n      const q = item.querySelector('.question');\n      const a = item.querySelector('.answer');\n      if (!q || !a) return;\n\n      item.style.display = 'block';\n      a.style.maxHeight = '0px';\n\n      q.setAttribute('role', 'button');\n      q.setAttribute('tabindex', '0');\n      q.setAttribute('aria-expanded', 'false');\n\n      const toggle = () => {\n        const isOpen = item.classList.contains('is-open');\n\n        items.forEach((other) => {\n          if (other !== item) closeItem(other);\n        });\n\n        if (isOpen) closeItem(item);\n        else openItem(item);\n      };\n\n      q.addEventListener('click', toggle);\n      q.addEventListener('keydown', (e) => {\n        if (e.key === 'Enter' || e.key === ' ') {\n          e.preventDefault();\n          toggle();\n        }\n      });\n    });\n\n    window.addEventListener(\n      'resize',\n      () => {\n        const open = wrapper.querySelector('faq.is-open .answer');\n        if (open) open.style.maxHeight = open.scrollHeight + 'px';\n      },\n      { passive: true }\n    );\n  });\n})();\n</script>",
+            "caption": "",
+            "heading": "",
+            "text": "",
+            "button_label": "",
+            "button_link": "",
+            "block_class": ""
+          }
+        }
+      },
+      "block_order": [
+        "row_WEwgr6",
+        "row_jELteG",
+        "row_GGXACg",
+        "row_cfxqaa",
+        "row_Q4wMgN"
+      ],
+      "custom_css": [
+        ".multirow__inner {display: grid; justify-content: center; grid-template-rows: auto; grid-template-columns: 1fr 1fr; column-gap: 120px; row-gap: 0; padding-left: 0; padding-right: 0;}",
+        ".grid {column-gap: 0; margin: 0 auto;}"
+      ],
+      "name": "t:sections.multirow.presets.name",
+      "settings": {
+        "image_height": "adapt",
+        "desktop_image_width": "medium",
+        "image_layout": "align-left",
+        "heading_size": "h2",
+        "text_style": "body",
+        "button_style": "secondary",
+        "desktop_content_position": "middle",
+        "desktop_content_alignment": "left",
+        "mobile_content_alignment": "left",
+        "section_color_scheme": "scheme-4",
+        "row_color_scheme": "scheme-4",
+        "padding_top": 0,
+        "padding_bottom": 0,
+        "section_id": "subscribe",
+        "section_class": "subscriptions-container"
+      }
+    },
+    "collection_list_XVVihN": {
+      "type": "collection-list",
+      "blocks": {
+        "featured_collection_79LJwL": {
+          "type": "featured_collection",
+          "settings": {
+            "collection": "cliff-honey",
+            "collection_alt_text": ""
+          }
+        },
+        "featured_collection_VHeBgp": {
+          "type": "featured_collection",
+          "settings": {
+            "collection": "superfood",
+            "collection_alt_text": "Protein Honey"
+          }
+        },
+        "featured_collection_acmj3t": {
+          "type": "featured_collection",
+          "settings": {
+            "collection": "himalayan-cliff-honey",
+            "collection_alt_text": ""
+          }
+        }
+      },
+      "block_order": [
+        "featured_collection_79LJwL",
+        "featured_collection_VHeBgp",
+        "featured_collection_acmj3t"
+      ],
+      "custom_css": [
+        "h2,h3 {text-align: center; margin: auto; font-weight: 700;}",
+        ".slider {padding: 0 16px;}",
+        ".slider * {text-align: start;}",
+        ".small-hide.medium-hide {display: block !important;}",
+        "@media screen and (max-width: 990px) {.slider--tablet.grid--peek.grid--1-col-tablet-down .grid__item {width: calc(50% - var(--grid-mobile-horizontal-spacing) - 3rem); }}",
+        "@media screen and (max-width: 580px) {.slider--tablet.grid--peek.grid--1-col-tablet-down .grid__item {width: calc(80% - var(--grid-mobile-horizontal-spacing) - 3rem); }}"
+      ],
+      "name": "t:sections.collection-list.presets.name",
+      "settings": {
+        "title": "Shop <strong>your way</strong>",
+        "heading_size": "h2",
+        "image_ratio": "square",
+        "columns_desktop": 3,
+        "color_scheme": "scheme-e0418eeb-85e5-4e72-8731-e95db24077ad",
+        "show_view_all": true,
+        "view_all": "Shop All Honey",
+        "show_explore_all": true,
+        "explore_all": "Explore All",
+        "columns_mobile": "1",
+        "swipe_on_mobile": true,
+        "padding_top": 0,
+        "padding_bottom": 110,
+        "custom_class": "header-dark"
+      }
+    }
+  },
+  "order": [
+    "main",
+    "image_with_text_eELNWd",
+    "multirow_YJy4PV",
+    "collection_list_XVVihN"
+  ]
+}

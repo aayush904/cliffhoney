@@ -1,0 +1,305 @@
+{% comment %}
+  Renders an article card for a given blog with settings to either show the image or not.
+
+  Accepts:
+  - blog: {Object} Blog object
+  - article: {Object} Article object
+  - media_aspect_ratio: {String} The setting changes the aspect ratio of the article image, if shown
+  - media_height: {String} The setting changes the height of the article image. Overrides media_aspect_ratio.
+  - show_image: {String} The setting either show the article image or not. If it's not included it will show the image by default
+  - show_date: {String} The setting either show the article date or not. If it's not included it will not show the image by default
+  - show_author: {String} The setting either show the article author or not. If it's not included it will not show the author by default
+  - show_badge: {String} The setting either show the blog badge or not.
+  - lazy_load: {Boolean} Image should be lazy loaded. Default: true (optional)
+  - style: {String} The setting either shows the article card vertically or horizontally. Default: 'vertical' (optional)
+
+  Usage:
+  {% render 'article-card' blog: blog, article: article, show_image: section.settings.show_image %}
+{% endcomment %}
+
+{%- if article and article != empty -%}
+  {%- liquid
+    assign ratio = 1
+    if media_aspect_ratio != null
+      assign ratio = media_aspect_ratio
+    endif
+  -%}
+
+  {% style %}
+    /* ========================= Section-scoped styles (no nesting) + legacy support ========================= */
+
+    /* Remove Dawn card pseudo overlays */ #shopify-section-{{ section.id }} .card--standard .card__inner::before,
+    #shopify-section-{{ section.id }} .card--standard .card__inner::after { content: none; }
+
+    /* Link decoration reset (WebKit + fallback) */ #shopify-section-{{ section.id }} a:-webkit-any-link,
+    #shopify-section-{{ section.id }} a:-webkit-any-link *, #shopify-section-{{ section.id }} a, #shopify-section-
+    {{- section.id }}
+    a * { text-decoration: none !important; }
+
+    /* Media wrappers: avoid absolute positioning constraints */ #shopify-section-{{ section.id }} .card .card__inner
+    .card__media, #shopify-section-{{ section.id }} .card a.media { position: static; height: auto; /* legacy-safe
+    replacement for max-content */ }
+
+    /* Image sizing */ #shopify-section-{{ section.id }} .card__media .media img.aspect-\[16\/9\] { height: auto; width:
+    100%; position: static; -o-object-fit: cover; object-fit: cover; -o-object-position: center center; object-position:
+    center center;
+
+    /* Modern browsers */ aspect-ratio: 232 / 155; }
+
+    /* Article card image wrappers */ #shopify-section-{{ section.id }} .article-card__image img, #shopify-section-
+    {{- section.id }}
+    .article-card__image-wrapper { position: static; min-height: 0; height: auto; }
+
+    /* ========================= Legacy fallback: aspect-ratio (Safari 14- supports; Safari 12/13 no)
+    ========================= */ @supports not (aspect-ratio: 1 / 1) { /* Apply the ratio to the container and absolutely
+    position the img */ #shopify-section-{{ section.id }} .card__media .media { position: relative; display: block;
+    height: 0; padding-top: 66.8103448%; /* 155/232 * 100 */ overflow: hidden; }
+
+    #shopify-section-{{ section.id }} .card__media .media img.aspect-\[16\/9\] { position: absolute; top: 0; left: 0;
+    height: 100%; width: 100%; } }
+
+    {% if style == 'video' %}
+      /* ========================= Video play overlay (legacy-safe) ========================= */ #shopify-section-
+      {{- section.id }}
+      .article-card__image.media-video::before { content: ''; display: inline-block; width: 4rem; height: 4rem; position:
+      absolute; top: 50%; left: 50%; -webkit-transform: translate(-50%, -50%); transform: translate(-50%, -50%);
+      background: url({{ 'play-button.png' | asset_url }}) no-repeat center center; -webkit-transition: all 0.3s ease;
+      transition: all 0.3s ease; opacity: 0.95; z-index: 2; }
+
+      #shopify-section-{{ section.id }} .article-card-wrapper:hover .article-card__image.media-video::before { opacity: 1;
+      -webkit-transform: translate(-50%, -50%) scale(1.1); transform: translate(-50%, -50%) scale(1.1); }
+    {% endif %}
+  {% endstyle %}
+
+  <div
+    class="basmil  article-card-wrapper group card-wrapper underline-links-hover {% if style != 'horizontal' %} pb-[24px] {% endif %}"
+    {% if style == 'video' %}
+      id="trigger-button" onclick="openModal()"
+    {% endif %}
+  >
+    <div
+      class="
+        card article-card overflow-hidden
+        card--{{ settings.blog_card_style }}
+        {% if media_height and media_height != 'adapt' %} article-card__image--{{ media_height }}{% endif %}
+        {% if article.image and show_image %} card--media{% else %} {% endif %}
+        {% if settings.blog_card_style == 'card' %} color-{{ settings.blog_card_color_scheme }} gradient{% endif %}
+        {% if settings.blog_card_style == 'card' and media_height == nil and article.image == empty or show_image == false %} ratio{% endif %}
+      "
+      style="--ratio-percent: {{ 1 | divided_by: ratio | times: 100 }}%; {% if style == 'horizontal' %} flex-direction: row; gap: 1rem; {% endif %}"
+    >
+      <div
+        class="card__inner {% if settings.blog_card_style == 'standard' %} color-{{ settings.blog_card_color_scheme }} gradient{% endif %}{% if article.image and show_image or settings.blog_card_style == 'standard' %} ratio{% endif %}"
+        style="--ratio-percent: {{ 1 | divided_by: ratio | times: 100 }}%;"
+      >
+        {%- if show_image == true -%}
+          <div class="article-card__image-wrapper card__media min-h-[348px] h-[348px] bg-grey">
+            <a
+              href="{% if style == 'video' %}javascript:void(0){% else %}{{- article.url -}}{% endif %}"
+              {% comment %} href="{{ article.url }}" {% endcomment %}
+              class="block {% if style == 'video' %} media-video {% endif %} article-card__image media media--hover-effect"
+              {% if section.settings.media_height == 'adapt' %}
+                style="padding-bottom: {{ 1 | divided_by: article.image.aspect_ratio | times: 100 }}%;"
+              {% endif %}
+            >
+              {% if article.image %}
+                <img
+                  srcset="
+                    {%- if article.image.src.width >= 165 -%}{{ article.image.src | image_url: width: 165 }} 165w,{%- endif -%}
+                    {%- if article.image.src.width >= 360 -%}{{ article.image.src | image_url: width: 360 }} 360w,{%- endif -%}
+                    {%- if article.image.src.width >= 533 -%}{{ article.image.src | image_url: width: 533 }} 533w,{%- endif -%}
+                    {%- if article.image.src.width >= 720 -%}{{ article.image.src | image_url: width: 720 }} 720w,{%- endif -%}
+                    {%- if article.image.src.width >= 1000 -%}{{ article.image.src | image_url: width: 1000 }} 1000w,{%- endif -%}
+                    {%- if article.image.src.width >= 1500 -%}{{ article.image.src | image_url: width: 1500 }} 1500w,{%- endif -%}
+                    {{ article.image.src | image_url }} {{ article.image.src.width }}w
+                  "
+                  src="{{ article.image.src | image_url: width: 533 }}"
+                  sizes="(min-width: {{ settings.page_width }}px) {{ settings.page_width | minus: 100 | divided_by: 2 }}px, (min-width: 768px) calc((100vw - 130px) / 2), calc((100vw - 50px) / 2)"
+                  alt="{{ article.image.src.alt | escape }}"
+                  class="motion-reduce aspect-[16/9] min-h-[348px] h-[348px] p-[0]"
+                  {% unless lazy_load == false %}
+                    loading="lazy"
+                  {% endunless %}
+                  width="{{ article.image.width }}"
+                  height="{{ article.image.height }}"
+                >
+              {% else %}
+                <img
+                  srcset="
+                    {%- if settings.logo.src.width >= 165 -%}{{ settings.logo.src | image_url: width: 165 }} 165w,{%- endif -%}
+                    {%- if settings.logo.src.width >= 360 -%}{{ settings.logo.src | image_url: width: 360 }} 360w,{%- endif -%}
+                    {%- if settings.logo.src.width >= 533 -%}{{ settings.logo.src | image_url: width: 533 }} 533w,{%- endif -%}
+                    {%- if settings.logo.src.width >= 720 -%}{{ settings.logo.src | image_url: width: 720 }} 720w,{%- endif -%}
+                    {%- if settings.logo.src.width >= 1000 -%}{{ settings.logo.src | image_url: width: 1000 }} 1000w,{%- endif -%}
+                    {%- if settings.logo.src.width >= 1500 -%}{{ settings.logo.src | image_url: width: 1500 }} 1500w,{%- endif -%}
+                    {{ settings.logo.src | image_url }} {{ settings.logo.src.width }}w
+                  "
+                  src="{{ settings.logo.src | image_url: width: 533 }}"
+                  sizes="(min-width: {{ settings.page_width }}px) {{ settings.page_width | minus: 100 | divided_by: 2 }}px, (min-width: 768px) calc((100vw - 130px) / 2), calc((100vw - 50px) / 2)"
+                  alt="{{ settings.logo.src.alt | escape }}"
+                  class="motion-reduce aspect-[464/348] min-h-[348px] h-[348px] p-[0]"
+                  {% unless lazy_load == false %}
+                    loading="lazy"
+                  {% endunless %}
+                  width="{{ settings.logo.width }}"
+                  height="{{ settings.logo.height }}"
+                >
+              {% endif %}
+            </a>
+          </div>
+        {%- endif -%}
+      </div>
+      <div class="card__content">
+        <a
+          href="{% if style == 'video' %}javascript:void(0){% else %}{{- article.url -}}{% endif %}"
+          class="font-sans card__information p-0 pt-[2.4rem] justify-center gap-[0!important]"
+          {% if style == 'horizontal' %}
+            style="padding:0;"
+          {% endif %}
+        >
+          {%- if article.tags.size > 0 -%}
+            <div class="article-card__tags mb-[8px!important] flex flex-wrap gap-2">
+              {% comment %} {%- for tag in article.tags -%} {% endcomment %}
+              <span
+                onclick="event.preventDefault(); event.stopPropagation(); window.location.href='{{ article.url | split: article.handle | first }}{{ article.handle | split: '/' | first}}/tagged/{{ article.tags[0].handle }}';"
+                class="article-tag text-[1.4rem] text-black"
+              >
+                {{- article.tags[0] -}}
+              </span>
+              {% comment %} {%- endfor -%} {% endcomment %}
+            </div>
+          {%- endif -%}
+          <div class="font-sans blog-text font-normal text-[#000000]">
+            <h3
+              class="h3 m-0 mb-[8px!important]  text-[#000000]"
+              title="{{ article.title | escape }}"
+              style="letter-spacing: 0; display: -webkit-box;  -webkit-box-orient: vertical; overflow: hidden;{% if style == 'horizontal' or request.page_type == 'search' or request.page_type =='blog' %}-webkit-line-clamp: 2; line-height: 1.28;{% else %}line-height: 1.1; -webkit-line-clamp: 1;{% endif %}"
+            >
+              {{ article.title | escape }}
+            </h3>
+          </div>
+
+          {%- if show_excerpt -%}
+            {%- if article.excerpt.size > 0 or article.content.size > 0 -%}
+              <p class="line-clamp-2 m-0 article-card__excerpt rte-width font-sans text-start blog-text font-normal text-[#000000]">
+                {%- if article.excerpt.size > 0 -%}
+                  {{ article.excerpt | strip_html | truncatewords: 30 }}
+                {%- else -%}
+                  {{ article.content | strip_html | truncatewords: 30 }}
+                {%- endif -%}
+              </p>
+            {%- endif -%}
+          {%- endif -%}
+          {%- if show_author or show_date -%}
+            <div class="article_meta">
+              {%- if show_author -%}
+                {{- article.author -}}
+                {{ ' | ' }}
+              {%- endif -%}
+              {%- if show_date -%}
+                {{- article.published_at | date: '%b %d, %Y' -}}
+              {%- endif -%}
+              {%- if article.content -%}
+                {{ ' | ' }}
+                {{ article.content | strip_html | split: ' ' | size | divided_by: 200.0 | ceil }} min read
+              {%- endif -%}
+            </div>
+          {%- endif -%}
+        </a>
+        {%- if show_badge -%}
+          <div class="card__badge {{ settings.badge_position }}">
+            <span class="badge color-background-1">{{ 'blogs.article.blog' | t }}</span>
+          </div>
+        {%- endif -%}
+      </div>
+    </div>
+  </div>
+
+  {% if style == 'video' %}
+    {% style %}
+      iframe,
+      video,
+      .modal-content {
+        width: 90vw;
+        height: auto;
+        max-width: 900px;
+        aspect-ratio: 16 / 9;
+      }
+      .modal-overlay {
+        position: fixed;
+        top: 0;
+        max-height: 100vh !important;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        background: rgba(0, 0, 0, 0.85);
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        z-index: 1000;
+        opacity: 0;
+        visibility: hidden;
+        transition: all 0.3s;
+      }
+
+      .modal-overlay.active {
+        opacity: 1;
+        visibility: visible;
+      }
+
+      .modal-content {
+        position: relative;
+        background: #000;
+        border-radius: 8px;
+        overflow: visible;
+      }
+
+      .close-button {
+        position: absolute;
+        top: -17px;
+        right: -17px;
+        aspect-ratio: 1 / 1;
+        width: 35px;
+        height: 35px;
+        background: rgba(0, 0, 0, 0.7);
+        border: 2px solid rgba(255, 255, 255, 0.8);
+        border-radius: 50%;
+        color: white;
+        font-size: 18px;
+        cursor: pointer;
+        z-index: 11;
+      }
+
+      .video-player {
+        width: 100%;
+        height: 500px;
+        border: none;
+        display: block;
+      }
+
+      @media (max-width: 768px) {
+        .video-player {
+          height: 300px;
+        }
+      }
+    {% endstyle %}
+    <div id="videoModal" class="modal-overlay" onclick="closeModal()">
+      <div class="modal-content" onclick="event.stopPropagation()">
+        <button class="close-button" onclick="closeModal()">&times;</button>
+        <div id="{{article.id}}"></div>
+      </div>
+    </div>
+
+    <script>
+      function openModal() {
+        document.getElementById('videoModal').classList.add('active');
+        document.getElementById('{{ article.id }}').innerHTML = `{{ article.content }}`;
+      }
+      function closeModal() {
+        document.getElementById('videoModal').classList.remove('active');
+        document.getElementById('{{ article.id }}').innerHTML = '';
+      }
+      document.addEventListener('keydown', (e) => e.key === 'Escape' && closeModal());
+    </script>
+  {% endif %}
+{%- endif -%}

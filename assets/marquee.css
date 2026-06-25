@@ -1,0 +1,67 @@
+.marquee-wrapper {
+  height:-webkit-max-content;
+  height:-moz-max-content;
+  height:max-content;
+  background-color: rgb(var(--color-background));
+  padding: 0px;
+  width: 100%;
+  position:relative;
+}
+
+
+
+.marquee-text {
+  overflow: clip;
+}
+
+.marquee-text-track {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  padding-left: 48px;
+  /* gap: 48px; */
+  width: -webkit-max-content;
+  width: -moz-max-content;
+  width: max-content;
+  -webkit-animation: marquee-move-text var(--speed, 25s) linear infinite
+    var(--direction, forwards);
+          animation: marquee-move-text var(--speed, 25s) linear infinite
+    var(--direction, forwards);
+}
+
+
+.marquee-block {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+  /* gap: 1rem; */
+}
+
+.marquee-image {
+  height: 50px; /* You can adjust this to fit the image size */
+  width: auto;
+}
+.marquee-text .marquee-block{
+  padding: clamp(12px, 0.84vw, 1.6rem) 0px;
+}
+.marquee-text span {
+  font-size:clamp(10px,0.84vw,16px);
+  color: rgb(var(--color-foreground));
+}
+
+@-webkit-keyframes marquee-move-text {
+  to {
+    -webkit-transform: translateX(-50%);
+            transform: translateX(-50%);
+  }
+}
+
+@keyframes marquee-move-text {
+  to {
+    -webkit-transform: translateX(-50%);
+            transform: translateX(-50%);
+  }
+}

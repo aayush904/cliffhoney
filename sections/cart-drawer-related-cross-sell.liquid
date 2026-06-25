@@ -1,0 +1,100 @@
+<style>
+  .cart-cross-sell {
+    margin-top: 2rem;
+  }
+
+  .cart-cross-sell__heading {
+    font-size: 1.4rem;
+    margin-bottom: 1rem;
+  }
+
+  .cart-cross-sell-card {
+    background: rgb(var(--color-background));
+    border-radius: 0.8rem;
+    padding: 1rem;
+  }
+
+  .cart-cross-sell-card__media img {
+    width: 100%;
+    border-radius: 0.6rem;
+  }
+
+  .cart-cross-sell-card__title {
+    font-size: 1.2rem;
+    margin: 0.6rem 0;
+  }
+
+  .price--compare {
+    text-decoration: line-through;
+    opacity: 0.6;
+    margin-left: 0.4rem;
+  }
+</style>
+{%- liquid
+  assign slides_to_show = 2
+
+  assign cart_product_ids = ''
+  for item in cart.items
+    assign cart_product_ids = cart_product_ids | append: item.product_id | append: ','
+  endfor
+-%}
+
+<div class="cart-drawer__cross-sell" data-cart-drawer-cross-sell>
+  {%- if recommendations.performed and recommendations.products_count > 0 -%}
+    <div class="cart-drawer__cross-sell-header">
+      <h3 class="h4">{{ section.settings.heading | escape }}</h3>
+    </div>
+
+    <slider-component class="slider-mobile-gutter">
+      <ul class="slider slider--tablet grid grid--2-col" id="CartDrawerCrossSell-{{ section.id }}" role="list">
+        {%- assign shown = 0 -%}
+        {%- for product in recommendations.products -%}
+          {%- assign token = product.id | append: ',' -%}
+          {%- if cart_product_ids contains token -%}{% continue %}{%- endif -%}
+
+          {%- assign shown = shown | plus: 1 -%}
+          <li class="grid__item slider__slide">
+            {% render 'card-product',
+              card_product: product,
+              media_aspect_ratio: 'square',
+              show_secondary_image: false,
+              show_vendor: false,
+              show_rating: false,
+              lazy_load: true,
+              skip_styles: true,
+              quick_add: 'standard',
+              section_id: section.id
+            %}
+          </li>
+        {%- endfor -%}
+      </ul>
+
+      {%- if shown > slides_to_show -%}
+        <div class="slider-buttons no-js-hidden">
+          <button
+            type="button"
+            class="slider-button slider-button--prev"
+            name="previous"
+          >
+            {{- 'icon-caret.svg' | inline_asset_content -}}
+          </button>
+
+          <button
+            type="button"
+            class="slider-button slider-button--next"
+            name="next"
+          >
+            {{- 'icon-caret.svg' | inline_asset_content -}}
+          </button>
+        </div>
+      {%- endif -%}
+    </slider-component>
+  {%- endif -%}
+</div>
+
+{% schema %}
+{
+  "name": "Cart-cross-sell",
+  "settings": [{ "type": "text", "id": "heading", "default": "You may also like", "label": "Heading" }]
+}
+{% endschema %}

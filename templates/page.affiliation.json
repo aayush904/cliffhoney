@@ -1,0 +1,275 @@
+/*
+ * ------------------------------------------------------------
+ * IMPORTANT: The contents of this file are auto-generated.
+ *
+ * This file may be updated by the Shopify admin theme editor
+ * or related systems. Please exercise caution as any changes
+ * made to this file may be overwritten.
+ * ------------------------------------------------------------
+ */
+{
+  "sections": {
+    "main": {
+      "type": "main-page",
+      "disabled": true,
+      "settings": {
+        "padding_top": 50,
+        "padding_bottom": 50
+      }
+    },
+    "custom_liquid_w9E93B": {
+      "type": "custom-liquid",
+      "custom_css": [
+        ".wrapper img {max-width: 100%; width:100%; min-height: 240px; height: auto; object-fit: cover;}"
+      ],
+      "name": "t:sections.custom-liquid.presets.name",
+      "settings": {
+        "custom_liquid": "<img src=\"https://cdn.shopify.com/s/files/1/0686/0721/3628/files/image_362.webp?v=1762767305\" alt=\"HCH Star Program\" width=\"1920\" height=\"580\"/>",
+        "color_scheme": "scheme-4",
+        "padding_top": 100,
+        "padding_bottom": 0
+      }
+    },
+    "image_with_text_7VVTnf": {
+      "type": "image-with-text",
+      "blocks": {
+        "heading_8tVcNw": {
+          "type": "heading",
+          "settings": {
+            "heading": "Hello <strong>Cliff Honey </strong>Star!",
+            "heading_size": "h2"
+          }
+        },
+        "text_4VPXEw": {
+          "type": "text",
+          "settings": {
+            "text": "<p>Come and Become a part of the Everest Shilajit Affiliated Program & Earn up to 15% Commission on Every Referral Purchases. </p><p>Refer others to try Shilajit and get paid. </p><p>It’s free to join, free to share, and offers you the opportunity to earn a healthy commission!</p>",
+            "text_style": "body"
+          }
+        },
+        "button_PmrDnA": {
+          "type": "button",
+          "settings": {
+            "button_label": "Be a Cliff Honey Star",
+            "button_link": "#",
+            "button_style_secondary": false,
+            "attributes": ""
+          }
+        }
+      },
+      "block_order": [
+        "heading_8tVcNw",
+        "text_4VPXEw",
+        "button_PmrDnA"
+      ],
+      "custom_css": [
+        ".grid {--grid-desktop-horizontal-spacing: clamp(24px, 2.61vw, 5rem);}",
+        ".buttons {display: flex; width: 100%; justify-content: space-between; gap: clamp(1.6rem, 1.25vw, 2.4rem); margin: clamp(24px, 2.61vw, 5rem) 0;}",
+        "highlight {display: contents;}",
+        ".buttons a {width: 100%; padding: 1.6rem;}",
+        "@media (max-width: 480px) {.buttons {flex-wrap: wrap; }}"
+      ],
+      "name": "t:sections.image-with-text.presets.name",
+      "settings": {
+        "image": "shopify://shop_images/OBJECTS.webp",
+        "height": "adapt",
+        "desktop_image_width": "medium",
+        "layout": "text_first",
+        "image_behavior": "none",
+        "content_layout": "no-overlap",
+        "desktop_content_position": "middle",
+        "desktop_content_alignment": "left",
+        "mobile_content_alignment": "center",
+        "section_color_scheme": "scheme-4",
+        "color_scheme": "scheme-4",
+        "id": "",
+        "class": "",
+        "padding_top": 110,
+        "padding_bottom": 110,
+        "custom_liquid": ""
+      }
+    },
+    "image_with_text_RniYwn": {
+      "type": "image-with-text",
+      "blocks": {
+        "heading_zQAP8X": {
+          "type": "heading",
+          "settings": {
+            "heading": "This is How <strong>It Works</strong>!",
+            "heading_size": "h2"
+          }
+        },
+        "text_aQ4hm8": {
+          "type": "text",
+          "settings": {
+            "text": "<p>Create your profile, and join us now. </p><p>Through your dashboard, you will get specific links that you can share with others via email, social networks, or as a link on your website. As an example, you can click on the instagram share icon and you can share the link with your friends with a couple of clicks.</p><p>It’s free and easy. Simply click on this link and sign up!</p>",
+            "text_style": "body"
+          }
+        },
+        "button_LtjBqi": {
+          "type": "button",
+          "settings": {
+            "button_label": "Join",
+            "button_link": "#Distributor",
+            "button_style_secondary": false,
+            "attributes": ""
+          }
+        }
+      },
+      "block_order": [
+        "heading_zQAP8X",
+        "text_aQ4hm8",
+        "button_LtjBqi"
+      ],
+      "custom_css": [
+        ".grid {--grid-desktop-horizontal-spacing: clamp(24px, 2.61vw, 5rem);}",
+        ".image-with-text__heading {margin-bottom: clamp(24px, 2.61vw, 5rem);}",
+        ".button {width: 32rem;}"
+      ],
+      "name": "t:sections.image-with-text.presets.name",
+      "settings": {
+        "image": "shopify://shop_images/Frame.webp",
+        "height": "adapt",
+        "desktop_image_width": "medium",
+        "layout": "image_first",
+        "image_behavior": "none",
+        "content_layout": "no-overlap",
+        "desktop_content_position": "middle",
+        "desktop_content_alignment": "left",
+        "mobile_content_alignment": "center",
+        "section_color_scheme": "scheme-4",
+        "color_scheme": "scheme-4",
+        "id": "",
+        "class": "",
+        "padding_top": 0,
+        "padding_bottom": 110,
+        "custom_liquid": ""
+      }
+    },
+    "image_with_text_hapTr6": {
+      "type": "image-with-text",
+      "blocks": {
+        "heading_BkMNtW": {
+          "type": "heading",
+          "settings": {
+            "heading": "<strong>Earn Up To</strong> 15% Commission",
+            "heading_size": "h2"
+          }
+        },
+        "text_jegDFd": {
+          "type": "text",
+          "settings": {
+            "text": "<p>Earn up to 15% commission with every referral. Yes, you heard us right.</p><p>Every purchase made using your referral qualifies you for earning a commission. Make money as someone uses your affiliate link to make purchases. Every month, you will get paid for all sales that you generate. And you can track your commissions right from your dashboard! We’ve had affiliates generate a significant amount of money simply by sharing a link</p><p><em><strong>Please note that commission from wholesale orders or from self referrals may not be granted.</strong></em></p>",
+            "text_style": "body"
+          }
+        },
+        "button_6CNkDN": {
+          "type": "button",
+          "settings": {
+            "button_label": "Be a Cliff Honey Star",
+            "button_link": "#",
+            "button_style_secondary": false,
+            "attributes": ""
+          }
+        }
+      },
+      "block_order": [
+        "heading_BkMNtW",
+        "text_jegDFd",
+        "button_6CNkDN"
+      ],
+      "custom_css": [
+        ".grid {--grid-desktop-horizontal-spacing: clamp(24px, 2.61vw, 5rem);}",
+        ".button {width: 32rem;}"
+      ],
+      "name": "t:sections.image-with-text.presets.name",
+      "settings": {
+        "image": "shopify://shop_images/image_399.webp",
+        "height": "adapt",
+        "desktop_image_width": "medium",
+        "layout": "text_first",
+        "image_behavior": "none",
+        "content_layout": "no-overlap",
+        "desktop_content_position": "middle",
+        "desktop_content_alignment": "left",
+        "mobile_content_alignment": "center",
+        "section_color_scheme": "scheme-4",
+        "color_scheme": "scheme-4",
+        "id": "fixedoff",
+        "class": "",
+        "padding_top": 0,
+        "padding_bottom": 110,
+        "custom_liquid": ""
+      }
+    },
+    "multicolumn_V9ajcD": {
+      "type": "multicolumn",
+      "blocks": {
+        "column_VDGq8a": {
+          "type": "column",
+          "settings": {
+            "title": "",
+            "text": "<p>According to the FDA guidelines, it is prohibited to mention cure, mitigation, or prevention of any medical conditions or diseases in public posts and advertising for Dietary Supplements.</p><p>Such claims may include (but are not limited to):</p><ul><li>bones problems, inflammation, arthritis, pain...</li><li>illness, health issues, viruses, bacteria, pathogens...</li><li>sexual libido, testosterone, erection, sperm...</li><li>anti-aging, longevity, age-related problems...</li><li>skin issues, scars, pimples, wrinkles, elasticity, dryness...</li><li>detox, heavy metals removal, hangover relief...</li><li>wounds, tissue regeneration, burn, healing...</li><li>memory, Alzheimer's, attention, any brain disorders.</li></ul><p> </p><p>Please check the following publication for more in-depth info: </p><p><a href=\"https://www.fda.gov/food/food-labeling-nutrition/label-claims-conventional-foods-and-dietary-supplements \" title=\"https://www.fda.gov/food/food-labeling-nutrition/label-claims-conventional-foods-and-dietary-supplements \">https://www.fda.gov/food/food-labeling-nutrition/label-claims-conventional-foods-and-dietary-supplements <br/><br/></a>Please avoid using the word health in general as well as treat, healing, prevent, mitigate, etc.</p>",
+            "link_label": "",
+            "link": "",
+            "custom_liquid": "<style>\nul{\n    list-style-position: outside!important;\n    margin-left: 1.5em;}\n</style>"
+          }
+        },
+        "column_UehXc8": {
+          "type": "column",
+          "settings": {
+            "title": "",
+            "text": "<p>Those rules are not just about words but applied to the meaning of the sentence or article. If a message has an idea of describing the diseases or medical condition it is strictly prohibited. It is also prohibited to mention health-related issues in the connection to the product even if you cited someone else's article or research. It is also prohibited to have comments or feedback from 3rd parties that mention health-related issues as such comments shall be removed from the post or article.</p><p>If your article or sentence comply (using general terms not connected with a disease or condition such as wellness, wellbeing, metabolism, immunity, beauty in some cases are allowed) but still describe the health-related topics always include the FDA disclaimer:</p><p>\"Dietary Supplements are not intended to diagnose, treat, cure or prevent any disease. The statements made with this article (and any accompanying material) have not been evaluated by FDA and not intended to replace the attention or advice of a physician or other qualified health care professional.\"</p><p><em><strong>Failure to comply will result in your account suspension as well as any affiliation with our brand.</strong></em></p>",
+            "link_label": "",
+            "link": "",
+            "custom_liquid": "<script>\n  (() => {\n    const el = document.querySelector('#featured-all-products');\n    const stopEl = document.querySelector('#fixedoff');\n    const header = document.querySelector('sticky-header');\n\n    if (!el || !stopEl || !header) return;\n\n    let rafId = null;\n\n    // We keep a placeholder so layout doesn't jump when el becomes fixed.\n    const ph = document.createElement('div');\n    ph.style.display = 'none';\n    el.parentNode.insertBefore(ph, el);\n\n    const px = (n) => Math.round(n) + 'px';\n\n    const getHeaderH = () => {\n      // sticky-header in Dawn is often a custom element; height is still measurable.\n      return header.getBoundingClientRect().height || header.offsetHeight || 0;\n    };\n\n    const measure = () => {\n      const headerH = getHeaderH();\n      const topOffset = headerH + 20;\n\n      // IMPORTANT: measure original position from placeholder (if visible) else element.\n      const baseNode = ph.style.display !== 'none' ? ph : el;\n\n      const baseRect = baseNode.getBoundingClientRect();\n      const baseTop = baseRect.top + window.scrollY; // document y\n      const baseLeft = baseRect.left + window.scrollX; // document x\n      const baseWidth = baseRect.width;\n      const elHeight = baseNode.offsetHeight || el.offsetHeight;\n\n      const stopRect = stopEl.getBoundingClientRect();\n      const stopTop = stopRect.top + window.scrollY; // document y\n\n      // When should it start fixing?\n      const startFixY = baseTop - topOffset;\n\n      // The last scrollY where fixed is allowed. After this, lock it before stopEl.\n      const endFixY = stopTop - topOffset - elHeight;\n\n      return { topOffset, baseTop, baseLeft, baseWidth, elHeight, startFixY, endFixY };\n    };\n\n    const setFixed = (m) => {\n      // Lock layout space\n      ph.style.display = 'block';\n      ph.style.height = px(m.elHeight);\n\n      el.style.position = 'fixed';\n      el.style.top = px(m.topOffset);\n      el.style.left = px(m.baseLeft);\n      el.style.width = px(m.baseWidth);\n      el.style.margin = '0';\n      el.style.zIndex = '20';\n    };\n\n    const setAbsoluteStopped = (m) => {\n      // element should sit right before stopEl\n      ph.style.display = 'block';\n      ph.style.height = px(m.elHeight);\n\n      el.style.position = 'absolute';\n      el.style.top = px(m.topOffset + (m.endFixY - m.startFixY)); // not used directly; we compute via document top below\n      el.style.left = px(m.baseLeft);\n      el.style.width = px(m.baseWidth);\n      el.style.margin = '0';\n      el.style.zIndex = '20';\n\n      // Place it in document flow using its parent as positioning context\n      const parent = el.parentElement;\n      if (getComputedStyle(parent).position === 'static') {\n        parent.style.position = 'relative';\n      }\n\n      // Absolute positioning is relative to parent; convert desired document-top to parent-top\n      const parentTop = parent.getBoundingClientRect().top + window.scrollY;\n      const desiredDocTop = m.endFixY + m.topOffset; // where the element's top should end up\n      el.style.top = px(desiredDocTop - parentTop);\n    };\n\n    const reset = () => {\n      ph.style.display = 'none';\n      ph.style.height = '';\n      el.style.position = '';\n      el.style.top = '';\n      el.style.left = '';\n      el.style.width = '';\n      el.style.margin = '';\n      el.style.zIndex = '';\n    };\n\n    const update = () => {\n      rafId = null;\n\n      const m = measure();\n      const y = window.scrollY;\n\n      if (y < m.startFixY) {\n        reset();\n        return;\n      }\n\n      if (y >= m.startFixY && y <= m.endFixY) {\n        setFixed(m);\n        return;\n      }\n\n      // past endFixY => stop before #fixedoff\n      setAbsoluteStopped(m);\n    };\n\n    const requestUpdate = () => {\n      if (rafId) return;\n      rafId = requestAnimationFrame(update);\n    };\n\n    // Initial + on changes\n    requestUpdate();\n    window.addEventListener('scroll', requestUpdate, { passive: true });\n    window.addEventListener('resize', requestUpdate, { passive: true });\n    window.addEventListener('load', requestUpdate, { passive: true });\n\n    // If sticky-header height changes after fonts/images load, this catches most cases\n    if ('ResizeObserver' in window) {\n      const ro = new ResizeObserver(requestUpdate);\n      ro.observe(header);\n      ro.observe(el);\n      ro.observe(stopEl);\n    }\n  })();\n</script>"
+          }
+        }
+      },
+      "block_order": [
+        "column_VDGq8a",
+        "column_UehXc8"
+      ],
+      "custom_css": [
+        "svg,img {max-width: 100%;}",
+        ".grid {--col: clamp(24px, 2.61vw, 5rem); column-gap: var(--col); row-gap: 32px; align-items: end;}",
+        ".grid__item {max-width: calc(50% - (var(--col) / 2)); display: block; height: max-content;}",
+        ".multicolumn {border-top: 1px solid;}",
+        ".multicolumn-card {background: transparent; height: max-content;}",
+        ".multicolumn-card__info {padding: 0;}",
+        "h3:not(:first-of-type) {margin-top: clamp(32px, 2.61vw, 5rem); margin-bottom: clamp(18px, 1.25vw, 24px);}",
+        "@media (max-width: 980px) {p {text-align: center; } .grid__item {max-width: 100%; }}"
+      ],
+      "name": "t:sections.multicolumn.presets.name",
+      "settings": {
+        "title": "",
+        "description": "",
+        "heading_size": "h2",
+        "image_width": "full",
+        "image_ratio": "adapt",
+        "button_label": "",
+        "button_link": "",
+        "columns_desktop": 3,
+        "column_alignment": "left",
+        "background_style": "primary",
+        "color_scheme": "scheme-4",
+        "swipe_on_desktop": false,
+        "columns_mobile": "1",
+        "swipe_on_mobile": false,
+        "padding_top": 110,
+        "padding_bottom": 110,
+        "section_id": "",
+        "section_class": "",
+        "custom_code": ""
+      }
+    }
+  },
+  "order": [
+    "main",
+    "custom_liquid_w9E93B",
+    "image_with_text_7VVTnf",
+    "image_with_text_RniYwn",
+    "image_with_text_hapTr6",
+    "multicolumn_V9ajcD"
+  ]
+}

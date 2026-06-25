@@ -1,0 +1,497 @@
+{%- comment -%}
+  Snippet: collection-mega-menu.liquid
+  Inputs:
+    - parent_link (required)
+    - block (required)
+    - mode: 'mega' | 'drawer' (required)
+
+  Rules:
+    - Only active on collection/blog pages.
+    - Child items expected to be collections/blogs; otherwise show as simple link.
+    - CSS + JS injected only once globally.
+{%- endcomment -%}
+
+{% comment %} {%- assign is_allowed_page = request.page_type == 'collection' or request.page_type == 'blog' -%} {% endcomment %}
+{%- assign uid = 'cmm-'
+  | append: parent_link.title
+  | handleize
+  | append: '-'
+  | append: block.id
+  | append: '-'
+  | append: mode
+-%}
+
+{% if mode == 'mega' %}
+  {{ 'collection-mega-menu.css' | asset_url | stylesheet_tag }}
+{% endif %}
+{%- comment -%} ==== Global CSS + JS loader (runs only once) ==== {%- endcomment -%}
+<script>
+  (function () {
+    if (window.__CMM_LOADED__) return;
+    window.__CMM_LOADED__ = true;
+
+    // Init function (safe to call multiple times)
+    window.__CMM_INIT__ = function () {
+      document.querySelectorAll('[data-cmm-root]').forEach(function (root) {
+        if (root.dataset.cmmInited === '1') return;
+        root.dataset.cmmInited = '1';
+
+        var mode = root.getAttribute('data-cmm-mode');
+
+        // Desktop hover tabs
+        if (mode === 'mega') {
+          var sidebarItems = root.querySelectorAll('.navsidebar-item');
+          var tabPanels = root.querySelectorAll('.tab-panel');
+          var desktopTitle = root.querySelector('[data-cmm-desktop-title]');
+          var shopAllBtn = root.querySelector('[data-cmm-shopall]');
+
+          sidebarItems.forEach(function (item) {
+            item.addEventListener('mouseenter', function () {
+              var row = item.closest('.accordion-row');
+              if (!row) return;
+
+              var tab = row.getAttribute('data-tab');
+
+              sidebarItems.forEach(function (i) {
+                i.classList.remove('active');
+              });
+              item.classList.add('active');
+
+              if (desktopTitle) desktopTitle.textContent = row.getAttribute('data-title') || '';
+              if (shopAllBtn) shopAllBtn.href = row.getAttribute('data-shop-link') || '#';
+
+              tabPanels.forEach(function (p) {
+                p.classList.toggle('active', p.id === root.id + '-tab-' + tab);
+              });
+            });
+          });
+        }
+
+        // Drawer accordion + sliders
+        if (mode === 'drawer') {
+          // Accordion open/close
+          root.querySelectorAll('.accordion-row').forEach(function (row) {
+            var trigger = row.querySelector('.navsidebar-item');
+            if (!trigger) return;
+
+            trigger.addEventListener('click', function () {
+              root.querySelectorAll('.accordion-row').forEach(function (r) {
+                if (r !== row) r.classList.remove('open');
+              });
+              row.classList.toggle('open');
+
+              // After accordion animation finishes, recalc arrows for sliders inside this row
+              setTimeout(function () {
+                row.querySelectorAll('.mobile-slider').forEach(function (slider) {
+                  if (typeof slider.__cmmUpdateArrows === 'function') slider.__cmmUpdateArrows();
+                });
+              }, 350);
+            });
+          });
+
+          // Sliders (native scroll + auto-hide arrows)
+          if({{block.settings.enable_accordion_sliders}}){
+            root.querySelectorAll('.mobile-slider').forEach(function (slider) {
+              var wrapper = slider.querySelector('.slider-wrapper');
+              var track = slider.querySelector('.slider-track');
+              var prevBtn = slider.querySelector('.slider-arrow.prev');
+              var nextBtn = slider.querySelector('.slider-arrow.next');
+
+              if (!wrapper || !track || !prevBtn || !nextBtn) return;
+
+              // Pick the actual element that scrolls (wrapper OR track)
+              function getScroller() {
+                var wOverflow = wrapper.scrollWidth - wrapper.clientWidth;
+                var tOverflow = track.scrollWidth - track.clientWidth;
+
+                // If track is the one that overflows (common when "scroll-container" is applied), use it.
+                if (tOverflow > 4 && wOverflow <= 4) return track;
+
+                // Default: wrapper
+                return wrapper;
+              }
+
+              function stopClose(e) {
+                e.stopPropagation();
+              }
+
+              [wrapper, track, prevBtn, nextBtn].forEach(function (el) {
+                el.addEventListener('click', stopClose);
+                el.addEventListener('pointerdown', stopClose);
+                el.addEventListener('touchstart', stopClose, { passive: true });
+              });
+
+              function updateArrows() {
+                var scroller = getScroller();
+                var maxScroll = Math.max(0, scroller.scrollWidth - scroller.clientWidth);
+                var left = Math.round(scroller.scrollLeft);
+                var tol = 12;
+
+                // If no overflow => hide both completely
+                if (maxScroll <= 4) {
+                  prevBtn.style.display = 'none';
+                  nextBtn.style.display = 'none';
+                  return;
+                }
+
+                // Overflow exists => show arrows, then hide side-specific using visibility
+                prevBtn.style.display = 'flex';
+                nextBtn.style.display = 'flex';
+
+                prevBtn.style.visibility = left <= tol ? 'hidden' : 'visible';
+                nextBtn.style.visibility = left >= maxScroll - tol ? 'hidden' : 'visible';
+              }
+
+              function scrollStep() {
+                // Move by one slide width + gap
+                var scroller = getScroller();
+                var firstSlide = slider.querySelector('.slide');
+                if (firstSlide) {
+                  var w = firstSlide.getBoundingClientRect().width;
+                  return Math.round(w + 12);
+                }
+                return Math.max(200, Math.floor(scroller.clientWidth / 2));
+              }
+
+              prevBtn.addEventListener('click', function (e) {
+                e.preventDefault();
+                e.stopPropagation();
+                var scroller = getScroller();
+                scroller.scrollBy({ left: -scrollStep(), behavior: 'smooth' });
+              });
+
+              nextBtn.addEventListener('click', function (e) {
+                e.preventDefault();
+                e.stopPropagation();
+                var scroller = getScroller();
+                scroller.scrollBy({ left: scrollStep(), behavior: 'smooth' });
+              });
+
+              // Keep arrows updated
+              wrapper.addEventListener('scroll', updateArrows, { passive: true });
+              track.addEventListener('scroll', updateArrows, { passive: true });
+              window.addEventListener('resize', updateArrows);
+
+              // After layout settles (drawer + accordion animations)
+              requestAnimationFrame(updateArrows);
+              setTimeout(updateArrows, 350);
+
+              // ResizeObserver catches accordion open height/width changes
+              if (window.ResizeObserver) {
+                var ro = new ResizeObserver(function () {
+                  updateArrows();
+                });
+                ro.observe(wrapper);
+                ro.observe(track);
+              }
+
+              // expose for accordion open recalcs
+              slider.__cmmUpdateArrows = updateArrows;
+            });
+          }
+        }
+      });
+    };
+
+    // Run once now + after any Shopify section reload
+    document.addEventListener('DOMContentLoaded', window.__CMM_INIT__);
+    document.addEventListener('shopify:section:load', window.__CMM_INIT__);
+  })();
+</script>
+
+<div id="{{ uid }}" class="cmm collection-megamenu" data-cmm-root data-cmm-mode="{{ mode }}">
+  {%- if mode == 'mega' -%}
+    {%- comment -%} ===== Desktop mega layout only ===== {%- endcomment -%}
+    <div class="page page-width">
+      <aside class="navsidebar">
+        <div class="accordion-group">
+          {%- for child in parent_link.links -%}
+            {%- assign child_key = child.title | handleize -%}
+            {%- assign child_type = 'link' -%}
+            {%- assign child_handle = '' -%}
+            {%- if child.url contains '/collections/' -%}
+              {%- assign child_type = 'collection' -%}
+              {%- assign parts = child.url | split: '/collections/' -%}
+              {%- assign child_handle = parts[1] | split: '/' | first -%}
+            {%- elsif child.url contains '/blogs/' -%}
+              {%- assign child_type = 'blog' -%}
+              {%- assign partsb = child.url | split: '/blogs/' -%}
+              {%- assign child_handle = partsb[1] | split: '/' | first -%}
+            {%- endif -%}
+
+            <div
+              class="accordion-row"
+              data-tab="{{ child_key }}"
+              data-title="{{ child.title | escape }}"
+              data-shop-link="{% if child.url contains '/collections/' %}/collections/all?collection={{ child_handle }}{% else %} {{ child.url }} {% endif %}"
+            >
+              <div class="navsidebar-item{% if forloop.first %} active{% endif %}">
+                <a
+                  href="{% if child.url contains '/collections/' %}/collections/all?collection={{ child_handle }}{% else %} {{ child.url }} {% endif %}"
+                  class="navsidebar-link"
+                >
+                  {%- if child_type == 'collection'
+                    and collections[child_handle] != null
+                    and collections[child_handle].featured_image
+                  -%}
+                    <img
+                      width=""
+                      height=""
+                      src="{{ collections[child_handle].featured_image | image_url: width: 120 }}"
+                      alt="{{ collections[child_handle].title | escape }}"
+                      loading="lazy"
+                    >
+                  {%- else -%}
+                    <img width="" height="" src="https://placehold.co/60" alt="" loading="lazy">
+                  {%- endif -%}
+                  <div class="navsidebar-title">{{ child.title | escape }}</div>
+                </a>
+
+                <div class="navsidebar-arrow">›</div>
+              </div>
+            </div>
+          {%- endfor -%}
+        </div>
+      </aside>
+
+      <main class="content">
+        {%- assign first_child = parent_link.links.first -%}
+        <div class="content-header">
+          <h2 class="content-title" data-cmm-desktop-title>
+            {{ first_child.title | default: parent_link.title | escape }}
+          </h2>
+          <a class="btn-outline button" data-cmm-shopall href="{{ first_child.url | default: parent_link.url }}"
+            >Shop All</a
+          >
+        </div>
+        {%- for child in parent_link.links -%}
+          {%- assign child_key = child.title | handleize -%}
+          {%- assign child_type = 'link' -%}
+          {%- assign child_handle = '' -%}
+          {%- if child.url contains '/collections/' -%}
+            {%- assign child_type = 'collection' -%}
+            {%- assign parts = child.url | split: '/collections/' -%}
+            {%- assign child_handle = parts[1] | split: '/' | first -%}
+          {%- elsif child.url contains '/blogs/' -%}
+            {%- assign child_type = 'blog' -%}
+            {%- assign partsb = child.url | split: '/blogs/' -%}
+            {%- assign child_handle = partsb[1] | split: '/' | first -%}
+          {%- endif -%}
+
+          <section class="tab-panel{% if forloop.first %} active{% endif %}" id="{{ uid }}-tab-{{ child_key }}">
+            <div class="products-grid">
+              {%- if child_type == 'collection' and collections[child_handle] != null -%}
+                {%- assign c = collections[child_handle] -%}
+                {%- for p in c.products limit: 6 -%}
+                  <div class="product-card" title="{{ p.title | escape }}">
+                    <a href="{{ p.url }}" class="product-image">
+                      {%- if p.featured_image -%}
+                        <img
+                          width=""
+                          height=""
+                          src="{{ p.featured_image | image_url: width: 320 }}"
+                          alt="{{ p.title | escape }}"
+                          loading="lazy"
+                        >
+                      {%- endif -%}
+                    </a>
+                    <div class="product-info">
+                      <a href="{{ p.url }}" class="product-name">{{ p.title | escape }}</a>
+                      <div class="product-sub">{{ c.title | escape }}</div>
+                      {% assign product_form_id = 'quick-buy-' | append: p.id %}
+                      {% render 'quick-buy-button',
+                        card_product: p,
+                        horizontal_quick_add: true,
+                        product_form_id: product_form_id
+                      %}
+                    </div>
+                  </div>
+                {%- endfor -%}
+
+              {%- elsif child_type == 'blog' and blogs[child_handle] != null -%}
+                {%- assign b = blogs[child_handle] -%}
+                {%- for a in b.articles limit: 6 -%}
+                  <div class="product-card" title="{{ p.title | escape }}">
+                    <div class="product-image">
+                      {%- if a.image -%}
+                        <img
+                          width=""
+                          height=""
+                          src="{{ a.image | image_url: width: 320 }}"
+                          alt="{{ a.title | escape }}"
+                          loading="lazy"
+                        >
+                      {%- endif -%}
+                    </div>
+                    <div class="product-info">
+                      <div class="product-name">{{ a.title | escape }}</div>
+                      <div class="product-sub">{{ b.title | escape }}</div>
+                      <a class="btn-quick" href="{{ a.url }}">Read</a>
+                    </div>
+                  </div>
+                {%- endfor -%}
+
+              {%- else -%}
+                <div class="product-card primary">
+                  <div class="product-image"></div>
+                  <div class="product-info">
+                    <div class="product-name">{{ child.title | escape }}</div>
+                    <div class="product-sub">Open link</div>
+                    <a class="btn-quick" href="{{ child.url }}">Go</a>
+                  </div>
+                </div>
+              {%- endif -%}
+            </div>
+          </section>
+        {%- endfor -%}
+      </main>
+    </div>
+
+  {%- elsif mode == 'drawer' -%}
+    {%- comment -%} ===== Mobile drawer layout only ===== {%- endcomment -%}
+    <div class="drawer-block">
+      <div class="accordion-group">
+        {%- for child in parent_link.links -%}
+          {%- assign child_key = child.title | handleize -%}
+          {%- assign child_type = 'link' -%}
+          {%- assign child_handle = '' -%}
+
+          {%- if child.url contains '/collections/' -%}
+            {%- assign child_type = 'collection' -%}
+            {%- assign parts = child.url | split: '/collections/' -%}
+            {%- assign child_handle = parts[1] | split: '/' | first -%}
+          {%- elsif child.url contains '/blogs/' -%}
+            {%- assign child_type = 'blog' -%}
+            {%- assign partsb = child.url | split: '/blogs/' -%}
+            {%- assign child_handle = partsb[1] | split: '/' | first -%}
+          {%- endif -%}
+
+          <div class="accordion-row{% if forloop.first %} open{% endif %}">
+            <div class="navsidebar-item">
+              <a
+                href="{% if child.url contains '/collections/' %}/collections/all?collection={{ child_handle }}{% else %} {{ child.url }} {% endif %}"
+                class="navsidebar-link"
+              >
+                {%- if child_type == 'collection'
+                  and collections[child_handle] != null
+                  and collections[child_handle].featured_image
+                -%}
+                  <img
+                    width=""
+                    height=""
+                    src="{{ collections[child_handle].featured_image | image_url: width: 96 }}"
+                    alt="{{ collections[child_handle].title | escape }}"
+                    loading="lazy"
+                  >
+                {%- else -%}
+                  <img width="" height="" src="https://via.placeholder.com/48" alt="" loading="lazy">
+                {%- endif -%}
+
+                <div class="navsidebar-title">{{ child.title | escape }}</div>
+              </a>
+              <div class="navsidebar-arrow">›</div>
+            </div>
+
+            <div class="accordion-panel">
+              <hr>
+              <div class="mobile-slider">
+                {% if block.settings.enable_accordion_sliders == true %}
+                  <span class="slider-arrow prev" type="button" aria-label="Previous">
+                    {{- 'icon-caret.svg' | inline_asset_content -}}
+                  </span>
+                  <span class="slider-arrow next" type="button" aria-label="Next">
+                    {{- 'icon-caret.svg' | inline_asset_content -}}
+                  </span>
+                {% endif %}
+                <div class="slider-wrapper">
+                  <div class="{% if block.settings.enable_accordion_sliders == true %}slider-track scroll-container{% else %}product-grid {% endif %}">
+                    {%- if child_type == 'collection' and collections[child_handle] != null -%}
+                      {%- assign c = collections[child_handle] -%}
+                      {%- for p in c.products limit: 6 -%}
+                        <div class="slide">
+                          <div class="slider-card" title="{{ p.title | escape }}">
+                            <a href="{{ p.url }}" class="slider-image">
+                              {%- if p.featured_image -%}
+                                <img
+                                  width=""
+                                  height=""
+                                  src="{{ p.featured_image | image_url: width: 240 }}"
+                                  alt="{{ p.title | escape }}"
+                                  loading="lazy"
+                                >
+                              {%- endif -%}
+                            </a>
+
+                            <div class="product-info">
+                              <a href="{{ p.url }}" class="slider-card" title="{{ p.title | escape }}">
+                                <div class="slider-name">{{ p.title | escape }}</div>
+                              </a>
+                              {% comment %} <div class="slider-sub">{{ c.title | escape }}</div> {% endcomment %}
+                              {% assign product_form_id = 'quick-buy-' | append: p.id %}
+                              {% render 'quick-buy-button',
+                                card_product: p,
+                                horizontal_quick_add: true,
+                                product_form_id: product_form_id
+                              %}
+                            </div>
+                          </div>
+                        </div>
+                      {%- endfor -%}
+                    {%- elsif child_type == 'blog' and blogs[child_handle] != null -%}
+                      {%- assign b = blogs[child_handle] -%}
+                      {%- for a in b.articles limit: 6 -%}
+                        <div class="slide">
+                          <div class="slider-card" title="{{ p.title | escape }}">
+                            <div class="slider-image">
+                              {%- if a.image -%}
+                                <img
+                                  width=""
+                                  height=""
+                                  src="{{ a.image | image_url: width: 240 }}"
+                                  alt="{{ a.title | escape }}"
+                                  loading="lazy"
+                                >
+                              {%- endif -%}
+                            </div>
+                            <div>
+                              <div class="slider-name">{{ a.title | escape }}</div>
+                              {% comment %} <div class="slider-sub">{{ b.title | escape }}</div> {% endcomment %}
+                              <a class="btn-quick" href="{{ a.url }}">Read</a>
+                            </div>
+                          </div>
+                        </div>
+                      {%- endfor -%}
+                    {%- else -%}
+                      <div class="slide">
+                        <div class="slider-card primary">
+                          <div class="slider-image"></div>
+                          <div>
+                            <div class="slider-name">{{ child.title | escape }}</div>
+                            {% comment %} <div class="slider-sub">Open link</div> {% endcomment %}
+                            <a class="btn-quick" href="{{ child.url }}">Go</a>
+                          </div>
+                        </div>
+                      </div>
+                    {%- endif -%}
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        {%- endfor -%}
+      </div>
+      <div class="navsidebar-item">
+        <a
+          style="
+            min-width: 100%;
+            text-align: center;
+          "
+          href="{{ block.settings.button_link }}"
+          class="w-full btn-outline button navsidebar-shopall"
+        >
+          {{ block.settings.button_text -}}
+        </a>
+      </div>
+    </div>
+  {%- endif -%}
+</div>

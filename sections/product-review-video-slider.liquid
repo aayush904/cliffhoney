@@ -1,0 +1,1198 @@
+{{ 'product-review-video-slider.css' | asset_url | stylesheet_tag }}
+
+{%- style -%}
+  .section-{{ section.id }}-padding {
+    padding-top: clamp({{ section.settings.padding_top | times: 0.43 | round: 0 }}px, {{ section.settings.padding_top | divided_by: 19.13 }}vw, {{ section.settings.padding_top  }}px);
+    padding-bottom: clamp({{ section.settings.padding_bottom | times: 0.43 | round: 0 }}px, {{ section.settings.padding_bottom | divided_by: 19.13 }}vw, {{ section.settings.padding_bottom  }}px);
+  }
+
+  @media screen and (min-width: 768px) {
+    /* .section-{{ section.id }}-padding {
+      padding-top: {{ section.settings.padding_top }}px;
+      padding-bottom: {{ section.settings.padding_bottom }}px;
+    } */
+
+    .section-{{ section.id }}-padding .product__title.product__title{
+      --margin-top: 0px;
+      margin-top: var(--margin-top);
+    }
+  }
+{%- endstyle -%}
+
+<div class="section-{{ section.id }}-padding vrs color-{{ section.settings.color_scheme.id }}{% if section.settings.color_scheme.gradient != blank %} gradient{% endif %}">
+  <div class="video-review-slider-section">
+    {%- if section.settings.heading != blank or section.settings.description != blank -%}
+      <div class="page-width">
+        <div class="collection__title title-wrapper animate--slide-in">
+          {%- if section.settings.heading != blank -%}
+            <div>
+              <h2 class="h2">{{ section.settings.heading }}</h2>
+            </div>
+          {%- endif -%}
+          {%- if section.settings.description != blank -%}
+            <div class="collection__description body rte scroll-trigger animate--slide-in">
+              {{ section.settings.description }}
+            </div>
+          {%- endif -%}
+        </div>
+      </div>
+    {%- endif -%}
+
+    <div class="video-slider-container" id="video-slider-container">
+      {%- for block in section.blocks -%}
+        <div class="video-slide" data-modal-index="{{ forloop.index0 }}">
+          {%- if block.settings.video != blank -%}
+            {{-
+              block.settings.video
+              | video_tag:
+                class: 'slide-video-thumbnail',
+                muted: true,
+                playsinline: true,
+                preload: 'metadata',
+                autoplay: true,
+                loop: true
+            -}}
+
+          {%- else -%}
+            <div class="video-placeholder">No video selected</div>
+          {%- endif -%}
+
+          {%- if block.settings.product_1 -%}
+            <div class="video-product-info">
+              {{-
+                block.settings.product_1.featured_image
+                | image_url: width: 100, height: 100, crop: 'center'
+                | image_tag: loading: 'lazy', widths: '50, 100'
+              -}}
+              <div>
+                <p>{{ block.settings.product_1.title }}</p>
+                <span>{{ block.settings.product_1.price | money }}</span>
+              </div>
+            </div>
+          {%- endif -%}
+        </div>
+      {%- endfor -%}
+    </div>
+  </div>
+
+  <!-- Pre-rendered Modals for Each Video -->
+  <div class="video-modals">
+    {%- for block in section.blocks -%}
+      {% assign modal_id = 'video-modal-' | append: section.id | append: '-' | append: forloop.index0 %}
+      <div
+        class="video-modal"
+        id="{{ modal_id }}"
+        data-modal-index="{{ forloop.index0 }}"
+        style="display: none; justify-content: center; align-items: center;"
+      >
+        <button class="close-modal-btn" data-action="close-video-modal" aria-label="Close video modal">
+          <svg class="reelUp_fill" width="12" height="12" viewBox="0 0 24 24" fill="none">
+            <path fill-rule="evenodd" clip-rule="evenodd" d="M12.0002 10.586L4.70718 3.29297L3.29297 4.70718L10.586 12.0002L3.29297 19.2933L4.70718 20.7075L12.0002 13.4145L19.2933 20.7075L20.7075 19.2933L13.4145 12.0002L20.7075 4.70723L19.2933 3.29302L12.0002 10.586Z" fill="white"></path>
+          </svg>
+        </button>
+        <button class="modal-nav prev" data-action="prev-video" aria-label="Previous video">
+          <svg
+            class="reelUp_fill"
+            data-name="Layer 1"
+            viewBox="0 0 13.82 24.38"
+            width="12"
+            height="12"
+            fill="currentColor"
+          >
+            <path d="M11.32,28.72a1.64,1.64,0,0,0,2.3,0L24.18,18.15A1.6,1.6,0,0,0,24.66,17a1.63,1.63,0,0,0-.48-1.16L13.62,5.28a1.63,1.63,0,0,0-2.3,2.3L20.73,17l-9.41,9.41A1.63,1.63,0,0,0,11.32,28.72Z" transform="translate(24.66 -4.82) scale(-1,1)"></path>
+          </svg>
+        </button>
+        <button class="modal-nav next" data-action="next-video" aria-label="Next video">
+          <svg
+            class="reelUp_fill"
+            data-name="Layer 1"
+            viewBox="0 0 13.82 24.38"
+            width="12"
+            height="12"
+            fill="currentColor"
+          >
+            <path width="12" height="12" d="M11.32,28.72a1.64,1.64,0,0,0,2.3,0L24.18,18.15A1.6,1.6,0,0,0,24.66,17a1.63,1.63,0,0,0-.48-1.16L13.62,5.28a1.63,1.63,0,0,0-2.3,2.3L20.73,17l-9.41,9.41A1.63,1.63,0,0,0,11.32,28.72Z" transform="translate(-10.84 -4.82)"></path>
+          </svg>
+        </button>
+
+        <div class="video-modal-content">
+          <div class="video-player-wrapper">
+            {%- if block.settings.video != blank -%}
+              {{-
+                block.settings.video
+                | video_tag:
+                  class: 'modal-video-player',
+                  controls: false,
+                  autoplay: true,
+                  playsinline: true,
+                  loop: true,
+                  preload: 'auto'
+              -}}
+              <div class="video-play-overlay">
+                <svg
+                  id="a68f8ca7-328d-4278-9a97-1921b12c9502"
+                  data-name="f5ceb3a6-724f-4dc8-8cd2-2a9eeac66291"
+                  xmlns="http://www.w3.org/2000/svg"
+                  viewBox="0 0 496.7 496.7"
+                  width="30"
+                  height="30"
+                >
+                  <path d="M316.5,263.7a14.71,14.71,0,0,1-7.5,12.9l-.4.2L191.9,344a14.72,14.72,0,0,1-14.9,0c-.1,0-.1-.1-.2-.1l.1-80.3.1-71.5v-8.8c.1,0,.1-.1.2-.1a15.3,15.3,0,0,1,7.5-2,15.52,15.52,0,0,1,7.5,2l.5.3-.1,56.6-.1,80.3c.1,0,.1.1.2.1a14.72,14.72,0,0,0,14.9,0l107.9-62.1A13.72,13.72,0,0,1,316.5,263.7Z" fill="#ff004f"></path><path d="M315.5,258.4,207.6,320.5a14.72,14.72,0,0,1-14.9,0c-.1,0-.1-.1-.2-.1l.1-80.3.1-56.6,116.4,67.4a14.34,14.34,0,0,1,5.31,5.18c.11.19.22.39.32.59.2.37.37.74.54,1.13C315.35,258,315.43,258.2,315.5,258.4Z" fill="#fff"></path><path d="M332.2,240.2a14.71,14.71,0,0,1-7.5,12.9l-.4.2-8.8,5.1c-.07-.2-.15-.4-.23-.6a11.7,11.7,0,0,0-.54-1.13c-.1-.2-.21-.4-.32-.59A14.22,14.22,0,0,0,309,250.8L192.6,183.4V159.7c.1,0,.1-.1.2-.1a15.3,15.3,0,0,1,7.5-2,15.52,15.52,0,0,1,7.5,2l116.9,67.7A14.71,14.71,0,0,1,332.2,240.2Z" fill="#6bfcb7"></path><g id="e79515ab-fc1f-4886-8e05-5c44a98cf66d" data-name="reelUp icon circle wrapper"><path d="M496.7,248.7c-.2,136.8-111.4,248-248.3,248S.2,385.5,0,248.7H23.7C23.9,372.5,124.7,473,248.4,473S472.9,372.5,473.1,248.7Z" fill="#6bfcb7"></path><path d="M248.4,23.6C124.5,23.6,23.7,124.4,23.7,248.3v.4C23.9,372.5,124.7,473,248.4,473S472.9,372.5,473.1,248.7v-.4C473.1,124.4,372.3,23.6,248.4,23.6Zm76.3,229.5-.4.2-8.8,5.1a13.72,13.72,0,0,1,1,5.3,14.71,14.71,0,0,1-7.5,12.9l-.4.2L191.9,344a14.72,14.72,0,0,1-14.9,0c-.1,0-.1-.1-.2-.1l.1-80.3.1-71.5v-8.8c.1,0,.1-.1.2-.1a15.3,15.3,0,0,1,7.5-2,15.52,15.52,0,0,1,7.5,2l.5.3,116.4,67.4a14.34,14.34,0,0,1,5.31,5.18A14.22,14.22,0,0,0,309,250.8L192.6,183.4V159.7c.1,0,.1-.1.2-.1a15.3,15.3,0,0,1,7.5-2,15.52,15.52,0,0,1,7.5,2l116.9,67.7a14.84,14.84,0,0,1,0,25.8Z" opacity="0.55"></path><path d="M496.7,248.3v.4H473.1v-.4c0-123.9-100.8-224.7-224.7-224.7S23.7,124.4,23.7,248.3v.4H0v-.4C0,111.4,111.4,0,248.4,0S496.7,111.4,496.7,248.3Z" fill="#ff004f"></path></g>
+                </svg>
+              </div>
+
+              <div class="progress-container">
+                <div class="progress-bar"></div>
+              </div>
+            {%- endif -%}
+            <button class="mute-toggle-btn muted" data-action="toggle-mute">
+              <svg
+                class="reelUp_fill"
+                stroke="currentColor"
+                fill="currentColor"
+                stroke-width="0"
+                viewBox="0 0 512 512"
+                height="24"
+                width="24"
+              >
+                <path d="M64 192v128h85.334L256 431.543V80.458L149.334 192H64zm288 64c0-38.399-21.333-72.407-53.333-88.863v176.636C330.667 328.408 352 294.4 352 256zM298.667 64v44.978C360.531 127.632 405.334 186.882 405.334 256c0 69.119-44.803 128.369-106.667 147.022V448C384 428.254 448 349.257 448 256c0-93.256-64-172.254-149.333-192z"></path>
+              </svg>
+            </button>
+          </div>
+          <div class="modal-product-display">
+            <div class="product-section">
+              <h3>Products in this video</h3>
+              <div class="product-grid modal-product-grid">
+                {%- assign products = 'product_1,product_2,product_3,product_4' | split: ',' -%}
+                {%- for product_key in products -%}
+                  {%- assign product = block.settings[product_key] -%}
+                  {%- if product != blank -%}
+                    <div
+                      class="modal-product-item"
+                      onclick="openProductDetail('{{ product.handle }}', `{{ modal_id }}`)"
+                    >
+                      {{-
+                        product.featured_image
+                        | image_url: width: 250, height: 250, crop: 'center'
+                        | image_tag: loading: 'lazy', widths: '175, 250'
+                      -}}
+                      <div class="modal-product-item-info">
+                        <h4>{{ product.title }}</h4>
+                        <span class="price">
+                          <span class="current-price">{{ product.price | money }}</span>
+                          {%- if product.compare_at_price != blank and product.compare_at_price > product.price -%}
+                            <span class="compare-at" style="text-decoration:line-through; margin-left:8px;">
+                              {{- product.compare_at_price | money -}}
+                            </span>
+                          {%- endif -%}
+                        </span>
+                      </div>
+                    </div>
+                  {%- endif -%}
+                {%- endfor -%}
+              </div>
+            </div>
+            <div class="product-detail-content" data-modal="{{ modal_id }}" data-index="{{ forloop.index0 }}"></div>
+          </div>
+        </div>
+      </div>
+    {%- endfor -%}
+  </div>
+  <script>
+    const url = new URL(window.location);
+   document.addEventListener('DOMContentLoaded', function() {
+     const videoSlides = document.querySelectorAll('.video-slide');
+     let currentModalIndex = -1;
+     const totalModals = {{ section.blocks.size }};
+     
+     function openVideoModal(index) {
+       if (currentModalIndex > -1) {
+         const currentModal = document.getElementById(`video-modal-{{ section.id }}-${currentModalIndex}`);
+         if (currentModal) {
+           currentModal.classList.remove('active'); // start fade-out
+     
+           const currentVideo = currentModal.querySelector('.modal-video-player');
+           if (currentVideo) currentVideo.pause();
+     
+           setTimeout(() => {
+             currentModal.style.display = 'none';
+           }, 250); 
+         }
+       }
+     
+       const newModal = document.getElementById(`video-modal-{{ section.id }}-${index}`);
+       if (newModal) {
+     
+         newModal.style.display = 'flex';
+     
+         requestAnimationFrame(() => {
+           newModal.classList.add('active'); 
+         });
+     
+         const newVideo = newModal.querySelector('.modal-video-player');
+         if (newVideo) newVideo.play();
+     
+         currentModalIndex = index;
+       }
+     }
+   
+     videoSlides.forEach(slide => {
+       let startX = 0;
+       let startY = 0;
+       let isDragging = false;
+   
+       slide.addEventListener('pointerdown', (e) => {
+         startX = e.clientX;
+         startY = e.clientY;
+         isDragging = false;
+       });
+   
+       slide.addEventListener('pointermove', (e) => {
+         const dx = Math.abs(e.clientX - startX);
+         const dy = Math.abs(e.clientY - startY);
+         if (dx > 5 || dy > 5) { // threshold for drag detection
+           isDragging = true;
+         }
+       });
+   
+       slide.addEventListener('click', function(e) {
+         if (isDragging) {
+           e.preventDefault();
+           e.stopImmediatePropagation();
+           return;
+         }
+         const index = parseInt(this.dataset.modalIndex, 10);
+         openVideoModal(index);
+       });
+     });
+   
+     document.querySelectorAll('.video-modal').forEach(modal => {
+       const modalIndex = parseInt(modal.dataset.modalIndex, 10);
+       const videoPlayer = modal.querySelector('.modal-video-player');
+   
+       modal.querySelector('[data-action="close-video-modal"]').addEventListener('click', () => {
+         modal.style.display = 'none';
+         if (videoPlayer) videoPlayer.pause();
+         currentModalIndex = -1;
+       });
+   
+       modal.querySelector('[data-action="toggle-mute"]').addEventListener('click', function() {
+         if (videoPlayer) {
+           videoPlayer.muted = !videoPlayer.muted;
+           this.classList.toggle('muted', videoPlayer.muted);
+         }
+       });
+       
+
+        const nextBtn = modal.querySelector('[data-action="next-video"]');
+        const prevBtn = modal.querySelector('[data-action="prev-video"]');
+
+        // Button clicks
+        nextBtn.addEventListener('click', () => {
+          openVideoModal((modalIndex + 1) % totalModals);
+        });
+
+        prevBtn.addEventListener('click', () => {
+          openVideoModal((modalIndex - 1 + totalModals) % totalModals);
+        });
+
+        // --- Swipe detection ---
+        let startY = 0;
+        let endY = 0;
+
+        modal.addEventListener('touchstart', (e) => {
+          startY = e.touches[0].clientY;
+        });
+
+        modal.addEventListener('touchend', (e) => {
+          
+          endY = e.changedTouches[0].clientY;
+          handleSwipe();
+        });
+        
+        function handleSwipe() {
+          if(modal.querySelector('.modal-product-display').classList.contains('active')) return;
+          const diff = startY - endY;
+
+          // threshold: minimum swipe distance
+          if (Math.abs(diff) < 60) return;
+
+          if (diff > 0) {
+            // Swipe UP → Next modal
+            nextBtn.click();
+          } else {
+            // Swipe DOWN → Prev modal
+            prevBtn.click();
+          }
+        }
+     });
+     
+     function loadLibrary(url, type = "js") {
+       return new Promise((resolve) => {
+         const tag = document.createElement(type === "css" ? "link" : "script");
+   
+         if (type === "css") {
+           tag.rel = "stylesheet";
+           tag.href = url;
+         } else {
+           tag.src = url;
+         }
+   
+         tag.onload = resolve;
+         document.head.appendChild(tag);
+       });
+     }
+   
+     async function loadGlobalLibraries() {
+       await loadLibrary("{{ 'slick.css' | asset_url }}", "css");
+       await loadLibrary("{{ 'slick-theme.css' | asset_url }}", "css");
+       await loadLibrary("{{ 'jquery-3.6.0.min.js' | asset_url }}");
+       await loadLibrary("{{ 'slick.min.js' | asset_url }}");
+
+       const $slider = $('#video-slider-container');
+
+      $slider.on('init afterChange', function (e, slick) {
+        const center = slick.currentSlide;
+        const $slides = $slider.find('.slick-slide');
+
+        $slides.removeClass('size-1 size-2 size-3 size-4 plus minus');
+
+        const ranges = [
+          { dist: 0, cls: 'size-1' },
+          { dist: 1, cls: 'size-2' },
+          { dist: 2, cls: 'size-3' },
+          { dist: 3, cls: 'size-4' }
+        ];
+
+        ranges.forEach(({ dist, cls }) => {
+          if (dist === 0) {
+            // center slide
+            $slides
+              .filter(`[data-slick-index="${center}"]`)
+              .addClass(cls); // size-1
+          } else {
+              $slides.filter(`[data-slick-index="${center - dist}"]`).addClass(cls + ' minus');
+              $slides.filter(`[data-slick-index="${center + dist}"]`).addClass(cls + ' plus');
+          }
+        });
+      });
+
+   
+       $('#video-slider-container').slick({
+         slidesToShow: 5,
+         slidesToScroll: 1,
+         centerMode: true,
+         centerPadding: '30px',
+         dots: false,
+         focusOnSelect: false,
+         infinite: true,
+         arrows: false,
+         swipeToSlide: true, 
+         dragToSlide: true,
+         speed: 500,
+         responsive: [
+           {
+             breakpoint: 1280,
+             settings: {
+               centerPadding: '80px',
+               slidesToShow: 3,
+             }
+           },
+          {
+             breakpoint: 768,
+             settings: {
+              centerPadding: '30px',
+              slidesToShow: 3,
+             }
+           },
+           {
+             breakpoint: 600,
+             settings: {
+               centerPadding: '80px',
+               slidesToShow: 1,
+             }
+           },
+           {
+             breakpoint: 480,
+             settings: {
+                centerPadding: '30px',
+               slidesToShow: 1,
+             }
+           }
+         ]
+       });
+
+       $slider.slick('slickGoTo', {{ section.blocks.size | divided_by: 2 }}, true);
+
+     }
+   
+     loadGlobalLibraries();   
+     
+function fetchCspProduct(handle) {
+  window.__CSP_PRODUCT_DATA__ = window.__CSP_PRODUCT_DATA__ || {};
+
+  // Already loaded
+  if (window.__CSP_PRODUCT_DATA__[handle]) {
+    return Promise.resolve(window.__CSP_PRODUCT_DATA__[handle]);
+  }
+
+  // Always fetch main-product section
+  return fetch(`/products/${handle}?section_id=main-product`, {
+    credentials: 'same-origin'
+  })
+    .then(r => r.text())
+    .then(html => {
+      const doc = new DOMParser().parseFromString(html, 'text/html');
+      const script = doc.querySelector('#csp_product_obj');
+
+      if (!script) {
+        throw new Error('csp_product_obj script not found for ' + handle);
+      }
+
+      // Execute script in isolated scope
+      const fn = new Function(script.textContent);
+      fn();
+
+      if (!window.__CSP_PRODUCT_DATA__[handle]) {
+        throw new Error('__CSP_PRODUCT_DATA__ missing after execution for ' + handle);
+      }
+
+      return window.__CSP_PRODUCT_DATA__[handle];
+    });
+}
+
+
+
+
+function money(symbol, cents) {
+  var amt = (cents || 0) / 100;
+  return symbol + amt.toFixed(2);
+}
+
+function calcSavePct(compareCents, priceCents) {
+  compareCents = Number(compareCents || 0);
+  priceCents = Number(priceCents || 0);
+  if (!compareCents || compareCents <= priceCents) return 0;
+  return Math.round(((compareCents - priceCents) / compareCents) * 100);
+}
+
+function findVariantByOptions(product, selectedOptions) {
+  for (var i = 0; i < product.variants.length; i++) {
+    var v = product.variants[i];
+    var ok = true;
+    for (var j = 0; j < selectedOptions.length; j++) {
+      if (String(v.options[j]) !== String(selectedOptions[j])) { ok = false; break; }
+    }
+    if (ok) return v;
+  }
+  return null;
+}
+
+
+function renderProductDetail(container, product, handle, modalId) {
+  var scopeId =
+    'csp-' +
+    String(modalId).replace(/[^a-z0-9_-]/gi, '') +
+    '-' +
+    String(handle).replace(/[^a-z0-9_-]/gi, '');
+
+  container.setAttribute('data-csp-scope', scopeId);
+
+  var currencySymbol = (window.__CSP_CURRENCY_SYMBOL__ || (window.Shopify && Shopify.currency && Shopify.currency.active) ? '' : '') || '';
+
+  function money(cents) {
+    var amt = (Number(cents) || 0) / 100;
+    return currencySymbol + amt.toFixed(2);
+  }
+
+  function findVariantByOptions(selectedOptions) {
+    for (var i = 0; i < product.variants.length; i++) {
+      var v = product.variants[i];
+      var ok = true;
+      for (var j = 0; j < selectedOptions.length; j++) {
+        if (String(v.options[j]) !== String(selectedOptions[j])) { ok = false; break; }
+      }
+      if (ok) return v;
+    }
+    return null;
+  }
+
+  // initial variant
+  var initialVariantId = product.selected_or_first_available_variant_id || (product.variants[0] && product.variants[0].id);
+  var currentVariant = product.variants.filter(function(v){ return String(v.id) === String(initialVariantId); })[0] || product.variants[0];
+  var selectedOptions = (currentVariant && currentVariant.options) ? currentVariant.options.slice() : [];
+
+  // images
+  var imgs = (product.images && product.images.length) ? product.images : (product.featured_image ? [product.featured_image] : []);
+
+  // free products (benefits area)
+  var freeProducts = Array.isArray(product.free_products) ? product.free_products : [];
+
+  // Build UI
+  container.innerHTML = `
+    <div class="csp-detail" id="${scopeId}">
+      <button type="button" class="csp-back" data-back aria-label="Back">
+        <svg viewBox="0 0 24 24" width="16" height="16" aria-hidden="true">
+          <path d="M15.5 19.5 8 12l7.5-7.5" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+        </svg>
+      </button>
+
+      <div class="csp-media">
+        <div class="csp-slider">
+          ${imgs.map(function(src){
+            return `<div class="csp-slide"><img src="${src}" alt="" draggable="false"></div>`;
+          }).join('')}
+        </div>
+      </div>
+
+      <h3 class="csp-title">${product.title || ''}</h3>
+
+      <div class="csp-opts" data-opts></div>
+
+      <div class="csp-purchase-title">Select Purchase Plan</div>
+
+      <div class="csp-purchase-wrap">
+        <!-- SUBSCRIBE -->
+        <div class="csp-purchase-card csp-subscribe is-active" data-purchase="subscribe">
+          <div class="csp-purchase-top">
+            <div class="csp-left">
+              <span class="csp-radio-ui" aria-hidden="true"></span>
+              <div class="csp-top-title">
+                <span class="csp-top-label">Subscribe &amp;</span>
+                <span class="csp-save-pill" data-sub-save></span>
+              </div>
+            </div>
+
+            <div class="csp-price-stack">
+              <div class="csp-price" data-sub-price>--</div>
+              <div class="csp-compare" data-sub-compare style="display:none;">--</div>
+            </div>
+          </div>
+
+          <div class="csp-body-sub">Subscribe &amp; Save | Cancel anytime</div>
+
+          <div class="csp-plan-row">
+            <select class="csp-plan-select" data-plan-select></select>
+          </div>
+
+          <div class="csp-inner-divider"></div>
+
+          <div class="csp-benefits" data-benefits>
+            <!-- injected -->
+          </div>
+        </div>
+
+        <!-- ONE TIME -->
+        <div class="csp-purchase-card csp-onetime" data-purchase="onetime">
+          <div class="csp-purchase-top">
+            <div class="csp-left">
+              <span class="csp-radio-ui" aria-hidden="true"></span>
+              <div class="csp-top-title">
+                <span class="csp-top-label">One-Time Purchase</span>
+                <span class="csp-save-pill" data-ot-save></span>
+              </div>
+            </div>
+
+            <div class="csp-price-stack">
+              <div class="csp-price" data-ot-price>--</div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <product-form class="csp-actions">
+        <form class="csp-form" action="/cart/add" method="post" enctype="multipart/form-data" data-form id="product-form-{{section.id}}__main">
+          <input type="hidden" name="quantity" value="1">
+          <input type="hidden" name="product-id" value="${product.id}">
+          <input type="hidden" name="section-id" value="{{section.id}}">
+          <input type="hidden" name="id" value="${currentVariant.id}" data-variant-id class="product-variant-id">
+          <input type="hidden" name="form_type" value="product">
+          <input type="hidden" name="selling_plan" value="" data-selling-plan>
+          <button id="quick-add-{{section.id}}-submit" name="add" class="quick-add__submit button button--full-width  card--horizontal__quick-add csp-btn atc" type="submit">Add to Cart
+          <div class="loading__spinner hidden">
+          <svg xmlns="http://www.w3.org/2000/svg" class="spinner" viewBox="0 0 66 66"><circle stroke-width="6" cx="33" cy="33" r="30" fill="none" class="path"></circle></svg></div></button>
+        </form>
+
+        <a class="csp-btn more" href="/products/${handle}">More info</a>
+        <button data-opencart aria-label="Open cart" class="csp-cartbtn test_head header__icon header__icon--cart link focus-inset cart-icon-bubble" id="cart-icon-bubble" role="button" aria-haspopup="dialog">
+          <svg viewBox="0 0 24 24" width="18" height="18" aria-hidden="true">
+            <path d="M7 4h-2l-1 2v2h2l2.2 9.4c.1.6.6 1 1.2 1h9.8c.6 0 1.1-.4 1.2-1l1.6-8.4H7.4L7 4zm3 17a1.5 1.5 0 1 0 0-3 1.5 1.5 0 0 0 0 3zm8 0a1.5 1.5 0 1 0 0-3 1.5 1.5 0 0 0 0 3z"></path>
+          </svg>
+          </div>
+        </button>
+      </product-form>
+     ${product.description_html ? `
+      <div class="csp-desc">
+        <h4>Description</h4>
+        <div class="rte">${product.description_html || ''}</div>
+      </div>` : ``
+      }
+
+      <div class="csp-recs">
+        <h4>You may also like</h4>
+        <div class="csp-recs-grid" data-recs-grid></div>
+      </div>
+    </div>
+  `;
+
+  // BACK button behavior (closes product detail view)
+  var backBtn = container.querySelector('#' + scopeId + ' [data-back]');
+  if (backBtn) {
+    backBtn.addEventListener('click', function(){
+      var modal = document.querySelector('#' + modalId + ' .modal-product-display');
+      if (modal) modal.classList.remove('active');
+      // clear after animation
+      setTimeout(function(){ container.innerHTML = ''; }, 250);
+    });
+  }
+
+  // Render variant option pills (with badge + serving size)
+  var optsWrap = container.querySelector('#' + scopeId + ' [data-opts]');
+  if (product.options && product.options.length ) {
+    product.options.forEach(function(opt, optIdx){
+      if (opt.values.length <= 1) return; // skip single-value options
+      var group = document.createElement('div');
+      var pills =  opt.values.map(function(val){
+        var temp = selectedOptions.slice();
+        temp[optIdx] = val;
+        var vGuess = findVariantByOptions(temp);
+
+        var serving = (vGuess && vGuess.serving_size) ? String(vGuess.serving_size) : '';
+        var badge = (vGuess && vGuess.badge && vGuess.badge.name) ? String(vGuess.badge.name) : '';
+        var badgeColor = (vGuess && vGuess.badge && vGuess.badge.color) ? String(vGuess.badge.color) : '';
+
+        var active = (String(selectedOptions[optIdx]) === String(val)) ? 'is-active' : '';
+
+        return `
+          <div class="csp-pill ${active}" data-opt-index="${optIdx}" data-val="${String(val).replace(/"/g,'&quot;')}">
+            ${badge ? `<span class="csp-badge" style="background:${badgeColor || 'var(--color-extra)'}">${badge}</span>` : ``}
+            <strong>${val}</strong>
+            ${serving ? `<span class="csp-serving">${serving}</span>` : ``}
+          </div>
+        `;
+      }).join('');
+
+      group.innerHTML = `
+        <div class="csp-opt-label">${opt.name}</div>
+        <div class="csp-pill-group">${pills}</div>
+      `;
+
+      optsWrap.appendChild(group);
+    });
+  }
+
+  // Init Slick: 3 slides per view, variable width, equal height
+  if (window.jQuery && jQuery.fn && jQuery.fn.slick) {
+    var $slider = jQuery(container).find('#' + scopeId + ' .csp-slider');
+    if ($slider.length && !$slider.hasClass('slick-initialized')) {
+      $slider.slick({
+        slidesToShow: 3,
+        slidesToScroll: 1,
+        arrows: false,
+        dots: true,
+        infinite: true,
+        swipeToSlide: true,
+        variableWidth: true,
+        centerMode: true,
+        centerPadding: '0px',
+        edgeFriction: 0.15,
+        touchThreshold: 5
+      });
+    }
+  }
+
+  // Purchase plan elements
+  var subCard = container.querySelector('#' + scopeId + ' .csp-subscribe');
+  var otCard  = container.querySelector('#' + scopeId + ' .csp-onetime');
+
+  var subPriceEl   = container.querySelector('#' + scopeId + ' [data-sub-price]');
+  var subCompareEl = container.querySelector('#' + scopeId + ' [data-sub-compare]');
+  var subSaveEl    = container.querySelector('#' + scopeId + ' [data-sub-save]');
+
+  var otPriceEl = container.querySelector('#' + scopeId + ' [data-ot-price]');
+  var otSaveEl  = container.querySelector('#' + scopeId + ' [data-ot-save]');
+
+  var planSelect = container.querySelector('#' + scopeId + ' [data-plan-select]');
+  var benefitsWrap = container.querySelector('#' + scopeId + ' [data-benefits]');
+
+  var variantIdInput  = container.querySelector('#' + scopeId + ' [data-variant-id]');
+  var sellingPlanInput = container.querySelector('#' + scopeId + ' [data-selling-plan]');
+
+  function calcSavePercent(compareCents, priceCents) {
+    compareCents = Number(compareCents) || 0;
+    priceCents   = Number(priceCents) || 0;
+    if (!compareCents || compareCents <= priceCents) return 0;
+    return Math.round(((compareCents - priceCents) / compareCents) * 100);
+  }
+
+  function setPurchase(type) {
+    if (type === 'subscribe') {
+      subCard.classList.add('is-active');
+      otCard.classList.remove('is-active');
+      // ensure selling plan exists
+      var v = currentVariant;
+      var plans = (v && v.selling_plan) ? v.selling_plan : [];
+      if (plans.length) {
+        // default to first plan
+        planSelect.selectedIndex = 0;
+        sellingPlanInput.value = String(planSelect.value || plans[0].id);
+      } else {
+        sellingPlanInput.value = '';
+      }
+    } else {
+      otCard.classList.add('is-active');
+      subCard.classList.remove('is-active');
+      sellingPlanInput.value = '';
+    }
+  }
+
+  function renderBenefits() {
+    // Line 1: 10% OFF recurring orders (static as per screenshot)
+    var html = `
+      <div class="csp-benefit">
+        <div class="csp-benefit-left">
+          <span class="csp-check">✓</span>
+          <div><strong>10% OFF</strong> on recurring orders</div>
+        </div>
+        <div></div>
+      </div>
+    `;
+
+    // Free products list (from product.free_products)
+    freeProducts.forEach(function(fp){
+      var compare = Number(fp.compare_at_price) || Number(fp.price) || 0;
+      html += `
+        <div class="csp-benefit">
+          <div class="csp-benefit-left">
+            <span class="csp-check">✓</span>
+            <div><strong>Free</strong> ${fp.title || ''}</div>
+          </div>
+          <div class="csp-benefit-right">
+            <span class="csp-strike">${money(compare)}</span>
+            <span class="csp-free">Free</span>
+          </div>
+        </div>
+      `;
+    });
+
+    benefitsWrap.innerHTML = html;
+  }
+
+  function rebuildPlansForVariant(v) {
+    var oneTimePrice = Number(v.price) || 0;
+    var oneTimeCompare = Number(v.compare_at_price) || 0;
+    if (!oneTimeCompare || oneTimeCompare <= 0) oneTimeCompare = oneTimePrice;
+
+    // one-time
+    otPriceEl.textContent = money(oneTimePrice);
+    var otSave = calcSavePercent(oneTimeCompare, oneTimePrice);
+    otSaveEl.textContent = otSave ? ('Save ' + otSave + '%') : '';
+    otSave? otSaveEl.style.display = '' : otSaveEl.style.display = 'none';
+    
+    // subscribe plans
+    var plans = (v && v.selling_plan && v.selling_plan.length) ? v.selling_plan : [];
+    planSelect.innerHTML = '';
+
+    if (!plans.length) {
+      // if no subs, force one-time
+      subPriceEl.textContent = '--';
+      subCompareEl.style.display = 'none';
+      subSaveEl.textContent = 'Save';
+      document.querySelector('.csp-subscribe').style.pointerEvents = 'none';
+      setPurchase('onetime');
+      return;
+    }
+      document.querySelector('.csp-subscribe').style.pointerEvents = 'auto';
+
+    // Build select options
+    plans.forEach(function(p){
+      var opt = document.createElement('option');
+      opt.value = String(p.id);
+      opt.textContent = p.name;
+      opt.setAttribute('data-price', String(p.price));
+      opt.setAttribute('data-compare', String(p.compare_at_price || oneTimeCompare));
+      planSelect.appendChild(opt);
+    });
+
+    // default to first plan
+    planSelect.selectedIndex = 0;
+
+    var first = plans[0];
+    var subPrice = Number(first.price) || oneTimePrice;
+    var subCompare = Number(first.compare_at_price) || oneTimeCompare;
+
+    subPriceEl.textContent = money(subPrice);
+
+    // show compare if higher
+    if (subCompare && subCompare > subPrice) {
+      subCompareEl.textContent = money(subCompare);
+      subCompareEl.style.display = '';
+    } else {
+      subCompareEl.style.display = 'none';
+    }
+
+    var subSave = calcSavePercent(subCompare, subPrice);
+    subSaveEl.textContent = subSave ? ('Save ' + subSave + '%') : 'Save';
+
+    // keep subscribe selected by default
+    setPurchase('subscribe');
+  }
+
+  function updateVariant(nextVariant) {
+    currentVariant = nextVariant;
+    selectedOptions = nextVariant.options.slice();
+
+    variantIdInput.value = String(nextVariant.id);
+
+    // update pill active state
+    var allPills = container.querySelectorAll('#' + scopeId + ' .csp-pill');
+    allPills.forEach(function(p){
+      var idx = Number(p.getAttribute('data-opt-index'));
+      var val = p.getAttribute('data-val');
+      p.classList.toggle('is-active', String(selectedOptions[idx]) === String(val));
+    });
+
+    rebuildPlansForVariant(nextVariant);
+    renderBenefits();
+  }
+
+  // initial
+  rebuildPlansForVariant(currentVariant);
+  renderBenefits();
+
+  // Click handlers (scoped)
+  container.addEventListener('click', function(e){
+    // open cart
+    var openCart = e.target.closest('#' + scopeId + ' [data-opencart]');
+    if (openCart) {
+      var bubble = document.querySelector('#cart-icon-bubble');
+      if (bubble) bubble.click();
+      return;
+    }
+
+    // purchase click
+    var purchaseCard = e.target.closest('#' + scopeId + ' .csp-purchase-card');
+    if (purchaseCard) {
+      var type = purchaseCard.getAttribute('data-purchase');
+      setPurchase(type);
+      return;
+    }
+
+    // pill click
+    var pill = e.target.closest('#' + scopeId + ' .csp-pill');
+    if (pill) {
+      var idx = Number(pill.getAttribute('data-opt-index'));
+      var val = pill.getAttribute('data-val');
+      selectedOptions[idx] = val;
+
+      var v = findVariantByOptions(selectedOptions);
+      if (v) updateVariant(v);
+      return;
+    }
+  });
+
+  // Plan change updates price + compare + save + selling_plan
+  planSelect.addEventListener('change', function(){
+    var planId = String(planSelect.value || '');
+    var plans = currentVariant.selling_plan || [];
+    var plan = plans.filter(function(p){ return String(p.id) === planId; })[0];
+    if (!plan) return;
+
+    var oneTimeCompare = Number(currentVariant.compare_at_price) || Number(currentVariant.price) || 0;
+    var subPrice = Number(plan.price) || 0;
+    var subCompare = Number(plan.compare_at_price) || oneTimeCompare;
+
+    subPriceEl.textContent = money(subPrice);
+
+    if (subCompare && subCompare > subPrice) {
+      subCompareEl.textContent = money(subCompare);
+      subCompareEl.style.display = '';
+    } else {
+      subCompareEl.style.display = 'none';
+    }
+
+    var subSave = calcSavePercent(subCompare, subPrice);
+    subSaveEl.textContent = subSave ? ('Save ' + subSave + '%') : 'Save';
+
+    // keep subscribe selected
+    setPurchase('subscribe');
+  });
+
+  // Form submit: ensure selling_plan populated when subscribe selected
+  var form = container.querySelector('#' + scopeId + ' [data-form]');
+  form.addEventListener('submit', function(){
+    if (subCard.classList.contains('is-active')) {
+      sellingPlanInput.value = String(planSelect.value || '');
+    } else {
+      sellingPlanInput.value = '';
+    }
+  });
+}
+
+
+
+
+
+window.openProductDetail = function(handle, modalId) {
+  var modal = document.getElementById(modalId);
+  if (!modal) return;
+
+  var productDetailModal = modal.querySelector('.modal-product-display');
+  var productDetailContent = productDetailModal.querySelector('.product-detail-content');
+
+  productDetailModal.classList.add('active');
+  productDetailContent.innerHTML = '<div style="padding:16px;">Loading…</div>';
+
+  fetchCspProduct(handle)
+    .then(product => {
+      renderProductDetail(productDetailContent, product, handle, modalId);
+
+      // load recommendations into the already-rendered grid
+      return fetch(
+        '/recommendations/products?limit=6&section_id=template--18886001459260__related-products&product_id=' + product.id,
+        { credentials: 'same-origin' }
+      )
+      .then(r => r.text())
+      .then(recHtml => {
+        var recDoc = new DOMParser().parseFromString(recHtml, 'text/html');
+        var grid = productDetailContent.querySelector('[data-recs-grid]');
+        if (!grid) return;
+
+        var items = recDoc.querySelectorAll('product-recommendations ul li');
+        if (!items || !items.length) return;
+
+        var out = [];
+        items.forEach(li => {
+          var a = li.querySelector('.card__information a');
+          var img = li.querySelector('img');
+          if (!a) return;
+
+          var href = a.getAttribute('href') || '';
+          var h = href.split('/products/')[1];
+          if (h) h = h.split('?')[0];
+
+          out.push({
+            handle: h,
+            img: img ? img.outerHTML : '',
+            title: a.textContent.trim() || ''
+          });
+        });
+
+        grid.innerHTML = out.slice(0,4).map(p => `
+          <div class="csp-rec" type="button" data-rec-handle="${p.handle || ''}">
+            <div class="csp-rec-img">${p.img || ''}</div>
+            <div class="csp-rec-title">${p.title || ''}</div>
+          </div>
+        `).join('');
+
+        grid.onclick = function(e) {
+          var btn = e.target.closest('.csp-rec');
+          if (!btn) return;
+          var nextHandle = btn.getAttribute('data-rec-handle');
+          if (nextHandle) window.openProductDetail(nextHandle, modalId);
+        };
+      });
+    })
+    .catch(err => {
+      console.error(err);
+      productDetailContent.innerHTML = '<div style="padding:16px;">Failed to load product.</div>';
+    });
+};
+
+
+
+   
+     document.querySelectorAll("#shopify-section-{{ section.id }} .video-modal").forEach((modal) => {
+       const video = modal.querySelector(".modal-video-player");
+       const progressContainer = modal.querySelector(".progress-container");
+       const progressBar = modal.querySelector(".progress-bar");
+       const overlay = modal.querySelector(".video-play-overlay");
+   
+       if (!video || !progressContainer || !progressBar || !overlay) return;
+   
+       function updateProgressBar() {
+         if (progressContainer.offsetWidth === 0) return;
+         if (!video.duration) return;
+   
+         const percent = (video.currentTime / video.duration) * 100;
+         progressBar.style.setProperty('--progress-percent', percent + '%');
+       }
+   
+       video.addEventListener("timeupdate", updateProgressBar);
+   
+       progressContainer.addEventListener("click", (e) => {
+         if (progressContainer.offsetWidth === 0) return; 
+   
+         const rect = progressContainer.getBoundingClientRect();
+         const percent = (e.clientX - rect.left) / rect.width;
+   
+         video.currentTime = percent * video.duration;
+         updateProgressBar();
+       });
+   
+       let dragging = false;
+       progressContainer.addEventListener("mousedown", () => {
+         dragging = true;
+       });
+   
+       document.addEventListener("mouseup", () => {
+         dragging = false;
+       });
+   
+       document.addEventListener("mousemove", (e) => {
+         if (!dragging) return;
+         if (progressContainer.offsetWidth === 0) return;
+   
+         const rect = progressContainer.getBoundingClientRect();
+         let x = Math.min(Math.max(0, e.clientX - rect.left), rect.width);
+   
+         const percent = x / rect.width;
+         progressBar.style.setProperty('--progress-percent', percent * 100 + "%");
+   
+         video.currentTime = percent * video.duration;
+       });
+   
+       video.addEventListener("click", () => {
+         if (video.paused) {
+           video.play();
+           overlay.style.display = "none";
+         } else {
+           video.pause();
+           overlay.style.display = "block";
+         }
+       });
+   
+       video.addEventListener("pause", () => {
+         overlay.style.display = "block";
+       });
+   
+       video.addEventListener("play", () => {
+         overlay.style.display = "none";
+       });
+   
+   
+       const observer = new MutationObserver(() => {
+         if (modal.style.display !== "none" && progressContainer.offsetWidth > 0) {
+           updateProgressBar();
+         }
+       });
+   
+       observer.observe(modal, { attributes: true, attributeFilter: ["style", "class"] });
+   
+       const visibilityObserver = new MutationObserver((mutations) => {
+         for (const m of mutations) {
+           if (m.attributeName !== 'style') continue;
+           const isVisible = modal.style.display !== 'none';
+           if (!isVisible) continue;
+   
+           if (video) {
+             try {
+               video.currentTime = 0;
+             } catch (e) {
+               video.addEventListener('loadedmetadata', () => {
+                 try { video.currentTime = 0; } catch (err) {}
+               }, { once: true });
+             }
+   
+             updateProgressBar();
+             video.play().catch(() => {});
+             overlay.style.display = 'none';
+           }
+         }
+       });
+   
+       visibilityObserver.observe(modal, { attributes: true, attributeFilter: ['style'] });
+     });
+   
+   });
+  </script>
+</div>
+
+{% schema %}
+{
+  "name": "Product Reviews Slider",
+  "settings": [
+    {
+      "type": "color_scheme",
+      "id": "color_scheme",
+      "label": "Color scheme",
+      "default": "background-1"
+    },
+    {
+      "type": "html",
+      "id": "heading",
+      "label": "Heading",
+      "default": "A DIFFERENCE YOU CAN FEEL"
+    },
+    {
+      "type": "richtext",
+      "id": "description",
+      "label": "Description",
+      "default": "<p>Just ask our thousands of happy customers</p>"
+    },
+    {
+      "type": "header",
+      "content": "t:sections.all.padding.section_padding_heading"
+    },
+    {
+      "type": "range",
+      "id": "padding_top",
+      "min": 0,
+      "max": 200,
+      "step": 5,
+      "unit": "px",
+      "label": "t:sections.all.padding.padding_top",
+      "default": 50
+    },
+    {
+      "type": "range",
+      "id": "padding_bottom",
+      "min": 0,
+      "max": 200,
+      "step": 5,
+      "unit": "px",
+      "label": "t:sections.all.padding.padding_bottom",
+      "default": 50
+    }
+  ],
+  "blocks": [
+    {
+      "type": "review",
+      "name": "Video Review",
+      "settings": [
+        {
+          "type": "video",
+          "id": "video",
+          "label": "Video",
+          "info": "Select a video from your Shopify Files."
+        },
+        {
+          "type": "product",
+          "id": "product_1",
+          "label": "Product 1"
+        },
+        {
+          "type": "product",
+          "id": "product_2",
+          "label": "Product 2 (Optional)"
+        },
+        {
+          "type": "product",
+          "id": "product_3",
+          "label": "Product 3 (Optional)"
+        },
+        {
+          "type": "product",
+          "id": "product_4",
+          "label": "Product 4 (Optional)"
+        }
+      ]
+    }
+  ],
+  "presets": [
+    {
+      "name": "Product Reviews Slider"
+    }
+  ]
+}
+{% endschema %}

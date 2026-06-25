@@ -1,0 +1,79 @@
+/*
+ * ------------------------------------------------------------
+ * IMPORTANT: The contents of this file are auto-generated.
+ *
+ * This file may be updated by the Shopify admin theme editor
+ * or related systems. Please exercise caution as any changes
+ * made to this file may be overwritten.
+ * ------------------------------------------------------------
+ */
+{
+  "sections": {
+    "blocks_fnyjGA": {
+      "type": "_blocks",
+      "blocks": {
+        "ai_gen_block_6fb6749_MWWxEM": {
+          "type": "ai_gen_block_6fb6749",
+          "settings": {
+            "media_type": "custom_code",
+            "image": "shopify://shop_images/Rectangle_40034.webp",
+            "custom_code": "<iframe src=\"https://www.google.com/maps/embed?pb=!1m17!1m12!1m3!1d3534.0996113088254!2d85.29488808754452!3d27.65238966659639!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m2!1m1!2zMjfCsDM5JzA4LjYiTiA4NcKwMTcnNTkuMSJF!5e0!3m2!1sen!2snp!4v1768993863606!5m2!1sen!2snp\" width=\"600\" height=\"450\" style=\"width:100%;height:100%;border:0;\" allowfullscreen=\"\" loading=\"lazy\" referrerpolicy=\"no-referrer-when-downgrade\"></iframe>",
+            "heading": "<p>Want to <strong>Get in </strong>with us?</p>",
+            "description": "<p>If you’ve any Himalayan cliff honey-related queries, we have a dedicated team that always hears you, just fill the form below or mail us with your related curiosity!</p><p>Please allow us 2 to 3 business days for one of our team members to get back to you.</p>",
+            "button_text": "Send message",
+            "success_message": "Thank you for your message! We'll get back to you soon.",
+            "contact_phone": "+977 9704510179",
+            "contact_phone_2": "",
+            "contact_email": "contact@cliffhoney.com",
+            "show_social_icons": true,
+            "color_scheme": "scheme-4",
+            "heading_size": 52,
+            "description_size": 16,
+            "image_border_radius": 8,
+            "input_border_radius": 20,
+            "button_border_radius": 40,
+            "social_icon_size": 40
+          },
+          "blocks": {}
+        }
+      },
+      "block_order": [
+        "ai_gen_block_6fb6749_MWWxEM"
+      ],
+      "custom_css": [
+        "img {max-width: 75rem;}",
+        ".color-scheme-4 {max-width: var(--page-width); margin: auto; padding: 15rem 16px;}",
+        "h1 strong {color: var(--color-extra);}",
+        "@media (max-width: 768px) {img {max-width: 100%; } h1 br {display: none; } .color-scheme-4 {max-width: 100%; padding: 10rem 16px; }}"
+      ],
+      "settings": {}
+    },
+    "main": {
+      "type": "main-page",
+      "disabled": true,
+      "settings": {
+        "padding_top": 100,
+        "padding_bottom": 35
+      }
+    },
+    "form": {
+      "type": "contact-form",
+      "disabled": true,
+      "custom_css": [
+        "h2 {}"
+      ],
+      "settings": {
+        "heading": "Want to <strong>get in</strong> <strong>touch </strong>with us?",
+        "heading_size": "h0",
+        "color_scheme": "scheme-4",
+        "padding_top": 100,
+        "padding_bottom": 35
+      }
+    }
+  },
+  "order": [
+    "blocks_fnyjGA",
+    "main",
+    "form"
+  ]
+}

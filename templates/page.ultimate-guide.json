@@ -1,0 +1,543 @@
+/*
+ * ------------------------------------------------------------
+ * IMPORTANT: The contents of this file are auto-generated.
+ *
+ * This file may be updated by the Shopify admin theme editor
+ * or related systems. Please exercise caution as any changes
+ * made to this file may be overwritten.
+ * ------------------------------------------------------------
+ */
+{
+  "sections": {
+    "main": {
+      "type": "main-page",
+      "disabled": true,
+      "settings": {
+        "padding_top": 30,
+        "padding_bottom": 30
+      }
+    },
+    "image_banner_wL9yNR": {
+      "type": "image-banner",
+      "blocks": {
+        "heading_GtnAmX": {
+          "type": "heading",
+          "settings": {
+            "heading": "The Ultimate Guide to Himalayan Cliff Honey",
+            "heading_size": "h1"
+          }
+        },
+        "text_tqhqYr": {
+          "type": "text",
+          "disabled": true,
+          "settings": {
+            "text": "Himalayan cliff honey is a rare and exquisite wild honey variety collected from huge hives of Apis laboriosa, found only in Himalayan forests. It’s loaded with vitamins, minerals, antioxidants, and most importantly, a rare compound called grayanotoxin. A spoonful of it and you will feel energetic and relaxed, each drop connects you with the power of the wild Himalayas.",
+            "text_style": "body"
+          }
+        },
+        "buttons_tAx4ij": {
+          "type": "buttons",
+          "disabled": true,
+          "settings": {
+            "button_label_1": "Try Himalayan Cliff Honey",
+            "button_link_1": "#",
+            "button_style_secondary_1": false,
+            "button_label_2": "",
+            "button_link_2": "",
+            "button_style_secondary_2": false
+          }
+        }
+      },
+      "block_order": [
+        "heading_GtnAmX",
+        "text_tqhqYr",
+        "buttons_tAx4ij"
+      ],
+      "disabled": true,
+      "custom_css": [
+        ".banner {max-width: var(--max-width); margin: 12rem auto 0 auto; overflow: hidden;}",
+        ".banner__media {background: transparent !important;}",
+        ".banner__box {max-width: 65%; margin: auto;}",
+        "@media (max-width: 1600px) {.banner {max-width: calc((var(--page-width) + 100vw) / 1.93238); }}",
+        ".banner__box * {color: #fff; letter-spacing: 0;}",
+        "@media (min-width: 768px) {.banner__box {padding: 0; } .banner__content {padding: clamp(4rem, 4.91vw, 9.4rem) 6.8%; }}"
+      ],
+      "name": "t:sections.image-banner.presets.name",
+      "settings": {
+        "image": "shopify://shop_images/Group_47.webp",
+        "image_overlay_opacity": 0,
+        "image_height": "small",
+        "image_behavior": "none",
+        "desktop_content_position": "middle-center",
+        "desktop_content_alignment": "center",
+        "show_text_box": false,
+        "color_scheme": "scheme-4",
+        "stack_images_on_mobile": true,
+        "mobile_content_alignment": "center",
+        "show_text_below": false,
+        "section_class": "",
+        "section_id": "",
+        "custom_liquid_html": "{% assign imgbanid = \"#shopify-section-\" | append: section.id %}\n{% style %}\n{{ imgbanid }} .media > img {\n  object-fit: cover;\n  border-radius: 32px;\n}\n{{ imgbanid }} .button:after{\nbox-shadow:none;\n}\n{% endstyle %}"
+      }
+    },
+    "image_banner_6maA7U": {
+      "type": "image-banner",
+      "blocks": {
+        "heading_qE7PDj": {
+          "type": "heading",
+          "settings": {
+            "heading": "The Ultimate Guide to Himalayan Cliff Honey",
+            "heading_size": "h1"
+          }
+        },
+        "text_GU48hn": {
+          "type": "text",
+          "disabled": true,
+          "settings": {
+            "text": "Himalayan cliff honey is a rare and exquisite wild honey variety collected from huge hives of Apis laboriosa, found only in Himalayan forests. It’s loaded with vitamins, minerals, antioxidants, and most importantly, a rare compound called grayanotoxin. A spoonful of it and you will feel energetic and relaxed, each drop connects you with the power of the wild Himalayas.",
+            "text_style": "body"
+          }
+        },
+        "buttons_i7zwQH": {
+          "type": "buttons",
+          "disabled": true,
+          "settings": {
+            "button_label_1": "Try Himalayan Cliff Honey",
+            "button_link_1": "#",
+            "button_style_secondary_1": false,
+            "button_label_2": "",
+            "button_link_2": "",
+            "button_style_secondary_2": false
+          }
+        }
+      },
+      "block_order": [
+        "heading_qE7PDj",
+        "text_GU48hn",
+        "buttons_i7zwQH"
+      ],
+      "custom_css": [
+        ".banner {max-width: var(--max-width); margin: 12rem auto 0 auto; overflow: hidden;}",
+        ".banner__media {background: transparent !important;}",
+        ".banner__box .button {background-color: var(--color-extra) !important; color: #fff; border: none;}",
+        "@media (max-width: 1600px) {.banner {max-width: calc((var(--page-width) + 100vw) / 1.93238); }}",
+        "@media (min-width: 768px) {.banner__box {max-width: 65%; } .banner__box * {color: #fff; letter-spacing: 0; } .banner__box {padding: 0; } .banner__content {padding: clamp(4rem, 4.91vw, 9.4rem) 6.8%; }}"
+      ],
+      "name": "t:sections.image-banner.presets.name",
+      "settings": {
+        "image": "shopify://shop_images/Group_47.webp",
+        "image_overlay_opacity": 0,
+        "image_height": "small",
+        "image_behavior": "none",
+        "desktop_content_position": "middle-center",
+        "desktop_content_alignment": "center",
+        "show_text_box": false,
+        "color_scheme": "scheme-4",
+        "stack_images_on_mobile": true,
+        "mobile_content_alignment": "center",
+        "show_text_below": true,
+        "section_class": "header-dark",
+        "section_id": "",
+        "custom_liquid_html": "{% assign imgbanid = \"#shopify-section-\" | append: section.id %}\n{% style %}\n{{ imgbanid }} .media > img {\n  object-fit: cover;\n  border-radius: 32px;\nobject-position:0%;\n\n}\n{{ imgbanid }} .banner__box {\n width:100%;\n  margin: auto;\n}\n\n{{ imgbanid }} .button:after{\nbox-shadow:none;\n}\n{% endstyle %}"
+      }
+    },
+    "rich_text_PbRizi": {
+      "type": "rich-text",
+      "blocks": {
+        "text_rAc6pc": {
+          "type": "text",
+          "settings": {
+            "text": "<p>Sourced from dense native forests of Nepal’s “Golden Triangle,” Himalayan Cliff Honey is a delicious, creamy treat crafted by fuzzy honey bees bustling around the Mānuka tea tree. Himalayan Cliff Honey, like many honeys, is a highly prized ingredient that has been used for centuries in traditional medicine and is now gaining popularity as an integral part of maintaining a healthy lifestyle.</p><p>Sourced from dense native forests of Nepal’s “Golden Triangle,” Himalayan Cliff Honey is a delicious, creamy treat crafted by fuzzy honey bees bustling around the Mānuka tea tree. Himalayan Cliff Honey, like many honeys, is a highly prized ingredient that has been used for centuries in traditional medicine and is now gaining popularity as an integral part of maintaining a healthy lifestyle.</p><p>Sourced from dense native forests of Nepal’s “Golden Triangle,” Himalayan Cliff Honey is a delicious, creamy treat crafted by fuzzy honey bees bustling around the Mānuka tea tree. Himalayan Cliff Honey, like many honeys, is a highly prized ingredient that has been used for centuries in traditional medicine and is now gaining popularity as an integral part of maintaining a healthy lifestyle.<br/><br/><br/><br/></p>"
+          }
+        }
+      },
+      "block_order": [
+        "text_rAc6pc"
+      ],
+      "disabled": true,
+      "custom_css": [
+        "p:nth-child(2) {padding: 4rem 5.6rem; background: #f9f4ed;}",
+        "@media (max-width: 998px) {p:nth-child(2) {padding: 16px; }}"
+      ],
+      "name": "t:sections.rich-text.presets.name",
+      "settings": {
+        "desktop_content_position": "center",
+        "content_alignment": "left",
+        "color_scheme": "scheme-4",
+        "full_width": true,
+        "padding_top": 100,
+        "padding_bottom": 55
+      }
+    },
+    "multi_rows_mixed_section_neNx94": {
+      "type": "multi-rows-mixed-section",
+      "blocks": {
+        "chapter_ErHxiJ": {
+          "type": "chapter",
+          "settings": {
+            "chapter": "Chapter 1",
+            "subtitle": "Understanding <strong>Himalayan Cliff Honey</strong>",
+            "excerpt": "Immerse yourself in the foundational understanding of Himalayan cliff honey."
+          }
+        },
+        "content_PtNeYG": {
+          "type": "content",
+          "settings": {
+            "richtext_content": "",
+            "html_content": "<p><strong>Himalayan cliff honey is a rare and unique honey product</strong>, which is collected from high rising cliffs in the dense Himalayan forests of Nepal. Harvested for centuries by native honey hunters in the foothills of the area, the floral sources for this honey are distinctive, the main ones being the alpine blooms thriving in the forests of the Himalayan foothills, especially varieties of rhododendrons that blanket the mountain slopes.</p>\n<p><highlight>One of the characteristic features of Himalayan cliff honey is its composition, the presence of antioxidants, enzymes and a unique compound not found in normal honey; grayanotoxin. Because of the presence of grayanotoxin, naturally found on various parts of rhododendron, Himalayan cliff honey is naturally psychoactive, making it popular with the significant name ”Mad Honey”.</highlight></p>\n\n<p>The harvesting process of Himalayan cliff honey is surreal, as the harvesters need to navigate the vertical cliffs that stand tall amidst the dense mountain forests, the edges of which are lost in haze barely visible from below. Standing at elevations as high as 2,500 to 4,000 metres above sea level, the hives on the rocky slopes are often hidden beneath steep overhangs, the combs being suspended on firm support from the cliffs. For harvesting the honey, indigenous people access the hives skillfully using their extraordinary balance and instinctive understanding of the terrain.</p>\n<img src=\"https://cdn.shopify.com/s/files/1/0686/0721/3628/files/ultimateGuide_2.webp?v=1768740651\" alt=\"honey hives\" width=\"980\" height=\"980\" style=\"max-width:100%; width:100%; height:auto;\">\n<p>\nThe uniqueness of Himalayan cliff honey is not limited just to its high Himalayan origin, the honey is made by an exclusive bee species, “Himalayan giant honey bee”, which is scientifically known as “Apis laboriosa”. This bee species is confined only to the high altitudes and is the only species known to produce mad honey. Added to that, it is the largest honey bee species, which does not digest grayanotoxin present in the nectar of rhododendrons, rather, they synthesize it into mad honey. The Himalayan giant honey bee plays the role of a significant pollinator as much species can’t adapt to the cold conditions of the area.</p>\n<p>\nHimalayan cliff honey is collected from three regions of Nepal: Lamjung, Jajarkot and Rukum. Although we collect the honey from various villages, what's similar in all types of cliff honey is the common characteristic: they contain grayanotoxin.\n</p>",
+            "image_caption": ""
+          }
+        },
+        "chapter_YLXTPV": {
+          "type": "chapter",
+          "settings": {
+            "chapter": "Chapter 2",
+            "subtitle": "The Himalayan Giant Bee <strong>(Apis laboriosa)</strong>",
+            "excerpt": "Explore the biology, behavior, and remarkable adaptations of Apis laboriosa."
+          }
+        },
+        "content_RTaXyi": {
+          "type": "content",
+          "settings": {
+            "richtext_content": "",
+            "html_content": "<p>The Himalayan Giant Bee, known as Apis laboriosa, is the largest bee species, with a height and width twice as large as the bees we usually see. These bees are remarkable not just because of their big size, but they also build massive hives in high altitudes, a surprising elevations above 3,500 meters, from where Himalayan cliff honey is harvested. Among the 20,000 known bee species, Apis laboriosa also stands out for a well-adapted body in high-altitude terrain. Their survival is possible mainly because of larger, stronger-built bodies, long wings capable of high-speed flight, and dense hair for warmth- a set of characters not found in local bees, the ones that protect them in the cold and windy environment of high altitude, where they thrive.</p>\n<img src=\"https://cdn.shopify.com/s/files/1/0686/0721/3628/files/ultimateGuide_3.webp?v=1768740649\" alt=\"honey bee\" width=\"980\" height=\"980\" style=\"max-width:100%; width:100%; height:auto;\">\n<p>The survival at high altitudes requires bravery, and the behavior of the Himalayan giant honey bees completely reflects courage and resilience. The Himalayan giant honey bees build nests on open-air cliffs, bearing constant threats from birds, wild animals, and other predators who can raid the hives for honey. The environmental conditions in the mountains cold, snow, wind, and unexpected rain also challenge the survival of the colony, requiring careful site selection. Their cleverness can be seen clearly in the way they choose the sites beneath overhangs and rock shelters to keep them safe from recognition and disturbance, and with full determination, the whole swarm first prepares a strong support to keep the hives steady.</p>\n\n<p><highlight>Himalayas have thin, low-oxygen air surrounding the area, and for taking flights here, they have highly developed wings that allow them to flap strongly, enabling them to forage efficiently in the high Himalayas. Their extremely developed social behavior, living and performing every task collaboratively and their aggressive protection of the hive are what keeps them safe. <br><br>One such studied interesting behavior of these bees is shimmering, a process in which the bees raise their abdomens sequentially. The observers outside the hive, who observe this habit, see waves across the surface of the nest repeatedly. This adaptation they’ve developed is believed to confuse the predators.</highlight></p>\n\n<p>The main source of food for Apis laboriosa is rhododendron among other alpine flowers, abundant in grayanotoxins, whose availability closely matches the altitudes where these bees live- up to about 4,000 metres. This natural toxin is produced by plants as a means to deter birds and other animals, but the Himalayan giant honey bees aren’t hampered at all, as they don’t digest the grayanotoxin. Rather, they collect it from the nectar and deposit it in the honey they prepare, and that's how it becomes the inherent component of Himalayan cliff honey.</p>\n\n<p>Apis laboriosa is the most valuable pollinator of the region and it is important in maintaining the population of the local plants (alpine blossoms), local crops (maize and vegetables), food security and biodiversity conservation. They are the guardians of the mountain ecosystem, where hardly any species of pollinators have adaptations and bravery enough to live. Besides their important role in the sustenance of the native plants, the fruits produced after successful reproduction become a significant food source for the birds and other wildlife that inhabit these forests. Their overall contribution to conserving the biodiversity and stability of the whole ecosystem is really significant, beyond being the sole producer of Himalayan cliff honey.</p>",
+            "image_caption": ""
+          }
+        },
+        "chapter_4D7DAX": {
+          "type": "chapter",
+          "settings": {
+            "chapter": "Chapter 3",
+            "subtitle": "Harvesting: The Ancient <strong>Honey Hunting</strong> Tradition",
+            "excerpt": "Discover the centuries-old honey hunting practices of Himalayan communities"
+          }
+        },
+        "content_CfccBC": {
+          "type": "content",
+          "settings": {
+            "richtext_content": "",
+            "html_content": "<p>Honey harvesting is one of the oldest traditions of mainly Gurungs and some Magars, the native residents of the mountains. Using their ancient techniques, they choose the perfect harvest time of the season, the most eligible individual for harvesting, and also the management of harvest after collection.</p>\n<p><highlight>The exceptional skills Gurungs possess for the harvest include: preparation of strong tools that don’t wear and tear during the harvest, detailed methods for harvesting with full precision for the collection in the safest way possible from the heights, and protecting the harvester from being stung by swarms of bees.</highlight></p>\n<img src=\"https://cdn.shopify.com/s/files/1/0686/0721/3628/files/ultimateGuide_4.webp?v=1768740649\" width=\"980\" height=\"980\" alt=\"honey hunting\" style=\"max-width:100%; width:100%; height:auto;\">\n\n<p>\nThe modern world has moved very far ahead today, but not for the Gurungs. The ancient methods they inherited and refined for a purpose still serve them. \n</p>\n\n<div class=\"img-text center\">\n<img src=\"https://cdn.shopify.com/s/files/1/0686/0721/3628/files/ultimateGuide_5.webp?v=1768740651\" width=\"402\" height=\"326\" alt=\"braiding a rope\" style=\"max-width:100%; height: auto;\">\n<div>\n<h4>Initial Preparation:</h4>\n<p>\nThe rope ladders for the ascent, the bamboo baskets for the collection, every tool is handmade, and all the work is done in the old way. Every twist of the rope, every strip of bamboo, every knot must be crafted with exact care, as even a minor mistake can ruin the harvest.\n</p>\n</div>\n</div>\n\n\n<div class=\"img-text center right-image\">\n<img src=\"https://cdn.shopify.com/s/files/1/0686/0721/3628/files/ultimateGuide_6.webp?v=1768740651\" width=\"402\" height=\"326\" style=\"max-width:100%; height: auto;\" alt=\"Worshiping Rangkemi\">\n<div>\n<h4>Sacred Customs:</h4>\n<p>\nBefore the honey harvest, the Gurungs also invite the community priest who performs elaborate rituals and prayers to pay respect to the forest gods, one of the most significant being Rangkemi. The spirits are believed to be forgiving but only when they are prayed with offerings; otherwise, they have the power to retaliate against the harvester. As part of these sacred practices, the legs and wings of animal, like hen, are used as offerings to the deities, while other parts are cooked and eaten with rice by the community.\n</p>\n</div>\n</div>\n\n\n<div class=\"img-text center\">\n<img src=\"https://cdn.shopify.com/s/files/1/0686/0721/3628/files/ultimateGuide_7.webp?v=1768740650\" alt=\"Detering Bees\" width=\"402\" height=\"326\" style=\"max-width:100%; height: auto;\">\n<div>\n<h4>Deterring Bees Naturally:</h4>\n<p>\nTo keep off the Himalayan giant honey bees, which are one of the most aggressive species and can sting the harvester in a group, the Gurungs discovered plants with natural bee-repelling properties. When smoked, the acrid, pungent fumes of these plants cause irritation to the sensitive olfactory receptors of the bees. The bees are agitated, confused and disoriented and this does not allow them to attack the harvester.</p>\n</div>\n</div>\n\n\n<div class=\"img-text center right-image\">\n<img src=\"https://cdn.shopify.com/s/files/1/0686/0721/3628/files/ultimateGuide_8.webp?v=1768740651\" alt=\"Honey Harvesting\" width=\"402\" height=\"326\" style=\"max-width:100%; height: auto;\">\n<div>\n<h4>Harvesting</h4>\n<p>\nThis effect typically lasts for several hours, creating a protective window within which honey can be safely collected. The main harvester climbs the rope, and drops the honeycombs with the help of stick, remaining harvesters on the ground collect them on the previously made basket. By understanding the bees’ behavior and carefully controlling the smoke, the Gurungs ensure that the harvest proceeds smoothly without provoking the swarms.</p>\n</div>\n</div>\n\n\n\n<p>\nEach harvest of Himalayan cliff honey is extremely limited due to several interlinked factors. The first limitation is the seasonal nature of the blossoms, with the rhododendrons, which are the largest source of nectar, having a brief blooming season, normally spring and autumn, and only growing in certain high-altitude regions. Moreover, unpredictable and extreme microclimatic conditions like sudden snowfalls, heavy monsoon rains, fierce winds, or even a sudden drop in temperature, add an element of uncertainty to every harvest.\n</p>\n<p>\nIn addition, the terrain is perilous, the harvesting process is entirely manual and labor-intensive, and the Himalayan giant honey bees are highly aggressive, making the collection risky. For sustainability, certain portions of the combs should be left such for regeneration, which further limits the overall yield. These combined factors make each honey harvest both rare and highly dependent on precise timing, skill, and the mercy of the mountain weather.</p>\n<p>\nGurungs are viewed as the original residents who pioneered mad honey harvesting, but the fact is, the honey hunting culture is ongoing till now, just because of the continuity the Gurungs have given to this tradition. Their ability to navigate the cliffs without leaving any gap that could open a loophole and compromise the harvest has upheld the integrity of the practice. It is through their dedication, bravery, and ancestral wisdom that this centuries-old heritage is sustained till today.</p>",
+            "image_caption": ""
+          }
+        },
+        "chapter_PfcnUU": {
+          "type": "chapter",
+          "settings": {
+            "chapter": "Chapter 4",
+            "subtitle": "The Science <strong>Behind Himalayan</strong> Cliff Honey",
+            "excerpt": "Get deep insight into the scientific factors that define Himalayan cliff honey."
+          }
+        },
+        "content_MPDfry": {
+          "type": "content",
+          "settings": {
+            "richtext_content": "<p>Himalayan cliff honey is highly concentrated with natural compounds; it is a combination of enzymes, minerals, and vitamins, which makes it a potent superfood of high medicinal value. Its moisture content is usually higher than 20 which is extremely high as compared to the commercial honey, and this content is largely attributed to the environmental factors such as humidity. The honey is made of about 60 percent sugars, mostly glucose, fructose and sucrose, which are extracted from the nectar, the natural juice of the various Himalayan floral varieties.</p>",
+            "html_content": "<p><highlight>\nAlong with carbohydrates, cliff honey has other components: low levels of proteins, water-soluble vitamins: Vitamin C, and traces of B-complex vitamins, all of which are nutritionally valuable and extracted by Himalayan giant honey bees out of flowers. The minerals found are potassium, sodium, phosphorus, calcium, magnesium, iron and copper, but in very trace amounts. The smaller amount, however, is also significant, as they are fundamentally required in metabolic processes and physiological activities in the body.\n</highlight></p>\n\n<img src=\"https://cdn.shopify.com/s/files/1/0686/0721/3628/files/components_cliff.webp?v=1768800624\" alt=\"Cliff honey components\" width=\"980\" height=\"980\" style=\"max-width:100%; width:100%; height:auto;\">\n\n<p>\nIn addition, the honey contains numerous natural enzymes including invertase, diastase and glucose oxidase which give the honey its potent antimicrobial properties and support long-term stability of original composition. The other important compounds are the antioxidants of the high altitude plants such as flavonoids, phenolic acids and derivatives- potent bioactive molecules that have been proven to have antimicrobial, anti-inflammatory and free-radical-scavenging properties.\n</p>\n<p>\nThese compounds combine to make Himalayan cliff honey a complex, nutrient-rich, and therapeutic natural product- a panacea that mountain communities have long relied on to maintain good health.\nThe most important of all compounds in Himalayan cliff honey, from Nepal, is grayanotoxin, which is a naturally occurring toxin common in various parts of plants of the Ericaceae family, particularly in the rhododendron flower for this honey type. There are four isoforms of grayanotoxins, grayanotoxin I to grayanotoxin IV; the most potent ones are I and III- these two isoforms are the main ones present in rhododendron flowers. Other grayanotoxins are present in low concentrations or are not usually present in measurable amounts in cliff honey.\n</p>\n<p>\nThe mode of toxicity of Grayanotoxins is through interaction with the voltage-gated sodium channels of the human body. They bind to these pathways and alter the electrical impulses of nerves and muscles. This is particularly of medicinal value and could result in lower blood pressure and a slower heart rate when people consume it normally. As the intoxicating properties aggravate with increasing dosage, mad honey should not be taken by individuals with high blood pressure and other cardiovascular disorders.\n</p>\n<p>\nThe chemistry of Himalayan cliff honey is totally dependent on nature, the flowering plants available at the altitudes where giant honeybees forage and changes in the environment being the main ones. The varieties of flowers bees visit can have differing chemical composition, which defines the phenolic, flavonoid and grayanotoxin content of honey. Specifically, plants at high altitudes grow and bloom in the presence of intense UV radiation and high oxygen levels, which stimulate the build-up of more antioxidants in cliff honey. The flavors, however, are not that differing as plant species sustaining in the cold climatic conditions are limited.\n</p>\n<h2>Why Different Seasons Produce Different Effects</h2>\n<p>\nThe season the honey is harvested in also alters the composition and the effects of the product. Himalayan cliff honey is harvested only in spring and autumn- the batch harvested in spring has a lighter color and a fainter taste, a reflection of the varieties of flowers spring brings to bloom. The ones harvested in the autumn, on the other hand, have more amberish shade and intense flavors as the main source of nectar extends beyond just flowers, it can be herbs and locally available plants like buckwheat.\n</p>\n<p><highlight>\nThe enzyme concentration in the Himalayan cliff honey is also high; this is the result of the fact that bees at elevated altitude are adjusted to a cold environment, which naturally increases levels of enzymes like invertase, diastase and glucose oxidase. These enzymes increase the antimicrobial properties of Himalayan cliff honey.\n</highlight></p>\n<p>\nOverall, the interaction of the altitude, floral sources, and environmental conditions directly affects the sugar composition, moisture content, and bioactive profile of the honey. The best varieties of flowers present in high altitude, in terms of antioxidants and several other nutrients, enhance the concentration, nutritional value and medicinal use of the Himalayan cliff honey.\n</p>\n<h2>Ongoing Scientific Research &amp; Studies</h2>\n<p>\nVarious studies have been conducted to gain in-depth knowledge of Himalayan cliff honey/ mad honey. In one of the studies, done to explore nutrient concentrations among different mad honey samples collected from varying altitudes, wide variations in pH, moisture level, total phenolics, as well as total antioxidants were observed. In another study, how seasonal variations affected the toxicity of Ericaceae plants was detected, the common floral source of Himalayan cliff honey, and the result pointed that the plants were most toxic during the spring. Consequently, grayanotoxin is more common in the cliff honey collected in spring than in honey collected at other seasons of the year.\n</p>\n<p>\nOne of the animal studies done noted that grayanotoxins, the bioactive toxins, are linked to vagal stimulation and the release of dopamine and endorphins, which can cause slight feelings of pleasure or lightness. In 2023, EFSA CONTAM Panel conducted a risk assessment of grayanotoxins in honey of plants of the family Ericaceae. The study concluded highest concentration of 0.05 mg of the combined levels of GTX I and III is protective for all age groups, though symptoms of acute intoxication might occur.\n</p>",
+            "image_caption": ""
+          }
+        },
+        "chapter_3jtiMH": {
+          "type": "chapter",
+          "settings": {
+            "chapter": "Chapter 5",
+            "subtitle": "Types &amp; Grades of Himalayan Cliff Honey",
+            "excerpt": "Learn about the different types and grading criteria of Himalayan cliff honey."
+          }
+        },
+        "content_xRgFdj": {
+          "type": "content",
+          "settings": {
+            "richtext_content": "",
+            "html_content": "<highlight>\nHimalayan cliff honey is classified based on the floral sources, season of harvest, and altitude from which the harvest is collected. These different factors also influence the grayanotoxin content, thus affecting the overall potency of the honey.\n</highlight>\n\n<div class=\"icons-grid\">\n<div class=\"icon-grid\">\n<img src=\"https://cdn.shopify.com/s/files/1/0686/0721/3628/files/4000m.svg?v=1768802083\" alt=\"4000 meter\" width=\"100\" height=\"100\">\n<h4>High-potency grade:</h4>\n<p>\nThe cliff honey that has been gathered from Apis laboriosa hives located at extreme heights above 4,000 metres from sea level is classified as high-potency grade. The honey is concentrated with high levels of grayanotoxins compared to all other batches.\n</p>\n</div>\n\n<div class=\"icon-grid\">\n<img src=\"https://cdn.shopify.com/s/files/1/0686/0721/3628/files/3800m.svg?v=1768802083\" alt=\"3800m\" width=\"100\" height=\"100\">\n<h4>Medium potency grade:</h4>\n<p>\nKnown for moderate levels of grayanotoxins, the medium potency grade cliff honey is perfect for gentle calming and therapeutic properties. This grade hence is ideal for individuals who want medicinal value and balanced flavor without overpowering intensity.\n</p>\n</div>\n\n<div class=\"icon-grid\">\n<img src=\"https://cdn.shopify.com/s/files/1/0686/0721/3628/files/3500m.svg?v=1768802083\" alt=\"3500m\" width=\"100\" height=\"100\">\n<h4>Mild potency grade:</h4>\n<p>\nThis grade is harvested mostly in autumn, generally from lower altitudes. The final product comes out as having lighter properties, lighter flavour and taste, and lower grayanotoxin content, as the honey is mostly derived from many wild flowers rather than just rhododendron.</p>\n</div>\n</div>\n\n\n\n<h2>Spring Harvest vs Autumn Harvest</h2>\n<p>\nHimalayan cliff honey is harvested two times a year, spring and autumn, and the quality of each differs in its own unique way. As rhododendrons reach full bloom in spring, the most potent honeys are produced during this season.\n</p>\n\n<h4>Spring Harvest (March–May):</h4>\n<p>\nIn spring, the giant bees forage on the rhododendron forests of the high altitudes, resulting in honey with stronger potency, deeper color, and intense aroma. This honey type needs responsible consumption, not a single intake should exceed the recommended dosage.<br>\nThis honey can be blended into recipes that demand a strong, rich sweetness from honey.\n</p>\n\n<h4>Autumn Harvest (September–November):</h4>\n<p>\nWhen compared, the autumn harvest has milder grayanotoxin levels, as the floral source is not just limited to rhododendron. A wide variety of plants that bloom in autumn are used in the preparation and you can expect this variety of cliff honey to have a smoother flavor and a pale yellow to light amber color. Unlike the spring harvest, this variety is ideal for everyday use and beginners. <br>\nIf you are preparing any of your favorite desserts that demand slight sweetness without bringing much change to the flavors, autumn harvest can work perfectly in this case.\n</p>\n\n<h2>Color Index &amp; Potency Levels</h2>\n<p><highlight>\nHimalayan cliff honey color ranges from light amber to dark reddish brown, depending on floral sources and altitude.\n</highlight></p>\n\n<h4>Darker Honey:</h4>\n<p>\nThe darker shade of the honey is due to the higher number of antioxidants and richer mineral content. This honey type also contains higher levels of grayanotoxin.\n</p>\n<h4>Lighter Honey:</h4>\n<p>\nThe nutrients in lighter honey are more limited, along with lower grayanotoxin content. You’ll find this type of honey to have a smoother taste and lower potency.\n</p>\n<p>\nOur jars include a color and potency index to guide consumers in proper use.\n</p>\n\n<h2>Raw, Filtered &amp; Unfiltered Honey- What’s the Difference?</h2>\n<p>\nRaw, filtered and unfiltered honey, all differ in what processing steps the honey undergoes after harvesting. The processes hugely impact the taste, texture and overall characteristics of the final product.\n</p>\n\n\n\n<div class=\"icons-grid\">\n<div class=\"icon-grid\">\n<img src=\"https://cdn.shopify.com/s/files/1/0686/0721/3628/files/Group_28756.svg?v=1768802078\" alt=\"hanging hive\" width=\"100\" height=\"100\">\n<h4>Raw Honey:</h4>\n<p>\nThe harvested honey from the hives at high altitude is directly packed in jars and brought to the market, known as raw honey. This honey retains pollen, enzymes and wax particles.</p>\n</div>\n\n<div class=\"icon-grid\">\n<img src=\"https://cdn.shopify.com/s/files/1/0686/0721/3628/files/Group_28758.svg?v=1768802078\" alt=\"honey filtering\" width=\"100\" height=\"100\">\n<h4>Filtered Honey:</h4>\n<p>\nIf the harvested honey is lightly strained before being sent to the market, the users get to enjoy a smoother honey without being interrupted by larger wax pieces. The final product remains pure and nutrients are also preserved in it.</p>\n</div>\n\n<div class=\"icon-grid\">\n<img src=\"https://cdn.shopify.com/s/files/1/0686/0721/3628/files/Group_28759.svg?v=1768802078\" alt=\"machine\" width=\"100\" height=\"100\">\n<h4>Processed Honey:</h4>\n<p>\nThe harvested honey undergoes a complex set of processing steps, including heavy heating and ultra-filtration, which removes pollen, enzymes, aroma, and natural nutrients. The processing is generally carried out to meet commercial quality standard in mass production.\n</p>\n</div>\n</div>\n\n\n<p>\nHimalayan Cliff Honey is never heated, minimally filtered, or commercially processed - we ensure every jar remains wild, authentic, and true to its natural Himalayan origin.\n</p>\n\n<h2>Taste Profiles Across Regions</h2>\n<p>\nThe uniqueness of Himalayan cliff honey lies in the fact that not every jar we sell tastes the same. The cliff honey harvested from each Himalayan region offers a distinct flavor of natural honey, giving users a rich and exciting experience.\n</p>\n\n<h4>Jajarkot (3500m): </h4>\n<p>\nThis wild honey is prepared generally using blooms of white rhododendrons and other mountain flora. It has characteristic earthier and slightly floral notes, thick and creamy texture, amber yellow hue and often has a gentler psychoactive profile.\n</p>\n\n<h4>Lamjung (4000m):</h4>\n<p>\nObtained from the high altitudes, cliff honey from Lamjung has a bold taste, light amber color, smooth texture and floral notes with strong rhododendron aroma.\n</p>\n\n<h2>Rukum (up to 4,000m)</h2>\n<p>\nFrom the Rukum region, the batches of honey we get are rare and from one of the remote sites of Nepal. The honey is characterised by dark amber color, thick, mild texture and rich flavor that comes from a variety of rhododendron flowers.\n</p>\n\n<h2>Differences from Turkish “Mad Honey”</h2>\n<p>\nTurkey is another well-known region besides Nepal, recognised around the world for the production of mad honey. But it’s not exactly a replication of what’s found in Nepal. While honey from both regions is known to have grayanotoxins, there are certain factors that make the two harvests different:\n</p>\n<table>\n<thead>\n<tr>\n<th>S.No</th>\n<th>Himalayan Cliff Honey</th>\n<th>Turkish “Mad Honey”</th>\n</tr>\n</thead>\n<tbody>\n<tr>\n<td>1</td>\n<td>Producer: solely Apis laboriosa</td>\n<td>Producer: Apis mellifera species</td>\n</tr>\n<tr>\n<td>2</td>\n<td>From high Himalayan cliffs of Nepal (2,500–4,500 m)</td>\n<td>From forest cliffs in the Black Sea region</td>\n</tr>\n<tr>\n<td>3</td>\n<td>Highly potent, main floral source is grayanotoxin-containing rhododendron</td>\n<td>Not so potent</td>\n</tr>\n<tr>\n<td>4</td>\n<td>Formation process is wholly natural.</td>\n<td>Harvesters intentionally prepare wooden hives</td>\n</tr>\n</tbody>\n</table>",
+            "image_caption": ""
+          }
+        },
+        "chapter_j8TVxm": {
+          "type": "chapter",
+          "settings": {
+            "chapter": "Chapter 6",
+            "subtitle": "Benefits &amp; Traditional Uses",
+            "excerpt": "Uncover the health benefits and traditional medicinal uses of Himalayan cliff honey."
+          }
+        },
+        "content_Bw6z8d": {
+          "type": "content",
+          "settings": {
+            "richtext_content": "",
+            "html_content": "<highlight>Himalayan cliff honey has long been used for wellness purposes, proven and backed by its use in Himalayan traditions that relied on it for healing, strength, and natural vitality. The use of honey was popular in the daily lives and curative practices of the Himalayan tribes, mainly the Gurung people.</highlight>\n<p>\nOne of the long-recognised uses is consuming cliff honey as a natural medicine that enabled them to survive in the high altitude and the harsh climatic conditions. It is popular among the native users for its body-warming capability, as they spend their entire lives enduring the cold weather in the high-altitude Himalayas.\n</p>\n\n<img src=\"https://cdn.shopify.com/s/files/1/0686/0721/3628/files/honey_hunter_with_bata.webp?v=1768802706\" alt=\"Hunter in Jungle\" width=\"980\" height=\"980\" style=\"max-width:100%; width:100%; height:auto;\">\n\n<p>Besides this, the cliff honey is also valued as a natural energy source, keeping them fit and able to work in rough terrains. Its natural sugars, minerals and warming properties were handy in keeping stamina and it still is a vital ingredient of the Gurung traditional wellness practices. After vigorous physical labor, it improves circulation and helps relieve fatigue, making it an essential part of their daily endurance and survival in harsh mountain conditions.\n</p>\n<p>\nNot only was it treasured as a food but also as a warming, strengthening and protective traditional medicinal substance that was integrated into their cultural health practices, including seasonal healing. It still serves as a trustworthy remedy for cough, sore throat, and seasonal colds as a healer that helps maintain respiratory health. \n</p>\n<p>\nTo heal the chest and strengthen the immune system, the people of the community prepared healing teas by mixing the honey with mountain herbs, spices and wild plants. These teas were consumed during the interseasons when the village people were more prone to illness. As a part of the tradition, the honey is mostly added while preparing alcoholic drinks and consumed in small amounts as a warming tonic.</p>\n\n<div class=\"img-text\">\n<img src=\"https://cdn.shopify.com/s/files/1/0686/0721/3628/files/Frame_1984079211.webp?v=1768805501\" alt=\"Sacred prayer\" width=\"402\" height=\"326\" style=\"max-width:100%; height: auto;\">\n<div>\n<h4>Sacred Customs:</h4>\n<p>\nHimalayan cliff honey is a natural source of energy, with the best benefits particularly when taken in small portions in the morning. It provides a source of fast and easy-to-digest energy, a result of its rich concentration in simple sugars, and this is why it keeps its native users active and alert when performing their daily chores in the high altitude environment. In addition to instant energy, the honey promotes bodily strength, making people fit and capable of working on rough surfaces for long hours, allowing them to sustain the activities that require much labor without feeling too tired.<br><br>\nCliff honey is also beneficial in digestion and general gastrointestinal wellbeing. Its natural formula is easy on the stomach, can keep metabolism in check in difficult circumstances; that's why it is used as a traditional remedy for digestive problems. Besides the physical advantages, cliff honey has cultural and spiritual values. It has significant use in religious ceremonies and is often gifted in various festivals as a symbol of purity, nourishment, and the strong bond between the Himalayan people and their nature</p>\n</div>\n</div>\n\n\n\n<div class=\"img-text\">\n<img src=\"https://cdn.shopify.com/s/files/1/0686/0721/3628/files/Frame_1984079206.webp?v=1768805501\" alt=\"communities\" width=\"402\" height=\"326\" style=\"max-width:100%; height: auto;\">\n<div>\n<h4>Used by communities for meditation and mental focus:</h4>\n<p>\nHimalayan cliff honey has also been used by the locals in meditation and mind sharpening. In small doses, it is claimed to increase concentration and clarity, which is beneficial in spiritual practice requiring attention. This is why it has been used continuously by natives as a spiritual and ceremonial object, in order to keep them awake and relaxed during meditating and other mindful activities.\n</p>\n</div>\n</div>\n\n<div class=\"img-text\">\n<img src=\"https://cdn.shopify.com/s/files/1/0686/0721/3628/files/Frame_1984079235.webp?v=1768970786\" alt=\"Antioxidant Properties\" width=\"402\" height=\"326\" style=\"max-width:100%; height: auto;\">\n<div>\n<h4>Antioxidant &amp; Immunity-Related Properties:</h4>\n<p>\nMost of the benefits of honey can be attributed to its high antioxidant and immunomodulatory properties that can be applied to prevent cellular destruction and boost natural defence mechanisms. Himalayan cliff honey is abundant in a wide variety of antioxidant, antibacterial, antiviral, and anti-inflammatory compounds, making it useful in soothing infections, supporting the healing process, and maintaining a healthy state of the body. <br><br>\nIt also has antiulcer, antihypertensive, and vasodilator properties, which support healthy blood flow and cardiovascular balance. In addition, honey possesses antihypercholesterolemic activity, helps to regulate the level of cholesterol and even antitumor activity, which is explained by bioactive compounds of plants. All these aspects make honey a powerful natural medicine that can be used to boost strength, life span, and overall vitality.\n</p>\n</div>\n</div>\n\n\n<h2>How the Body Reacts to Cliff Honey?</h2>\n<p>\nThe body reacts to cliff honey in several different stages, and every change that occurs is mainly because of the special bioactive compounds of high altitude Rhododendron flowers. At first, the taste buds pick up a certain, slightly bitter or floral taste, richer than normal honey. When it goes down the throat, many people complain of a warm or slightly soothing sensation, which is due to grayanotoxin present in the honey.\nThe body responds to sugars, minerals, and grayanotoxin compounds as soon as they reach the stomach and begin to be absorbed into the blood. This may give a feeling of light warmth, clearness, or slight relaxation in small, traditional doses, as the natural substances of the honey will work upon the digestive and circulatory systems.\n<br><br>\nThe physiological effects are more severe for a brief period of time- usually an hour. This may also include a sense of lightness, relaxation or a slight heaviness of the body to some individuals, especially when the honey is of very strong Rhododendron sources, and that is why local people traditionally consume it in limited doses as a sort of medicine honey, but not food.\n<br><br>\nHowever, once the dose is exceeded, the range of symptoms can get serious and the consumer might have to tolerate one or more of the following effects:\n</p>\n\n\n<p>\nThese visible effects occur because the grayanotoxins overstimulate certain ion channels in the nervous system. In large quantities, people may describe the experience as dreamlike or “psychedelic,” but these reactions are considered signs of toxicity, not a desirable effect.\n</p>\n\n<h2>Why locals consume very small quantities?</h2>\n<p>\nThe Himalayan cliff honey is very potent and is beneficial to the body only when consumed in limited amounts. They are well aware that increased doses may cause digestive disorders and other abnormalities. Consumption beyond the recommended limit can lead to dizziness, nausea, vomiting, a decrease in blood pressure, irregular heartbeat beat and even a temporary state of confusion. The native communities are able to avoid these negative effects by safely using it in its warming, energizing, and medicinal effects by taking small doses.\n</p>",
+            "image_caption": ""
+          }
+        },
+        "chapter_crBgjq": {
+          "type": "chapter",
+          "settings": {
+            "chapter": "Chapter 7",
+            "subtitle": "How to Use Himalayan Cliff Honey",
+            "excerpt": "Explore practical ways to consume and incorporate Himalayan cliff honey into daily routines."
+          }
+        },
+        "content_mbEbny": {
+          "type": "content",
+          "settings": {
+            "richtext_content": "<p>Himalayan cliff honey can be used in multiple ways. Whether you’re a new user or an old one, the different concentration levels can be incorporated into similar recipes.</p>",
+            "html_content": "<div class=\"img-text\">\n<img src=\"https://cdn.shopify.com/s/files/1/0686/0721/3628/files/Frame_1984079214.webp?v=1768805949\" alt=\"Favorite Tea\" width=\"402\" height=\"326\" style=\"max-width:100%; height: auto;\">\n<div>\n<h4>Mixed with Your Favorite Tea</h4>\n<p>\nThe best recipes to prepare it are mixing the honey in your regular tea, warm tea and herbal mixes. It is a perfect natural replacement for refined sugar, meaning you’ll cut down on unnecessary sweetness and processed additives.\n</p>\n</div>\n</div>\n\n<div class=\"img-text\">\n<img src=\"https://cdn.shopify.com/s/files/1/0686/0721/3628/files/Frame_1984079213.webp?v=1768805950\" alt=\"oats\" width=\"402\" height=\"326\" style=\"max-width:100%; height: auto;\">\n<div>\n<h4>Early Morning Breakfast</h4>\n<p>\nThe recipes also depend on which time of the day you’re planning to add it to. If it’s for a fresh start of the day, include it in your morning regimen. In this case, the honey can be added to a smoothie bowl or any herbal infusions of your choice. If for meditation, try to add it to light meals like fruit bowls/ fruit blends or any other option that works best for you. These prepared concoctions will be best to increase focus.\n</p>\n</div>\n</div>\n\n<highlight>\nFor all the beginners, starting with a small dose around one to two teaspoons is recommended, which can then be gradually increased as much to two tablespoons.\n</highlight>\n\n<h2>How to respect potency and avoid overuse</h2>\n<p>\nHimalayan cliff honey has a natural power that should be respected with mindfulness regardless of how much you are used to it. It is always good to start with small portions to allow yourself time to know how your body will react to it before increasing the amount. Using it in large amounts directly is not suggested because its strength may vary with each batch and each season. You can minimise the risk of overusing it by being patient, conscious, and deliberate in your approach to integrating it into your routine, with the only safe way being gradual use that lets your body guide the pace.\n</p>",
+            "image_caption": ""
+          }
+        },
+        "chapter_Tdy9Tq": {
+          "type": "chapter",
+          "settings": {
+            "chapter": "Chapter 8",
+            "subtitle": "Safety, Tolerance &amp; Responsible Usage",
+            "excerpt": "Understand safe consumption guidelines, individual tolerance levels, and responsible use."
+          }
+        },
+        "content_zfwFbc": {
+          "type": "content",
+          "settings": {
+            "richtext_content": "<p>Himalayan cliff honey is a rare, wild, high-altitude honey, which is valued because of its high antioxidants, minerals and rare bioactive compounds. Nevertheless, also occasionally referred to as \"mad honey\", because of the existence of grayanotoxins, the safety dose stands as the main concern, as even small variations can influence physiological and psychedelic effects.</p><p>While some sources emphasise psychoactive or medicinal properties, traditional knowledge from Himalayan communities, particularly the Gurungs, shows that the honey is primarily valued for energy, stamina, digestion, and ritual use, and the “mad” effects occur only if it is consumed in larger-than-traditional amounts.</p><h2>How Much Should You Take? Serving Guidelines by Experience Level</h2><p>Due to the high potency, the amount you are to take is very important. Guidelines on serving are mostly dependent on the level of experience:</p>",
+            "html_content": "<div class=\"icons-grid\">\n<highlight class=\"icon-grid\">\n\n<h4>Possible Side Effects</h4>\n<p>\nTaking more than the conventional doses may result in dizziness, nausea, reduced blood pressure, or even a temporary loss of orientation, which explains the importance of dose moderation. With these rules and the understanding of the natural power of the honey, it is possible to use it safely as a medicine and a culturally important product.\n</p>\n</highlight>\n\n<highlight class=\"icon-grid\">\n<h4>Who Should Avoid Cliff Honey?</h4>\n<p>\nCliff honey is not for everyone. Here are some of the individuals who should stay away from it:\n</p>\n<ul>\n<li>Cardiac patients</li>\n<li>Children below 18</li>\n<li>People with any underlying disease</li>\n<li>Pets</li>\n<li>Pregnant woman</li>\n<li>Breastfeeding woman</li>\n</ul>\n</highlight>\n\n<highlight class=\"icon-grid\">\n<h4>Understanding Potency Variation in Natural Honey:</h4>\n<p>\nPotency variation in natural honey is common, as per the variability of the floral sources. Depending on the nectar source, the levels of sugar, enzymes, pollen, vitamins, minerals and other nutrients can widely differ. The composition of commercialised honey types, on the other hand, is processed to meet the standard criteria of the nutrients.\n</p>\n</highlight>\n\n<highlight class=\"icon-grid\">\n\n<h4>First-time Users:</h4>\n<p>\nSmall doses, starting with as little as 1 to 2 teaspoons, are advised to see how the body responds to them since even small doses can have some effect.\n</p>\n</highlight>\n\n\n<highlight class=\"icon-grid\">\n\n<h4>Experienced Users:</h4>\n<p>\nAs the body once completely adapts to the low dose, you can then slowly increase the dose to larger amounts, try increasing to 1 tablespoon but don't exceed 2 tablespoons, while monitoring the body’s response.\n</p>\n</highlight>\n\n\n<highlight class=\"icon-grid\">\n<h4>How to Build Tolerance:</h4>\n<p>\nTolerance can be built by starting with low doses, just enough to sense the warmth. With this dose, monitor body responses after each intake- over the next few days, your system becomes familiar with the initial intensity. Then, you can gradually increase the dose to one tablespoon once your body shows it can handle more. In this way, tolerance isn’t rushed, it’s earned little by little.\n</p>\n</highlight>\n</div>\n\n<highlight>\n<h4 style=\"margin-bottom:10px;\">Emergency Guidelines:</h4>\n<p>\nAccording to studies, the symptoms related to excessive-intake generally disappear within 24 hours. Once the unusual reactions like dizziness, nausea or stomach cramps start to disappear, the safest choice is to visit a hospital.\n</p>\n</highlight>",
+            "image_caption": ""
+          }
+        },
+        "chapter_VH9nXg": {
+          "type": "chapter",
+          "settings": {
+            "chapter": "Chapter 9",
+            "subtitle": "Storage, Quality &amp; Fermentation",
+            "excerpt": "Learn best storage conditions to maintain the shelf life of Himalayan cliff honey."
+          }
+        },
+        "content_PeXYTB": {
+          "type": "content",
+          "settings": {
+            "richtext_content": "<p>The moisture content of Himalayan cliff honey is high and therefore, the growth of yeasts is more favorable compared to commercial honey that is found in the market. As the cliff honey isn’t treated using standard purification processes, it still has yeasts from flowers and the surrounding environment, that too osmophilic in nature. The presence of natural sugars favors their growth even more, and once they are fermented, ethanol is produced. The fermented honey, hence, has a characteristic sour smell and taste. If sufficient carbon dioxide is generated during fermentation, visible bubbles can also be seen.</p><p>To prevent fermentation and to store wild cliff honey well, it is necessary to use a clean and airtight container, which should then be transferred to a cool and dry place. Choosing such an environment means reducing the activity of the yeast, and also, opening the jar time to time should be stopped. Also, use a clean and dry spoon every time to avoid contamination.</p><p>To preserve the cliff honey in the long run, it is best to keep the honey in dark-colored or opaque containers to reduce the amount of light exposure as light can destroy the natural compounds in the honey over time. Refrigeration is not recommended, since cold may hasten the crystallisation process, but this does not have any impact on the quality, and can be undone by heating the honey slightly.</p>",
+            "html_content": "<highlight>\n<h4>How Long Does Cliff Honey Last?</h4>\n<p>\nIf stored properly, keeping the container tightly sealed, in a cool and dry place, cliff honey can last as long as two years.\n</p>\n</highlight>\n<h2>Some Myths</h2>\n<p>\nDue to the high potency, the amount you are to take is very important. Guidelines on serving are mostly dependent on the level of experience:\n</p>\n<div class=\"icons-grid\">\n<highlight class=\"icon-grid\">\n<h4>Crystallized honey is spoiled.</h4>\n<p>\nThe crystallization of honey is natural. As the sugars in honey, especially glucose, begin to crystallize, the texture becomes rough or hard. The honeys with higher sugar content, the majority of the wild ones, crystallize faster. This natural change is not a sign of a spoiled or impure honey and should not be used as a measure of quality.\n</p>\n</highlight>\n\n<highlight class=\"icon-grid\">\n<h4>Honey never spoils.</h4>\n<p>\nHoney can take years to expire, but when it is not well sealed, it can go bad early. As the humidity greatly affects the texture, leaving honey in an environment with high moisture isn't proper. If the moisture percentage in honey increases by any means, a favorable environment will be formed where natural yeasts in honey will activate and start releasing byproducts of fermentation.\n</p>\n</highlight>\n\n<highlight class=\"icon-grid\">\n<h4>Raw honey is unsafe</h4>\n<p>\nRaw honey is safe for most age groups but is not suggested for infants under the age of 1 year due to concerns related to infant botulism. In general, raw honey has nutrients like natural enzymes, antioxidants, vitamins, minerals, and antibacterial compounds. What makes it unsafe for the specified age group is the limited studies confirming safety in these age groups.\n</p>\n</highlight>\n</div>\n\n<h2>Raw honey never ferments.</h2>\n<p>Raw honey can ferment when the environment inside the jar gets excessively humid, mostly due to inappropriate storage. Certain varieties of wild honey especially are naturally prone to fermentation and this does not necessarily mean that the honey is bad.\n</p>\n<p>\nHimalayan cliff honey is very temperature sensitive- the texture, aroma and enzymatic activity of honey may change depending on the temperature. The high temperatures may destroy important enzymes such as diastase and invertase which are major indicators of the quality of raw honey. Stable moderate temperatures are best when preserving the honey in terms of freshness and flavor.\n</p>\n<h2>Fermentation and Potency:</h2>\n<p>\nHimalayan cliff honey fermentation is a natural process because of the high moisture content of the honey and the presence of osmophilic yeasts. The fermentation of the sugars by these yeasts results in the production of small quantities of ethanol and carbon dioxide, which occasionally cause the honey to have a faint sour odor or to have bubbles.\n</p>\n<p>\nIn spite of this, fermentation does not substantially lower the potency of honey. The majority of its bioactive compounds- antioxidants, enzymes and minerals- are not destroyed. Actually, even minor fermentation can improve some of the digestive and preservative properties. researches show that the fermentation process rather increases the probiotics in the honey, but over-fermentation can change the taste and texture.\n</p>\n<p>\nIn summary, naturally fermented cliff honey is still medicinally useful; however, it's better to avoid storage in an environment that promotes over-fermentation, as it can really alter both the flavor and the nutrients for which the cliff honey is used.\n</p>",
+            "image_caption": ""
+          }
+        },
+        "chapter_rfEjh3": {
+          "type": "chapter",
+          "settings": {
+            "chapter": "Chapter 10",
+            "subtitle": "Authentication &amp; Traceability",
+            "excerpt": "Discover how to trace the purity, origin and authenticity of Himalayan cliff honey."
+          }
+        },
+        "content_tbrbrx": {
+          "type": "content",
+          "settings": {
+            "richtext_content": "",
+            "html_content": "<highlight>\nOur brand is committed to authentication are traceability, further supported by hunter verification. Every batch includes:\n</highlight>\n<div class=\"icons-grid\">\n<div class=\"icon-grid\">\n<img src=\"https://cdn.shopify.com/s/files/1/0686/0721/3628/files/Group_28762.svg?v=1768804006\" alt=\"microscope\" width=\"100\" height=\"100\">\n<h4>Lab Testing</h4>\n<p>\nEach of our products has comprehensive lab reports, in which potency, purity and safety are detailed.</p>\n</div>\n\n<div class=\"icon-grid\">\n<img src=\"https://cdn.shopify.com/s/files/1/0686/0721/3628/files/Group_28763.svg?v=1768804167\" alt=\"hunter_verification\" width=\"100\" height=\"100\">\n<h4>Hunter Verification</h4>\n<p>\nIn respect of native harvesters, we have included the name and details of the honey-hunting community who have kept traditional, ethical methods of harvesting alive for centuries.\n</p>\n</div>\n\n<div class=\"icon-grid\">\n<img src=\"https://cdn.shopify.com/s/files/1/0686/0721/3628/files/Group_28761.svg?v=1768804006\" alt=\"traceability\" width=\"100\" height=\"100\">\n<h4>Geo-Traceability</h4>\n<p>\nTo let our customers from around the world know where the honey is coming from, we also provide mapping of the region and altitude where it is harvested.\n</p>\n</div>\n\n\n<div class=\"icon-grid\">\n<img src=\"https://cdn.shopify.com/s/files/1/0686/0721/3628/files/Group_28760.svg?v=1768804006\" alt=\"footage\" width=\"100\" height=\"100\">\n<h4>Harvest Documentary Footage</h4>\n<p>\nWe also have a collection of visual proof from the harvesting cliff site, which serves as proof of high-altitude harvesting, totally dependent on traditional honey-hunting methods.\n</p>\n</div>\n</div>\n\n<h2>How to Identify Genuine Himalayan Cliff Honey</h2>\n<p>\nHimalayan cliff honey is only made by Apis laboriosa, and the honey has not been found anywhere else except in high altitudes. A genuine cliff honey has a signature deep reddish-amber color, a strong aromatic profile, natural pollen content, and a distinct warming sensation due to naturally occurring grayanotoxins.\n</p>\n<p>\nMoreover, from the manufacturer's side, a strong backing of lab tests, clear geographical origin, and transparent harvest documentation also speak a lot about the product’s authenticity and quality.\n</p>\n<p>\nWe, at Himalayan Cliff Honey, provide a complete transparency system that includes:\n</p>\n<ol>\n<li>\n<b>QR Code Verification:</b> Every jar includes a unique QR code that links to harvest details, especially region and cliff name, batch number, and lab reports. Honey hunting community verification. This ensures full transparency from hive to jar.\n</li>\n<li>\n<b>Documentation:</b> Each batch of Himalayan cliff honey is supported by the following documents verifying origin and quality:\n<ul>\n<li>\nCOA (Certificate of Analysis) for potency, purity &amp; safety\n</li>\n<li>\nBatch Identification Report \n</li>\n<li>\nRegion of Origin document issued by the local forestry department from where the honey is harvested.\n</li>\n</ul>\n</li>\n<li>\n<b>Photographic Evidence &amp; Cliff Coordinates:</b> On each shop page, we provide photos and documentary of regions to show our fair coordination in each region, showing the real harvesting location and the traditional methods of harvesting the honey.</li>\n</ol>\n<img src=\"https://cdn.shopify.com/s/files/1/0686/0721/3628/files/Frame_1984079207.webp?v=1768806334\" alt=\"hive in hills\" width=\"1168\" height=\"\">\n<h2>Regional Markers That Prove Authenticity</h2>\n<p>\nAuthentic Himalayan Cliff Honey shows characteristics tied to specific regions. The cliff honey harvested from the different regions of Nepal has the following unique regional traits:\n</p>\n\n\n<div class=\"icons-grid\">\n<highlight class=\"icon-grid\">\n<img src=\"https://cdn.shopify.com/s/files/1/0686/0721/3628/files/Group_28764.svg?v=1768806736\" alt=\"lamjung\" width=\"100\" height=\"100\">\n<h4>Lamjung</h4>\n<p>\nhigh-altitude nectar, deeper color\n</p>\n</highlight>\n\n<highlight class=\"icon-grid\">\n<img src=\"https://cdn.shopify.com/s/files/1/0686/0721/3628/files/Group_28765.svg?v=1768806737\" alt=\"jajarkot\" width=\"100\" height=\"100\">\n<h4>Jajarkot</h4>\n<p>\nearthy, mild–medium potency\n</p>\n</highlight>\n\n\n<highlight class=\"icon-grid\">\n<img src=\"https://cdn.shopify.com/s/files/1/0686/0721/3628/files/Group_28766.svg?v=1768806737\" alt=\"rukum\" width=\"100\" height=\"100\">\n<h4>Rukum</h4>\n<p>\ndark, resinous, strong aroma\n</p>\n</highlight>\n</div>\n\n<p>\nWe have brought cliff honey particularly from these areas because the high altitudes in these regions are known for the highest quality Himalayan cliff honey. This honey is also available in other regions of Nepal, but only in small quantities.\n</p>\n<h2>Common Fake Products in the Market</h2>\n<p>\nMany “cliff honey” products from different brands are diluted, syrup-mixed, or might not even be of completely Himalayan origin. Some brands sell regular forest honey or Turkish honey labeled as “Himalayan”. Lack of traceability and no harvest details are key red flags one should consider if you’re looking for a genuine product.\n</p>\n<p>\nMost of the brands are selling just honey under the name of “Cliff Honey” without detailed information about their sources, harvesting practices and no connection with the honey hunters community.\n</p>",
+            "image_caption": ""
+          }
+        },
+        "chapter_LNxhwQ": {
+          "type": "chapter",
+          "settings": {
+            "chapter": "Chapter 11",
+            "subtitle": "Sustainability, Communities &amp; Environmental Responsibility",
+            "excerpt": "Explore how we practice sustainability, directly linked to native environment and community."
+          }
+        },
+        "content_p6Gy8K": {
+          "type": "content",
+          "settings": {
+            "richtext_content": "<p>An exquisite natural product, while rare and valuable, raises questions about sustainability and there are several factors that either support or threaten its viability. The Himalayan giant honeybee, Apis laboriosa, faces a number of threats in its very high altitude habitat. Even nature is unforgiving at such heights, and the weather is bad most of the time. And now, human activity has also been a major threat to their survival as it has put a strain on the delicate balance of their ecosystems.</p>",
+            "html_content": "<highlight>\nThe greatest threats are connected with their habitat, food and water resources. They nest in remote cliffs and this provides them with protection against predators and minimal human interference. However, the activities of human development like construction, tourism and infrastructure projects are encroaching on these significant sites and this has reduced the number of safe cliffs where nesting generally occurs.\n</highlight>\n<p>\nTheir food sources are also always on the verge of scarcity. Apis laboriosa is dependent on nectar and pollen of the alpine flowers, which are highly seasonal and sensitive to environmental changes. Deforestation and sudden alteration of flowering of the alpine plants, which is normally a result of climate change, reduce the availability of nectar. The effects of this shortage direct impact the health of colonies, brood growth and honey production.\n</p>\n<img src=\"https://cdn.shopify.com/s/files/1/0686/0721/3628/files/Frame_1984079208.webp?v=1768807092\" alt=\"hanging hive\" width=\"1168\" height=\"\">\n\n<p>\nWater resources are another very important factor. High altitude bees rely on small streams, glacial melts and dew to be hydrated. The changes in the rainfall patterns, melting glaciers, and the human diversion of the water sources can limit the availability of this essential resource, which will also increase the burden on the colonies.\n</p>\n<p>\nApis laboriosa can hardly survive due to habitat loss, reduced food supply, and limited water supply. The fact that the modern honey hunters might not allow honey hives an opportunity to regenerate is also a threat to the sustainability of Himalayan cliff honey and the survival of these bees in the long term. Their habitat must be well maintained, ethical harvesting practices of honey must be implemented and their fragile alpine ecosystems must be preserved in order to save them.\n</p>\n\n\n<div class=\"img-text\">\n<img src=\"https://cdn.shopify.com/s/files/1/0686/0721/3628/files/Frame_1984079209.webp?v=1768807091\" alt=\"communities\" width=\"402\" height=\"326\" style=\"max-width:100%; height: auto;\">\n<div>\n<h4>How our brand’s direct work with honey-hunting communities across Nepal:</h4>\n<p>\nOur brand works on collaboration with the honey-hunting communities oldest in Nepal, so, their traditional knowledge and skills remain at the heart of our sourcing process. We also adhere to a policy of fairness, which incorporates fair trade principles in both sourcing and labor.</p>\n<p>\nNo third parties, no intermediaries, and no mediators are involved, we are just connected to the indigenous honey hunters themselves. As honey hunting is a major source of income for these communities, we ensure that they are the greatest beneficiaries, and we are only facilitating them by taking their unique and natural products to the global market.\n</p>\n</div>\n</div>\n\n<div class=\"img-text\">\n<img src=\"https://cdn.shopify.com/s/files/1/0686/0721/3628/files/Frame_1984079210.webp?v=1768807091\" alt=\"ethical hunting\" width=\"402\" height=\"326\" style=\"max-width:100%; height: auto;\">\n<div>\n<h4>How ethical hunting protects bees:</h4>\n<p>\nEthical hunting practices completely favor the health and survival of bee colonies, the careful, well-planned methods. By using strategic hunting methods that are aimed at reducing the amount of harm, hunters ensure that the bees continue to thrive, allowing colonies to regenerate naturally. This will not only save the Himalayan giant honeybees but also help in the long-term sustainability of the Himalayan ecosystem which will see the bees and the environment thrive even more in the future.\n</p>\n</div>\n</div>\n\n<h2>Climate change &amp; deforestation:</h2>\n<p>\nClimate change interferes with the natural environment of Himalayan giant honeybees by influencing the flowering time and water availability. Locals argue that the quantity of honey that has been produced in the past few decades has been low, which is a sign of a decline in the population of these bees.\n</p>\n<p>\nDeforestation also affects the quantity of nectar to be gathered by means of fewer blooms to be gathered, and this decreases the food supply to the bees and also influences the overall health of the colonies.\n</p>\n<h2> Destructive Development </h2>\n<p>\nThe mountain areas are no longer silent as they once were. Though progress arrived late, it has not been in the favor of bees and their hives. Massive hydropower projects and other large-scale developments are underway, which have disturbed the availability of floral resources and altered the natural water resources- both of which are important for bees’ survival.\n</p>\n<p>\nLikewise, sand and minerals that bees use for building hives are also not as abundant as they once were. Blasting and other similar industrial activities related to the development produce loud noises and vibrations, further stressing bee populations, contributing to their decline.\n</p>\n<h2>Environmental Threats: Global Warming and Landslides\n</h2>\n\n<p>\nThe growing environmental pressure on every creature also reflects in the Himalayan giant honeybees. And, as they live in a more delicate Himalayan environment, a subtle change in their surroundings can deeply affect these tiny species whose existence most of us even don't know about.\n</p>\n<p>\nGlobal warming, the most common and far-reaching threat, can impact every growth stage- from eggs and larvae to fully developed adults- as even a single degree of temperature change can influence their development and survival.\n</p>\n<p>\nLandslides pose another major danger. The towering cliffs, their preferred and most suitable nesting sites, can widely be affected if landslides occur in the mountainous regions. The loss of entire nests is directly tied to the decline in giant honey bee populations: as the number of safe cliff habitats decreases, there will be a growing void of suitable nesting habitat.\n</p>\n<p>\nThese threats, acting together, intensify concern, as climate change, frequent landslides, and ongoing habitat loss continue to reshape the fragile Himalayan ecosystem. Forest fires, though less common in Himalayan forests, and habitat degradation caused by deforestation, also contribute to this decline, and all of this further reduces the stability and availability of nesting and foraging areas.\n</p>\n<p>\nWe have brought cliff honey particularly from these areas because the high altitudes in these regions are known for the highest quality Himalayan cliff honey. This honey is also available in other regions of Nepal, but only in small quantities.\n</p>",
+            "image_caption": ""
+          }
+        },
+        "chapter_m8pcfT": {
+          "type": "chapter",
+          "settings": {
+            "chapter": "Chapter 12",
+            "subtitle": "FAQs &amp; Common Questions",
+            "excerpt": "Immerse yourself in the foundational understanding of Himalayan cliff honey."
+          }
+        },
+        "content_YKbqTn": {
+          "type": "content",
+          "settings": {
+            "richtext_content": "<p><strong>Quick Guide: Everything You Should Know about Himalayan Cliff Honey. </strong></p>",
+            "html_content": "[FAQ_SECTION]",
+            "image_caption": ""
+          }
+        }
+      },
+      "block_order": [
+        "chapter_ErHxiJ",
+        "content_PtNeYG",
+        "chapter_YLXTPV",
+        "content_RTaXyi",
+        "chapter_4D7DAX",
+        "content_CfccBC",
+        "chapter_PfcnUU",
+        "content_MPDfry",
+        "chapter_3jtiMH",
+        "content_xRgFdj",
+        "chapter_j8TVxm",
+        "content_Bw6z8d",
+        "chapter_crBgjq",
+        "content_mbEbny",
+        "chapter_Tdy9Tq",
+        "content_zfwFbc",
+        "chapter_VH9nXg",
+        "content_PeXYTB",
+        "chapter_rfEjh3",
+        "content_tbrbrx",
+        "chapter_LNxhwQ",
+        "content_p6Gy8K",
+        "chapter_m8pcfT",
+        "content_YKbqTn"
+      ],
+      "custom_css": [
+        "div.img-text {flex-direction: row; align-items: center; border: 1px solid; border-radius: 16px; padding: clamp(12px, 1.67vw, 32px); justify-content: space-between;}",
+        ".img-text h4,h2 {margin: 0;}",
+        ".img-text img {width: 38%;}",
+        "img {border-radius: 16px; max-width: 100%; width: 100%; height: auto;}",
+        "* {letter-spacing: 0;}",
+        "ul,ol {padding-left: 1.5rem;}",
+        "li {text-align: start !important;}",
+        "@media (max-width: 768px) {div.img-text, .img-text div {flex-direction: column !important; flex-wrap: nowrap; gap: 12px; } .img-text img, .img-text div {width: 100%; }}"
+      ],
+      "name": "Basmil Mixed Section",
+      "settings": {
+        "toc_heading": "Table Of Contents",
+        "navigation_label": "Navigate through the chapters:",
+        "navigation_btn_text": "Learn More →",
+        "color_scheme": "scheme-4",
+        "custom_liquid": "<highlight>\nHimalayan cliff honey is an explicitly sourced natural honey from the high-altitude region in the Himalayas of Nepal. Found thousands of metres above sea level- where only limited bee species can survive- the honey is prepared by the extraordinary Himalayan giant honeybee species <em><b>“Apis laboriosa”</b></em>, also known as Himalayan Giant honeybees. Harvested only twice a year, its collection is done following a traditional honey hunting practice, where the native hunters climb towering cliffs risking their lives.\n</highlight>\n<p>\nThe primary floral source of Himalayan cliff honey is rhododendron- the flower has a naturally occurring compound, grayanotoxin, and upon consumption of the honey, consumers can experience a range of symptoms from euphoria to discomfort if consumed in excess. The effects thus experienced have made the honey popular by the name “mad honey”.</p>\n<img src=\"https://cdn.shopify.com/s/files/1/0686/0721/3628/files/Frame_1984079214_1c33a902-6b4f-4588-8986-c6a306413038.webp?v=1768969037\" alt=\"rhodonderon\" width=\"980\" height=\"980\" style=\"max-width:100%; width:100%; height:auto;\">\n\n<p>\nNow, with this brief and easy-to-understand overview of Himalayan cliff honey, there are still much more mysteries left to be uncovered. This guide is intended to serve you with all of it, the comprehensive information on this unparalleled gift from the Himalayas; moreover, a deeper insight into how this panacea has been valued through time awaits to be explored!\n</p>\n<style>\n{% assign sid = '#shopify-section-' | append: section.id %}\n\n{{ sid }} .icons-grid {\ndisplay:flex;\nflex-wrap:wrap;\n--gap:clamp(8px,1.67vw,32px);\ngap:var(--gap)!important;\nflex-direction:row!important;\n}\n\n{{ sid }} .icon-grid.icon-grid{\ndisplay:flex;\nflex-direction:column;\nflex:1 0 calc((100%/3) - (var(--gap)*2)/3);\nwidth: calc((100%/3) - (var(--gap)*2)/3);\nalign-items:start;\nborder:1px solid #D9D9D9;\nborder-radius:16px;\npadding: clamp(8px,1.67vw,32px);\ngap:16px!important;\n}\n\n{{ sid }} .icon-grid *:not(li){\nmargin:0!important;\nletter-spacing:0;\n}\n\n{{ sid }} .icon-grid h4{\n width:100%;\n}\n\n{{ sid }} .icon-grid img{\nborder-radius:50%!important;\nwidth:clamp(60px,5.23vw,100px);\naspect-ratio:1/1;\n}\n\n{{ sid }} ol{\n margin:0;\n}\n\n{{ sid }} li{\n margin:5px;\n}\n\n{{ sid }} .img-text.right-image{\nflex-direction: row-reverse;\n}\n\n{{ sid }} .img-text.center,\n{{ sid }} highlight.icon-grid.icon-grid{\ntext-align:center;\nalign-items: center;\n}\n\n{{ sid }} .img-text div {\n  width: 58.5%;\n  gap:clamp(16px,1.25vw,24px);\n}\n\n@media(max-width:768px){\n{{ sid }} .icons-grid{\n justify-content:center;\n}\n\n{{ sid }} .icon-grid.icon-grid{\n flex:1 0 calc((100%/2) - (var(--gap)*2)/3);\nwidth: calc((100%/2) - (var(--gap)*2)/3);\n align-items:center!important;\n}\n\n\n{{ sid }} .img-text,\n{{ sid }} .img-text div{\nmax-width:100%!important;\ntext-align:center;\n}\n{{ sid }} .icon-grid *:not(li){\ntext-align:center!important;\n}\n\n\n{{sid}} .custom-html,\n{{sid}} .chapters,\n{{sid}} nav-heading{\npadding-left:0!important;\npadding-right:0!important;\n}\n}\n</style>"
+      }
+    },
+    "collapsible_content_Ut6Lez": {
+      "type": "collapsible-content",
+      "blocks": {
+        "collapsible_row_gV6W9f": {
+          "type": "collapsible_row",
+          "settings": {
+            "heading": "What is Himalayan Cliff Honey and where does it come from?",
+            "icon": "none",
+            "row_content": "<p>Himalayan cliff honey is a wild honey, a product of Nepal formed in high altitude areas. It is produced by Apis laboriosa- the largest honeybee species in the world inhabiting remote cliff faces, at an altitude between 2,500 and 4,000 meters. The bees forage on forest flowers, mainly grayanotoxin-containing rhododendron- all of which bloom in an untouched environment. </p>",
+            "page": ""
+          }
+        },
+        "collapsible_row_tg3Tyg": {
+          "type": "collapsible_row",
+          "settings": {
+            "heading": "Why is it called \"Mad Honey\" and what are grayanotoxins?",
+            "icon": "none",
+            "row_content": "<p>The name \"mad honey\" refers to mild, dose-dependent effects documented long ago. These effects are due to natural substances present in some rhododendron species- grayanotoxins. Bees gather and transfer small traces of this compound to the honey. Its concentration varies by season, altitude, and floral source.</p>",
+            "page": ""
+          }
+        },
+        "collapsible_row_rFQqNe": {
+          "type": "collapsible_row",
+          "settings": {
+            "heading": "How do spring and autumn harvests differ in potency?",
+            "icon": "none",
+            "row_content": "<p>Spring-harvested cliff honey has a higher concentration of grayanotoxin as in this season, bees get to forage on abundant blooms of rhododendron. Autumn honey is on the milder side, as bees access a broad variety of late-season flowers, diluting rhododendron nectar in the final product. Many first-time users prefer autumn batches for their gentler profile, while experienced consumers may choose spring honey. Potency varies batch to batch.</p>",
+            "page": ""
+          }
+        },
+        "collapsible_row_A3qDHr": {
+          "type": "collapsible_row",
+          "settings": {
+            "heading": "What makes this honey different from Turkish Mad Honey?",
+            "icon": "none",
+            "row_content": "<p>Himalayan cliff honey and Turkish Mad Honey differ in origin and harvesting methods. Himalayan cliff honey comes exclusively from wild Apis laboriosa colonies of high altitude cliffs in remote Nepal and is traditionally harvested. Turkish Mad Honey is produced by Apis cerana colonies and their hives are managed using modern methods by harvesters in the Black Sea region. Their flavor profiles and grayanotoxin concentrations also differ.</p>",
+            "page": ""
+          }
+        },
+        "collapsible_row_zhY6Q7": {
+          "type": "collapsible_row",
+          "settings": {
+            "heading": "Is this honey safe to consume and who should avoid it?",
+            "icon": "none",
+            "row_content": "<p>Cliff honey is safe for all healthy adults, when responsibly consumed in small amounts. However,  its use is not recommended for:</p><ul><li>Pregnant or nursing women</li><li>Children</li><li>Individuals with heart condition/ low blood pressure</li><li>Anyone taking cardiovascular medications. </li></ul><p>In case you are suffering from any of the above underlying health issues, consume only on getting medical approval.</p>",
+            "page": ""
+          }
+        },
+        "collapsible_row_akkgkG": {
+          "type": "collapsible_row",
+          "settings": {
+            "heading": "How should I use this honey safely?",
+            "icon": "none",
+            "row_content": "<p>Start with a small amount (no more than one teaspoon), preferably taken with food. Individual tolerance varies, so moderation is essential. This honey is intended for occasional use only and should not be consumed frequently or in excess.</p>",
+            "page": ""
+          }
+        },
+        "collapsible_row_ANkbXJ": {
+          "type": "collapsible_row",
+          "settings": {
+            "heading": "Does this honey ferment or go bad, and how should I store it?",
+            "icon": "none",
+            "row_content": "<p>If consumers pay attention towards proper storage, cliff honey remains stable for years. Keep the container in a cool, dry place away from direct sunlight and once you open it, make sure the jar is always airtight. Natural crystallization does not indicate spoilage for this raw honey.</p>",
+            "page": ""
+          }
+        },
+        "collapsible_row_69Bjtk": {
+          "type": "collapsible_row",
+          "settings": {
+            "heading": "How can I verify my cliff honey is authentic and not fake?",
+            "icon": "none",
+            "row_content": "<p>Authentic Himalayan cliff honey needs to have verifiable traceability. Check for:</p><ul><li>QR codes linking to batch-specific origin data</li><li>Certificates of analysis (COA) confirming grayanotoxin presence</li><li>Documentation of the harvesting community and region</li></ul><p>Genuine suppliers can be identified through transparent sourcing information and harvest dates. Unusually low prices or vague origin claims are warning signs. Counterfeit products often lack proper documentation or contain adulterated honey blends.</p>",
+            "page": ""
+          }
+        }
+      },
+      "block_order": [
+        "collapsible_row_gV6W9f",
+        "collapsible_row_tg3Tyg",
+        "collapsible_row_rFQqNe",
+        "collapsible_row_A3qDHr",
+        "collapsible_row_zhY6Q7",
+        "collapsible_row_akkgkG",
+        "collapsible_row_ANkbXJ",
+        "collapsible_row_69Bjtk"
+      ],
+      "custom_css": [
+        ".grid__item {width: 100%; display: grid !important; gap: clamp(2px, 1.05vw, 20px) 5%; grid-template-columns: 1fr 1fr;}",
+        ".collapsible-content-wrapper-narrow,.page-width {width: 100%; max-width: 100%; padding: 0;}",
+        ".collapsible-content__header {display: none !important;}",
+        "@media (max-width: 990px) {.grid__item {display: block !important; }}"
+      ],
+      "name": "t:sections.collapsible_content.presets.name",
+      "settings": {
+        "caption": "",
+        "heading": "",
+        "heading_size": "h2",
+        "heading_alignment": "center",
+        "button_label": "",
+        "button_link": "",
+        "layout": "none",
+        "container_color_scheme": "scheme-4",
+        "color_scheme": "scheme-4",
+        "open_first_collapsible_row": false,
+        "image_ratio": "adapt",
+        "desktop_layout": "image_second",
+        "padding_top": 0,
+        "padding_bottom": 0
+      }
+    },
+    "custom_liquid_wFcad4": {
+      "type": "custom-liquid",
+      "name": "t:sections.custom-liquid.presets.name",
+      "settings": {
+        "custom_liquid": "<script>\n(function () {\n  function replaceFAQSection() {\n    var chapter = document.querySelector('.chapter-section');\n    var collapsible = document.querySelector('[id*=\"__collapsible_content\"]');\n\n    if (!chapter || !collapsible) return false;\n\n    var walker = document.createTreeWalker(\n      chapter,\n      NodeFilter.SHOW_TEXT,\n      null,\n      false\n    );\n\n    var node;\n    while ((node = walker.nextNode())) {\n      if (node.nodeValue.includes('[FAQ_SECTION]')) {\n\n        // Clone the collapsible\n        var clone = collapsible.cloneNode(true);\n        var wrapper = document.createElement('span');\n        wrapper.appendChild(clone);\n\n        var parts = node.nodeValue.split('[FAQ_SECTION]');\n        node.nodeValue = parts[0];\n\n        node.parentNode.insertBefore(wrapper, node.nextSibling);\n\n        if (parts[1]) {\n          node.parentNode.insertBefore(\n            document.createTextNode(parts[1]),\n            wrapper.nextSibling\n          );\n        }\n\n        // 🔥 Remove original collapsible after successful copy\n        collapsible.remove();\n\n        return true;\n      }\n    }\n    return false;\n  }\n\n  function init() {\n    if (replaceFAQSection()) return;\n\n    var observer = new MutationObserver(function () {\n      if (replaceFAQSection()) observer.disconnect();\n    });\n\n    observer.observe(document.body, {\n      childList: true,\n      subtree: true\n    });\n  }\n\n  if (document.readyState === 'loading') {\n    document.addEventListener('DOMContentLoaded', init);\n  } else {\n    init();\n  }\n})();\n</script>",
+        "color_scheme": "",
+        "padding_top": 0,
+        "padding_bottom": 0
+      }
+    }
+  },
+  "order": [
+    "main",
+    "image_banner_wL9yNR",
+    "image_banner_6maA7U",
+    "rich_text_PbRizi",
+    "multi_rows_mixed_section_neNx94",
+    "collapsible_content_Ut6Lez",
+    "custom_liquid_wFcad4"
+  ]
+}
