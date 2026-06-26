@@ -1,4 +1,5 @@
-{{ 'product-review-video-slider.css' | asset_url | stylesheet_tag }}
+<link rel="stylesheet" href="{{ 'product-review-video-slider.css' | asset_url }}" media="print" onload="this.media='all'">
+<noscript><link rel="stylesheet" href="{{ 'product-review-video-slider.css' | asset_url }}"></noscript>
 
 {%- style -%}
   .section-{{ section.id }}-padding {
@@ -426,8 +427,19 @@
 
      }
    
-     loadGlobalLibraries();   
-     
+     const _prvSection = document.getElementById('shopify-section-{{ section.id }}');
+     if (_prvSection && 'IntersectionObserver' in window) {
+       const _prvObserver = new IntersectionObserver(function(entries) {
+         if (entries[0].isIntersecting) {
+           _prvObserver.disconnect();
+           loadGlobalLibraries();
+         }
+       }, { rootMargin: '200px' });
+       _prvObserver.observe(_prvSection);
+     } else {
+       loadGlobalLibraries();
+     }
+
 function fetchCspProduct(handle) {
   window.__CSP_PRODUCT_DATA__ = window.__CSP_PRODUCT_DATA__ || {};
 

@@ -11,6 +11,7 @@
       <link rel="icon" type="image/png" href="{{ settings.favicon | image_url: width: 32, height: 32 }}">
     {%- endif -%}
 
+    <link rel="preconnect" href="https://cdn.shopify.com" crossorigin>
     {%- unless settings.type_header_font.system? and settings.type_body_font.system? -%}
       <link rel="preconnect" href="https://fonts.shopifycdn.com" crossorigin>
     {%- endunless -%}
@@ -568,7 +569,8 @@
         document.documentElement.classList.add('shopify-design-mode');
       }
     </script>
-    {{ 'quick-add.css' | asset_url | stylesheet_tag }}
+    <link rel="stylesheet" href="{{ 'quick-add.css' | asset_url }}" media="print" onload="this.media='all'">
+    <noscript><link rel="stylesheet" href="{{ 'quick-add.css' | asset_url }}"></noscript>
 
     <!-- Google tag (gtag.js) -->
     {% comment %} <script async src="https://www.googletagmanager.com/gtag/js?id=G-D68WXTP1FG"></script> {% endcomment %}
