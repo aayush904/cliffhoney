@@ -20,7 +20,24 @@
       {%- endif -%}
 
       <hr>
-      <div class="article-expert__media">
+      <div class="article-expert__grid">
+              <div class="article-expert__text rte">
+                {%- if expert_content != blank -%}
+                  {{ expert_content | metafield_tag }}
+                {%- endif -%}
+              </div>
+
+              {%- if expert_image != blank -%}
+                {%- liquid
+                  assign img = expert_image.value
+                  if img == blank
+                    assign img = expert_image
+                  endif
+                  assign sizes = '(min-width: 990px) 220px, 40vw'
+                  assign widths = '220, 320, 420, 540, 720'
+                  assign h = img.width | divided_by: img.aspect_ratio | round
+                -%}
+                <div class="article-expert__media">
                   {{
                     img
                     | image_url: width: 280
@@ -34,6 +51,8 @@
                       draggable: 'false'
                   }}
                 </div>
+              {%- endif -%}
+            </div>
     </div>
   </aside>
 {%- endif -%}
