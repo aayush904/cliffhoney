@@ -20,7 +20,21 @@
       {%- endif -%}
 
       <hr>
-      <div class="article-expert__grid">
+       {%- liquid
+          assign expert_heading = article.metafields.custom.expert.value.name | default: 'Meet our Expert'
+          assign expert_content = article.metafields.custom.expert.value.detail
+          assign expert_image = article.metafields.custom.expert.value.image
+          assign show_expert = false
+          if expert_content != blank or expert_image != blank
+            assign show_expert = true
+          endif
+        -%}
+
+        {%- if show_expert -%}
+          <section class="article-expert" aria-label="{{ expert_heading | escape }}">
+            <h2 class="h2 article-expert__heading">{{ expert_heading | escape }}</h2>
+
+            <div class="article-expert__grid">
               <div class="article-expert__text rte">
                 {%- if expert_content != blank -%}
                   {{ expert_content | metafield_tag }}
@@ -53,6 +67,8 @@
                 </div>
               {%- endif -%}
             </div>
+          </section>
+        {%- endif -%}
     </div>
   </aside>
 {%- endif -%}
