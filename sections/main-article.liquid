@@ -23,6 +23,11 @@
         {%- endif -%}
         <span aria-hidden="true"> / </span>
         <span>{{ article.title | escape }}</span>
+        {%- if section.settings.show_date -%}
+            <span class="article-hero__date">
+              {{ article.published_at | time_tag: format: 'date' }}
+            </span>
+          {%- endif -%}
       </nav>
     {%- endif -%}
 
@@ -60,7 +65,7 @@
         <div class="article-hero__meta">
           {%- if section.settings.show_date -%}
             <span class="article-hero__date">
-              {{ article.published_at | time_tag: format: 'date' }}
+              {{ article.updated_at | time_tag: format: 'date' }}
             </span>
           {%- endif -%}
 
