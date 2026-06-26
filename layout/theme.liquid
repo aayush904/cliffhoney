@@ -11,7 +11,6 @@
       <link rel="icon" type="image/png" href="{{ settings.favicon | image_url: width: 32, height: 32 }}">
     {%- endif -%}
 
-    <link rel="preconnect" href="https://cdn.shopify.com" crossorigin>
     {%- unless settings.type_header_font.system? and settings.type_body_font.system? -%}
       <link rel="preconnect" href="https://fonts.shopifycdn.com" crossorigin>
     {%- endunless -%}
@@ -594,7 +593,12 @@
       </script>
     {% endcomment %}
     {% render 'inria-serif' %}
-    {{ 'custom.css' | asset_url | stylesheet_tag }}
+    <style>
+      p[role="presentation"] a span { word-break: break-all; }
+      @media screen and (max-width: 989px) {
+        .article-sidebar { order: -1; }
+      }
+    </style>
   </head>
 
 <body class="gradient{% if request.page_type == 'index' %} home-page{% endif %}{% if settings.animations_hover_elements != 'none' %} animate--hover-{{ settings.animations_hover_elements }}{% endif %}">    {% comment %}
