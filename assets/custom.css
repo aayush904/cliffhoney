@@ -4,3 +4,10 @@
 p[role="presentation"] a span {
   word-break: break-all;
 }
+
+/* Show cheat sheet after article hero on mobile */
+@media screen and (max-width: 989px) {
+  .article-sidebar {
+    order: -1;
+  }
+}
