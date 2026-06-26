@@ -584,6 +584,7 @@
       </script>
     {% endcomment %}
     {% render 'inria-serif' %}
+    {{ 'custom.css' | asset_url | stylesheet_tag }}
   </head>
 
 <body class="gradient{% if request.page_type == 'index' %} home-page{% endif %}{% if settings.animations_hover_elements != 'none' %} animate--hover-{{ settings.animations_hover_elements }}{% endif %}">    {% comment %}

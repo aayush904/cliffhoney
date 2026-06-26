@@ -1,0 +1,6 @@
+/* Custom styles */
+
+/* Break long URLs in rich text content */
+p[role="presentation"] a span {
+  word-break: break-all;
+}
