@@ -24,6 +24,8 @@
         <span aria-hidden="true"> / </span>
         <span>{{ article.title | escape }}</span>
         {%- if section.settings.show_date -%}
+                  <span aria-hidden="true"> / </span>
+
             <span class="article-hero__date">
               {{ article.published_at | time_tag: format: 'date' }}
             </span>
