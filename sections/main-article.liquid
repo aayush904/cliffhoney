@@ -67,7 +67,7 @@
         <div class="article-hero__meta">
           {%- if section.settings.show_date -%}
             <span class="article-hero__date">
-              {{ article.updated_at | time_tag: format: 'date' }}
+              Last updated: {{ article.updated_at | time_tag: format: 'date' }}
             </span>
           {%- endif -%}
 
