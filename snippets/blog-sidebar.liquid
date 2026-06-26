@@ -18,6 +18,22 @@
       {%- else -%}
         {{ cheat.value | default: cheat | escape | newline_to_br }}
       {%- endif -%}
+
+      <hr>
+      <div class="article-expert__media">
+                  {{
+                    img
+                    | image_url: width: 280
+                    | image_tag:
+                      class: 'article-expert__img',
+                      loading: 'lazy',
+                      decoding: 'async',
+                      sizes: sizes,
+                      widths: widths,
+                      height: h,
+                      draggable: 'false'
+                  }}
+                </div>
     </div>
   </aside>
 {%- endif -%}
