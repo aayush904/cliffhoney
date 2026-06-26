@@ -1,5 +1,6 @@
 <!-- marquee-text.liquid -->
-{{ 'marquee.css' | asset_url | stylesheet_tag }}
+<link rel="stylesheet" href="{{ 'marquee.css' | asset_url }}" media="print" onload="this.media='all'">
+<noscript><link rel="stylesheet" href="{{ 'marquee.css' | asset_url }}"></noscript>
 
 {%- style -%}
   .section-{{ section.id }}-padding {
