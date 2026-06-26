@@ -482,11 +482,14 @@
 
       @media screen and (max-width: 989px) {
         #shopify-section-{{ section.id }} .article-layout {
-          display: flex;
+          display: flex !important;
           flex-direction: column;
         }
         #shopify-section-{{ section.id }} .article-sidebar {
           order: -1;
+        }
+         #shopify-section-{{ section.id }} .article-main {
+          width:100%;
         }
       }
 
