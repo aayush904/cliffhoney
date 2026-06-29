@@ -19,7 +19,8 @@
         {{ cheat.value | default: cheat | escape | newline_to_br }}
       {%- endif -%}
 
-      <hr>
+      <hr style="    margin: 10px;
+">
        {%- liquid
           assign expert_heading = article.metafields.custom.expert.value.name | default: 'Meet our Expert'
           assign expert_content = article.metafields.custom.expert.value.detail
