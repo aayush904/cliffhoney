@@ -10,154 +10,172 @@
 {%- endif -%}
 
 {%- if featured_product != empty -%}
-  {%- assign real_rating = featured_product.metafields.reviews.rating.value.rating -%}
-  {%- assign real_count  = featured_product.metafields.reviews.rating_count -%}
-  {%- assign box_cta     = cta_text | default: 'Start Your Ritual' -%}
-  {%- assign box_quote   = quote | default: '' -%}
+  {%- assign real_rating   = featured_product.metafields.reviews.rating.value.rating -%}
+  {%- assign real_count    = featured_product.metafields.reviews.rating_count -%}
+  {%- assign box_cta       = cta_text | default: 'Start Your Ritual' -%}
+  {%- assign box_quote     = quote | default: '' -%}
 
   {%- if real_rating != blank -%}
-    {%- assign full_stars     = real_rating | floor -%}
-    {%- assign has_half       = real_rating | modulo: 1 -%}
+    {%- assign full_stars      = real_rating | floor -%}
+    {%- assign has_half        = real_rating | modulo: 1 -%}
     {%- assign half_star_index = full_stars | plus: 1 -%}
   {%- endif -%}
 
-  <div class="apb-wrap">
-    <h3 class="apb-heading">Products Mentioned</h3>
-
+  <div class="apb-outer">
     <a href="{{ featured_product.url }}" class="apb-card" aria-label="{{ featured_product.title }}">
-      <div class="apb-image-col">
+
+      {{- /* ── LEFT: image ── */ -}}
+      <div class="apb-img-col">
         {%- if featured_product.featured_image -%}
           {{
             featured_product.featured_image
-            | image_url: width: 160
+            | image_url: width: 600
             | image_tag:
-              width: 80,
-              height: 80,
-              class: 'apb-image',
+              class: 'apb-img',
               alt: featured_product.featured_image.alt | default: featured_product.title,
-              loading: 'lazy'
+              loading: 'lazy',
+              widths: '200, 300, 400, 600'
           }}
         {%- endif -%}
       </div>
 
-      <div class="apb-content">
+      {{- /* ── RIGHT: content ── */ -}}
+      <div class="apb-body">
+
         {%- if real_rating != blank -%}
           <div class="apb-stars" aria-label="Rated {{ real_rating }} out of 5, {{ real_count }} reviews">
             {%- for i in (1..5) -%}
               {%- if i <= full_stars -%}
-                <svg class="apb-star apb-star--full" viewBox="0 0 20 20" aria-hidden="true"><path d="M10 1l2.39 4.84 5.34.78-3.86 3.76.91 5.31L10 13.27l-4.78 2.42.91-5.31L2.27 6.62l5.34-.78z"/></svg>
+                <svg class="apb-star apb-star--full" viewBox="0 0 24 24" aria-hidden="true"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01z"/></svg>
               {%- elsif has_half >= 0.5 and i == half_star_index -%}
-                <svg class="apb-star apb-star--half" viewBox="0 0 20 20" aria-hidden="true"><defs><linearGradient id="apb-half-{{ featured_product.id }}"><stop offset="50%" stop-color="currentColor"/><stop offset="50%" stop-color="#ddd"/></linearGradient></defs><path d="M10 1l2.39 4.84 5.34.78-3.86 3.76.91 5.31L10 13.27l-4.78 2.42.91-5.31L2.27 6.62l5.34-.78z" fill="url(#apb-half-{{ featured_product.id }})"/></svg>
+                <svg class="apb-star apb-star--half" viewBox="0 0 24 24" aria-hidden="true">
+                  <defs><linearGradient id="apb-hg-{{ featured_product.id }}"><stop offset="50%" stop-color="#f5a623"/><stop offset="50%" stop-color="#ddd"/></linearGradient></defs>
+                  <path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01z" fill="url(#apb-hg-{{ featured_product.id }})"/>
+                </svg>
               {%- else -%}
-                <svg class="apb-star apb-star--empty" viewBox="0 0 20 20" aria-hidden="true"><path d="M10 1l2.39 4.84 5.34.78-3.86 3.76.91 5.31L10 13.27l-4.78 2.42.91-5.31L2.27 6.62l5.34-.78z"/></svg>
+                <svg class="apb-star apb-star--empty" viewBox="0 0 24 24" aria-hidden="true"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01z"/></svg>
               {%- endif -%}
             {%- endfor -%}
-            <span class="apb-rating-num">{{ real_rating | round: 2 }}</span>
+            <span class="apb-rating-num">{{ real_rating | round: 1 }}</span>
             {%- if real_count != blank -%}
               <span class="apb-review-count">({{ real_count }})</span>
             {%- endif -%}
           </div>
         {%- endif -%}
 
-        <p class="apb-title">{{ featured_product.title }}</p>
+        <h3 class="apb-title">{{ featured_product.title }}</h3>
 
         {%- if box_quote != blank -%}
           <blockquote class="apb-quote">{{ box_quote }}</blockquote>
         {%- endif -%}
 
         <span class="apb-btn">{{ box_cta | upcase }}</span>
+
       </div>
     </a>
   </div>
 
   <style>
-    .apb-wrap {
-      background: #fff;
-      border-radius: 14px;
-      padding: 1.8rem;
-      box-shadow: 0 1px 6px rgba(0,0,0,.08);
-      margin-top: 1.6rem;
-    }
-    .apb-heading {
-      font-size: 1.5rem;
-      font-weight: 600;
-      margin: 0 0 .6rem;
-      padding-bottom: .8rem;
-      border-bottom: 2px solid #c8862a;
-      color: rgb(var(--color-foreground));
+    .apb-outer {
+      margin-top: 2rem;
     }
     .apb-card {
       display: flex;
-      gap: 1.2rem;
-      align-items: flex-start;
+      border-radius: 16px;
+      overflow: hidden;
+      box-shadow: 0 2px 12px rgba(0,0,0,.1);
       text-decoration: none;
       color: inherit;
-      margin-top: 1.2rem;
+      min-height: 220px;
     }
-    .apb-image-col { flex-shrink: 0; }
-    .apb-image {
-      width: 80px;
-      height: 80px;
+    /* LEFT column — image fills full area */
+    .apb-img-col {
+      flex: 0 0 42%;
+      position: relative;
+      overflow: hidden;
+      background: #e8dfd0;
+    }
+    .apb-img {
+      position: absolute;
+      inset: 0;
+      width: 100%;
+      height: 100%;
       object-fit: cover;
-      border-radius: 8px;
+      object-position: center;
       display: block;
     }
-    .apb-content { flex: 1; min-width: 0; }
+    /* RIGHT column */
+    .apb-body {
+      flex: 1;
+      background: #fff;
+      padding: 1.8rem 1.6rem;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      gap: .6rem;
+    }
+    /* Stars */
     .apb-stars {
       display: flex;
       align-items: center;
-      gap: .2rem;
-      margin-bottom: .4rem;
+      gap: .15rem;
+      flex-wrap: nowrap;
     }
     .apb-star {
-      width: 1.6rem;
-      height: 1.6rem;
-      fill: currentColor;
+      width: 1.8rem;
+      height: 1.8rem;
       flex-shrink: 0;
+      fill: currentColor;
     }
-    .apb-star--full { color: #f5a623; }
-    .apb-star--half { color: #f5a623; }
+    .apb-star--full  { color: #f5a623; }
+    .apb-star--half  { color: #f5a623; }
     .apb-star--empty { color: #ddd; }
     .apb-rating-num {
-      font-size: 1.3rem;
+      font-size: 1.4rem;
       font-weight: 600;
-      color: #f5a623;
-      margin-left: .2rem;
+      color: #333;
+      margin-left: .4rem;
     }
     .apb-review-count {
-      font-size: 1.2rem;
+      font-size: 1.3rem;
       color: #888;
-      text-decoration: underline;
+      margin-left: .1rem;
     }
+    /* Title */
     .apb-title {
-      font-size: 1.5rem;
+      font-size: clamp(1.6rem, 2.5vw, 2rem);
       font-weight: 700;
-      line-height: 1.25;
-      margin: 0 0 .6rem;
+      line-height: 1.2;
+      margin: 0;
       color: rgb(var(--color-foreground));
     }
+    /* Quote */
     .apb-quote {
-      font-size: 1.2rem;
-      line-height: 1.5;
-      margin: 0 0 1rem;
-      padding-left: .8rem;
-      border-left: 3px solid rgb(var(--color-foreground));
-      color: #555;
+      font-size: 1.3rem;
+      line-height: 1.55;
+      margin: 0;
+      padding-left: .9rem;
+      border-left: 3px solid #bbb;
+      color: #777;
       font-style: normal;
     }
+    /* CTA button — copper gradient from collection-mega-menu */
     .apb-btn {
-      display: inline-block;
-      background: #c8862a;
-      color: #fff;
+      display: block;
+      margin-top: .4rem;
+      padding: 1.1rem 1.4rem;
+      border-radius: 50px;
+      background: linear-gradient(90deg, #c27348 0%, #d1845a 25%, #ffaf80 50%, #d1845a 76%, #c27348 100%);
+      color: rgb(var(--color-foreground));
       font-size: 1.2rem;
       font-weight: 700;
-      letter-spacing: .05em;
-      padding: .9rem 1.6rem;
-      border-radius: 6px;
+      letter-spacing: .06em;
       text-align: center;
-      width: 100%;
-      box-sizing: border-box;
+      text-decoration: none;
+      transition: opacity .2s;
     }
-    .apb-card:hover .apb-btn { background: #a86e1e; }
+    .apb-card:hover .apb-btn {
+      opacity: .88;
+    }
   </style>
 {%- endif -%}
