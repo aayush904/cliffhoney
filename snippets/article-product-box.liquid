@@ -1,6 +1,7 @@
 {% comment %}
   Renders a "Products Mentioned" card in the article sidebar.
-  Usage: {% render 'article-product-box', product_handle: 'handle', quote: '...', rating: 4.88, review_count: 352, cta_text: 'Shop Now' %}
+  Usage: {% render 'article-product-box', product_handle: 'handle', quote: '...', cta_text: 'Shop Now' %}
+  Rating and review count are pulled live from product.metafields.reviews.*
 {% endcomment %}
 
 {%- assign featured_product = all_products[product_handle] -%}
@@ -9,13 +10,16 @@
 {%- endif -%}
 
 {%- if featured_product != empty -%}
-  {%- assign box_rating = rating | default: 4.88 -%}
-  {%- assign box_reviews = review_count | default: 352 -%}
-  {%- assign box_cta = cta_text | default: 'Start Your Ritual' -%}
-  {%- assign box_quote = quote | default: '' -%}
-  {%- assign full_stars = box_rating | floor -%}
-  {%- assign has_half = box_rating | modulo: 1 -%}
-  {%- assign half_star_index = full_stars | plus: 1 -%}
+  {%- assign real_rating = featured_product.metafields.reviews.rating.value.rating -%}
+  {%- assign real_count  = featured_product.metafields.reviews.rating_count -%}
+  {%- assign box_cta     = cta_text | default: 'Start Your Ritual' -%}
+  {%- assign box_quote   = quote | default: '' -%}
+
+  {%- if real_rating != blank -%}
+    {%- assign full_stars     = real_rating | floor -%}
+    {%- assign has_half       = real_rating | modulo: 1 -%}
+    {%- assign half_star_index = full_stars | plus: 1 -%}
+  {%- endif -%}
 
   <div class="apb-wrap">
     <h3 class="apb-heading">Products Mentioned</h3>
@@ -37,19 +41,23 @@
       </div>
 
       <div class="apb-content">
-        <div class="apb-stars" aria-label="Rated {{ box_rating }} out of 5, {{ box_reviews }} reviews">
-          {%- for i in (1..5) -%}
-            {%- if i <= full_stars -%}
-              <svg class="apb-star apb-star--full" viewBox="0 0 20 20" aria-hidden="true"><path d="M10 1l2.39 4.84 5.34.78-3.86 3.76.91 5.31L10 13.27l-4.78 2.42.91-5.31L2.27 6.62l5.34-.78z"/></svg>
-            {%- elsif has_half >= 0.5 and i == half_star_index -%}
-              <svg class="apb-star apb-star--half" viewBox="0 0 20 20" aria-hidden="true"><defs><linearGradient id="apb-half"><stop offset="50%" stop-color="currentColor"/><stop offset="50%" stop-color="transparent"/></linearGradient></defs><path d="M10 1l2.39 4.84 5.34.78-3.86 3.76.91 5.31L10 13.27l-4.78 2.42.91-5.31L2.27 6.62l5.34-.78z" fill="url(#apb-half)" stroke="currentColor" stroke-width="1"/></svg>
-            {%- else -%}
-              <svg class="apb-star apb-star--empty" viewBox="0 0 20 20" aria-hidden="true"><path d="M10 1l2.39 4.84 5.34.78-3.86 3.76.91 5.31L10 13.27l-4.78 2.42.91-5.31L2.27 6.62l5.34-.78z"/></svg>
+        {%- if real_rating != blank -%}
+          <div class="apb-stars" aria-label="Rated {{ real_rating }} out of 5, {{ real_count }} reviews">
+            {%- for i in (1..5) -%}
+              {%- if i <= full_stars -%}
+                <svg class="apb-star apb-star--full" viewBox="0 0 20 20" aria-hidden="true"><path d="M10 1l2.39 4.84 5.34.78-3.86 3.76.91 5.31L10 13.27l-4.78 2.42.91-5.31L2.27 6.62l5.34-.78z"/></svg>
+              {%- elsif has_half >= 0.5 and i == half_star_index -%}
+                <svg class="apb-star apb-star--half" viewBox="0 0 20 20" aria-hidden="true"><defs><linearGradient id="apb-half-{{ featured_product.id }}"><stop offset="50%" stop-color="currentColor"/><stop offset="50%" stop-color="#ddd"/></linearGradient></defs><path d="M10 1l2.39 4.84 5.34.78-3.86 3.76.91 5.31L10 13.27l-4.78 2.42.91-5.31L2.27 6.62l5.34-.78z" fill="url(#apb-half-{{ featured_product.id }})"/></svg>
+              {%- else -%}
+                <svg class="apb-star apb-star--empty" viewBox="0 0 20 20" aria-hidden="true"><path d="M10 1l2.39 4.84 5.34.78-3.86 3.76.91 5.31L10 13.27l-4.78 2.42.91-5.31L2.27 6.62l5.34-.78z"/></svg>
+              {%- endif -%}
+            {%- endfor -%}
+            <span class="apb-rating-num">{{ real_rating | round: 2 }}</span>
+            {%- if real_count != blank -%}
+              <span class="apb-review-count">({{ real_count }})</span>
             {%- endif -%}
-          {%- endfor -%}
-          <span class="apb-rating-num">{{ box_rating }}</span>
-          <span class="apb-review-count">({{ box_reviews }})</span>
-        </div>
+          </div>
+        {%- endif -%}
 
         <p class="apb-title">{{ featured_product.title }}</p>
 
@@ -86,9 +94,7 @@
       color: inherit;
       margin-top: 1.2rem;
     }
-    .apb-image-col {
-      flex-shrink: 0;
-    }
+    .apb-image-col { flex-shrink: 0; }
     .apb-image {
       width: 80px;
       height: 80px;
@@ -96,10 +102,7 @@
       border-radius: 8px;
       display: block;
     }
-    .apb-content {
-      flex: 1;
-      min-width: 0;
-    }
+    .apb-content { flex: 1; min-width: 0; }
     .apb-stars {
       display: flex;
       align-items: center;
@@ -112,13 +115,9 @@
       fill: currentColor;
       flex-shrink: 0;
     }
-    .apb-star--full,
-    .apb-star--half {
-      color: #f5a623;
-    }
-    .apb-star--empty {
-      color: #ddd;
-    }
+    .apb-star--full { color: #f5a623; }
+    .apb-star--half { color: #f5a623; }
+    .apb-star--empty { color: #ddd; }
     .apb-rating-num {
       font-size: 1.3rem;
       font-weight: 600;
@@ -159,8 +158,6 @@
       width: 100%;
       box-sizing: border-box;
     }
-    .apb-card:hover .apb-btn {
-      background: #a86e1e;
-    }
+    .apb-card:hover .apb-btn { background: #a86e1e; }
   </style>
 {%- endif -%}
