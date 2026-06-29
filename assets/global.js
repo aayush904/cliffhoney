@@ -1012,8 +1012,11 @@ var SlideshowComponent = /*#__PURE__*/function (_SliderComponent) {
         link.classList.remove("slider-counter__link--active");
         link.removeAttribute("aria-current");
       });
-      this.sliderControlButtons[this.currentPage - 1].classList.add("slider-counter__link--active");
-      this.sliderControlButtons[this.currentPage - 1].setAttribute("aria-current", true);
+      var activeBtn = this.sliderControlButtons[this.currentPage - 1];
+      if (activeBtn) {
+        activeBtn.classList.add("slider-counter__link--active");
+        activeBtn.setAttribute("aria-current", true);
+      }
     }
   }, {
     key: "autoPlayToggle",
