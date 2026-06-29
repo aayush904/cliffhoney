@@ -24,7 +24,6 @@
   <div class="apb-outer">
     <a href="{{ featured_product.url }}" class="apb-card" aria-label="{{ featured_product.title }}">
 
-      {{- /* ── LEFT: image ── */ -}}
       <div class="apb-img-col">
         {%- if featured_product.featured_image -%}
           {{
@@ -39,7 +38,6 @@
         {%- endif -%}
       </div>
 
-      {{- /* ── RIGHT: content ── */ -}}
       <div class="apb-body">
 
         {%- if real_rating != blank -%}
