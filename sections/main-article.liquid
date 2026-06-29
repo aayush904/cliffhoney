@@ -258,6 +258,13 @@
             cheat_sheet: article.metafields.custom.cheat_sheet,
             heading: section.settings.cheat_sheet_heading
           -%}
+          {%- render 'article-product-box',
+            product_handle: section.settings.sidebar_product_handle,
+            quote: section.settings.sidebar_product_quote,
+            rating: section.settings.sidebar_product_rating,
+            review_count: section.settings.sidebar_product_reviews,
+            cta_text: section.settings.sidebar_product_cta
+          -%}
         </aside>
       {%- endif -%}
     </div>
@@ -638,6 +645,41 @@
       "id": "cheat_sheet_heading",
       "label": "Cheat sheet heading",
       "default": "Cheat Sheet"
+    },
+    {
+      "type": "header",
+      "content": "Sidebar product box"
+    },
+    {
+      "type": "text",
+      "id": "sidebar_product_handle",
+      "label": "Product handle",
+      "default": "himalayan-cliff-honey-lamjung",
+      "info": "Enter the product handle (from the product URL)"
+    },
+    {
+      "type": "text",
+      "id": "sidebar_product_quote",
+      "label": "Testimonial quote",
+      "default": "This is the best honey in the entire world. If you care about your immune health, this is a must. I enjoy it every morning."
+    },
+    {
+      "type": "text",
+      "id": "sidebar_product_rating",
+      "label": "Star rating (e.g. 4.88)",
+      "default": "4.88"
+    },
+    {
+      "type": "text",
+      "id": "sidebar_product_reviews",
+      "label": "Review count (e.g. 352)",
+      "default": "352"
+    },
+    {
+      "type": "text",
+      "id": "sidebar_product_cta",
+      "label": "CTA button text",
+      "default": "Start Your Ritual"
     },
     {
       "type": "header",
