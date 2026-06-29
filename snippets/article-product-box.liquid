@@ -15,6 +15,7 @@
   {%- assign box_quote = quote | default: '' -%}
   {%- assign full_stars = box_rating | floor -%}
   {%- assign has_half = box_rating | modulo: 1 -%}
+  {%- assign half_star_index = full_stars | plus: 1 -%}
 
   <div class="apb-wrap">
     <h3 class="apb-heading">Products Mentioned</h3>
@@ -40,7 +41,7 @@
           {%- for i in (1..5) -%}
             {%- if i <= full_stars -%}
               <svg class="apb-star apb-star--full" viewBox="0 0 20 20" aria-hidden="true"><path d="M10 1l2.39 4.84 5.34.78-3.86 3.76.91 5.31L10 13.27l-4.78 2.42.91-5.31L2.27 6.62l5.34-.78z"/></svg>
-            {%- elsif has_half >= 0.5 and i == full_stars | plus: 1 -%}
+            {%- elsif has_half >= 0.5 and i == half_star_index -%}
               <svg class="apb-star apb-star--half" viewBox="0 0 20 20" aria-hidden="true"><defs><linearGradient id="apb-half"><stop offset="50%" stop-color="currentColor"/><stop offset="50%" stop-color="transparent"/></linearGradient></defs><path d="M10 1l2.39 4.84 5.34.78-3.86 3.76.91 5.31L10 13.27l-4.78 2.42.91-5.31L2.27 6.62l5.34-.78z" fill="url(#apb-half)" stroke="currentColor" stroke-width="1"/></svg>
             {%- else -%}
               <svg class="apb-star apb-star--empty" viewBox="0 0 20 20" aria-hidden="true"><path d="M10 1l2.39 4.84 5.34.78-3.86 3.76.91 5.31L10 13.27l-4.78 2.42.91-5.31L2.27 6.62l5.34-.78z"/></svg>
