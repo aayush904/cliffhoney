@@ -677,60 +677,6 @@
         "custom_code": ""
       }
     },
-    "multi_column_timeline_TKwP9A": {
-      "type": "multi-column-timeline",
-      "blocks": {
-        "timeline_item_QjRTPC": {
-          "type": "timeline_item",
-          "settings": {
-            "period": "2017–2020",
-            "title": "The <strong>first </strong>Leap",
-            "bullets": "Founded in Nepal by 2nd gen Nepali beekeepers family\nYears with the honey hunting community created Himalayan Cliff Honey.\nFrom Nepali flowers, fauna, seasons, and regions to US, we started our journey  \nTogether with one goal : building a luxury honey brand from Nepal"
-          }
-        },
-        "timeline_item_JYr7mC": {
-          "type": "timeline_item",
-          "settings": {
-            "period": "2021–2025",
-            "title": "The <strong>buzz </strong>starts",
-            "bullets": "Started a fully automated, HACCP- and GMP-certified honey processing facility\nAdded multiple Himalayan honey types and bee products\nBegan structured collaborations with honey stores and skincare brands\nWorking with 300+ honey hunters and 200+ beekeepers across Nepal"
-          }
-        },
-        "timeline_item_8qhGzX": {
-          "type": "timeline_item",
-          "settings": {
-            "period": "2026 & Beyond",
-            "title": "<strong>12k+</strong> Honey Jars Sold",
-            "bullets": "Find Nepal Honey at U.S. marketplace like amazon, etsy and walmart \nA #1 bestseller on Rare Honey, giving the best honey brands in the world \nIt’s official! We’ve served over +12,000 jars of honey \nFrom Nepal to the world And more to come…"
-          }
-        }
-      },
-      "block_order": [
-        "timeline_item_QjRTPC",
-        "timeline_item_JYr7mC",
-        "timeline_item_8qhGzX"
-      ],
-      "disabled": true,
-      "custom_css": [
-        "h2 {padding-top: clamp(2rem, 1.6vw, 4rem);}"
-      ],
-      "name": "Honey Legacy Timeline",
-      "settings": {
-        "heading": "Honey Legacy",
-        "heading_accent": "Almost A Decade!",
-        "background_style": "none",
-        "color_scheme": "scheme-9d2c0c65-03cd-4aee-be49-5b37cc6b1f9f",
-        "show_placeholders": false,
-        "placeholder_img_left": "shopify://shop_images/Mask_group_b768beaf-3d53-443d-a092-59c198343bbc.webp",
-        "placeholder_img_right": "shopify://shop_images/Mask_group_ba4fa17e-2850-498d-a409-d80c60eaab91.webp",
-        "show_connector": true,
-        "connector_width": 2,
-        "padding_top": 110,
-        "padding_bottom": 110,
-        "section_id": "",
-        "section_class": ""
-      }
-    },
     "multicolumn_inX7Ln": {
       "type": "multicolumn",
       "blocks": {
@@ -861,140 +807,6 @@
         "color_scheme": "scheme-92d10699-e28c-4d95-88ce-bf9cab415f48",
         "id": "",
         "class": "",
-        "padding_top": 0,
-        "padding_bottom": 0
-      }
-    },
-    "image_text_video_VfnVmz": {
-      "type": "image-text-video",
-      "blocks": {
-        "heading_zaTtL7": {
-          "type": "heading",
-          "settings": {
-            "heading": "Inspired by <strong>Himalayan Bees </strong>& <strong>Honey Hunters</strong>",
-            "heading_size": "h2"
-          }
-        },
-        "text_gGEQiK": {
-          "type": "text",
-          "settings": {
-            "text": "<p>We bring you the world’s exclusive honey- produced by the largest honeybees of the world and harvested by native Himalayan honey hunters in the traditional way. Our purpose, at Himalayan Cliff Honey, lies in bringing nature's uncommon, limited honey from Himalayan cliffs to jars. Each jar carries an ancient legacy- a symbol of the timeless bond between Himalayan bees and honey hunters that existed for ages.</p>",
-            "text_style": "body"
-          }
-        }
-      },
-      "block_order": [
-        "heading_zaTtL7",
-        "text_gGEQiK"
-      ],
-      "disabled": true,
-      "custom_css": [
-        ".media {border-radius: 16px;}",
-        ".page-width {--grid-desktop-horizontal-spacing: 2.35%;}",
-        "video {object-fit: cover;}",
-        "@media screen and (min-width: 768px) {.image-with-text__media-item {width: 59.15%; } .image-with-text__text-item {width: 38.5%; }}",
-        "@media (max-width: 767px) {.grid {gap: 24px; } h2 {margin-bottom: 24px; } h2, p {text-align: center; }}"
-      ],
-      "name": "Image Text Video",
-      "settings": {
-        "image": "shopify://shop_images/courage.webp",
-        "video_url": "https://www.youtube.com/watch?v=6qsRJQPtHPA",
-        "video_file": "shopify://files/videos/hch website video with sound.mp4",
-        "video_alt": "",
-        "video_display_type": "inline",
-        "video_autoplay": true,
-        "height": "adapt",
-        "desktop_image_width": "large",
-        "layout": "text_first",
-        "image_behavior": "none",
-        "content_layout": "no-overlap",
-        "desktop_content_position": "middle",
-        "desktop_content_alignment": "left",
-        "mobile_content_alignment": "left",
-        "section_color_scheme": "scheme-4",
-        "color_scheme": "scheme-4",
-        "id": "",
-        "class": "header-dark",
-        "padding_top": 0,
-        "padding_bottom": 110
-      }
-    },
-    "marquee_xXe3n3": {
-      "type": "marquee",
-      "blocks": {
-        "marquee_block_hGEXxG": {
-          "type": "marquee_block",
-          "settings": {
-            "marquee_text": "Free Shipping",
-            "marquee_image": "shopify://shop_images/Vector.svg"
-          }
-        },
-        "marquee_block_tBpCDx": {
-          "type": "marquee_block",
-          "settings": {
-            "marquee_text": "Subscribe & Save 20%",
-            "marquee_image": "shopify://shop_images/Group_ecf4023d-0d5a-4b2e-8817-6ae3b71161fe.svg"
-          }
-        },
-        "marquee_block_F8YkYm": {
-          "type": "marquee_block",
-          "settings": {
-            "marquee_text": "Backed by Certification",
-            "marquee_image": "shopify://shop_images/Layer_1_80cf97e6-2416-42c0-9203-d91b70b6d2b8.svg"
-          }
-        },
-        "marquee_block_phpt9w": {
-          "type": "marquee_block",
-          "settings": {
-            "marquee_text": "Lab Verified & Tested",
-            "marquee_image": "shopify://shop_images/Layer_1-1_65747c06-e18c-4af7-b8dd-e0c02398457f.svg"
-          }
-        },
-        "marquee_block_VRjJRz": {
-          "type": "marquee_block",
-          "settings": {
-            "marquee_text": "Free Shipping",
-            "marquee_image": "shopify://shop_images/Vector.svg"
-          }
-        },
-        "marquee_block_6cVEek": {
-          "type": "marquee_block",
-          "settings": {
-            "marquee_text": "Subscribe & Save 20%",
-            "marquee_image": "shopify://shop_images/Group_ecf4023d-0d5a-4b2e-8817-6ae3b71161fe.svg"
-          }
-        },
-        "marquee_block_E63rjV": {
-          "type": "marquee_block",
-          "settings": {
-            "marquee_text": "Backed by Certification",
-            "marquee_image": "shopify://shop_images/Layer_1_80cf97e6-2416-42c0-9203-d91b70b6d2b8.svg"
-          }
-        },
-        "marquee_block_fPAxgK": {
-          "type": "marquee_block",
-          "settings": {
-            "marquee_text": "Lab Verified & Tested",
-            "marquee_image": "shopify://shop_images/Layer_1-1_65747c06-e18c-4af7-b8dd-e0c02398457f.svg"
-          }
-        }
-      },
-      "block_order": [
-        "marquee_block_hGEXxG",
-        "marquee_block_tBpCDx",
-        "marquee_block_F8YkYm",
-        "marquee_block_phpt9w",
-        "marquee_block_VRjJRz",
-        "marquee_block_6cVEek",
-        "marquee_block_E63rjV",
-        "marquee_block_fPAxgK"
-      ],
-      "disabled": true,
-      "name": "Marquee Text with Image",
-      "settings": {
-        "color_scheme": "scheme-3280f7d4-14e8-4743-9865-9a5e12c941d7",
-        "seperator": "",
-        "gap_size": 40,
         "padding_top": 0,
         "padding_bottom": 0
       }
@@ -1560,11 +1372,8 @@
     "multicolumn_qGCMMn",
     "products_category_tab_2_zpMXnD",
     "multicolumn_ccqEPn",
-    "multi_column_timeline_TKwP9A",
     "multicolumn_inX7Ln",
     "image_text_video_WjnRzD",
-    "image_text_video_VfnVmz",
-    "marquee_xXe3n3",
     "multicolumn_TRmDEd",
     "collection_list_WRXJzV",
     "product_review_video_slider_k6aJDM",
