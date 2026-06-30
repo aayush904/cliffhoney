@@ -91,6 +91,105 @@
         "custom_class": "header-dark"
       }
     },
+    "multicolumn_ciwEAG": {
+      "type": "multicolumn",
+      "blocks": {
+        "column_M7VPNR": {
+          "type": "column",
+          "settings": {
+            "image": "shopify://shop_images/Frame.svg",
+            "title": "",
+            "text": "<p>Effects In 30-45<br/>Minutes</p>",
+            "link_label": "",
+            "link": "",
+            "custom_liquid": ""
+          }
+        },
+        "column_NGh4pm": {
+          "type": "column",
+          "settings": {
+            "image": "shopify://shop_images/Frame-1.svg",
+            "title": "",
+            "text": "<p>Lab Verified<br/>Authentic</p>",
+            "link_label": "",
+            "link": "",
+            "custom_liquid": ""
+          }
+        },
+        "column_nTGBgL": {
+          "type": "column",
+          "settings": {
+            "image": "shopify://shop_images/Frame-2.svg",
+            "title": "",
+            "text": "<p>Annual <br/>Harvest Only</p>",
+            "link_label": "",
+            "link": "",
+            "custom_liquid": ""
+          }
+        },
+        "column_YJNXJx": {
+          "type": "column",
+          "settings": {
+            "image": "shopify://shop_images/Frame-3.svg",
+            "title": "",
+            "text": "<p>Trusted by Leading <br/>Luxury Skin Care Brand</p>",
+            "link_label": "",
+            "link": "",
+            "custom_liquid": ""
+          }
+        },
+        "column_cjWUyE": {
+          "type": "column",
+          "settings": {
+            "image": "shopify://shop_images/Frame-4.svg",
+            "title": "",
+            "text": "<p>12k+ Verified<br/>Customers</p>",
+            "link_label": "",
+            "link": "",
+            "custom_liquid": ""
+          }
+        }
+      },
+      "block_order": [
+        "column_M7VPNR",
+        "column_NGh4pm",
+        "column_nTGBgL",
+        "column_YJNXJx",
+        "column_cjWUyE"
+      ],
+      "custom_css": [
+        ".multicolumn-card {align-items: center; gap: clamp(10px, 0.94vw, 18px);}",
+        ".multicolumn-card {display: flex;}",
+        ".multi-item {padding: 0;}",
+        ".img-wrap {--width: clamp(28px, 2.1vw, 40px); width: var(--width); aspect-ratio: 1/1; height: auto;}",
+        "img {width: 100%; height: auto; aspect-ratio: 1/1;}",
+        ".grid__item {max-width: max-content;}",
+        ".grid {justify-content: space-around; gap: clamp(30px, 6.4vw, 123px) !important; flex-wrap: nowrap;}",
+        "@media (max-width: 990px) {.grid {gap: 10px; max-width: max-content; margin: 0 auto; } .page-width {padding: 16px 16px 24px 16px; }}"
+      ],
+      "name": "t:sections.multicolumn.presets.name",
+      "settings": {
+        "title": "",
+        "description": "",
+        "heading_size": "h2",
+        "image_width": "third",
+        "image_ratio": "square",
+        "button_label": "",
+        "button_link": "",
+        "columns_desktop": 5,
+        "column_alignment": "left",
+        "background_style": "none",
+        "color_scheme": "scheme-4",
+        "swipe_on_desktop": false,
+        "columns_mobile": "2",
+        "swipe_on_mobile": true,
+        "padding_top": 40,
+        "padding_bottom": 40,
+        "section_id": "",
+        "section_class": "",
+        "custom_code": "{% assign isid =  \"#shopify-section-\" | append: section.id %}\n{% style %}\n{{isid}} p{\n  width:max-content;\n}\n{{isid}} li{\n width:max-content;\n}\n\n{{isid}} .gradient{\n background:#f8eddb;\n}\n\n\n{{isid}} .slider-buttons {\ndisplay:none;\n}\n\n\n@media(max-width:989px){\n{{isid}} .slider-buttons {\n        position: absolute;\n        width: 100%;\n        justify-content: space-between;\n        top: 50%;\n width:100vw;\nleft:50%;\nheight:0;\ntransform:translate(-50%,-50%);\n}\n{{isid}} .slider-buttons button span{\nbox-shadow:none;\nbackground:transparent;\nborder:none;\nmax-width:max-content;\n}\n\n{{isid}} .page-width.page-width{\npadding-left: 24px;\npadding-right:24px;\n}\n}\n\n{% endstyle %}"
+      }
+    },
     "multicolumn_MpKc9N": {
       "type": "multicolumn",
       "blocks": {
@@ -133,6 +232,7 @@
         "column_x76wTa",
         "column_edr8Ve"
       ],
+      "disabled": true,
       "custom_css": [
         ".multicolumn-card {align-items: center; gap: clamp(6px, 0.52vw, 10px);}",
         ".multicolumn-card {display: flex;}",
@@ -545,6 +645,7 @@
         "column_L7if4J",
         "column_NkyU8b"
       ],
+      "disabled": true,
       "custom_css": [
         ".grid {gap: 24px clamp(24px, 4vw, 60px); justify-content: space-around; flex-direction: row !important;}",
         ".grid__item {max-width: clamp(110px, 10vw, 160px); width: 100%;}",
@@ -888,6 +989,7 @@
         "marquee_block_E63rjV",
         "marquee_block_fPAxgK"
       ],
+      "disabled": true,
       "name": "Marquee Text with Image",
       "settings": {
         "color_scheme": "scheme-3280f7d4-14e8-4743-9865-9a5e12c941d7",
@@ -1308,6 +1410,7 @@
         "marquee_block_E63rjV",
         "marquee_block_fPAxgK"
       ],
+      "disabled": true,
       "name": "Marquee Text with Image",
       "settings": {
         "color_scheme": "scheme-3280f7d4-14e8-4743-9865-9a5e12c941d7",
@@ -1449,6 +1552,7 @@
   },
   "order": [
     "slideshow_zzNTyM",
+    "multicolumn_ciwEAG",
     "multicolumn_MpKc9N",
     "collection_list_qeieHV",
     "multicolumn_U6QwbX",
