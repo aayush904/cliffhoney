@@ -116,7 +116,8 @@
   {{ 'component-accordion.css' | asset_url | stylesheet_tag }}
   {{ 'component-price.css' | asset_url | stylesheet_tag }}
   {{ 'component-slider.css' | asset_url | stylesheet_tag }}
-  {{ 'component-rating.css' | asset_url | stylesheet_tag }}
+  <link rel="stylesheet" href="{{ 'component-rating.css' | asset_url }}" media="print" onload="this.media='all'">
+  <noscript><link rel="stylesheet" href="{{ 'component-rating.css' | asset_url }}"></noscript>
   {{ 'component-deferred-media.css' | asset_url | stylesheet_tag }}
 
   {% unless product.has_only_default_variant %}
@@ -126,7 +127,8 @@
   {% endunless %}
 
   {%- if product.quantity_price_breaks_configured? -%}
-    {{ 'component-volume-pricing.css' | asset_url | stylesheet_tag }}
+    <link rel="stylesheet" href="{{ 'component-volume-pricing.css' | asset_url }}" media="print" onload="this.media='all'">
+    <noscript><link rel="stylesheet" href="{{ 'component-volume-pricing.css' | asset_url }}"></noscript>
   {%- endif -%}
 
   {% assign mid = '#MainProduct-' | append: section.id %}
@@ -154,7 +156,6 @@
   {%- endstyle -%}
 
   <script src="{{ 'product-info.js' | asset_url }}" defer="defer"></script>
-  <script src="{{ 'product-form.js' | asset_url }}" defer="defer"></script>
   {%- if product.quantity_price_breaks_configured? -%}
     <script src="{{ 'show-more.js' | asset_url }}" defer="defer"></script>
     <script src="{{ 'price-per-item.js' | asset_url }}" defer="defer"></script>
