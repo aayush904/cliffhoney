@@ -1571,7 +1571,7 @@ legend.form__label {
   .grid__item.product__media-wrapper media-gallery {
     position: relative;
     overflow: hidden;
-    min-width: 40vw;
+    /* min-width: 40vw; */
     max-width: calc(var(--viewerPaddingLeft) - 16px  + var(--viewerHeight)*8/9);
     margin-left: auto;
   }
