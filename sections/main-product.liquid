@@ -597,7 +597,7 @@
                 -%}
               {%- when 'rating' -%}
                 {%- if product.metafields.reviews.rating.value != blank -%}
-                  <a href="#judgeme_product_reviews" class="rating-wrapper" style="text-decoration:none; color:inherit; cursor:pointer;" onclick="event.preventDefault(); var el=document.getElementById('judgeme_product_reviews'); if(el){el.scrollIntoView({behavior:'smooth', block:'start'});}">
+                  <a href="#judgeme_product_reviews" class="rating-wrapper" style="display:block; text-decoration:none; color:inherit; cursor:pointer;" onclick="event.preventDefault(); var el=document.getElementById('judgeme_product_reviews'); if(el){var headerEl=document.querySelector('sticky-header'); var headerOffset=headerEl ? headerEl.offsetHeight : 0; var top=el.getBoundingClientRect().top + window.pageYOffset - headerOffset - 20; window.scrollTo({top: top, behavior: 'smooth'});}">
                     {% liquid
                       assign rating_decimal = 0
                       assign decimal = product.metafields.reviews.rating.value.rating | modulo: 1
