@@ -68,7 +68,7 @@
         ".grid__item {max-width: 18%;}",
         ".grid__item:last-of-type {max-width: 24.3%;}",
         "@media (max-width: 768px) {.grid__item {max-width: 100% !important; }}",
-        ".footer__content-top,input {background: #fbefd6;}",
+        ".footer__content-top,input {background: #F8E3B8;}",
         ".footer-block--newsletter {padding: clamp(16px, 1.67vw, 3.2rem) 16px;}",
         ".list-social__link {padding: 0 6px;}",
         "svg:not(.icon-arrow),.svg-wrapper {width: 36px; height: 36px;}",
