@@ -597,7 +597,7 @@
                 -%}
               {%- when 'rating' -%}
                 {%- if product.metafields.reviews.rating.value != blank -%}
-                  <div class="rating-wrapper">
+                  <a href="#judgeme_product_reviews" class="rating-wrapper" style="text-decoration:none; color:inherit; cursor:pointer;" onclick="event.preventDefault(); var el=document.getElementById('judgeme_product_reviews'); if(el){el.scrollIntoView({behavior:'smooth', block:'start'});}">
                     {% liquid
                       assign rating_decimal = 0
                       assign decimal = product.metafields.reviews.rating.value.rating | modulo: 1
@@ -631,7 +631,7 @@
                         {{ 'accessibility.total_reviews' | t -}}
                       </span>
                     </p>
-                  </div>
+                  </a>
                 {%- endif -%}
               {%- when 'complementary' -%}
                 <product-recommendations
