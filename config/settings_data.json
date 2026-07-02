@@ -236,15 +236,15 @@
           "greeting_message": "",
           "background_color": "#fffbef",
           "font_color": "#4b5441",
-          "button_color": "#FFFBEF",
-          "secondary_color": "#000000",
-          "ternary_color": "#6A6A6A",
+          "button_color": "#fffbef",
+          "secondary_color": "#364639",
+          "ternary_color": "#6a6a6a",
           "button_icon": "chat_bubble",
           "button_text": "no_text",
           "button_horizontal_position": "bottom_right",
           "button_vertical_position": "lowest",
-          "agent_inherit_fonts": true,
-          "agent_font": "system_ui_n4",
+          "agent_inherit_fonts": false,
+          "agent_font": "mono",
           "agent_border_radius": 16
         }
       }
