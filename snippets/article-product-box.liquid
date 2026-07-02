@@ -20,7 +20,7 @@
 {%- if featured_product != blank -%}
   {%- assign real_rating   = featured_product.metafields.reviews.rating.value.rating -%}
   {%- assign real_count    = featured_product.metafields.reviews.rating_count -%}
-  {%- assign box_cta       = cta_text | default: 'Start Your Ritual' -%}
+  {%- assign box_cta       = cta_text | default: '' -%}
   {%- assign box_quote     = quote | default: '' -%}
 
   {%- if real_rating != blank -%}
@@ -30,6 +30,8 @@
   {%- endif -%}
 
   <div class="apb-outer">
+
+    <h3>Product Mentioned</h3>
     <a href="{{ featured_product.url }}" class="apb-card" aria-label="{{ featured_product.title }}">
 
       <div class="apb-img-col">
