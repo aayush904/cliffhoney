@@ -2,14 +2,22 @@
   Renders a "Products Mentioned" card in the article sidebar.
   Usage: {% render 'article-product-box', product_handle: 'handle', quote: '...', cta_text: 'Shop Now' %}
   Rating and review count are pulled live from product.metafields.reviews.*
+
+  Product resolution order:
+  1. article.metafields.custom.sidebar_product (per-article product reference, set in Shopify Admin)
+  2. product_handle param (section setting fallback)
+  3. himalayan-cliff-honey-lamjung (hard fallback)
 {% endcomment %}
 
-{%- assign featured_product = all_products[product_handle] -%}
-{%- if featured_product == empty -%}
+{%- assign featured_product = article.metafields.custom.sidebar_product.value -%}
+{%- if featured_product == blank -%}
+  {%- assign featured_product = all_products[product_handle] -%}
+{%- endif -%}
+{%- if featured_product == blank -%}
   {%- assign featured_product = all_products['himalayan-cliff-honey-lamjung'] -%}
 {%- endif -%}
 
-{%- if featured_product != empty -%}
+{%- if featured_product != blank -%}
   {%- assign real_rating   = featured_product.metafields.reviews.rating.value.rating -%}
   {%- assign real_count    = featured_product.metafields.reviews.rating_count -%}
   {%- assign box_cta       = cta_text | default: 'Start Your Ritual' -%}
