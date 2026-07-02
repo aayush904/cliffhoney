@@ -30,243 +30,94 @@
     {% assign potential_action_target = request.origin | append: routes.search_url | append: "?q={search_term_string}" %}
 
     <script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@graph": [
     {
-      "@context": "https://schema.org",
-      "@graph": [
-        {
-          "@type": "BreadcrumbList",
-          "@id": {{ request.origin | append: "#breadcrumb" | json }},
-          "itemListElement": [
-            {
-              "@type": "ListItem",
-              "position": 1,
-              "name": "Home",
-              "item": {{ shop.url | json }}
-            }
-            {%- if template.name == 'collection' -%}
-              {%- assign breadcrumb_index = 2 -%}
-              {%- if current_tags == blank -%}
-              ,
-              {
-                "@type": "ListItem",
-                "position": {{ breadcrumb_index }},
-                "name": {{ collection.title | json }},
-                "item": {{ shop.url | append: collection.url | json }}
-              }
-              {%- endif -%}
-
-            {%- elsif template.name == 'product' -%}
-              {%- assign breadcrumb_index = 2 -%}
-              {%- assign variant_name = product.selected_variant.title -%}
-              {%- assign title_postfix = product.selected_or_first_available_variant.metafields.custom.title_postfix.value -%}
-              {%- if variant_name != 'Default Title' and variant_name != blank -%}
-                {%- assign title_postfix = title_postfix | append: ' | ' | append: variant_name -%}
-                {%- assign product_url = shop.url | append: product.selected_variant.url -%}
-              {%- else -%}
-                {%- assign product_url = shop.url | append: product.url -%}
-              {%- endif -%}
-              ,
-              {
-                "@type": "ListItem",
-                "position": {{ breadcrumb_index }},
-                "name": {{ product.title | append: ' - ' | append: title_postfix | json }},
-                "item": {{ product_url | json }}
-              }
-
-            {%- elsif template.name == 'blog' -%}
-              {%- assign breadcrumb_index = 2 -%}
-              ,
-              {
-                "@type": "ListItem",
-                "position": {{ breadcrumb_index }},
-                "name": {{ blog.title | json }},
-                "item": {{ shop.url | append: blog.url | json }}
-              }
-
-            {%- elsif template.name == 'article' -%}
-              {%- assign breadcrumb_index = 2 -%}
-              ,
-              {
-                "@type": "ListItem",
-                "position": {{ breadcrumb_index }},
-                "name": {{ blog.title | json }},
-                "item": {{ shop.url | append: blog.url | json }}
-              }
-              ,
-              {
-                "@type": "ListItem",
-                "position": 3,
-                "name": {{ article.title | json }},
-                "item": {{ shop.url | append: article.url | json }}
-              }
-
-            {%- elsif template.name == 'page' -%}
-              {%- assign breadcrumb_index = 2 -%}
-              ,
-              {
-                "@type": "ListItem",
-                "position": {{ breadcrumb_index }},
-                "name": {{ page.title | json }},
-                "item": {{ shop.url | append: page.url | json }}
-              }
-            {%- endif -%}
-          ]
-        },
-
-        {
-          "@type": "Organization",
-          "@id": {{ request.origin | append: "#organization" | json }},
-          "name": {{ shop.name | json }},
-          {% if settings.logo %}
-          "logo": {{ settings.logo | image_url: width: 500 | prepend: "https:" | json }},
-          {% endif %}
-          "url": {{ request.origin | json }},
-          "sameAs": [
-            {%- assign first_social = true -%}
-            {%- if settings.social_twitter_link != blank -%}
-              {{ settings.social_twitter_link | json }}
-              {%- assign first_social = false -%}
-            {%- endif -%}
-            {%- if settings.social_facebook_link != blank -%}
-              {%- unless first_social -%},{%- endunless -%}
-              {{ settings.social_facebook_link | json }}
-              {%- assign first_social = false -%}
-            {%- endif -%}
-            {%- if settings.social_pinterest_link != blank -%}
-              {%- unless first_social -%},{%- endunless -%}
-              {{ settings.social_pinterest_link | json }}
-              {%- assign first_social = false -%}
-            {%- endif -%}
-            {%- if settings.social_instagram_link != blank -%}
-              {%- unless first_social -%},{%- endunless -%}
-              {{ settings.social_instagram_link | json }}
-              {%- assign first_social = false -%}
-            {%- endif -%}
-            {%- if settings.social_tiktok_link != blank -%}
-              {%- unless first_social -%},{%- endunless -%}
-              {{ settings.social_tiktok_link | json }}
-              {%- assign first_social = false -%}
-            {%- endif -%}
-            {%- if settings.social_tumblr_link != blank -%}
-              {%- unless first_social -%},{%- endunless -%}
-              {{ settings.social_tumblr_link | json }}
-              {%- assign first_social = false -%}
-            {%- endif -%}
-            {%- if settings.social_snapchat_link != blank -%}
-              {%- unless first_social -%},{%- endunless -%}
-              {{ settings.social_snapchat_link | json }}
-              {%- assign first_social = false -%}
-            {%- endif -%}
-            {%- if settings.social_youtube_link != blank -%}
-              {%- unless first_social -%},{%- endunless -%}
-              {{ settings.social_youtube_link | json }}
-              {%- assign first_social = false -%}
-            {%- endif -%}
-            {%- if settings.social_vimeo_link != blank -%}
-              {%- unless first_social -%},{%- endunless -%}
-              {{ settings.social_vimeo_link | json }}
-            {%- endif -%}
-          ],
-          "address": {
-            "@type": "PostalAddress",
-            "streetAddress": {{ shop.address.street | json }},
-            "addressLocality": {{ shop.address.city | json }},
-            "addressRegion": {{ shop.address.province | default: 'Bagmati' | json }},
-            "postalCode": {{ shop.address.zip | json }},
-            "addressCountry": {{ shop.address.country_code | default: 'NP' | json }}
-          }
-        },
-
-        {
-          "@type": "LocalBusiness",
-          "@id": {{ request.origin | append: "#localbusiness" | json }},
-          "name": {{ shop.name | json }},
-          {% if settings.logo %}
-          "image": {{ settings.logo | image_url: width: 500 | prepend: "https:" | json }},
-          {% endif %}
-          "description": {{ shop.meta_description | default: "Explore our premium selection of authentic Himalayan Everest Shilajit, known for its unique medicinal properties and natural wellness benefits. Shop now for 100% pure and sustainably sourced Everest Shilajit." | json }},
-          "url": {{ shop.url | json }},
-          "telephone": {{ shop.phone | json }},
-          "address": {
-            "@type": "PostalAddress",
-            "streetAddress": {{ shop.address.street | json }},
-            "addressLocality": {{ shop.address.city | json }},
-            "addressRegion": {{ shop.address.province | default: 'Bagmati' | json }},
-            "postalCode": {{ shop.address.zip | json }},
-            "addressCountry": {{ shop.address.country_code | default: 'NP' | json }}
-          }
-          {% if shop.address.latitude and shop.address.longitude %}
-          ,
-          "geo": {
-            "@type": "GeoCoordinates",
-            "latitude": {{ shop.address.latitude | json }},
-            "longitude": {{ shop.address.longitude | json }}
-          }
-          {% endif %}
-          ,
-          "priceRange": "$$",
-          "sameAs": [
-            {%- assign first_social = true -%}
-            {%- if settings.social_twitter_link != blank -%}
-              {{ settings.social_twitter_link | json }}
-              {%- assign first_social = false -%}
-            {%- endif -%}
-            {%- if settings.social_facebook_link != blank -%}
-              {%- unless first_social -%},{%- endunless -%}
-              {{ settings.social_facebook_link | json }}
-              {%- assign first_social = false -%}
-            {%- endif -%}
-            {%- if settings.social_pinterest_link != blank -%}
-              {%- unless first_social -%},{%- endunless -%}
-              {{ settings.social_pinterest_link | json }}
-              {%- assign first_social = false -%}
-            {%- endif -%}
-            {%- if settings.social_instagram_link != blank -%}
-              {%- unless first_social -%},{%- endunless -%}
-              {{ settings.social_instagram_link | json }}
-              {%- assign first_social = false -%}
-            {%- endif -%}
-            {%- if settings.social_tiktok_link != blank -%}
-              {%- unless first_social -%},{%- endunless -%}
-              {{ settings.social_tiktok_link | json }}
-              {%- assign first_social = false -%}
-            {%- endif -%}
-            {%- if settings.social_tumblr_link != blank -%}
-              {%- unless first_social -%},{%- endunless -%}
-              {{ settings.social_tumblr_link | json }}
-              {%- assign first_social = false -%}
-            {%- endif -%}
-            {%- if settings.social_snapchat_link != blank -%}
-              {%- unless first_social -%},{%- endunless -%}
-              {{ settings.social_snapchat_link | json }}
-              {%- assign first_social = false -%}
-            {%- endif -%}
-            {%- if settings.social_youtube_link != blank -%}
-              {%- unless first_social -%},{%- endunless -%}
-              {{ settings.social_youtube_link | json }}
-              {%- assign first_social = false -%}
-            {%- endif -%}
-            {%- if settings.social_vimeo_link != blank -%}
-              {%- unless first_social -%},{%- endunless -%}
-              {{ settings.social_vimeo_link | json }}
-            {%- endif -%}
-          ]
-        },
-
-        {
-          "@type": "WebSite",
-          "@id": {{ request.origin | append: "#website" | json }},
-          "name": {{ shop.name | json }},
-          "url": {{ request.origin | json }},
-          "potentialAction": {
-            "@type": "SearchAction",
-            "target": {{ potential_action_target | json }},
-            "query-input": "required name=search_term_string"
-          }
-        }
+      "@type": "Organization",
+      "@id": "https://cliffhoney.com/#organization",
+      "name": "Himalayan Cliff Honey",
+      "alternateName": "Cliff Honey",
+      "url": "https://cliffhoney.com/",
+      "logo": {
+        "@type": "ImageObject",
+        "@id": "https://cliffhoney.com/#logo",
+        "url": "https://cliffhoney.com/cdn/shop/files/logo.svg?v=1767766440&width=600"
+      },
+      "description": "Himalayan Cliff Honey is a Nepal-origin honey brand offering rare Himalayan cliff honey, wild honey, bee pollen, and superfood honey sourced from high-altitude Himalayan regions.",
+      "slogan": "The World’s Rarest Honey",
+      "foundingLocation": {
+        "@type": "Country",
+        "name": "Nepal"
+      },
+      "areaServed": "Worldwide",
+      "contactPoint": {
+        "@type": "ContactPoint",
+        "contactType": "customer support",
+        "url": "https://cliffhoney.com/pages/contact-us",
+        "areaServed": "Worldwide",
+        "availableLanguage": "English"
+      },
+      "sameAs": [
+        "https://www.facebook.com/himalayancliffhoney",
+        "https://www.instagram.com/himalayancliffhoney",
+        "https://www.youtube.com/@himalayancliffhoney8993",
+        "https://www.tiktok.com/@himalayancliffhoney"
+      ],
+      "knowsAbout": [
+        "Himalayan cliff honey",
+        "Himalayan honey",
+        "Nepal honey",
+        "Wild honey",
+        "Rhododendron honey",
+        "High-altitude honey",
+        "Apis laboriosa",
+        "Himalayan giant honey bee",
+        "Traditional honey hunting"
       ]
+    },
+    {
+      "@type": "WebSite",
+      "@id": "https://cliffhoney.com/#website",
+      "url": "https://cliffhoney.com/",
+      "name": "Himalayan Cliff Honey",
+      "alternateName": "Cliff Honey",
+      "publisher": {
+        "@id": "https://cliffhoney.com/#organization"
+      },
+      "inLanguage": "en"
+    },
+    {
+      "@type": "WebPage",
+      "@id": "https://cliffhoney.com/#webpage",
+      "url": "https://cliffhoney.com/",
+      "name": "Himalayan Cliff Honey | Rare Himalayan Honey from Nepal",
+      "description": "Wild harvested from the cliffs of Nepal, crafted with respect for tradition and time, where season and place shape a wild, exotic honey unlike any other.",
+      "isPartOf": {
+        "@id": "https://cliffhoney.com/#website"
+      },
+      "about": {
+        "@id": "https://cliffhoney.com/#organization"
+      },
+      "mainEntity": {
+        "@id": "https://cliffhoney.com/#organization"
+      },
+      "keywords": [
+        "Himalayan Cliff Honey",
+        "Rare Himalayan honey from Nepal",
+        "Cliff Honey",
+        "Nepal cliff honey",
+        "Wild honey",
+        "Himalayan honey",
+        "High-altitude honey",
+        "Rhododendron honey",
+        "Premium Honey"
+      ],
+      "inLanguage": "en"
     }
-    </script>
+  ]
+}
+</script>
     {% comment %} <script src="{{ 'polyfills-legacy.js' | asset_url }}"></script> {% endcomment %}
 
     {%- if settings.animations_reveal_on_scroll -%}
