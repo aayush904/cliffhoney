@@ -276,13 +276,21 @@
                           title="{{ video_alt | escape }}"
                         ></iframe>
                       {%- endif -%}
+                    {%- elsif section.settings.video_autoplay -%}
+                      {{
+                        section.settings.video_file
+                        | video_tag:
+                          image_size: '1100x',
+                          autoplay: true,
+                          loop: true,
+                          controls: true,
+                          muted: false
+                      }}
                     {%- else -%}
                       {{
                         section.settings.video_file
                         | video_tag:
                           image_size: '1100x',
-                          autoplay: section.settings.video_autoplay,
-                          loop: section.settings.video_autoplay,
                           controls: true,
                           muted: false
                       }}
@@ -498,13 +506,21 @@
               title="{{ section.settings.video_alt | default: 'Video' | escape }}"
             ></iframe>
           {%- endif -%}
+        {%- elsif section.settings.video_autoplay -%}
+          {{
+            section.settings.video_file
+            | video_tag:
+              image_size: '1100x',
+              autoplay: true,
+              loop: true,
+              controls: true,
+              muted: false
+          }}
         {%- else -%}
           {{
             section.settings.video_file
             | video_tag:
               image_size: '1100x',
-              autoplay: section.settings.video_autoplay,
-              loop: section.settings.video_autoplay,
               controls: true,
               muted: false
           }}
