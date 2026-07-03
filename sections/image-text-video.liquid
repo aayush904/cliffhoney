@@ -287,13 +287,16 @@
                           muted: false
                       }}
                     {%- else -%}
-                      {{
-                        section.settings.video_file
-                        | video_tag:
-                          image_size: '1100x',
-                          controls: true,
-                          muted: false
-                      }}
+                      {%- capture video_html_a -%}
+                        {{
+                          section.settings.video_file
+                          | video_tag:
+                            image_size: '1100x',
+                            controls: true,
+                            muted: false
+                        }}
+                      {%- endcapture -%}
+                      {{ video_html_a | replace: 'autoplay="autoplay" ', '' | replace: 'autoplay="autoplay"', '' }}
                     {%- endif -%}
                   </template>
                 </deferred-media>
@@ -517,13 +520,16 @@
               muted: false
           }}
         {%- else -%}
-          {{
-            section.settings.video_file
-            | video_tag:
-              image_size: '1100x',
-              controls: true,
-              muted: false
-          }}
+          {%- capture video_html_b -%}
+            {{
+              section.settings.video_file
+              | video_tag:
+                image_size: '1100x',
+                controls: true,
+                muted: false
+            }}
+          {%- endcapture -%}
+          {{ video_html_b | replace: 'autoplay="autoplay" ', '' | replace: 'autoplay="autoplay"', '' }}
         {%- endif -%}
       </div>
     </div>
