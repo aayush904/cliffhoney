@@ -794,7 +794,7 @@
         "video_file": "shopify://files/videos/Cliff-Honey-Trailer.av1 (1).mp4",
         "video_alt": "",
         "video_display_type": "popup",
-        "video_autoplay": true,
+        "video_autoplay": false,
         "height": "adapt",
         "desktop_image_width": "medium",
         "layout": "image_first",
