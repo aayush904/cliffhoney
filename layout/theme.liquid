@@ -472,22 +472,13 @@
           root.appendChild(style);
         }
 
-        function tryInject() {
+        // The widget mounts asynchronously and may rebuild its shadow root
+        // (or swap the host node) during that process, so re-assert the
+        // fix on an interval rather than relying on a single mutation event.
+        setInterval(function () {
           var host = document.querySelector('inbox-online-store-chat');
-          if (host && host.shadowRoot) {
-            injectInto(host.shadowRoot);
-            new MutationObserver(function () { injectInto(host.shadowRoot); })
-              .observe(host.shadowRoot, { childList: true, subtree: true });
-            return true;
-          }
-          return false;
-        }
-
-        if (!tryInject()) {
-          new MutationObserver(function (_, obs) {
-            if (tryInject()) obs.disconnect();
-          }).observe(document.documentElement, { childList: true, subtree: true });
-        }
+          if (host && host.shadowRoot) injectInto(host.shadowRoot);
+        }, 500);
       })();
     </script>
   </head>
