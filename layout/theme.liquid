@@ -457,8 +457,11 @@
         // normal page CSS (even with !important) cannot reach it. Inject a
         // <style> directly into the shadow root once it exists.
         var CHAT_WIDGET_CSS = [
-          '.instant-answers-list__prompt { border-color: #7a3f26 !important; color: #7a3f26 !important; background-color: #fff !important; }',
-          '.instant-answers-list__prompt p { color: #7a3f26 !important; }',
+          /* Covers every low-contrast gray outline button the widget renders
+             (instant answers, sign-up prompt, etc.) — the widget applies the
+             same rgb(106,106,106)-on-white inline style pattern to all of them. */
+          'button.outline-button { border-color: #7a3f26 !important; color: #7a3f26 !important; background-color: #fff !important; }',
+          'button.outline-button p, button.outline-button span { color: #7a3f26 !important; }',
           '.return-to-chat-wrapper .background { background-color: #7a3f26 !important; }',
           '.return-to-chat-wrapper .label { color: #fff !important; }',
           '.store-info-heading h2, .interstitial-view__welcome p, .instant-answers { color: #3d3d3d !important; }'
