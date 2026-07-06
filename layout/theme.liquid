@@ -450,6 +450,13 @@
         .article-sidebar { order: -1; }
       }
 
+      /* Shopify Inbox chat widget — custom properties inherit through the
+         widget's shadow root even though normal selectors below cannot. */
+      :root {
+        --ternary-color: #7a3f26 !important;
+        --secondary-color: #3d1f10 !important;
+      }
+
       /* Shopify Inbox chat widget — brand restyle */
       .chat-app {
         --chat-copper-1: #c27348;
