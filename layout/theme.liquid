@@ -451,6 +451,45 @@
       }
 
     </style>
+    <script>
+      (function () {
+        // Shopify Inbox chat widget renders inside an open shadow root, so
+        // normal page CSS (even with !important) cannot reach it. Inject a
+        // <style> directly into the shadow root once it exists.
+        var CHAT_WIDGET_CSS = [
+          '.instant-answers-list__prompt { border-color: #7a3f26 !important; color: #7a3f26 !important; }',
+          '.instant-answers-list__prompt p { color: #7a3f26 !important; }',
+          '.return-to-chat-wrapper .background { background-color: #7a3f26 !important; }',
+          '.return-to-chat-wrapper .label { color: #fff !important; }',
+          '.store-info-heading h2, .interstitial-view__welcome p, .instant-answers { color: #3d3d3d !important; }'
+        ].join('\n');
+
+        function injectInto(root) {
+          if (root.querySelector('style[data-chat-contrast-fix]')) return;
+          var style = document.createElement('style');
+          style.setAttribute('data-chat-contrast-fix', '');
+          style.textContent = CHAT_WIDGET_CSS;
+          root.appendChild(style);
+        }
+
+        function tryInject() {
+          var host = document.querySelector('inbox-online-store-chat');
+          if (host && host.shadowRoot) {
+            injectInto(host.shadowRoot);
+            new MutationObserver(function () { injectInto(host.shadowRoot); })
+              .observe(host.shadowRoot, { childList: true, subtree: true });
+            return true;
+          }
+          return false;
+        }
+
+        if (!tryInject()) {
+          new MutationObserver(function (_, obs) {
+            if (tryInject()) obs.disconnect();
+          }).observe(document.body, { childList: true, subtree: true });
+        }
+      })();
+    </script>
   </head>
 
 <body class="gradient{% if request.page_type == 'index' %} home-page{% endif %}{% if settings.animations_hover_elements != 'none' %} animate--hover-{{ settings.animations_hover_elements }}{% endif %}">    {% comment %}
