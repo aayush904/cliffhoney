@@ -547,6 +547,27 @@
       .chat-app .signUp-button svg {
         fill: var(--chat-copper-1) !important;
       }
+
+      /* Welcome / instant-answers screen — low-contrast fix (default gray #6a6a6a on cream fails AA) */
+      .chat-app .store-info-heading h2,
+      .chat-app .interstitial-view__welcome p,
+      .chat-app .instant-answers {
+        color: #3d3d3d !important;
+      }
+      .chat-app .instant-answers-list__prompt {
+        border-color: #8a4a2e !important;
+        color: #7a3f26 !important;
+        opacity: 1 !important;
+      }
+      .chat-app .instant-answers-list__prompt p {
+        color: #7a3f26 !important;
+      }
+      .chat-app .return-to-chat-wrapper .background {
+        background-color: #7a3f26 !important;
+      }
+      .chat-app .return-to-chat-wrapper .label {
+        color: #fff !important;
+      }
     </style>
   </head>
 

@@ -1221,41 +1221,12 @@
     },
     "1781680982fbfed33b": {
       "type": "apps",
-      "blocks": {
-        "junip_junip_product_review_hJFwww": {
-          "type": "shopify://apps/junip/blocks/junip-product-review/dc14f5a8-ed15-41b1-ad08-cfba23f9789b",
-          "disabled": true,
-          "settings": {
-            "product": "{{product}}",
-            "title": "",
-            "alignment": "",
-            "sortOrder": "mostRecent"
-          }
-        }
-      },
-      "block_order": [
-        "junip_junip_product_review_hJFwww"
-      ],
       "settings": {
         "include_margins": true
       }
     },
     "1783312598be00f6ed": {
       "type": "apps",
-      "blocks": {
-        "junip_junip_product_review_mPQ6qB": {
-          "type": "shopify://apps/junip/blocks/junip-product-review/dc14f5a8-ed15-41b1-ad08-cfba23f9789b",
-          "settings": {
-            "product": "{{product}}",
-            "title": "",
-            "alignment": "",
-            "sortOrder": "mostRecent"
-          }
-        }
-      },
-      "block_order": [
-        "junip_junip_product_review_mPQ6qB"
-      ],
       "settings": {
         "include_margins": true
       }
