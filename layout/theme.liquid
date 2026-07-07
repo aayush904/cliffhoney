@@ -458,13 +458,33 @@
         // <style> directly into the shadow root once it exists.
         var CHAT_WIDGET_CSS = [
           /* Covers every low-contrast gray outline button the widget renders
-             (instant answers, sign-up prompt, etc.) — the widget applies the
+             (sign-up prompt, order lookup, etc.) — the widget applies the
              same rgb(106,106,106)-on-white inline style pattern to all of them. */
           'button.outline-button { border-color: #7a3f26 !important; color: #7a3f26 !important; background-color: #fff !important; }',
           'button.outline-button p, button.outline-button span { color: #7a3f26 !important; }',
           '.return-to-chat-wrapper .background { background-color: #7a3f26 !important; }',
           '.return-to-chat-wrapper .label { color: #fff !important; }',
-          '.store-info-heading h2, .interstitial-view__welcome p, .instant-answers { color: #3d3d3d !important; }'
+
+          /* Welcome screen: solid panel, copper gradient header, white text */
+          '#chat-ui.interstitial-view { background: #fffbef !important; }',
+          '.store-info { background: linear-gradient(135deg, #c27348 0%, #d1845a 50%, #ffaf80 100%) !important; padding: 20px 20px 32px !important; border-radius: 0 0 24px 24px !important; }',
+          '.store-info-heading h2 { color: #fff !important; font-weight: 800 !important; }',
+          '.interstitial-view__welcome p { color: rgba(255,255,255,0.92) !important; }',
+          'button[aria-label="Close chat window"] svg path { fill: #fff !important; }',
+
+          /* Instant answers: floating white card of divided rows with chevrons
+             instead of individually boxed pill buttons */
+          'h3.instant-answers { display: none !important; }',
+          '.interstitial-view__instant-answers-list { background: #fff !important; border-radius: 16px !important; overflow: hidden !important; margin: -16px 16px 16px !important; box-shadow: 0 6px 20px rgba(61,31,16,0.12) !important; position: relative; z-index: 2; }',
+          'button.instant-answers-list__prompt { border: none !important; border-radius: 0 !important; border-bottom: 1px solid rgba(61,31,16,0.08) !important; background: #fff !important; color: #3d1f10 !important; display: flex !important; align-items: center !important; justify-content: space-between !important; width: 100% !important; text-align: left !important; padding: 16px !important; }',
+          'button.instant-answers-list__prompt:last-child { border-bottom: none !important; }',
+          'button.instant-answers-list__prompt::after { content: "\\203A"; color: #c27348; font-size: 22px; line-height: 1; margin-left: 12px; flex-shrink: 0; }',
+          'button.instant-answers-list__prompt p { color: inherit !important; margin: 0 !important; }',
+
+          /* Composer */
+          '.composer-bar-interstitialView { margin-top: 16px !important; }',
+          '.composer-bar__box { border: 1px solid rgba(194,115,72,0.35) !important; border-radius: 20px !important; }',
+          'button[data-spec="message-submit"] svg path { fill: #c27348 !important; }'
         ].join('\n');
 
         function injectInto(root) {
