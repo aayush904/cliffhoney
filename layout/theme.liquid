@@ -465,8 +465,10 @@
           '.return-to-chat-wrapper .background { background-color: #7a3f26 !important; }',
           '.return-to-chat-wrapper .label { color: #fff !important; }',
           /* Widget pulls this button up over the header with margin-top:-56px;
-             give it the same clean gap as the composer instead. */
-          '.return-to-chat-wrapper { margin-top: 16px !important; }',
+             give it the same clean gap as the composer instead. The list
+             card below has margin-top:-16px of its own, so 48px here nets
+             a visible ~32px gap rather than the two canceling out. */
+          '.return-to-chat-wrapper { margin-top: 16px !important; margin-bottom: 48px !important; }',
 
           /* Welcome screen: solid panel, copper gradient header, white text */
           '#chat-ui.interstitial-view { background: #fffbef !important; }',
