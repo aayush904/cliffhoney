@@ -1108,7 +1108,7 @@
           "settings": {
             "heading": "Is our honey raw and unprocessed?",
             "icon": "none",
-            "row_content": "<p>Yes, authentic Himalayan honey is raw and unprocessed. The honey is harvested using traditional methods and retains all natural enzymes, pollen, and delicate flavor compounds. </p>",
+            "row_content": "<p>Yes, <a href=\"https://cliffhoney.com/\" target=\"_blank\" title=\"authentic Himalayan honey from Nepal\">authentic Himalayan honey</a> is raw and unprocessed. The honey is harvested using traditional methods and retains all natural enzymes, pollen, and delicate flavor compounds. </p>",
             "page": ""
           }
         },
