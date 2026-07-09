@@ -993,6 +993,18 @@
 {% assign current_variant = product.selected_or_first_available_variant %}
 
 {% if template.name == 'product' and product %}
+{% if product.metafields.custom.structured_data_json != blank %}
+  {% comment %}
+    Per-product override: paste a full custom JSON-LD object into this
+    product's "Structured data JSON" metafield (custom.structured_data_json,
+    type: JSON) in the Shopify admin to replace the auto-generated schema
+    below for that product only. Leave the metafield empty to keep using
+    the generated version.
+  {% endcomment %}
+  <script type="application/ld+json">
+  {{ product.metafields.custom.structured_data_json.value | json }}
+  </script>
+{% else %}
 <script type="application/ld+json">
 {
   "@context": "https://schema.org",
@@ -1053,6 +1065,7 @@
   {% endif %}
 }
 </script>
+{% endif %}
 {% endif %}
 
 {% schema %}
