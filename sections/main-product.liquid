@@ -989,7 +989,7 @@
 </product-info>
 
 
-{% assign jdgm_reviews = product.metafields.judgeme.review_widget_data.value %}
+{% comment %} {% assign jdgm_reviews = product.metafields.judgeme.review_widget_data.value %}
 {% assign current_variant = product.selected_or_first_available_variant %}
 
 {% if template.name == 'product' and product %}
@@ -1004,7 +1004,7 @@
   <script type="application/ld+json">
   {{ product.metafields.custom.structured_data_json.value | json }}
   </script>
-{% else %}
+{% else %} {% endcomment %}
 {% assign current_variant = product.selected_or_first_available_variant %}
 {% assign has_multiple_variants = false %}
 {% if product.variants.size > 1 %}
@@ -1270,8 +1270,9 @@
   {% endif %}
 }
 </script>
-{% endif %}
-{% endif %}
+
+{% comment %} {% endif %}
+{% endif %} {% endcomment %}
 
 {% schema %}
 {
