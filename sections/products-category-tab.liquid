@@ -26,6 +26,62 @@
 {% assign skip_card_product_styles = false %}
 {% assign collection_number = section.settings.collection.size %}
 
+
+{% if template.name == 'collection' and collection.handle == 'cliff-honey' %}
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@graph": [
+    {
+      "@type": "CollectionPage",
+      "@id": "{{ shop.url }}{{ collection.url }}#collectionpage",
+      "url": "{{ shop.url }}{{ collection.url }}",
+      "name": {{ collection.title | json }},
+      "description": {% if collection.description != blank %}{{ collection.description | strip_html | strip_newlines | truncate: 500 | json }}{% else %}"Shop rare Himalayan cliff honey from Nepal, including high-altitude honey sourced from Lamjung, Rukum, Jajarkot, and regional variety collections."{% endif %},
+      "isPartOf": {
+        "@id": "https://cliffhoney.com/#website"
+      },
+      "mainEntity": {
+        "@id": "{{ shop.url }}{{ collection.url }}#itemlist"
+      },
+      "inLanguage": "en"
+    },
+    {
+      "@type": "ItemList",
+      "@id": "{{ shop.url }}{{ collection.url }}#itemlist",
+      "name": {{ collection.title | append: " Products" | json }},
+      "numberOfItems": {{ collection.products_count }},
+      "itemListOrder": "https://schema.org/ItemListOrderAscending",
+      "itemListElement": [
+        {% for product in collection.products %}
+        {
+          "@type": "ListItem",
+          "position": {{ forloop.index }},
+          "url": "{{ shop.url }}{{ product.url }}",
+          "item": {
+            "@type": "Product",
+            "@id": "{{ shop.url }}{{ product.url }}#product",
+            "name": {{ product.title | json }},
+            "url": "{{ shop.url }}{{ product.url }}",
+            {% if product.featured_image %}
+            "image": {{ product.featured_image | image_url: width: 1200 | prepend: "https:" | json }},
+            {% endif %}
+            "brand": {
+              "@type": "Brand",
+              "name": "Himalayan Cliff Honey"
+            }
+          }
+        }{% unless forloop.last %},{% endunless %}
+        {% endfor %}
+      ]
+    }
+  ]
+}
+</script>
+{% endif %}
+
+
+
 {%- style -%}
   .section-{{ section.id }}-padding {
     padding-top: clamp({{ section.settings.padding_top | times: 0.43 | round: 0 }}px, {{ section.settings.padding_top | divided_by: 19.13 }}vw, {{ section.settings.padding_top  }}px);
