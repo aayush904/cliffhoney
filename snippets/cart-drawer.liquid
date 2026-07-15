@@ -22,9 +22,28 @@
   #shopify-buyer-consent {
     display: none;
   }
+
+  .cart-drawer__main {
+    display: flex;
+    flex-direction: column;
+    height: 100%;
+    min-width: 0;
+    flex: 1 1 auto;
+    overflow: hidden;
+  }
+
+  @media screen and (min-width: 900px) {
+    cart-drawer.has-sidebar .drawer__inner {
+      flex-direction: row;
+      max-width: min(94vw, 860px);
+    }
+    cart-drawer.has-sidebar .cart-drawer__below-items-xsell {
+      display: none;
+    }
+  }
 {% endstyle %}
 
-<cart-drawer class="drawer{% if cart == empty %} is-empty{% endif %}">
+<cart-drawer class="drawer{% if cart == empty %} is-empty{% endif %}{% if cart != empty and settings.cart_drawer_collection != blank %} has-sidebar{% endif %}">
   <div id="CartDrawer" class="cart-drawer">
     <div id="CartDrawer-Overlay" class="cart-drawer__overlay"></div>
     <div
@@ -34,6 +53,10 @@
       aria-label="{{ 'sections.cart.title' | t }}"
       tabindex="-1"
     >
+      {%- if cart != empty and settings.cart_drawer_collection != blank -%}
+        {% render 'cart-drawer-sidebar-fbt', fbt_collection: settings.cart_drawer_collection %}
+      {%- endif -%}
+      <div class="cart-drawer__main">
       <div class="drawer__header">
         <div class="drawer__heading">
           {{ 'sections.cart.title' | t }}
@@ -486,7 +509,9 @@
             <div id="CartDrawer-CartErrors" role="alert"></div>
           </form>
         </cart-drawer-items>
-        {% render 'cart-drawer-cross-sell', csell_collections: settings.cart_drawer_collection %}
+        <div class="cart-drawer__below-items-xsell">
+          {% render 'cart-drawer-cross-sell', csell_collections: settings.cart_drawer_collection %}
+        </div>
         <div class="drawer__footer">
           {%- if settings.show_cart_note -%}
             <details id="Details-CartDrawer">
@@ -595,6 +620,7 @@
           {% comment %} <paypal-button-container style="display:block; margin-top:10px;" id="paypal-button-container"></paypal-button-container> {% endcomment %}
         </div>
       {%- endif -%}
+      </div>
     </div>
   </div>
 </cart-drawer>
