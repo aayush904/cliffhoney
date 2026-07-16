@@ -12,6 +12,9 @@
   - show_badge: {String} The setting either show the blog badge or not.
   - lazy_load: {Boolean} Image should be lazy loaded. Default: true (optional)
   - style: {String} The setting either shows the article card vertically or horizontally. Default: 'vertical' (optional)
+  - show_title: {Boolean} Show the article title. Default: true (optional)
+  - show_meta_title: {Boolean} Show the article's SEO page title (falls back to article.title). Default: false (optional)
+  - show_meta_description: {Boolean} Show the article's SEO meta description (falls back to excerpt/content). Default: false (optional)
 
   Usage:
   {% render 'article-card' blog: blog, article: article, show_image: section.settings.show_image %}
@@ -169,15 +172,26 @@
               {% comment %} {%- endfor -%} {% endcomment %}
             </div>
           {%- endif -%}
-          <div class="font-sans blog-text font-normal text-[#000000]">
-            <h3
-              class="h3 m-0 mb-[8px!important]  text-[#000000]"
-              title="{{ article.title | escape }}"
-              style="letter-spacing: 0; display: -webkit-box;  -webkit-box-orient: vertical; overflow: hidden;{% if style == 'horizontal' or request.page_type == 'search' or request.page_type =='blog' %}-webkit-line-clamp: 2; line-height: 1.28;{% else %}line-height: 1.1; -webkit-line-clamp: 1;{% endif %}"
-            >
-              {{ article.title | escape }}
-            </h3>
-          </div>
+          {%- unless show_title == false -%}
+            <div class="font-sans blog-text font-normal text-[#000000]">
+              <h3
+                class="h3 m-0 mb-[8px!important]  text-[#000000]"
+                title="{{ article.title | escape }}"
+                style="letter-spacing: 0; display: -webkit-box;  -webkit-box-orient: vertical; overflow: hidden;{% if style == 'horizontal' or request.page_type == 'search' or request.page_type =='blog' %}-webkit-line-clamp: 2; line-height: 1.28;{% else %}line-height: 1.1; -webkit-line-clamp: 1;{% endif %}"
+              >
+                {{ article.title | escape }}
+              </h3>
+            </div>
+          {%- endunless -%}
+
+          {%- if show_meta_title -%}
+            {%- assign article_meta_title = article.metafields.global.title_tag.value | default: article.title -%}
+            {%- if article_meta_title != blank -%}
+              <p class="m-0 mb-[8px!important] article-card__meta-title font-sans text-start blog-text font-normal text-[#000000]">
+                {{ article_meta_title }}
+              </p>
+            {%- endif -%}
+          {%- endif -%}
 
           {%- if show_excerpt -%}
             {%- if article.excerpt.size > 0 or article.content.size > 0 -%}
@@ -187,6 +201,21 @@
                 {%- else -%}
                   {{ article.content | strip_html | truncatewords: 30 }}
                 {%- endif -%}
+              </p>
+            {%- endif -%}
+          {%- endif -%}
+
+          {%- if show_meta_description -%}
+            {%- assign article_meta_description = article.metafields.global.description_tag.value -%}
+            {%- if article_meta_description == blank -%}
+              {%- assign article_meta_description = article.excerpt | strip_html | truncatewords: 30 -%}
+            {%- endif -%}
+            {%- if article_meta_description == blank -%}
+              {%- assign article_meta_description = article.content | strip_html | truncatewords: 30 -%}
+            {%- endif -%}
+            {%- if article_meta_description != blank -%}
+              <p class="line-clamp-2 m-0 article-card__meta-description rte-width font-sans text-start blog-text font-normal text-[#000000]">
+                {{ article_meta_description }}
               </p>
             {%- endif -%}
           {%- endif -%}
