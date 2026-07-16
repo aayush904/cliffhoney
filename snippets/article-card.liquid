@@ -220,7 +220,7 @@
               {%- assign article_meta_description = article.content | strip_html | truncatewords: 30 -%}
             {%- endif -%}
             {%- if article_meta_description != blank -%}
-              <p class="line-clamp-2 m-0 article-card__meta-description rte-width font-sans text-start blog-text font-normal text-[#000000]">
+              <p class="line-clamp-2 m-0 article-card__excerpt article-card__meta-description rte-width font-sans text-start blog-text font-normal text-[#000000]">
                 {{ article_meta_description }}
               </p>
             {%- endif -%}
