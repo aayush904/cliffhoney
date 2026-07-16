@@ -4174,3 +4174,32 @@ details[open]>.header__menu-item .icon-caret {
 	display: -ms-flexbox;
 	display: flex
 }
+.article-content table {
+  border-collapse: separate;
+  border-spacing: 0;
+  border-radius: 10px;
+  overflow: hidden;
+  width: 100%;
+}
+
+.article-content table th {
+  background-color: #F0E3CE;
+  font-weight: 600;
+  font-size: 14px;
+  padding: 1.2rem 1.2rem;
+  text-align: left;
+}
+
+.article-content table td {
+  font-weight: 400;
+  font-size: 16px;
+  padding: 1.2rem 1.2rem;
+}
+
+.article-content table tbody tr:nth-child(odd) td {
+  background-color: #FFFBEF;
+}
+
+.article-content table tbody tr:nth-child(even) td {
+  background-color: #F2EEE3;
+}
