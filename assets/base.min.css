@@ -4175,8 +4175,8 @@ details[open]>.header__menu-item .icon-caret {
 	display: flex
 }
 .article-content table {
-  border-collapse: separate;
-  border-spacing: 0;
+  border-collapse: separate !important;
+  border-spacing: 0 !important;
   border-radius: 10px;
   overflow: hidden;
   width: 100%;
@@ -4186,7 +4186,7 @@ details[open]>.header__menu-item .icon-caret {
   background-color: #F0E3CE;
   font-weight: 600;
   font-size: 14px;
-  padding: 2.8rem 2.2rem;
+  padding: 2.8rem 2.2rem !important;
 
   text-align: left;
   border:none;
@@ -4197,7 +4197,7 @@ details[open]>.header__menu-item .icon-caret {
 .article-content table td {
   font-weight: 400;
   font-size: 16px;
-  padding: 1.6rem 2.2rem;
+  padding: 1.6rem 2.2rem !important;
     border:none;
 	  color:#666666;
 
@@ -4207,7 +4207,7 @@ details[open]>.header__menu-item .icon-caret {
 
 @media screen and (max-width: 768px) {
   .article-content table td {
-    padding: 0.6rem 1rem;
+    padding: 0.6rem 1rem !important;
   }
 }
 
