@@ -187,9 +187,15 @@
           {%- if show_meta_title -%}
             {%- assign article_meta_title = article.metafields.global.title_tag.value | default: article.title -%}
             {%- if article_meta_title != blank -%}
-              <p class="m-0 mb-[8px!important] article-card__meta-title font-sans text-start blog-text font-normal text-[#000000]">
-                {{ article_meta_title }}
-              </p>
+              <div class="font-sans blog-text font-normal text-[#000000]">
+                <h3
+                  class="h3 m-0 mb-[8px!important] article-card__meta-title text-[#000000]"
+                  title="{{ article_meta_title | escape }}"
+                  style="letter-spacing: 0; display: -webkit-box;  -webkit-box-orient: vertical; overflow: hidden;{% if style == 'horizontal' or request.page_type == 'search' or request.page_type =='blog' %}-webkit-line-clamp: 2; line-height: 1.28;{% else %}line-height: 1.1; -webkit-line-clamp: 1;{% endif %}"
+                >
+                  {{ article_meta_title | escape }}
+                </h3>
+              </div>
             {%- endif -%}
           {%- endif -%}
 
