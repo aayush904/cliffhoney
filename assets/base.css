@@ -3898,6 +3898,7 @@ details-disclosure > details {
   padding: 1.2rem 1.2rem;
   text-align: left;
     border:none;
+    color:#364639;
 
 }
 
@@ -3906,6 +3907,7 @@ details-disclosure > details {
   font-size: 16px;
   padding: 1.2rem 1.2rem;
   border:none;
+  color:#666666;
 }
 
 .article-content table tbody tr:nth-child(odd) td {
