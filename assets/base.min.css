@@ -4189,6 +4189,8 @@ details[open]>.header__menu-item .icon-caret {
   padding: 1.2rem 1.2rem;
   text-align: left;
   border:none;
+      color:#364639;
+
 }
 
 .article-content table td {
@@ -4196,6 +4198,9 @@ details[open]>.header__menu-item .icon-caret {
   font-size: 16px;
   padding: 1.2rem 1.2rem;
     border:none;
+	  color:#666666;
+
+
 
 }
 
