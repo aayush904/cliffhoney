@@ -3918,11 +3918,11 @@ details-disclosure > details {
 }
 
 .article-content table tbody tr:nth-child(odd) td {
-  background-color: #FFFBEF;
+  background-color: #F2EEE3;
 }
 
 .article-content table tbody tr:nth-child(even) td {
-  background-color: #F2EEE3;
+  background-color: #FFFBEF;
 }
 
 .rte img {
