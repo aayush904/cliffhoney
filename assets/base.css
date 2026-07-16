@@ -3911,6 +3911,12 @@ details-disclosure > details {
   color:#666666;
 }
 
+@media screen and (max-width: 768px) {
+  .article-content table td {
+    padding: 0.6rem 1rem;
+  }
+}
+
 .article-content table tbody tr:nth-child(odd) td {
   background-color: #FFFBEF;
 }
