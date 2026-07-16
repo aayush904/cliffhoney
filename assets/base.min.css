@@ -4188,12 +4188,15 @@ details[open]>.header__menu-item .icon-caret {
   font-size: 14px;
   padding: 1.2rem 1.2rem;
   text-align: left;
+  border:none;
 }
 
 .article-content table td {
   font-weight: 400;
   font-size: 16px;
   padding: 1.2rem 1.2rem;
+    border:none;
+
 }
 
 .article-content table tbody tr:nth-child(odd) td {
