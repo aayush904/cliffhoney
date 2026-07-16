@@ -207,7 +207,10 @@
             show_image: section.settings.show_image,
             show_date: section.settings.show_date,
             show_author: section.settings.show_author,
-            show_excerpt: true
+            show_title: section.settings.show_title,
+            show_excerpt: section.settings.show_excerpt,
+            show_meta_title: section.settings.show_meta_title,
+            show_meta_description: section.settings.show_meta_description
           -%}
         </div>
       {%- endfor -%}
@@ -332,6 +335,36 @@
       "id": "show_author",
       "default": false,
       "label": "t:sections.main-blog.settings.show_author.label"
+    },
+    {
+      "type": "header",
+      "content": "Article card content"
+    },
+    {
+      "type": "checkbox",
+      "id": "show_title",
+      "default": true,
+      "label": "Show title"
+    },
+    {
+      "type": "checkbox",
+      "id": "show_excerpt",
+      "default": true,
+      "label": "Show text"
+    },
+    {
+      "type": "checkbox",
+      "id": "show_meta_title",
+      "default": false,
+      "label": "Show meta title",
+      "info": "Uses the article's SEO page title. Falls back to the article title if not set."
+    },
+    {
+      "type": "checkbox",
+      "id": "show_meta_description",
+      "default": false,
+      "label": "Show meta description",
+      "info": "Uses the article's SEO meta description. Falls back to the excerpt if not set."
     },
     {
       "type": "color_scheme",
