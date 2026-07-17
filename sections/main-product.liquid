@@ -988,239 +988,443 @@
   </div>
 </product-info>
 
+{% if request.page_type == 'product' and product %}
 
-{% assign current_variant = product.selected_or_first_available_variant %}
+  {% assign current_variant = product.selected_or_first_available_variant %}
+  {% assign schema_currency = cart.currency.iso_code | default: shop.currency %}
+  {% assign canonical_product_url = shop.url | append: product.url %}
 
-{% assign product_description = product.description | strip_html | strip_newlines | strip | truncate: 900 %}
-{% if product_description == blank %}
-  {% assign product_description = product.title | append: " is a Nepal origin Himalayan cliff honey product from Himalayan Cliff Honey." %}
-{% endif %}
+  {% assign product_description = product.description
+    | strip_html
+    | strip_newlines
+    | strip
+    | truncate: 900
+  %}
 
-{% if product.variants.size > 1 %}
-<script type="application/ld+json">
-{
-  "@context": "https://schema.org",
-  "@type": "ProductGroup",
-  "@id": "{{ shop.url }}{{ product.url }}#product",
-  "name": {{ product.title | json }},
-  "url": "{{ shop.url }}{{ product.url }}",
-  "description": {{ product_description | json }},
-  "image": [
-    {% for image in product.images limit: 6 %}
-      {{ image | image_url: width: 1200 | prepend: "https:" | json }}{% unless forloop.last %},{% endunless %}
-    {% endfor %}
-  ],
-  "brand": {
-    "@type": "Brand",
-    "name": "Himalayan Cliff Honey"
-  },
-  "manufacturer": {
-    "@type": "Organization",
-    "@id": "https://cliffhoney.com/#organization",
-    "name": "Himalayan Cliff Honey",
-    "url": "https://cliffhoney.com/"
-  },
-  "category": {{ product.type | default: "Himalayan Cliff Honey" | json }},
-  "countryOfOrigin": {
-    "@type": "Country",
-    "name": "Nepal"
-  },
-  "productGroupID": {{ product.id | json }},
-  "variesBy": "https://schema.org/size",
-  "hasVariant": [
-    {% for variant in product.variants %}
-    {% assign variant_size = variant.option1 | strip %}
-    {% if variant_size == blank or variant_size == "Default Title" %}
-      {% assign variant_size = variant.title | strip %}
-    {% endif %}
-    {
-      "@type": "Product",
-      "@id": "{{ shop.url }}{{ product.url }}?variant={{ variant.id }}#product",
-      "name": {{ product.title | append: " - " | append: variant_size | json }},
-      "url": "{{ shop.url }}{{ product.url }}?variant={{ variant.id }}",
-      "description": {{ product_description | json }},
-      "size": {{ variant_size | json }},
-      {% if variant.sku != blank %}
-      "sku": {{ variant.sku | json }},
-      {% endif %}
-      {% if variant.barcode != blank %}
-      "gtin": {{ variant.barcode | json }},
-      {% endif %}
-      "image": [
-        {% if variant.featured_image %}
-          {{ variant.featured_image | image_url: width: 1200 | prepend: "https:" | json }}
-        {% elsif product.featured_image %}
-          {{ product.featured_image | image_url: width: 1200 | prepend: "https:" | json }}
-        {% endif %}
-      ],
-      "brand": {
-        "@type": "Brand",
-        "name": "Himalayan Cliff Honey"
-      },
-      "category": {{ product.type | default: "Himalayan Cliff Honey" | json }},
-      "countryOfOrigin": {
-        "@type": "Country",
-        "name": "Nepal"
-      },
-      "isVariantOf": {
-        "@id": "{{ shop.url }}{{ product.url }}#product"
-      },
-      "additionalProperty": [
-        {
-          "@type": "PropertyValue",
-          "name": "Origin",
-          "value": "Nepal"
+  {% if product_description == blank %}
+    {% assign product_description = product.title
+      | append: " is a Nepal-origin Himalayan cliff honey product from Himalayan Cliff Honey."
+    %}
+  {% endif %}
+
+  {% assign rating_object = product.metafields.reviews.rating.value %}
+  {% assign rating_value = rating_object.rating %}
+  {% assign rating_count = product.metafields.reviews.rating_count.value
+    | default: 0
+    | plus: 0
+  %}
+  {% assign rating_best = rating_object.scale_max | default: 5 %}
+  {% assign rating_worst = rating_object.scale_min | default: 1 %}
+
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@graph": [
+
+      {% if product.variants.size > 1 %}
+
+      {
+        "@type": "ProductGroup",
+        "@id": "{{ canonical_product_url }}#product-group",
+        "name": {{ product.title | json }},
+        "url": "{{ canonical_product_url }}",
+        "description": {{ product_description | json }},
+
+        "image": [
+          {% for image in product.images limit: 6 %}
+            {{ image
+              | image_url: width: 1200
+              | prepend: "https:"
+              | json
+            }}{% unless forloop.last %},{% endunless %}
+          {% endfor %}
+        ],
+
+        "brand": {
+          "@type": "Brand",
+          "name": "Himalayan Cliff Honey"
         },
-        {
-          "@type": "PropertyValue",
-          "name": "Product Type",
-          "value": "Himalayan cliff honey"
-        },
-        {
-          "@type": "PropertyValue",
-          "name": "Ingredient",
-          "value": "Pure cliff honey"
-        },
-        {
-          "@type": "PropertyValue",
-          "name": "Testing",
-          "value": "Third-party lab tested"
-        }
-      ],
-      "offers": {
-        "@type": "Offer",
-        "@id": "{{ shop.url }}{{ product.url }}?variant={{ variant.id }}#offer",
-        "url": "{{ shop.url }}{{ product.url }}?variant={{ variant.id }}",
-        "priceCurrency": "{{ shop.currency }}",
-        "price": "{{ variant.price | money_without_currency | remove: ',' }}",
-        "availability": "{% if variant.available %}https://schema.org/InStock{% else %}https://schema.org/OutOfStock{% endif %}",
-        "itemCondition": "https://schema.org/NewCondition",
-        "seller": {
+
+        "manufacturer": {
           "@type": "Organization",
           "@id": "https://cliffhoney.com/#organization",
           "name": "Himalayan Cliff Honey",
           "url": "https://cliffhoney.com/"
         },
-        "shippingDetails": {
-          "@type": "OfferShippingDetails",
-          "shippingDestination": {
-            "@type": "DefinedRegion",
-            "addressCountry": [
-              "US",
-              "GB",
-              "CA",
-              "AU",
-              "AE",
-              "SA",
-              "QA",
-              "KW",
-              "BH",
-              "OM"
-            ]
-          },
-          "shippingRate": {
-            "@type": "MonetaryAmount",
-            "value": "0",
-            "currency": "{{ shop.currency }}"
-          },
-          "deliveryTime": {
-            "@type": "ShippingDeliveryTime",
-            "handlingTime": {
-              "@type": "QuantitativeValue",
-              "minValue": 1,
-              "maxValue": 2,
-              "unitCode": "DAY"
-            },
-            "transitTime": {
-              "@type": "QuantitativeValue",
-              "minValue": 3,
-              "maxValue": 10,
-              "unitCode": "DAY"
-            }
-          },
-          "url": "https://cliffhoney.com/policies/shipping-policy"
-        },
-        "hasMerchantReturnPolicy": {
-          "@type": "MerchantReturnPolicy",
-          "applicableCountry": [
-            "US",
-            "GB",
-            "CA",
-            "AU",
-            "AE",
-            "SA",
-            "QA",
-            "KW",
-            "BH",
-            "OM"
-          ],
-          "returnPolicyCategory": "https://schema.org/MerchantReturnFiniteReturnWindow",
-          "merchantReturnDays": 30,
-          "returnMethod": "https://schema.org/ReturnByMail",
-          "returnFees": "https://schema.org/ReturnFeesCustomerResponsibility",
-          "returnLabelSource": "https://schema.org/ReturnLabelCustomerResponsibility",
-          "itemCondition": "https://schema.org/NewCondition",
-          "refundType": "https://schema.org/FullRefund",
-          "merchantReturnLink": "https://cliffhoney.com/policies/refund-policy"
-        },
-        "priceValidUntil": "{{ 'now' | date: '%Y' | plus: 1 }}-12-31"
-      }
-    }{% unless forloop.last %},{% endunless %}
-    {% endfor %}
-  ]
 
-  {% if product.metafields.reviews.rating.value != blank and product.metafields.reviews.rating_count != blank %}
-  ,
-  "aggregateRating": {
-    "@type": "AggregateRating",
-    "ratingValue": "{{ product.metafields.reviews.rating.value.rating }}",
-    "reviewCount": "{{ product.metafields.reviews.rating_count }}",
-    "bestRating": "5",
-    "worstRating": "1"
+        "category": {{ product.type
+          | default: "Himalayan Cliff Honey"
+          | json
+        }},
+
+        "countryOfOrigin": {
+          "@type": "Country",
+          "name": "Nepal"
+        },
+
+        "productGroupID": {{ product.id
+          | append: ""
+          | json
+        }},
+
+        "variesBy": [
+          "https://schema.org/size"
+        ],
+
+        "additionalProperty": [
+          {
+            "@type": "PropertyValue",
+            "name": "Origin",
+            "value": "Nepal"
+          },
+          {
+            "@type": "PropertyValue",
+            "name": "Product Type",
+            "value": "Himalayan cliff honey"
+          },
+          {
+            "@type": "PropertyValue",
+            "name": "Ingredient",
+            "value": "Pure cliff honey"
+          },
+          {
+            "@type": "PropertyValue",
+            "name": "Testing",
+            "value": "Third-party lab tested"
+          }
+        ],
+
+        "offers": {
+          "@type": "AggregateOffer",
+          "@id": "{{ canonical_product_url }}#aggregate-offer",
+          "url": "{{ canonical_product_url }}",
+          "priceCurrency": {{ schema_currency | json }},
+          "lowPrice": {{ product.price_min
+            | divided_by: 100.0
+            | json
+          }},
+          "highPrice": {{ product.price_max
+            | divided_by: 100.0
+            | json
+          }},
+          "offerCount": {{ product.variants.size }},
+          "seller": {
+            "@id": "https://cliffhoney.com/#organization"
+          }
+        },
+
+        "hasVariant": [
+          {% for variant in product.variants %}
+
+            {% assign variant_label = variant.title | strip %}
+
+            {% if variant_label == blank or variant_label == "Default Title" %}
+              {% assign variant_label = variant.option1 | strip %}
+            {% endif %}
+
+            {% assign variant_sku = variant.sku | strip %}
+
+            {% if variant_sku == blank %}
+              {% assign variant_sku = variant.id | append: "" %}
+            {% endif %}
+
+            {
+              "@type": "Product",
+              "@id": "{{ canonical_product_url }}?variant={{ variant.id }}#product",
+              "name": {{ product.title
+                | append: " - "
+                | append: variant_label
+                | json
+              }},
+              "url": "{{ canonical_product_url }}?variant={{ variant.id }}",
+              "description": {{ product_description
+                | append: " Selected variant: "
+                | append: variant_label
+                | append: "."
+                | json
+              }},
+              "sku": {{ variant_sku | json }},
+              "size": {{ variant_label | json }},
+
+              {% if variant.barcode != blank %}
+              "gtin": {{ variant.barcode | json }},
+              {% endif %}
+
+              "image":
+                {% if variant.featured_image %}
+                  {{ variant.featured_image
+                    | image_url: width: 1200
+                    | prepend: "https:"
+                    | json
+                  }}
+                {% elsif product.featured_image %}
+                  {{ product.featured_image
+                    | image_url: width: 1200
+                    | prepend: "https:"
+                    | json
+                  }}
+                {% else %}
+                  null
+                {% endif %},
+
+              "isVariantOf": {
+                "@id": "{{ canonical_product_url }}#product-group"
+              },
+
+              "offers": {
+                "@type": "Offer",
+                "@id": "{{ canonical_product_url }}?variant={{ variant.id }}#offer",
+                "url": "{{ canonical_product_url }}?variant={{ variant.id }}",
+                "priceCurrency": {{ schema_currency | json }},
+                "price": {{ variant.price
+                  | divided_by: 100.0
+                  | json
+                }},
+                "availability": "{% if variant.available %}https://schema.org/InStock{% else %}https://schema.org/OutOfStock{% endif %}",
+                "itemCondition": "https://schema.org/NewCondition",
+
+                "seller": {
+                  "@id": "https://cliffhoney.com/#organization"
+                },
+
+                "shippingDetails": {
+                  "@id": "{{ canonical_product_url }}#shipping-policy"
+                },
+
+                "hasMerchantReturnPolicy": {
+                  "@id": "{{ canonical_product_url }}#return-policy"
+                }
+              }
+            }{% unless forloop.last %},{% endunless %}
+
+          {% endfor %}
+        ]
+
+        {% if rating_value != blank and rating_count > 0 %}
+        ,
+        "aggregateRating": {
+          "@type": "AggregateRating",
+          "ratingValue": {{ rating_value | json }},
+          "ratingCount": {{ rating_count | json }},
+          "bestRating": {{ rating_best | json }},
+          "worstRating": {{ rating_worst | json }}
+        }
+        {% endif %}
+      },
+
+      {% else %}
+
+        {% assign single_variant_sku = current_variant.sku | strip %}
+
+        {% if single_variant_sku == blank %}
+          {% assign single_variant_sku = current_variant.id | append: "" %}
+        {% endif %}
+
+      {
+        "@type": "Product",
+        "@id": "{{ canonical_product_url }}#product",
+        "name": {{ product.title | json }},
+        "url": "{{ canonical_product_url }}",
+        "description": {{ product_description | json }},
+        "sku": {{ single_variant_sku | json }},
+
+        {% if current_variant.barcode != blank %}
+        "gtin": {{ current_variant.barcode | json }},
+        {% endif %}
+
+        "image": [
+          {% for image in product.images limit: 6 %}
+            {{ image
+              | image_url: width: 1200
+              | prepend: "https:"
+              | json
+            }}{% unless forloop.last %},{% endunless %}
+          {% endfor %}
+        ],
+
+        "brand": {
+          "@type": "Brand",
+          "name": "Himalayan Cliff Honey"
+        },
+
+        "manufacturer": {
+          "@type": "Organization",
+          "@id": "https://cliffhoney.com/#organization",
+          "name": "Himalayan Cliff Honey",
+          "url": "https://cliffhoney.com/"
+        },
+
+        "category": {{ product.type
+          | default: "Himalayan Cliff Honey"
+          | json
+        }},
+
+        "countryOfOrigin": {
+          "@type": "Country",
+          "name": "Nepal"
+        },
+
+        "additionalProperty": [
+          {
+            "@type": "PropertyValue",
+            "name": "Origin",
+            "value": "Nepal"
+          },
+          {
+            "@type": "PropertyValue",
+            "name": "Product Type",
+            "value": "Himalayan cliff honey"
+          },
+          {
+            "@type": "PropertyValue",
+            "name": "Ingredient",
+            "value": "Pure cliff honey"
+          },
+          {
+            "@type": "PropertyValue",
+            "name": "Testing",
+            "value": "Third-party lab tested"
+          }
+        ],
+
+        "offers": {
+          "@type": "Offer",
+          "@id": "{{ canonical_product_url }}#offer",
+          "url": "{{ canonical_product_url }}",
+          "priceCurrency": {{ schema_currency | json }},
+          "price": {{ current_variant.price
+            | divided_by: 100.0
+            | json
+          }},
+          "availability": "{% if current_variant.available %}https://schema.org/InStock{% else %}https://schema.org/OutOfStock{% endif %}",
+          "itemCondition": "https://schema.org/NewCondition",
+
+          "seller": {
+            "@id": "https://cliffhoney.com/#organization"
+          },
+
+          "shippingDetails": {
+            "@id": "{{ canonical_product_url }}#shipping-policy"
+          },
+
+          "hasMerchantReturnPolicy": {
+            "@id": "{{ canonical_product_url }}#return-policy"
+          }
+        }
+
+        {% if rating_value != blank and rating_count > 0 %}
+        ,
+        "aggregateRating": {
+          "@type": "AggregateRating",
+          "ratingValue": {{ rating_value | json }},
+          "ratingCount": {{ rating_count | json }},
+          "bestRating": {{ rating_best | json }},
+          "worstRating": {{ rating_worst | json }}
+        }
+        {% endif %}
+      },
+
+      {% endif %}
+
+      {
+        "@type": "OfferShippingDetails",
+        "@id": "{{ canonical_product_url }}#shipping-policy",
+
+        "shippingDestination": [
+          {
+            "@type": "DefinedRegion",
+            "addressCountry": "US"
+          },
+          {
+            "@type": "DefinedRegion",
+            "addressCountry": "CA"
+          },
+          {
+            "@type": "DefinedRegion",
+            "addressCountry": "GB"
+          },
+          {
+            "@type": "DefinedRegion",
+            "addressCountry": "AU"
+          },
+          {
+            "@type": "DefinedRegion",
+            "addressCountry": "AE"
+          },
+          {
+            "@type": "DefinedRegion",
+            "addressCountry": "SA"
+          },
+          {
+            "@type": "DefinedRegion",
+            "addressCountry": "QA"
+          },
+          {
+            "@type": "DefinedRegion",
+            "addressCountry": "KW"
+          },
+          {
+            "@type": "DefinedRegion",
+            "addressCountry": "BH"
+          },
+          {
+            "@type": "DefinedRegion",
+            "addressCountry": "OM"
+          }
+        ],
+
+        "shippingRate": {
+          "@type": "MonetaryAmount",
+          "value": 0,
+          "currency": {{ schema_currency | json }}
+        },
+
+        "deliveryTime": {
+          "@type": "ShippingDeliveryTime",
+
+          "handlingTime": {
+            "@type": "QuantitativeValue",
+            "minValue": 1,
+            "maxValue": 2,
+            "unitCode": "DAY"
+          },
+
+          "transitTime": {
+            "@type": "QuantitativeValue",
+            "minValue": 3,
+            "maxValue": 10,
+            "unitCode": "DAY"
+          }
+        }
+      },
+
+      {
+        "@type": "MerchantReturnPolicy",
+        "@id": "{{ canonical_product_url }}#return-policy",
+
+        "applicableCountry": [
+          "US",
+          "CA",
+          "GB",
+          "AU",
+          "AE",
+          "SA",
+          "QA",
+          "KW",
+          "BH",
+          "OM"
+        ],
+
+        "returnPolicyCategory": "https://schema.org/MerchantReturnFiniteReturnWindow",
+        "merchantReturnDays": 30,
+        "returnMethod": "https://schema.org/ReturnByMail",
+        "returnFees": "https://schema.org/ReturnFeesCustomerResponsibility"
+      }
+
+    ]
   }
-  {% endif %}
-}
-</script>
-{% else %}
-<script type="application/ld+json">
-{
-  "@context": "https://schema.org",
-  "@type": "Product",
-  "@id": "{{ shop.url }}{{ product.url }}#product",
-  "name": {{ product.title | json }},
-  "url": "{{ shop.url }}{{ product.url }}",
-  "description": {{ product_description | json }},
-  "image": [
-    {% for image in product.images limit: 6 %}
-      {{ image | image_url: width: 1200 | prepend: "https:" | json }}{% unless forloop.last %},{% endunless %}
-    {% endfor %}
-  ],
-  "brand": {
-    "@type": "Brand",
-    "name": "Himalayan Cliff Honey"
-  },
-  "category": {{ product.type | default: "Himalayan Cliff Honey" | json }},
-  "countryOfOrigin": {
-    "@type": "Country",
-    "name": "Nepal"
-  },
-  "offers": {
-    "@type": "Offer",
-    "@id": "{{ shop.url }}{{ product.url }}#offer",
-    "url": "{{ shop.url }}{{ product.url }}",
-    "priceCurrency": "{{ shop.currency }}",
-    "price": "{{ current_variant.price | money_without_currency | remove: ',' }}",
-    "availability": "{% if current_variant.available %}https://schema.org/InStock{% else %}https://schema.org/OutOfStock{% endif %}",
-    "itemCondition": "https://schema.org/NewCondition",
-    "seller": {
-      "@type": "Organization",
-      "@id": "https://cliffhoney.com/#organization",
-      "name": "Himalayan Cliff Honey",
-      "url": "https://cliffhoney.com/"
-    }
-  }
-}
-</script>
+  </script>
+
 {% endif %}
 
 
