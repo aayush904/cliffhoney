@@ -7,6 +7,10 @@
   1. article.metafields.custom.sidebar_product (per-article product reference, set in Shopify Admin)
   2. product_handle param (section setting fallback)
   3. himalayan-cliff-honey-lamjung (hard fallback)
+
+  Quote/description resolution order:
+  1. article.metafields.custom.sidebar_product_quote (per-article text, set in Shopify Admin)
+  2. quote param (section setting fallback)
 {% endcomment %}
 
 {%- assign featured_product = article.metafields.custom.sidebar_product.value -%}
@@ -21,7 +25,10 @@
   {%- assign real_rating   = featured_product.metafields.reviews.rating.value.rating -%}
   {%- assign real_count    = featured_product.metafields.reviews.rating_count -%}
   {%- assign box_cta       = cta_text | default: '' -%}
-  {%- assign box_quote     = quote | default: '' -%}
+  {%- assign box_quote     = article.metafields.custom.sidebar_product_quote.value -%}
+  {%- if box_quote == blank -%}
+    {%- assign box_quote = quote | default: '' -%}
+  {%- endif -%}
 
   {%- if real_rating != blank -%}
     {%- assign full_stars      = real_rating | floor -%}
