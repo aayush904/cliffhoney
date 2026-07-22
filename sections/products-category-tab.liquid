@@ -54,6 +54,7 @@
       "itemListOrder": "https://schema.org/ItemListOrderAscending",
       "itemListElement": [
         {% for product in collection.products %}
+        {%- assign schema_variant = product.selected_or_first_available_variant -%}
         {
           "@type": "ListItem",
           "position": {{ forloop.index }},
@@ -69,6 +70,14 @@
             "brand": {
               "@type": "Brand",
               "name": "Himalayan Cliff Honey"
+            },
+            "offers": {
+              "@type": "Offer",
+              "url": "{{ shop.url }}{{ product.url }}",
+              "priceCurrency": {{ cart.currency.iso_code | default: shop.currency | json }},
+              "price": {{ schema_variant.price | divided_by: 100.0 | json }},
+              "availability": "{% if schema_variant.available %}https://schema.org/InStock{% else %}https://schema.org/OutOfStock{% endif %}",
+              "itemCondition": "https://schema.org/NewCondition"
             }
           }
         }{% unless forloop.last %},{% endunless %}
