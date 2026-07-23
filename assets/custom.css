@@ -11,3 +11,26 @@ p[role="presentation"] a span {
     order: -1;
   }
 }
+
+
+
+  .desktop-only-blog {
+    display: block !important;
+  }
+
+
+  @media screen and (max-width: 767px) {
+    .desktop-only-blog {
+      display: none !important;
+    }
+  }
+
+    .mobile-only-blog {
+    display: none !important;
+  }
+
+  @media screen and (max-width: 767px) {
+    .mobile-only-blog {
+      display: block !important;
+    }
+  }
