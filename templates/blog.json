@@ -122,7 +122,7 @@
         "load_more_label": "See More",
         "padding_top": 40,
         "padding_bottom": 0,
-        "custom_code": "{% assign id = \"#shopify-section-\" | append: section.id %}\n\n{% style %}\n@media (max-width: 768px) {\n\n{{ id  }} .blog-articles {\n    flex-direction: row;\n    flex-wrap: wrap;\n  }\n\n{{id}} .blog-articles__article {\nflex: 0 0 calc( 50% - var(--grid-desktop-horizontal-spacing)/2)!important;\n}\n\n}\n{% endstyle %}"
+        "custom_code": "{% assign id = \"#shopify-section-\" | append: section.id %}\n\n{% style %}\n@media (max-width: 768px) {\n\n{{ id  }} .blog-articles {\n    flex-direction: column;\n    flex-wrap: wrap;\n  }\n\n{{id}} .blog-articles__article {\nflex: 0 0 100%!important;\n}\n\n}\n{% endstyle %}"
       }
     },
     "products_category_tab_2_CxMePh": {
