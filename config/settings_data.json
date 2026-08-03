@@ -224,29 +224,36 @@
         "disabled": true,
         "settings": {}
       },
+      "10864971697205422121": {
+        "type": "shopify://apps/gorgias-live-chat-helpdesk/blocks/gorgias/a66db725-7b96-4e3f-916e-6c8e6f87aaaa",
+        "disabled": true,
+        "settings": {}
+      },
       "15683396631634586217": {
         "type": "shopify://apps/inbox/blocks/chat/841fc607-4181-4ad1-842d-e24d7f8bad6b",
         "disabled": false,
         "settings": {
           "greeting_message": "",
+          "show_featured_products": true,
+          "featured_products": [
+            "himalayan-cliff-honey-lamjung",
+            "himalayan-cliff-honey-rukum",
+            "himalayan-cliff-honey-jajarkot"
+          ],
           "background_color": "#fffbef",
           "font_color": "#4b5441",
-          "button_color": "#fffbef",
-          "secondary_color": "#364639",
+          "agent_invert_activator_colors": true,
+          "button_color": "#364639",
+          "secondary_color": "#ffffff",
           "ternary_color": "#6a6a6a",
           "button_icon": "chat_bubble",
           "button_text": "no_text",
           "button_horizontal_position": "bottom_right",
-          "button_vertical_position": "lowest",
-          "agent_inherit_fonts": false,
+          "button_vertical_position": "higher",
+          "agent_inherit_fonts": true,
           "agent_font": "mono",
-          "agent_border_radius": 16
+          "agent_border_radius": 10
         }
-      },
-      "10864971697205422121": {
-        "type": "shopify://apps/gorgias-live-chat-helpdesk/blocks/gorgias/a66db725-7b96-4e3f-916e-6c8e6f87aaaa",
-        "disabled": true,
-        "settings": {}
       }
     },
     "color_schemes": {
