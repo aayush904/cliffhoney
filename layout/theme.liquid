@@ -117,6 +117,56 @@
       ],
       "inLanguage": "en"
     }
+    {%- if request.page_type == 'index' -%}
+      {%- liquid
+        assign home_product = all_products['himalayan-cliff-honey-lamjung']
+        assign home_variant = home_product.selected_or_first_available_variant
+        assign home_rating_object = home_product.metafields.reviews.rating.value
+        assign home_rating = home_rating_object.rating
+        assign home_rating_best = home_rating_object.scale_max | default: 5
+        assign home_rating_worst = home_rating_object.scale_min | default: 1
+        assign home_rating_count = home_product.metafields.reviews.rating_count
+      -%}
+      {%- if home_product != blank -%}
+        ,{
+          "@type": "Product",
+          "@id": "{{ shop.url }}{{ home_product.url }}#product",
+          "name": {{ home_product.title | json }},
+          "url": "{{ shop.url }}{{ home_product.url }}",
+          "description": {{ home_product.description | strip_html | strip_newlines | strip | truncate: 500 | json }},
+          "image": [
+            {%- if home_product.featured_image -%}
+              {{ home_product.featured_image | image_url: width: 1200 | prepend: "https:" | json }}
+            {%- endif -%}
+          ],
+          {%- if home_variant.barcode != blank -%}
+            "gtin": {{ home_variant.barcode | json }},
+          {%- endif -%}
+          "sku": {{ home_variant.sku | json }},
+          "brand": {
+            "@type": "Brand",
+            "name": "Himalayan Cliff Honey"
+          },
+          "offers": {
+            "@type": "Offer",
+            "url": "{{ shop.url }}{{ home_product.url }}",
+            "priceCurrency": {{ cart.currency.iso_code | default: shop.currency | json }},
+            "price": {{ home_variant.price | divided_by: 100.0 | json }},
+            "availability": "{% if home_variant.available %}https://schema.org/InStock{% else %}https://schema.org/OutOfStock{% endif %}",
+            "itemCondition": "https://schema.org/NewCondition"
+          }
+          {%- if home_rating != blank and home_rating_count > 0 -%}
+          ,"aggregateRating": {
+            "@type": "AggregateRating",
+            "ratingValue": {{ home_rating | json }},
+            "reviewCount": {{ home_rating_count | json }},
+            "bestRating": {{ home_rating_best | json }},
+            "worstRating": {{ home_rating_worst | json }}
+          }
+          {%- endif -%}
+        }
+      {%- endif -%}
+    {%- endif -%}
   ]
 }
 </script>
