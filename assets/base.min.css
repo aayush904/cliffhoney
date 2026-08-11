@@ -4218,3 +4218,13 @@ details[open]>.header__menu-item .icon-caret {
 .article-content table tbody tr:nth-child(even) td {
   background-color: #FFFBEF;
 }
+
+.article-content a {
+  text-decoration: underline !important;
+  font-weight: 600 !important;
+  transition: color 0.2s ease !important;
+}
+
+.article-content a:hover {
+  color: #c27348 !important;
+}

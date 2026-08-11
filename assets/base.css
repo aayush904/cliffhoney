@@ -3925,6 +3925,16 @@ details-disclosure > details {
   background-color: #FFFBEF;
 }
 
+.article-content a {
+  text-decoration: underline !important;
+  font-weight: 600 !important;
+  transition: color 0.2s ease !important;
+}
+
+.article-content a:hover {
+  color: #c27348 !important;
+}
+
 .rte img {
   height: auto;
   max-width: 100%;
