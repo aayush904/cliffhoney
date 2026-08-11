@@ -200,6 +200,126 @@
             {{ article.content }}
           {%- endif -%}
         </div>
+
+        <style>
+          .article-content p.faq-pair .faq-q {
+            display: block;
+          }
+          .article-content p.faq-pair .faq-a {
+            display: block;
+            max-height: 0;
+            opacity: 0;
+            overflow: hidden;
+            transition: max-height 0.3s ease, opacity 0.3s ease;
+          }
+          .article-content p.faq-pair:hover .faq-a {
+            max-height: 1000px;
+            opacity: 1;
+          }
+          /* Touch devices don't have real hover (tap can "stick" a hover
+             state inconsistently), so just show answers normally on mobile
+             instead of hiding them behind a hover that may not work. */
+          @media screen and (max-width: 749px) {
+            .article-content p.faq-pair .faq-a {
+              max-height: none;
+              opacity: 1;
+            }
+          }
+        </style>
+        <script>
+          (function () {
+            // FAQ Q&A pairs in article content are plain rich-text paragraphs:
+            // "<strong>Q: ...</strong><br><span>A: ...</span>" all inside ONE <p>,
+            // with the <br> sometimes nested inside a <strong> that spans both
+            // the question and the "A:" label. Split each qualifying paragraph
+            // at its first <br> (wherever it lives in the tree) into a
+            // question span and an answer span, so the answer can be hidden by
+            // default and revealed on hover via CSS.
+            function splitAtBr(node) {
+              if (node.nodeType === Node.TEXT_NODE) {
+                return { before: [node.cloneNode(true)], after: [], found: false };
+              }
+              if (node.nodeName === 'BR') {
+                return { before: [], after: [], found: true };
+              }
+              var beforeClone = node.cloneNode(false);
+              var afterClone = node.cloneNode(false);
+              var found = false;
+              Array.prototype.forEach.call(node.childNodes, function (child) {
+                if (found) {
+                  afterClone.appendChild(child.cloneNode(true));
+                  return;
+                }
+                var res = splitAtBr(child);
+                if (res.found) {
+                  found = true;
+                  res.before.forEach(function (n) { beforeClone.appendChild(n); });
+                  res.after.forEach(function (n) { afterClone.appendChild(n); });
+                } else {
+                  res.before.forEach(function (n) { beforeClone.appendChild(n); });
+                }
+              });
+              return {
+                before: beforeClone.childNodes.length ? [beforeClone] : [],
+                after: afterClone.childNodes.length ? [afterClone] : [],
+                found: found
+              };
+            }
+
+            function processParagraph(p) {
+              var qWrap = document.createElement('span');
+              qWrap.className = 'faq-q';
+              var aWrap = document.createElement('span');
+              aWrap.className = 'faq-a';
+              var found = false;
+
+              Array.prototype.forEach.call(p.childNodes, function (child) {
+                if (found) {
+                  aWrap.appendChild(child.cloneNode(true));
+                  return;
+                }
+                var res = splitAtBr(child);
+                if (res.found) {
+                  found = true;
+                  res.before.forEach(function (n) { qWrap.appendChild(n); });
+                  res.after.forEach(function (n) { aWrap.appendChild(n); });
+                } else {
+                  res.before.forEach(function (n) { qWrap.appendChild(n); });
+                }
+              });
+
+              if (!found) return;
+              p.textContent = '';
+              p.appendChild(qWrap);
+              p.appendChild(aWrap);
+              p.classList.add('faq-pair');
+            }
+
+            function processAllFaqs() {
+              document.querySelectorAll('.article-content p').forEach(function (p) {
+                if (p.classList.contains('faq-pair')) return;
+                var text = p.textContent.trim();
+                if (/^Q[:.]/i.test(text) && /A[:.]/i.test(text)) {
+                  processParagraph(p);
+                }
+              });
+            }
+
+            // Some themes/apps replace .article-content's HTML after this
+            // script's first pass (animations, lazy content, etc.), which
+            // would wipe out the split-up markup. Re-assert on an interval
+            // for the first few seconds, same pattern used for the chat
+            // widget elsewhere in this theme, rather than relying on a
+            // single one-shot pass at parse time.
+            processAllFaqs();
+            var faqRetries = 0;
+            var faqInterval = setInterval(function () {
+              faqRetries++;
+              processAllFaqs();
+              if (faqRetries > 20) clearInterval(faqInterval);
+            }, 300);
+          })();
+        </script>
         {%- liquid
           assign expert_heading = article.metafields.custom.expert.value.name | default: 'Meet our Expert'
           assign expert_content = article.metafields.custom.expert.value.detail
