@@ -216,6 +216,15 @@
             max-height: 1000px;
             opacity: 1;
           }
+          /* Touch devices don't have real hover (tap can "stick" a hover
+             state inconsistently), so just show answers normally on mobile
+             instead of hiding them behind a hover that may not work. */
+          @media screen and (max-width: 749px) {
+            .article-content p.faq-pair .faq-a {
+              max-height: none;
+              opacity: 1;
+            }
+          }
         </style>
         <script>
           (function () {
