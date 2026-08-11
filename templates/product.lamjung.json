@@ -1107,6 +1107,7 @@
     },
     "custom_liquid_AbhB8a": {
       "type": "custom-liquid",
+      "disabled": true,
       "name": "t:sections.custom-liquid.presets.name",
       "settings": {
         "custom_liquid": "{% render 'junip-product-review', product: product %}",
