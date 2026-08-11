@@ -286,12 +286,29 @@
               p.classList.add('faq-pair');
             }
 
-            document.querySelectorAll('.article-content p').forEach(function (p) {
-              var text = p.textContent.trim();
-              if (/^Q[:.]/i.test(text) && /A[:.]/i.test(text)) {
-                processParagraph(p);
-              }
-            });
+            function processAllFaqs() {
+              document.querySelectorAll('.article-content p').forEach(function (p) {
+                if (p.classList.contains('faq-pair')) return;
+                var text = p.textContent.trim();
+                if (/^Q[:.]/i.test(text) && /A[:.]/i.test(text)) {
+                  processParagraph(p);
+                }
+              });
+            }
+
+            // Some themes/apps replace .article-content's HTML after this
+            // script's first pass (animations, lazy content, etc.), which
+            // would wipe out the split-up markup. Re-assert on an interval
+            // for the first few seconds, same pattern used for the chat
+            // widget elsewhere in this theme, rather than relying on a
+            // single one-shot pass at parse time.
+            processAllFaqs();
+            var faqRetries = 0;
+            var faqInterval = setInterval(function () {
+              faqRetries++;
+              processAllFaqs();
+              if (faqRetries > 20) clearInterval(faqInterval);
+            }, 300);
           })();
         </script>
         {%- liquid
