@@ -206,6 +206,9 @@
             margin-top: 6px;
             margin-bottom: 6px;
           }
+          .article-content p.faq-spacer {
+            display: none !important;
+          }
           .article-content p.faq-pair .faq-q {
             display: block;
           }
@@ -297,6 +300,16 @@
               p.appendChild(qWrap);
               p.appendChild(aWrap);
               p.classList.add('faq-pair');
+
+              // Rich text often leaves a blank "<p><br></p>"-style spacer
+              // paragraph directly after each Q&A block, which shows up as
+              // extra empty space between FAQ pairs. Hide it, but only when
+              // it immediately follows a FAQ pair and is genuinely empty --
+              // never touch blank paragraphs elsewhere in the article.
+              var spacer = p.nextElementSibling;
+              if (spacer && spacer.tagName === 'P' && spacer.textContent.trim() === '') {
+                spacer.classList.add('faq-spacer');
+              }
             }
 
             function processAllFaqs() {
