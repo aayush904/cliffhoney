@@ -4228,3 +4228,13 @@ details[open]>.header__menu-item .icon-caret {
 .article-content a:hover {
   color: #c27348 !important;
 }
+
+/* Long unbroken strings (e.g. reference URLs pasted as plain text)
+   have no natural word-break points, so they overflow their container
+   instead of wrapping unless we explicitly allow breaking within them. */
+.article-content p,
+.article-content li,
+.article-content a {
+  overflow-wrap: break-word !important;
+  word-break: break-word !important;
+}
