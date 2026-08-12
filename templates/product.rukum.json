@@ -1251,21 +1251,10 @@
             "alignment": "",
             "sortOrder": "mostRecent"
           }
-        },
-        "judge_me_reviews_review_widget_ZDpCm8": {
-          "type": "shopify://apps/judge-me-reviews/blocks/review_widget/61ccd3b1-a9f2-4160-9fe9-4fec8413e5d8",
-          "disabled": true,
-          "settings": {
-            "review_data": "sample_data",
-            "max_width": 1200,
-            "show_shop_reviews": false,
-            "empty_state": "hide_widget"
-          }
         }
       },
       "block_order": [
-        "junip_junip_product_review_kXnQCt",
-        "judge_me_reviews_review_widget_ZDpCm8"
+        "junip_junip_product_review_kXnQCt"
       ],
       "settings": {
         "include_margins": true
