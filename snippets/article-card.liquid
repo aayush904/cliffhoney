@@ -114,7 +114,7 @@
                     {%- if article.image.src.width >= 720 -%}{{ article.image.src | image_url: width: 720 }} 720w,{%- endif -%}
                     {%- if article.image.src.width >= 1000 -%}{{ article.image.src | image_url: width: 1000 }} 1000w,{%- endif -%}
                     {%- if article.image.src.width >= 1500 -%}{{ article.image.src | image_url: width: 1500 }} 1500w,{%- endif -%}
-                    {{ article.image.src | image_url }} {{ article.image.src.width }}w
+                    {{ article.image.src | image_url: width: 1080 }} {{ article.image.src.width | at_most: 1080 }}w
                   "
                   src="{{ article.image.src | image_url: width: 533 }}"
                   sizes="(min-width: {{ settings.page_width }}px) {{ settings.page_width | minus: 100 | divided_by: 2 }}px, (min-width: 768px) calc((100vw - 130px) / 2), calc((100vw - 50px) / 2)"
@@ -135,7 +135,7 @@
                     {%- if settings.logo.src.width >= 720 -%}{{ settings.logo.src | image_url: width: 720 }} 720w,{%- endif -%}
                     {%- if settings.logo.src.width >= 1000 -%}{{ settings.logo.src | image_url: width: 1000 }} 1000w,{%- endif -%}
                     {%- if settings.logo.src.width >= 1500 -%}{{ settings.logo.src | image_url: width: 1500 }} 1500w,{%- endif -%}
-                    {{ settings.logo.src | image_url }} {{ settings.logo.src.width }}w
+                    {{ settings.logo.src | image_url: width: 1080 }} {{ settings.logo.src.width | at_most: 1080 }}w
                   "
                   src="{{ settings.logo.src | image_url: width: 533 }}"
                   sizes="(min-width: {{ settings.page_width }}px) {{ settings.page_width | minus: 100 | divided_by: 2 }}px, (min-width: 768px) calc((100vw - 130px) / 2), calc((100vw - 50px) / 2)"

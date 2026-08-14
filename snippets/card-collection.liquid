@@ -57,8 +57,7 @@
                 {%- if card_collection.featured_image.width >= 650 -%}{{ card_collection.featured_image | image_url: width: 420 }} 768w,{%- endif -%}
                 {%- if card_collection.featured_image.width >= 1000 -%}{{ card_collection.featured_image | image_url: width: 500 }} 1000w,{%- endif -%}
                 {%- if card_collection.featured_image.width >= 1500 -%}{{ card_collection.featured_image | image_url: width: 980 }} 1500w,{%- endif -%}
-                {%- if card_collection.featured_image.width >= 3000 -%}{{ card_collection.featured_image | image_url: width: 1080 }} 3000w,{%- endif -%}
-                {{ card_collection.featured_image | image_url }} {{ card_collection.featured_image.width }}w
+                {{ card_collection.featured_image | image_url: width: 1080 }} {{ card_collection.featured_image.width | at_most: 1080 }}w
               "
               src="{{ card_collection.featured_image | image_url: width: 1080 }}"
               sizes="(min-width: {{ settings.page_width }}px) {{ settings.page_width | minus: 100 | divided_by: columns }}px, (min-width: 768px) {% if columns > 1 %}calc((100vw - 10rem) / 2){% else %}calc(100vw - 10rem){% endif %}, calc(100vw / 1.2 - 3.2rem)"
