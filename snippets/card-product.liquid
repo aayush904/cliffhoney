@@ -22,18 +22,11 @@
 {% endcomment %}
 
 {%- unless skip_styles -%}
-  <link rel="stylesheet" href="{{ 'component-rating.css' | asset_url }}" media="print" onload="this.media='all'">
-  <link rel="stylesheet" href="{{ 'component-volume-pricing.css' | asset_url }}" media="print" onload="this.media='all'">
-  <link rel="stylesheet" href="{{ 'component-price.css' | asset_url }}" media="print" onload="this.media='all'">
-  <link rel="stylesheet" href="{{ 'quick-order-list.css' | asset_url }}" media="print" onload="this.media='all'">
-  <link rel="stylesheet" href="{{ 'quantity-popover.css' | asset_url }}" media="print" onload="this.media='all'">
-  <noscript>
-    <link rel="stylesheet" href="{{ 'component-rating.css' | asset_url }}">
-    <link rel="stylesheet" href="{{ 'component-volume-pricing.css' | asset_url }}">
-    <link rel="stylesheet" href="{{ 'component-price.css' | asset_url }}">
-    <link rel="stylesheet" href="{{ 'quick-order-list.css' | asset_url }}">
-    <link rel="stylesheet" href="{{ 'quantity-popover.css' | asset_url }}">
-  </noscript>
+  {%- comment -%}
+    Card component stylesheets are loaded once per page from layout/theme.liquid.
+    Emitting them here duplicated them for every section that renders a card
+    (72 of 109 stylesheet link tags on the homepage), costing a style recalc each.
+  {%- endcomment -%}
 
   {% style %}
     #shopify-section-{{ section.id }} a{ text-decoration: none; }
