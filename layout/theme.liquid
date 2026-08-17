@@ -434,6 +434,24 @@
     {{ 'base.min.css' | asset_url | stylesheet_tag }}
         {{ 'custom.css' | asset_url | stylesheet_tag }}
 
+    {%- comment -%}
+      Product-card component styles, loaded once here rather than per card.
+      snippets/card-product.liquid previously emitted these for every section
+      that rendered a card, producing dozens of duplicate link tags.
+    {%- endcomment -%}
+    <link rel="stylesheet" href="{{ 'component-rating.css' | asset_url }}" media="print" onload="this.media='all'">
+    <link rel="stylesheet" href="{{ 'component-volume-pricing.css' | asset_url }}" media="print" onload="this.media='all'">
+    <link rel="stylesheet" href="{{ 'component-price.css' | asset_url }}" media="print" onload="this.media='all'">
+    <link rel="stylesheet" href="{{ 'quick-order-list.css' | asset_url }}" media="print" onload="this.media='all'">
+    <link rel="stylesheet" href="{{ 'quantity-popover.css' | asset_url }}" media="print" onload="this.media='all'">
+    <noscript>
+      <link rel="stylesheet" href="{{ 'component-rating.css' | asset_url }}">
+      <link rel="stylesheet" href="{{ 'component-volume-pricing.css' | asset_url }}">
+      <link rel="stylesheet" href="{{ 'component-price.css' | asset_url }}">
+      <link rel="stylesheet" href="{{ 'quick-order-list.css' | asset_url }}">
+      <link rel="stylesheet" href="{{ 'quantity-popover.css' | asset_url }}">
+    </noscript>
+
     <link rel="stylesheet" href="{{ 'component-cart-items.css' | asset_url }}" media="print" onload="this.media='all'">
 
     {%- if settings.cart_type == 'drawer' -%}
