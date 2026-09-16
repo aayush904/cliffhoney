@@ -133,7 +133,7 @@
           "settings": {
             "heading": "What is bee pollen?",
             "icon": "none",
-            "content": "<p>Bee pollen is a superfood- a package of protein, fat, essential amino acids, vitamins and over 250 bioactive substances. Bees gather it while foraging in the field of flowers. Just a sprinkle of it and you get nourished with multiple vitamins and minerals.</p>",
+            "content": "<p>Bee pollen is flower pollen collected by honey bees and formed into small granules with tiny amounts of nectar and natural bee secretions. Its composition naturally varies depending on the flowers, season and growing region.</p><p>Our product contains just one ingredient: <strong>100% bee pollen granules from Nepal.</strong></p>",
             "page": ""
           }
         },
@@ -142,7 +142,7 @@
           "settings": {
             "heading": "Who’s it for?",
             "icon": "none",
-            "content": "<p>Bee pollen is considered safe for healthy adults without pollen allergies. While it suits a wide range of diets and lifestyles including paleo, vegetarian, clean eating, keto, gluten-free and intermittent fasting, it is not recommended for children (below 18 years), pregnant women or breastfeeding mothers.</p>",
+            "content": "<p>Made for adults looking for a simple, single-ingredient bee product that can easily be added to everyday foods and drinks.</p><p>People with pollen or bee-product allergies should avoid bee pollen. If you are pregnant, breastfeeding, taking medication or under medical care, consult a healthcare professional before use.</p>",
             "page": ""
           }
         },
@@ -151,7 +151,7 @@
           "settings": {
             "heading": "Benefits",
             "icon": "none",
-            "content": "<p>Daily support for:</p><ul><li>Natural energy & stamina</li><li>Radiant & youthful skin</li><li>Immune strength</li><li>Improved metabolism & overall vitality</li></ul>",
+            "content": "<p>A simple whole-food addition to your daily routine:</p><ul><li>Naturally contains proteins, amino acids, carbohydrates, lipids and plant compounds</li><li>Easy to sprinkle, mix or blend into everyday foods</li><li>Single ingredient with no fillers or preservatives</li><li>Nepal origin with batch-level traceability</li></ul>",
             "page": ""
           }
         }
@@ -266,14 +266,14 @@
         "heading_jcD7iy": {
           "type": "heading",
           "settings": {
-            "heading": "Himalayan <strong>Bee Pollen</strong> Honey",
+            "heading": "Bee Pollen from Nepal",
             "heading_size": "h2"
           }
         },
         "text_8hzjxn": {
           "type": "text",
           "settings": {
-            "text": "<p>Himalayan Bee Pollen is from Chitwan and Dang regions of Nepal- where lush jungles, grasslands and rivers cover vast patches of land. It stands out because of the wide range of wildflowers bees get to feed on in this area. Traditionally harvested without overstressing the hive and minimally processed, it is superpacked with all the nutrients from diverse wildflowers native to the region.</p>",
+            "text": "<p>Our bee pollen is sourced from <strong>Chitwan and Dang, Nepal</strong>, where honey bees forage across a diverse mix of seasonal flowers and surrounding vegetation. That floral variety can be seen directly in the granules. Shades, aromas and flavors naturally differ from one harvest to another depending on what was blooming when the pollen was collected. The pollen is carefully harvested, dried and handled in small batches before being packed at our certified facility in Nepal.</p>",
             "text_style": "body"
           }
         },
@@ -1181,21 +1181,10 @@
             "alignment": "",
             "sortOrder": "mostRecent"
           }
-        },
-        "judge_me_reviews_review_widget_RShOtw": {
-          "type": "shopify://apps/judge-me-reviews/blocks/review_widget/61ccd3b1-a9f2-4160-9fe9-4fec8413e5d8",
-          "disabled": true,
-          "settings": {
-            "review_data": "sample_data",
-            "max_width": 1200,
-            "show_shop_reviews": false,
-            "empty_state": "hide_widget"
-          }
         }
       },
       "block_order": [
-        "junip_junip_product_review_qT33Ar",
-        "judge_me_reviews_review_widget_RShOtw"
+        "junip_junip_product_review_qT33Ar"
       ],
       "settings": {
         "include_margins": true
