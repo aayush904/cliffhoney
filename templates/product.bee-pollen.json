@@ -1043,16 +1043,16 @@
         "collapsible_row_dWjWWM": {
           "type": "collapsible_row",
           "settings": {
-            "heading": "Is Bee Pollen safe to consume?",
+            "heading": "Why are bee pollen granules different colors?",
             "icon": "none",
-            "row_content": "<p>Bee pollen is a centuries-old natural food. It is safe for healthy adults as long as it is consumed in moderation as part of a balanced diet. The users need to be quality-conscious- always use unprocessed, additive-free bee pollen from reputable sources.</p>",
+            "row_content": "<p>Color depends largely on the flowers the bees visit. Different botanical sources can produce yellow, orange, brown, red and other naturally occurring shades, so variation between granules and harvests is normal.</p>",
             "page": ""
           }
         },
         "collapsible_row_i6MWmi": {
           "type": "collapsible_row",
           "settings": {
-            "heading": "Who should not take Bee Pollen?",
+            "heading": "Who should avoid bee pollen?",
             "icon": "none",
             "row_content": "<p>Individuals with allergies to bee or pollen, pregnant women, breastfeeding women, individuals taking blood-thinning medications or immunosuppressants shouldn’t take bee pollen. Always take medical advice if you are under any medications.</p>",
             "page": ""
@@ -1070,9 +1070,9 @@
         "collapsible_row_3nffCp": {
           "type": "collapsible_row",
           "settings": {
-            "heading": "How can I verify the quality of raw Bee Pollen?",
+            "heading": "How should bee pollen be stored?",
             "icon": "none",
-            "row_content": "<p>Authentic raw bee pollen has a natural color- its shade can be varying, from golden yellow to deep orange and brown, totally depending on the sources of the flowers. It must be slightly sweet and floral, never chemical or fermented. Texture should be slightly soft, not too dry or powdery. Also, look for brands with origin, harvesting and processing transparency.</p>",
+            "row_content": "<p>Keep the jar tightly closed and store it according to the storage directions on the packaging. Protect it from excessive heat, moisture and direct sunlight.</p>",
             "page": ""
           }
         }
