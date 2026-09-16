@@ -39,7 +39,7 @@
             "heading_size": "h2",
             "subheading": "Nature’s purest supplement, designed to fuel your busy lifestyle.",
             "button_label": "Shop Bee Superfood &nbsp;<span class=\"icon-wrap\"> {{- 'icon-arrow.svg' | inline_asset_content -}} </span>",
-            "link": "shopify://products/himalayan-bee-pollen",
+            "link": "shopify://products/bee-pollen",
             "button_style_secondary": false,
             "show_text_box": false,
             "box_align": "middle-left",
@@ -1009,7 +1009,7 @@
           "type": "review",
           "settings": {
             "video": "shopify://files/videos/YTDown.com_Shorts_Mad-Honey-Nepal-on-Best-Food-Review-madh_Media_emGOhOeadiI_001_720p.mp4",
-            "product_1": "himalayan-bee-pollen",
+            "product_1": "bee-pollen",
             "product_2": "",
             "product_3": "",
             "product_4": ""
