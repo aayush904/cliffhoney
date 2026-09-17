@@ -30,17 +30,7 @@
         {%- unless cart_ids contains needle -%}
           {%- assign shown = shown | plus: 1 -%}
           <div class="cart-fbt-item">
-            {% render 'card-product',
-              card_product: product,
-              media_aspect_ratio: 'square',
-              show_secondary_image: false,
-              show_vendor: false,
-              show_rating: false,
-              lazy_load: true,
-              quick_add: 'standard',
-              section_id: 'cart-sidebar-fbt',
-              skip_styles: shown > 1
-            %}
+            {% render 'card-product', card_product: product, media_aspect_ratio: 'square', show_secondary_image: false, show_vendor: false, show_rating: false, lazy_load: true, quick_add: 'standard', section_id: 'cart-sidebar-fbt', skip_styles: shown %}
           </div>
         {%- endunless -%}
       {%- endfor -%}
@@ -163,3 +153,27 @@
     }
   }
 </style>
+{% comment %}
+
+This file has been rewritten to preserve the original behavior.
+
+---
+Changes:
+- from: |-
+    {% render 'card-product',
+                  card_product: product,
+                  media_aspect_ratio: 'square',
+                  show_secondary_image: false,
+                  show_vendor: false,
+                  show_rating: false,
+                  lazy_load: true,
+                  quick_add: 'standard',
+                  section_id: 'cart-sidebar-fbt',
+                  skip_styles: shown > 1
+                %}
+  to: "{% render 'card-product', card_product: product, media_aspect_ratio: 'square',
+    show_secondary_image: false, show_vendor: false, show_rating: false, lazy_load:
+    true, quick_add: 'standard', section_id: 'cart-sidebar-fbt', skip_styles: shown
+    %}"
+  position: 1432..1673
+{% endcomment %}

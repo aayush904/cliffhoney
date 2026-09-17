@@ -133,7 +133,7 @@
           "settings": {
             "heading": "What is bee pollen?",
             "icon": "none",
-            "content": "<p>Bee pollen is a superfood- a package of protein, fat, essential amino acids, vitamins and over 250 bioactive substances. Bees gather it while foraging in the field of flowers. Just a sprinkle of it and you get nourished with multiple vitamins and minerals.</p>",
+            "content": "<p>Bee pollen is flower pollen that honey bees collect and pack into small granules, using tiny amounts of nectar and their own secretions. Its composition varies with the flowers, season and region it comes from.<br/><br/>Our product contains just one ingredient: <strong>100% bee pollen granules from Nepal.</strong></p>",
             "page": ""
           }
         },
@@ -142,7 +142,7 @@
           "settings": {
             "heading": "Who’s it for?",
             "icon": "none",
-            "content": "<p>Bee pollen is considered safe for healthy adults without pollen allergies. While it suits a wide range of diets and lifestyles including paleo, vegetarian, clean eating, keto, gluten-free and intermittent fasting, it is not recommended for children (below 18 years), pregnant women or breastfeeding mothers.</p>",
+            "content": "<p>Made for adults looking for a simple, single-ingredient bee product that can easily be added to everyday foods and drinks.</p><p>People with pollen or bee-product allergies should avoid bee pollen. If you are pregnant, breastfeeding, taking medication or under medical care, consult a healthcare professional before use.</p>",
             "page": ""
           }
         },
@@ -151,7 +151,7 @@
           "settings": {
             "heading": "Benefits",
             "icon": "none",
-            "content": "<p>Daily support for:</p><ul><li>Natural energy & stamina</li><li>Radiant & youthful skin</li><li>Immune strength</li><li>Improved metabolism & overall vitality</li></ul>",
+            "content": "<p>A simple whole-food addition to your daily routine:</p><ul><li>Naturally contains proteins, amino acids, carbohydrates, lipids and plant compounds</li><li>Easy to sprinkle, mix or blend into everyday foods</li><li>Single ingredient with no fillers or preservatives</li><li>Nepal origin with batch-level traceability</li></ul>",
             "page": ""
           }
         }
@@ -266,14 +266,14 @@
         "heading_jcD7iy": {
           "type": "heading",
           "settings": {
-            "heading": "Himalayan <strong>Bee Pollen</strong> Honey",
+            "heading": "Bee Pollen from Nepal",
             "heading_size": "h2"
           }
         },
         "text_8hzjxn": {
           "type": "text",
           "settings": {
-            "text": "<p>Himalayan Bee Pollen is from Chitwan and Dang regions of Nepal- where lush jungles, grasslands and rivers cover vast patches of land. It stands out because of the wide range of wildflowers bees get to feed on in this area. Traditionally harvested without overstressing the hive and minimally processed, it is superpacked with all the nutrients from diverse wildflowers native to the region.</p>",
+            "text": "<p>Our bee pollen comes from beekeepers in Chitwan (central Nepal) and Dang (western Nepal). These warm, fertile lowland valleys bloom with a changing mix of wildflowers, mustard, forest trees and farm crops throughout the year. That floral variety can be seen directly in the granules. Shades, aromas and flavors naturally differ from one harvest to another depending on what was blooming when the pollen was collected. The pollen is carefully harvested, dried and handled in small batches before being packed at our certified facility in Nepal.</p>",
             "text_style": "body"
           }
         },
@@ -488,7 +488,7 @@
         "heading_7dfnHm": {
           "type": "heading",
           "settings": {
-            "heading": "Health Benefits",
+            "heading": "Nutritional Profile",
             "heading_size": "h2"
           }
         },
@@ -1007,9 +1007,9 @@
         "collapsible_row_HiiLHn": {
           "type": "collapsible_row",
           "settings": {
-            "heading": "What is Himalayan Bee Pollen?",
+            "heading": "What is Bee Pollen?",
             "icon": "none",
-            "row_content": "<p>Himalayan bee pollen is a nutrient-dense superfood- it is a collection of wild bees especially from high-altitude meadows in Nepal. The source of this pollen is a diverse kind of wildflowers blooming at exceptionally pure conditions above 3,000 meters. Our bee pollen is ethically harvested in small batches, naturally sun-dried, and remains completely raw and unprocessed.</p>",
+            "row_content": "<p>Bee pollen is flower pollen collected by honey bees while foraging. Bees form the pollen into small granules using tiny amounts of nectar and natural secretions before carrying it back to the hive. Our product contains 100% bee pollen granules from Nepal.<br/><br/></p>",
             "page": ""
           }
         },
@@ -1025,34 +1025,34 @@
         "collapsible_row_taFCjT": {
           "type": "collapsible_row",
           "settings": {
-            "heading": "How is Wild Bee Pollen different from Regular Bee Pollen?",
+            "heading": "What ingredients are in your bee pollen?",
             "icon": "none",
-            "row_content": "<p>Wild bee pollen is produced by bees feeding on hundreds of species of wildflowers of the wild, sold raw. The regular ones, however, are from those bees that are usually kept in regulated farming conditions- and are mostly from single-crop sources and may be processed as well.</p>",
+            "row_content": "<p>There is only one ingredient: <strong>100% bee pollen</strong>. No fillers, artificial colors, artificial flavors or preservatives are added.</p>",
             "page": ""
           }
         },
         "collapsible_row_VzTKUX": {
           "type": "collapsible_row",
           "settings": {
-            "heading": "How should I take Bee Pollen daily?",
+            "heading": "Is bee pollen the same as honey?",
             "icon": "none",
-            "row_content": "<p>Bee pollen should be started small, with as small as ¼ teaspoon per day. If well tolerated, this dose can be gradually increased to the standard daily serving size of 1–2 teaspoons. Like honey, you can mix it into your everyday smoothies, yogurt or oatmeal.</p>",
+            "row_content": "<p>No. Bee pollen and honey are different bee products. Bee pollen begins as flower pollen collected by honey bees, while honey is produced primarily from flower nectar.</p>",
             "page": ""
           }
         },
         "collapsible_row_dWjWWM": {
           "type": "collapsible_row",
           "settings": {
-            "heading": "Is Bee Pollen safe to consume?",
+            "heading": "Why are bee pollen granules different colors?",
             "icon": "none",
-            "row_content": "<p>Bee pollen is a centuries-old natural food. It is safe for healthy adults as long as it is consumed in moderation as part of a balanced diet. The users need to be quality-conscious- always use unprocessed, additive-free bee pollen from reputable sources.</p>",
+            "row_content": "<p>Color depends largely on the flowers the bees visit. Different botanical sources can produce yellow, orange, brown, red and other naturally occurring shades, so variation between granules and harvests is normal.</p>",
             "page": ""
           }
         },
         "collapsible_row_i6MWmi": {
           "type": "collapsible_row",
           "settings": {
-            "heading": "Who should not take Bee Pollen?",
+            "heading": "Who should avoid bee pollen?",
             "icon": "none",
             "row_content": "<p>Individuals with allergies to bee or pollen, pregnant women, breastfeeding women, individuals taking blood-thinning medications or immunosuppressants shouldn’t take bee pollen. Always take medical advice if you are under any medications.</p>",
             "page": ""
@@ -1070,9 +1070,9 @@
         "collapsible_row_3nffCp": {
           "type": "collapsible_row",
           "settings": {
-            "heading": "How can I verify the quality of raw Bee Pollen?",
+            "heading": "How should bee pollen be stored?",
             "icon": "none",
-            "row_content": "<p>Authentic raw bee pollen has a natural color- its shade can be varying, from golden yellow to deep orange and brown, totally depending on the sources of the flowers. It must be slightly sweet and floral, never chemical or fermented. Texture should be slightly soft, not too dry or powdery. Also, look for brands with origin, harvesting and processing transparency.</p>",
+            "row_content": "<p>Keep the jar tightly closed and store it according to the storage directions on the packaging. Protect it from excessive heat, moisture and direct sunlight.</p>",
             "page": ""
           }
         }
@@ -1181,21 +1181,10 @@
             "alignment": "",
             "sortOrder": "mostRecent"
           }
-        },
-        "judge_me_reviews_review_widget_RShOtw": {
-          "type": "shopify://apps/judge-me-reviews/blocks/review_widget/61ccd3b1-a9f2-4160-9fe9-4fec8413e5d8",
-          "disabled": true,
-          "settings": {
-            "review_data": "sample_data",
-            "max_width": 1200,
-            "show_shop_reviews": false,
-            "empty_state": "hide_widget"
-          }
         }
       },
       "block_order": [
-        "junip_junip_product_review_qT33Ar",
-        "judge_me_reviews_review_widget_RShOtw"
+        "junip_junip_product_review_qT33Ar"
       ],
       "settings": {
         "include_margins": true
