@@ -33,11 +33,19 @@
   }
 
   @media screen and (min-width: 900px) {
-    cart-drawer.has-sidebar .drawer__inner {
+    /* The has-sidebar class is baked onto <cart-drawer> when the page is
+       rendered, so it is absent whenever the cart was empty at page load --
+       adding the first item re-renders only the drawer's inner HTML, not the
+       element's class. Matching on the sidebar itself keeps the two-column
+       layout working in that case; without it .drawer__inner stays a 320px
+       column, the sidebar fills it, and the actual cart is pushed off-screen. */
+    cart-drawer.has-sidebar .drawer__inner,
+    cart-drawer:has(.cart-drawer__sidebar) .drawer__inner {
       flex-direction: row;
       max-width: min(94vw, 860px);
     }
-    cart-drawer.has-sidebar .cart-drawer__below-items-xsell {
+    cart-drawer.has-sidebar .cart-drawer__below-items-xsell,
+    cart-drawer:has(.cart-drawer__sidebar) .cart-drawer__below-items-xsell {
       display: none;
     }
   }
