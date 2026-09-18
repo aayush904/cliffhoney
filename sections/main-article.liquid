@@ -202,35 +202,78 @@
         </div>
 
         <style>
-          .article-content p.faq-pair {
-            margin-top: 6px;
-            margin-bottom: 6px;
-          }
           .article-content p.faq-spacer {
             display: none !important;
           }
-          .article-content p.faq-pair .faq-q {
-            display: block;
+          .article-content .faq-item {
+            border-bottom: 1px solid rgba(var(--color-foreground), 0.12);
           }
-          .article-content p.faq-pair .faq-a {
-            display: block;
-            max-height: 0;
+          .article-content .faq-item.faq-item--first {
+            border-top: 1px solid rgba(var(--color-foreground), 0.12);
+          }
+          .article-content .faq-question {
+            width: 100%;
+            margin: 0;
+            padding: 2rem 0;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            gap: 1.6rem;
+            background: none;
+            border: 0;
+            cursor: pointer;
+            text-align: left;
+            font-family: var(--font-body-family);
+            font-size: 1.7rem;
+            font-weight: 600;
+            line-height: 1.4;
+            color: rgb(var(--color-foreground));
+          }
+          .article-content .faq-question:hover {
+            opacity: 0.7;
+          }
+          /* Plus sign drawn from two bars so the vertical one can rotate away
+             into a minus when the row opens. */
+          .article-content .faq-icon {
+            position: relative;
+            flex: 0 0 auto;
+            width: 1.5rem;
+            height: 1.5rem;
+          }
+          .article-content .faq-icon::before,
+          .article-content .faq-icon::after {
+            content: '';
+            position: absolute;
+            background: currentColor;
+          }
+          .article-content .faq-icon::before {
+            top: 50%;
+            left: 0;
+            width: 100%;
+            height: 1.5px;
+            transform: translateY(-50%);
+          }
+          .article-content .faq-icon::after {
+            left: 50%;
+            top: 0;
+            width: 1.5px;
+            height: 100%;
+            transform: translateX(-50%);
+            transition: transform 0.25s ease, opacity 0.25s ease;
+          }
+          .article-content .faq-question[aria-expanded='true'] .faq-icon::after {
+            transform: translateX(-50%) rotate(90deg);
             opacity: 0;
+          }
+          /* max-height is driven from JS (scrollHeight) so the panel can
+             animate open without hardcoding a height that might clip. */
+          .article-content .faq-answer {
+            max-height: 0;
             overflow: hidden;
-            transition: max-height 0.3s ease, opacity 0.3s ease;
+            transition: max-height 0.3s ease;
           }
-          .article-content p.faq-pair:hover .faq-a {
-            max-height: 1000px;
-            opacity: 1;
-          }
-          /* Touch devices don't have real hover (tap can "stick" a hover
-             state inconsistently), so just show answers normally on mobile
-             instead of hiding them behind a hover that may not work. */
-          @media screen and (max-width: 749px) {
-            .article-content p.faq-pair .faq-a {
-              max-height: none;
-              opacity: 1;
-            }
+          .article-content .faq-answer-inner {
+            padding: 0 0 2rem;
           }
         </style>
         <script>
@@ -273,52 +316,107 @@
               };
             }
 
+            // Questions are labelled inconsistently across articles: some use
+            // "Q:"/"Q." and others are numbered ("1. What is mad honey?").
+            var QUESTION_PREFIX = /^\s*(?:Q\s*[:.]|\d+\s*[.)])\s*/i;
+            var ANSWER_PREFIX = /^\s*A\s*[:.]\s*/i;
+
+            // Strip the label off the first piece of real text, wherever it
+            // sits in the tree (it is usually nested inside a <strong>).
+            function stripPrefix(root, re) {
+              var walker = document.createTreeWalker(root, NodeFilter.SHOW_TEXT, null);
+              var node;
+              while ((node = walker.nextNode())) {
+                if (!node.nodeValue.trim()) continue;
+                node.nodeValue = node.nodeValue.replace(re, '');
+                return;
+              }
+            }
+
             function processParagraph(p) {
-              var qWrap = document.createElement('span');
-              qWrap.className = 'faq-q';
-              var aWrap = document.createElement('span');
-              aWrap.className = 'faq-a';
+              var qFrag = document.createElement('span');
+              var aFrag = document.createElement('div');
+              aFrag.className = 'faq-answer-inner';
               var found = false;
 
               Array.prototype.forEach.call(p.childNodes, function (child) {
                 if (found) {
-                  aWrap.appendChild(child.cloneNode(true));
+                  aFrag.appendChild(child.cloneNode(true));
                   return;
                 }
                 var res = splitAtBr(child);
                 if (res.found) {
                   found = true;
-                  res.before.forEach(function (n) { qWrap.appendChild(n); });
-                  res.after.forEach(function (n) { aWrap.appendChild(n); });
+                  res.before.forEach(function (n) { qFrag.appendChild(n); });
+                  res.after.forEach(function (n) { aFrag.appendChild(n); });
                 } else {
-                  res.before.forEach(function (n) { qWrap.appendChild(n); });
+                  res.before.forEach(function (n) { qFrag.appendChild(n); });
                 }
               });
 
               if (!found) return;
-              p.textContent = '';
-              p.appendChild(qWrap);
-              p.appendChild(aWrap);
-              p.classList.add('faq-pair');
+              if (!aFrag.textContent.trim()) return;
 
-              // Rich text often leaves a blank "<p><br></p>"-style spacer
-              // paragraph directly after each Q&A block, which shows up as
-              // extra empty space between FAQ pairs. Hide it, but only when
-              // it immediately follows a FAQ pair and is genuinely empty --
-              // never touch blank paragraphs elsewhere in the article.
+              stripPrefix(qFrag, QUESTION_PREFIX);
+              stripPrefix(aFrag, ANSWER_PREFIX);
+
+              var item = document.createElement('div');
+              item.className = 'faq-item';
+
+              var btn = document.createElement('button');
+              btn.type = 'button';
+              btn.className = 'faq-question';
+              btn.setAttribute('aria-expanded', 'false');
+              var qText = document.createElement('span');
+              qText.className = 'faq-question-text';
+              qText.appendChild(qFrag);
+              var icon = document.createElement('span');
+              icon.className = 'faq-icon';
+              icon.setAttribute('aria-hidden', 'true');
+              btn.appendChild(qText);
+              btn.appendChild(icon);
+
+              var panel = document.createElement('div');
+              panel.className = 'faq-answer';
+              panel.appendChild(aFrag);
+
+              btn.addEventListener('click', function () {
+                var open = btn.getAttribute('aria-expanded') === 'true';
+                btn.setAttribute('aria-expanded', open ? 'false' : 'true');
+                // Measure on open so the panel animates to its real height and
+                // is not clipped; back to 0 to collapse.
+                panel.style.maxHeight = open ? '0px' : panel.scrollHeight + 'px';
+              });
+
+              item.appendChild(btn);
+              item.appendChild(panel);
+
+              // Hide the blank "<p><br></p>" spacer rich text leaves after each
+              // Q&A block, but only when it is genuinely empty -- never touch
+              // blank paragraphs elsewhere in the article.
               var spacer = p.nextElementSibling;
               if (spacer && spacer.tagName === 'P' && spacer.textContent.trim() === '') {
                 spacer.classList.add('faq-spacer');
               }
+
+              p.parentNode.replaceChild(item, p);
+              return item;
             }
 
             function processAllFaqs() {
               document.querySelectorAll('.article-content p').forEach(function (p) {
-                if (p.classList.contains('faq-pair')) return;
+                if (p.closest('.faq-item')) return;
                 var text = p.textContent.trim();
-                if (/^Q[:.]/i.test(text) && /A[:.]/i.test(text)) {
+                if (QUESTION_PREFIX.test(text) && /\bA\s*[:.]/i.test(text)) {
                   processParagraph(p);
                 }
+              });
+              // Only the first row of each run needs a top border, so the
+              // group reads as one list rather than doubling up dividers.
+              document.querySelectorAll('.article-content .faq-item').forEach(function (item) {
+                var prev = item.previousElementSibling;
+                var first = !prev || !prev.classList.contains('faq-item');
+                item.classList.toggle('faq-item--first', first);
               });
             }
 
