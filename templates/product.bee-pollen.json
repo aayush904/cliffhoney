@@ -125,7 +125,7 @@
         "custom_liquid_WmyPAL": {
           "type": "custom_liquid",
           "settings": {
-            "custom_liquid": "<p>\n All Bee Pollen Granules is ethically produced, and <highlight>sourced from the high Mountain Regions of Nepal and Third-Party lab tested </highlight> for purity and potency.<p>"
+            "custom_liquid": "<p>\n All Bee Pollen Granules are ethically produced, and <highlight>sourced from the high Mountain Regions of Nepal and Third-Party lab tested </highlight> for purity and potency.<p>"
           }
         },
         "collapsible_tab_Vx3RHW": {
