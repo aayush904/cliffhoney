@@ -1,0 +1,406 @@
+{%- liquid
+  assign panel_bg = section.settings.panel_bg
+  assign heading_color = section.settings.heading_color
+  assign body_color = section.settings.body_color
+  assign btn_bg = section.settings.button_bg
+  assign btn_label_color = section.settings.button_label_color
+-%}
+
+{%- if section.settings.enable -%}
+  <style>
+    #PopupHCH-{{ section.id }} {
+      position: fixed;
+      inset: 0;
+      z-index: 100000;
+      display: none;
+      align-items: center;
+      justify-content: center;
+      padding: 2rem;
+      background: rgba(0, 0, 0, 0.6);
+    }
+    #PopupHCH-{{ section.id }}.is-open {
+      display: flex;
+    }
+    #PopupHCH-{{ section.id }} .popup-hch__dialog {
+      position: relative;
+      display: grid;
+      grid-template-columns: 51% 49%;
+      width: 100%;
+      max-width: {{ section.settings.max_width }}px;
+      max-height: 90vh;
+      overflow: hidden;
+      border-radius: 12px;
+      background: {{ panel_bg }};
+      box-shadow: 0 24px 60px rgba(0, 0, 0, 0.35);
+    }
+    #PopupHCH-{{ section.id }} .popup-hch__media {
+      position: relative;
+      min-height: 100%;
+      background: #2b0b0b;
+    }
+    #PopupHCH-{{ section.id }} .popup-hch__media img,
+    #PopupHCH-{{ section.id }} .popup-hch__media svg {
+      display: block;
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+    }
+    #PopupHCH-{{ section.id }} .popup-hch__content {
+      position: relative;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      gap: 1.6rem;
+      padding: clamp(2.4rem, 3.4vw, 4.8rem);
+      overflow: hidden;
+    }
+    /* Decorations sit behind the copy and never intercept clicks. */
+    #PopupHCH-{{ section.id }} .popup-hch__decor {
+      position: absolute;
+      pointer-events: none;
+      z-index: 0;
+    }
+    #PopupHCH-{{ section.id }} .popup-hch__decor--top {
+      top: 0;
+      right: 0;
+      width: clamp(120px, 30%, 210px);
+    }
+    #PopupHCH-{{ section.id }} .popup-hch__decor--bottom {
+      left: 0;
+      right: 0;
+      bottom: 0;
+      width: 100%;
+    }
+    #PopupHCH-{{ section.id }} .popup-hch__decor img,
+    #PopupHCH-{{ section.id }} .popup-hch__decor svg {
+      display: block;
+      width: 100%;
+      height: auto;
+    }
+    #PopupHCH-{{ section.id }} .popup-hch__inner {
+      position: relative;
+      z-index: 1;
+      display: flex;
+      flex-direction: column;
+      gap: 1.6rem;
+    }
+    #PopupHCH-{{ section.id }} .popup-hch__heading {
+      margin: 0;
+      font-family: var(--font-heading-family);
+      font-weight: 700;
+      font-size: clamp(2.8rem, 3.6vw, 4.6rem);
+      line-height: 1.08;
+      color: {{ heading_color }};
+    }
+    #PopupHCH-{{ section.id }} .popup-hch__body {
+      margin: 0;
+      font-family: var(--font-body-family);
+      font-size: clamp(1.5rem, 1.2vw, 1.7rem);
+      line-height: 1.6;
+      color: {{ body_color }};
+    }
+    #PopupHCH-{{ section.id }} .popup-hch__body p {
+      margin: 0 0 0.8rem;
+    }
+    #PopupHCH-{{ section.id }} .popup-hch__body p:last-child {
+      margin-bottom: 0;
+    }
+    #PopupHCH-{{ section.id }} .popup-hch__cta {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      gap: 1rem;
+      margin-top: 0.8rem;
+      padding: 1.8rem 2.4rem;
+      border: 0;
+      border-radius: 8px;
+      background: {{ btn_bg }};
+      color: {{ btn_label_color }};
+      font-family: var(--font-body-family);
+      font-size: 1.5rem;
+      font-weight: 600;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      text-decoration: none;
+      cursor: pointer;
+      transition: filter 0.2s ease;
+    }
+    #PopupHCH-{{ section.id }} .popup-hch__cta:hover {
+      filter: brightness(0.92);
+    }
+    #PopupHCH-{{ section.id }} .popup-hch__close {
+      position: absolute;
+      top: 1.6rem;
+      right: 1.6rem;
+      z-index: 2;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      width: 3.6rem;
+      height: 3.6rem;
+      padding: 0;
+      border: 0;
+      border-radius: 50%;
+      background: transparent;
+      color: {{ body_color }};
+      cursor: pointer;
+    }
+    #PopupHCH-{{ section.id }} .popup-hch__close:hover {
+      opacity: 0.6;
+    }
+    #PopupHCH-{{ section.id }} .popup-hch__close svg {
+      width: 2rem;
+      height: 2rem;
+    }
+    @media screen and (max-width: 749px) {
+      #PopupHCH-{{ section.id }} {
+        padding: 1.6rem;
+      }
+      #PopupHCH-{{ section.id }} .popup-hch__dialog {
+        grid-template-columns: 1fr;
+        max-height: 88vh;
+        overflow-y: auto;
+      }
+      #PopupHCH-{{ section.id }} .popup-hch__media {
+        min-height: 0;
+        aspect-ratio: 1 / 1;
+      }
+    }
+  </style>
+
+  <div
+    id="PopupHCH-{{ section.id }}"
+    class="popup-hch"
+    role="dialog"
+    aria-modal="true"
+    aria-labelledby="PopupHCHHeading-{{ section.id }}"
+    data-delay="{{ section.settings.delay_seconds }}"
+    data-frequency="{{ section.settings.frequency }}"
+    data-storage-key="popup-hch-{{ section.id }}"
+  >
+    <div class="popup-hch__dialog">
+      <div class="popup-hch__media">
+        {%- if section.settings.image != blank -%}
+          {{
+            section.settings.image
+            | image_url: width: 1200
+            | image_tag: loading: 'lazy', widths: '400, 600, 800, 1200', alt: section.settings.image.alt | default: section.settings.heading
+          }}
+        {%- else -%}
+          {{ 'product-apparel-1' | placeholder_svg_tag: 'popup-hch__placeholder' }}
+        {%- endif -%}
+      </div>
+
+      <div class="popup-hch__content">
+        <button
+          type="button"
+          class="popup-hch__close"
+          aria-label="{{ 'accessibility.close' | t | default: 'Close' }}"
+          data-popup-close
+        >
+          <svg viewBox="0 0 24 24" fill="none" aria-hidden="true">
+            <path d="M5 5l14 14M19 5L5 19" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/>
+          </svg>
+        </button>
+
+        {%- if section.settings.show_decorations -%}
+          <div class="popup-hch__decor popup-hch__decor--top">
+            {%- if section.settings.decoration_top != blank -%}
+              {{ section.settings.decoration_top | image_url: width: 420 | image_tag: loading: 'lazy', alt: '' }}
+            {%- else -%}
+              <svg viewBox="0 0 200 140" fill="none" aria-hidden="true">
+                <g stroke="{{ section.settings.decoration_color }}" stroke-width="1.4" fill="none" stroke-linecap="round">
+                  <path d="M200 0 L120 86 M200 0 L140 96 M200 0 L162 104 M200 0 L182 110 M200 0 L104 60 M200 0 L96 36"/>
+                  <path d="M186 14 Q168 22 160 34"/>
+                  <path d="M176 26 Q150 38 140 56"/>
+                  <path d="M166 40 Q134 54 124 78"/>
+                  <path d="M156 54 Q120 70 110 96"/>
+                  <path d="M146 68 Q106 86 98 112"/>
+                  <path d="M150 20 L150 62"/>
+                </g>
+                <g fill="{{ section.settings.decoration_color }}">
+                  <ellipse cx="150" cy="72" rx="7" ry="9"/>
+                  <circle cx="150" cy="61" r="4"/>
+                </g>
+                <g stroke="{{ section.settings.decoration_color }}" stroke-width="1.2" stroke-linecap="round">
+                  <path d="M143 68 L134 62 M143 73 L132 73 M143 78 L134 85 M157 68 L166 62 M157 73 L168 73 M157 78 L166 85"/>
+                </g>
+              </svg>
+            {%- endif -%}
+          </div>
+
+          <div class="popup-hch__decor popup-hch__decor--bottom">
+            {%- if section.settings.decoration_bottom != blank -%}
+              {{ section.settings.decoration_bottom | image_url: width: 1200 | image_tag: loading: 'lazy', alt: '' }}
+            {%- else -%}
+              <svg viewBox="0 0 600 150" fill="none" aria-hidden="true" preserveAspectRatio="xMidYMax meet">
+                <g fill="{{ section.settings.decoration_color }}">
+                  <path d="M470 150 V74 h10 V58 h10 V74 h14 V44 h10 V74 h14 V58 h10 V74 h10 v76 z"/>
+                  <path d="M470 74 l19 -22 l19 22 z M508 44 l19 -26 l19 26 z M546 74 l19 -22 l19 22 z"/>
+                  <rect x="484" y="96" width="9" height="14" rx="4.5" fill="{{ panel_bg }}"/>
+                  <rect x="522" y="88" width="9" height="14" rx="4.5" fill="{{ panel_bg }}"/>
+                  <rect x="560" y="96" width="9" height="14" rx="4.5" fill="{{ panel_bg }}"/>
+                  <path d="M60 150 v-54 a16 16 0 0 1 32 0 v54 z"/>
+                  <path d="M120 150 v-44 h-10 v-10 h10 v-12 h10 v12 h10 v10 h-10 v44 z"/>
+                  <path d="M186 150 v-46 a14 14 0 0 1 28 0 v46 z"/>
+                  <path d="M330 150 v-40 h-9 v-9 h9 v-11 h9 v11 h9 v9 h-9 v40 z"/>
+                  <path d="M250 150 c-14 0 -22 -9 -22 -19 c0 -10 8 -17 22 -17 c14 0 22 7 22 17 c0 10 -8 19 -22 19 z"/>
+                  <path d="M248 114 c0 -6 -2 -9 -6 -11 c6 -1 10 2 10 11 z"/>
+                  <path d="M288 150 c-11 0 -17 -7 -17 -15 c0 -8 6 -13 17 -13 c11 0 17 5 17 13 c0 8 -6 15 -17 15 z"/>
+                  <path d="M286 122 c0 -5 -2 -7 -5 -9 c5 -1 8 2 8 9 z"/>
+                  <path d="M20 150 v-62 h6 v62 z M23 104 l-14 -16 M23 112 l15 -18 M23 92 l-9 -12 M23 96 l11 -14"
+                        stroke="{{ section.settings.decoration_color }}" stroke-width="3" stroke-linecap="round"/>
+                  <path d="M398 150 v-70 h6 v70 z M401 100 l-16 -18 M401 110 l17 -20 M401 86 l-10 -13 M401 90 l12 -15"
+                        stroke="{{ section.settings.decoration_color }}" stroke-width="3" stroke-linecap="round"/>
+                  <path d="M0 150 v-16 h600 v16 z"/>
+                </g>
+                <g stroke="{{ section.settings.decoration_color }}" stroke-width="2.4" stroke-linecap="round" fill="none">
+                  <path d="M150 34 q6 -7 12 0 q6 -7 12 0"/>
+                  <path d="M352 20 q5 -6 10 0 q5 -6 10 0"/>
+                  <path d="M250 54 q4 -5 8 0 q4 -5 8 0"/>
+                </g>
+              </svg>
+            {%- endif -%}
+          </div>
+        {%- endif -%}
+
+        <div class="popup-hch__inner">
+          {%- if section.settings.heading != blank -%}
+            <h2 class="popup-hch__heading" id="PopupHCHHeading-{{ section.id }}">
+              {{ section.settings.heading }}
+            </h2>
+          {%- endif -%}
+
+          {%- if section.settings.body != blank -%}
+            <div class="popup-hch__body">{{ section.settings.body }}</div>
+          {%- endif -%}
+
+          {%- if section.settings.button_label != blank -%}
+            <a
+              class="popup-hch__cta"
+              href="{{ section.settings.button_link | default: '#' }}"
+              {% if section.settings.close_on_cta %}data-popup-close-after{% endif %}
+            >
+              {{ section.settings.button_label }}
+              <svg viewBox="0 0 24 24" width="16" height="16" fill="none" aria-hidden="true">
+                <path d="M9 5l7 7-7 7" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+              </svg>
+            </a>
+          {%- endif -%}
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <script>
+    (function () {
+      var root = document.getElementById('PopupHCH-{{ section.id }}');
+      if (!root) return;
+
+      var key = root.dataset.storageKey;
+      var frequency = root.dataset.frequency;
+      var delay = parseInt(root.dataset.delay, 10) || 0;
+      // The theme editor needs the popup visible while it is being designed,
+      // so frequency capping is bypassed there.
+      var inEditor = window.Shopify && window.Shopify.designMode;
+
+      function seenRecently() {
+        if (frequency === 'always') return false;
+        try {
+          var raw = localStorage.getItem(key);
+          if (!raw) return false;
+          if (frequency === 'session') return sessionStorage.getItem(key) === '1';
+          var days = frequency === 'week' ? 7 : 1;
+          return Date.now() - parseInt(raw, 10) < days * 86400000;
+        } catch (e) {
+          return false;
+        }
+      }
+
+      function remember() {
+        try {
+          localStorage.setItem(key, String(Date.now()));
+          sessionStorage.setItem(key, '1');
+        } catch (e) {}
+      }
+
+      function open() {
+        root.classList.add('is-open');
+        document.body.style.overflow = 'hidden';
+      }
+
+      function close() {
+        root.classList.remove('is-open');
+        document.body.style.overflow = '';
+        if (!inEditor) remember();
+      }
+
+      root.addEventListener('click', function (e) {
+        // Backdrop click closes, but only when the click started outside the dialog.
+        if (e.target === root) close();
+        if (e.target.closest('[data-popup-close]')) close();
+        if (e.target.closest('[data-popup-close-after]')) {
+          if (!inEditor) remember();
+        }
+      });
+
+      document.addEventListener('keydown', function (e) {
+        if (e.key === 'Escape' && root.classList.contains('is-open')) close();
+      });
+
+      if (inEditor) {
+        open();
+      } else if (!seenRecently()) {
+        setTimeout(open, delay * 1000);
+      }
+    })();
+  </script>
+{%- endif -%}
+
+{% schema %}
+{
+  "name": "Pop up HCH",
+  "settings": [
+    { "type": "checkbox", "id": "enable", "label": "Enable pop up", "default": true },
+    { "type": "header", "content": "Content" },
+    { "type": "image_picker", "id": "image", "label": "Image" },
+    { "type": "text", "id": "heading", "label": "Heading", "default": "Spooky Season Golden Reasons" },
+    {
+      "type": "richtext",
+      "id": "body",
+      "label": "Text",
+      "default": "<p>Your Himalayan favourites are <strong>20%</strong> off for a limited time. Use code <strong>HONEYBOO</strong> before this seasonal treat disappears.</p>"
+    },
+    { "type": "text", "id": "button_label", "label": "Button label", "default": "Find your treat" },
+    { "type": "url", "id": "button_link", "label": "Button link" },
+    { "type": "checkbox", "id": "close_on_cta", "label": "Don't show again after button is clicked", "default": true },
+    { "type": "header", "content": "Decorations" },
+    { "type": "checkbox", "id": "show_decorations", "label": "Show seasonal artwork", "default": true },
+    { "type": "image_picker", "id": "decoration_top", "label": "Top corner artwork", "info": "Optional. Replaces the built-in cobweb." },
+    { "type": "image_picker", "id": "decoration_bottom", "label": "Bottom artwork", "info": "Optional. Replaces the built-in graveyard scene." },
+    { "type": "color", "id": "decoration_color", "label": "Artwork colour", "default": "#F0E0C6" },
+    { "type": "header", "content": "Colours" },
+    { "type": "color", "id": "panel_bg", "label": "Panel background", "default": "#FFFBEF" },
+    { "type": "color", "id": "heading_color", "label": "Heading", "default": "#C2601A" },
+    { "type": "color", "id": "body_color", "label": "Text", "default": "#3A3A3A" },
+    { "type": "color", "id": "button_bg", "label": "Button background", "default": "#D2601A" },
+    { "type": "color", "id": "button_label_color", "label": "Button label", "default": "#FFFFFF" },
+    { "type": "header", "content": "Behaviour" },
+    { "type": "range", "id": "delay_seconds", "min": 0, "max": 30, "step": 1, "unit": "s", "label": "Show after", "default": 3 },
+    {
+      "type": "select",
+      "id": "frequency",
+      "label": "Show again",
+      "options": [
+        { "value": "session", "label": "Once per session" },
+        { "value": "day", "label": "Once per day" },
+        { "value": "week", "label": "Once per week" },
+        { "value": "always", "label": "Every page view" }
+      ],
+      "default": "session"
+    },
+    { "type": "range", "id": "max_width", "min": 600, "max": 1200, "step": 20, "unit": "px", "label": "Maximum width", "default": 1080 }
+  ],
+  "presets": [{ "name": "Pop up HCH" }]
+}
+{% endschema %}
