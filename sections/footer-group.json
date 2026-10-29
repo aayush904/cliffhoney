@@ -95,7 +95,7 @@
     "popup_hch": {
       "type": "popup-hch",
       "settings": {
-        "enable": true,
+        "enable": false,
         "image": "shopify://shop_images/Pop_up_-_HCH.avif",
         "heading": "Spooky Season Golden Reasons",
         "body": "<p>Your Himalayan favourites are <strong>20%</strong> off for a limited time. Use code <strong>HONEYBOO</strong> before this seasonal treat disappears.</p>",
