@@ -25,6 +25,10 @@
       position: relative;
       display: grid;
       grid-template-columns: 51% 49%;
+      /* minmax(0, 1fr) stops the photo's intrinsic height from sizing the row
+         past the 555px cap, which is what pushed the bottom artwork below the
+         dialog's clip line and made it disappear. */
+      grid-template-rows: minmax(0, 1fr);
       width: 100%;
       max-width: {{ section.settings.max_width }}px;
       max-height: min(555px, 90vh);
@@ -36,7 +40,7 @@
     }
     #PopupHCH-{{ section.id }} .popup-hch__media {
       position: relative;
-      min-height: 100%;
+      min-height: 0;
       background: #2b0b0b;
     }
     #PopupHCH-{{ section.id }} .popup-hch__media img,
@@ -51,7 +55,9 @@
       display: flex;
       flex-direction: column;
       justify-content: center;
-      padding: clamp(2.4rem, 3.4vw, 4.8rem) 65px;
+      /* The bottom padding reserves the strip the graveyard artwork occupies, so
+         the CTA never lands on top of it now that the dialog is capped at 555px. */
+      padding: clamp(1.6rem, 2.2vw, 2.8rem) 65px 100px;
       overflow: hidden;
     }
     /* Decorations sit behind the copy and never intercept clicks. */
