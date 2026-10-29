@@ -29,6 +29,7 @@
       max-width: {{ section.settings.max_width }}px;
       max-height: 90vh;
       overflow: hidden;
+      position: relative;
       border-radius: 12px;
       background: {{ panel_bg }};
       box-shadow: 0 24px 60px rgba(0, 0, 0, 0.35);
@@ -162,18 +163,35 @@
       #PopupHCH-{{ section.id }} {
         padding: 1.6rem;
       }
+      /* Block rather than grid: once the stacked image and copy exceed the
+         height cap, grid compresses its rows and the copy rides up over the
+         image. As blocks they keep their natural heights and the dialog
+         scrolls instead. */
       #PopupHCH-{{ section.id }} .popup-hch__dialog {
-        grid-template-columns: 1fr;
+        display: block;
         max-height: 88vh;
         overflow-y: auto;
+        -webkit-overflow-scrolling: touch;
       }
       #PopupHCH-{{ section.id }} .popup-hch__media {
         min-height: 0;
-        aspect-ratio: 1 / 1;
+        /* Shorter than the desktop square so the copy below still fits in
+           one screen without the dialog needing to scroll. */
+        aspect-ratio: 4 / 3;
       }
+      /* Top padding clears the cobweb so it sits above the heading rather
+         than across it; bottom padding clears the graveyard under the CTA. */
       #PopupHCH-{{ section.id }} .popup-hch__content {
-        padding-left: 24px;
-        padding-right: 24px;
+        padding: 76px 24px 120px;
+      }
+      #PopupHCH-{{ section.id }} .popup-hch__decor--top {
+        width: 64px;
+      }
+      #PopupHCH-{{ section.id }} .popup-hch__close {
+        top: 12px;
+        right: 12px;
+        background: rgba(255, 251, 239, 0.92);
+        color: #3a3a3a;
       }
       #PopupHCH-{{ section.id }} .popup-hch__heading {
         font-size: 34px;
@@ -199,6 +217,17 @@
     data-storage-key="popup-hch-{{ section.id }}"
   >
     <div class="popup-hch__dialog">
+      <button
+        type="button"
+        class="popup-hch__close"
+        aria-label="{{ 'accessibility.close' | t | default: 'Close' }}"
+        data-popup-close
+      >
+        <svg viewBox="0 0 24 24" fill="none" aria-hidden="true">
+          <path d="M5 5l14 14M19 5L5 19" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/>
+        </svg>
+      </button>
+
       <div class="popup-hch__media">
         {%- if section.settings.image != blank -%}
           {{
@@ -212,17 +241,6 @@
       </div>
 
       <div class="popup-hch__content">
-        <button
-          type="button"
-          class="popup-hch__close"
-          aria-label="{{ 'accessibility.close' | t | default: 'Close' }}"
-          data-popup-close
-        >
-          <svg viewBox="0 0 24 24" fill="none" aria-hidden="true">
-            <path d="M5 5l14 14M19 5L5 19" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/>
-          </svg>
-        </button>
-
         {%- if section.settings.show_decorations -%}
           <div class="popup-hch__decor popup-hch__decor--top">
             {%- if section.settings.decoration_top != blank -%}
