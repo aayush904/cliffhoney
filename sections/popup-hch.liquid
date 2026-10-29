@@ -50,7 +50,6 @@
       display: flex;
       flex-direction: column;
       justify-content: center;
-      gap: 1.6rem;
       padding: clamp(2.4rem, 3.4vw, 4.8rem);
       overflow: hidden;
     }
@@ -62,7 +61,7 @@
     }
     #PopupHCH-{{ section.id }} .popup-hch__decor--top {
       top: 0;
-      right: 0;
+      left: 0;
       width: clamp(120px, 30%, 210px);
     }
     #PopupHCH-{{ section.id }} .popup-hch__decor--bottom {
@@ -82,21 +81,25 @@
       z-index: 1;
       display: flex;
       flex-direction: column;
-      gap: 1.6rem;
+      align-items: flex-start;
     }
     #PopupHCH-{{ section.id }} .popup-hch__heading {
-      margin: 0;
-      font-family: var(--font-heading-family);
-      font-weight: 700;
-      font-size: clamp(2.8rem, 3.6vw, 4.6rem);
-      line-height: 1.08;
+      margin: 0 0 16px;
+      font-family: 'Inria Serif', var(--font-heading-family);
+      font-weight: 400;
+      font-size: 52px;
+      line-height: 100%;
+      letter-spacing: -0.01em;
+      text-transform: capitalize;
       color: {{ heading_color }};
     }
     #PopupHCH-{{ section.id }} .popup-hch__body {
-      margin: 0;
+      margin: 0 0 26px;
       font-family: var(--font-body-family);
-      font-size: clamp(1.5rem, 1.2vw, 1.7rem);
-      line-height: 1.6;
+      font-weight: 400;
+      font-size: 20px;
+      line-height: 140%;
+      letter-spacing: 0;
       color: {{ body_color }};
     }
     #PopupHCH-{{ section.id }} .popup-hch__body p {
@@ -110,16 +113,19 @@
       align-items: center;
       justify-content: center;
       gap: 1rem;
-      margin-top: 0.8rem;
-      padding: 1.8rem 2.4rem;
+      padding: 1.8rem 3.2rem;
       border: 0;
-      border-radius: 8px;
+      border-radius: 65px;
       background: {{ btn_bg }};
       color: {{ btn_label_color }};
-      font-family: var(--font-body-family);
-      font-size: 1.5rem;
-      font-weight: 600;
-      letter-spacing: 0.12em;
+      font-family: 'Overused Grotesk', var(--font-body-family);
+      font-size: 20px;
+      font-weight: 500;
+      line-height: 100%;
+      /* base.min.css sets `a, button { letter-spacing: 0 !important }`, which
+         would otherwise flatten the 6% tracking this button is specced with. */
+      letter-spacing: 0.06em !important;
+      vertical-align: middle;
       text-transform: uppercase;
       text-decoration: none;
       cursor: pointer;
@@ -165,6 +171,16 @@
         min-height: 0;
         aspect-ratio: 1 / 1;
       }
+      #PopupHCH-{{ section.id }} .popup-hch__heading {
+        font-size: 34px;
+      }
+      #PopupHCH-{{ section.id }} .popup-hch__body {
+        font-size: 16px;
+      }
+      #PopupHCH-{{ section.id }} .popup-hch__cta {
+        font-size: 16px;
+        padding: 1.6rem 2.6rem;
+      }
     }
   </style>
 
@@ -208,7 +224,7 @@
             {%- if section.settings.decoration_top != blank -%}
               {{ section.settings.decoration_top | image_url: width: 420 | image_tag: loading: 'lazy', alt: '' }}
             {%- else -%}
-              <svg viewBox="0 0 200 140" fill="none" aria-hidden="true">
+              <svg viewBox="0 0 200 140" fill="none" aria-hidden="true" style="transform: scaleX(-1);">
                 <g stroke="{{ section.settings.decoration_color }}" stroke-width="1.4" fill="none" stroke-linecap="round">
                   <path d="M200 0 L120 86 M200 0 L140 96 M200 0 L162 104 M200 0 L182 110 M200 0 L104 60 M200 0 L96 36"/>
                   <path d="M186 14 Q168 22 160 34"/>
@@ -381,9 +397,9 @@
     { "type": "color", "id": "decoration_color", "label": "Artwork colour", "default": "#F0E0C6" },
     { "type": "header", "content": "Colours" },
     { "type": "color", "id": "panel_bg", "label": "Panel background", "default": "#FFFBEF" },
-    { "type": "color", "id": "heading_color", "label": "Heading", "default": "#C2601A" },
-    { "type": "color", "id": "body_color", "label": "Text", "default": "#3A3A3A" },
-    { "type": "color", "id": "button_bg", "label": "Button background", "default": "#D2601A" },
+    { "type": "color", "id": "heading_color", "label": "Heading", "default": "#E57B1B" },
+    { "type": "color", "id": "body_color", "label": "Text", "default": "#747A6F" },
+    { "type": "color", "id": "button_bg", "label": "Button background", "default": "#C95A14" },
     { "type": "color", "id": "button_label_color", "label": "Button label", "default": "#FFFFFF" },
     { "type": "header", "content": "Behaviour" },
     { "type": "range", "id": "delay_seconds", "min": 0, "max": 30, "step": 1, "unit": "s", "label": "Show after", "default": 3 },
