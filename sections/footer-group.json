@@ -94,6 +94,7 @@
     },
     "popup_hch": {
       "type": "popup-hch",
+      "disabled": true,
       "settings": {
         "enable": true,
         "image": "shopify://shop_images/Pop_up_-_HCH.avif",
