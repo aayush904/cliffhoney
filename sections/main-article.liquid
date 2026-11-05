@@ -285,13 +285,21 @@
             // at its first <br> (wherever it lives in the tree) into a
             // question span and an answer span, so the answer can be hidden by
             // default and revealed on hover via CSS.
-            function splitAtBr(node) {
+            // `state.seen` tracks whether any real text has been passed yet.
+            // Several articles open the paragraph with a stray "<strong><br>Q: ..."
+            // line break; splitting on that one would hand the question half an
+            // empty span and dump the whole Q&A into the answer, which is what
+            // left those rows rendering as blank, unreadable buttons.
+            function splitAtBr(node, state) {
               if (node.nodeType === Node.TEXT_NODE) {
+                if (node.nodeValue.trim()) state.seen = true;
                 return { before: [node.cloneNode(true)], after: [], found: false };
               }
               if (node.nodeName === 'BR') {
+                if (!state.seen) return { before: [], after: [], found: false };
                 return { before: [], after: [], found: true };
               }
+              if (node.nodeName === 'IMG') state.seen = true;
               var beforeClone = node.cloneNode(false);
               var afterClone = node.cloneNode(false);
               var found = false;
@@ -300,7 +308,7 @@
                   afterClone.appendChild(child.cloneNode(true));
                   return;
                 }
-                var res = splitAtBr(child);
+                var res = splitAtBr(child, state);
                 if (res.found) {
                   found = true;
                   res.before.forEach(function (n) { beforeClone.appendChild(n); });
@@ -338,13 +346,14 @@
               var aFrag = document.createElement('div');
               aFrag.className = 'faq-answer-inner';
               var found = false;
+              var state = { seen: false };
 
               Array.prototype.forEach.call(p.childNodes, function (child) {
                 if (found) {
                   aFrag.appendChild(child.cloneNode(true));
                   return;
                 }
-                var res = splitAtBr(child);
+                var res = splitAtBr(child, state);
                 if (res.found) {
                   found = true;
                   res.before.forEach(function (n) { qFrag.appendChild(n); });
